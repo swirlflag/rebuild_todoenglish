@@ -1,0 +1,44 @@
+
+// 이하 예시들
+
+$STANDARD_mobile : 768px;
+$STANDARD_tablet : 1024px;
+$STANDARD_fhd : 1920px;
+
+// 스마트폰 사이즈 전용
+@mixin phone {
+    @media screen and (max-width : $STANDARD_mobile){
+        @content;
+    }
+}
+
+// 타블렛 사이즈 전용
+@mixin tablet {
+    @media screen and (max-width : $STANDARD_tablet) and (min-width : $STANDARD_mobile){
+        @content;
+    }
+}
+
+// 타블렛 이하 스마트폰을 포함하는 사이즈
+@mixin mobile {
+    @media screen and (max-width : $STANDARD_tablet){
+        @content;
+    }
+}
+
+@mixin desktop {
+}
+
+@mixin hover {
+    #app.unuse_touch &:hover {
+        @content;
+    }
+}
+
+// 하위 시멘틱 태그들까지 강력하게 셀렉팅
+@mixin hardSelect {
+    @content;
+    a ,button , input, textarea{
+        @content;
+    }
+}

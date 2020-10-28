@@ -1,0 +1,45 @@
+body {
+    font-family:
+        'Apple SD Gothic Neo',
+        'Spoqa Han Sans',
+        'Noto Sans KR',
+        'Malgun Gothic',
+        'Dotum',
+        sans-serif ,
+    ;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+    color: $COLOR_default_1;
+    @include hardSelect {
+        color: $COLOR_default_1;
+    }
+}
+
+.fw {
+    &-100 {font-weight: 100;}
+    &-200 {font-weight: 200;}
+    &-300 {font-weight: 300;}
+    &-400 {font-weight: 400;}
+    &-500 {font-weight: 500;}
+    &-600 {font-weight: 600;}
+    &-700{font-weight: 700;} &-b {font-weight: 700;}
+    &-800 {font-weight: 800;}
+    &-900 {font-weight: 900;}
+}
+
+.icon {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    width: 10px; height: 10px;
+
+    &.icon--account {
+        background-image: url('~@/assets/icon/icon_account_person.svg'); width: 15px; height: 17px;
+    }
+    &.icon--dropdown-arrow {
+        background-image: url('~@/assets/icon/icon_dropdown_arrow.svg'); width: 24px; height: 24px;
+        &.c-white {background-image: url('~@/assets/icon/icon_dropdown_arrow.svg')}
+    }
+
+}
