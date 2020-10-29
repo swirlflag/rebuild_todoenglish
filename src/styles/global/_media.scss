@@ -5,9 +5,19 @@ $STANDARD_mobile : 768px;
 $STANDARD_tablet : 1024px;
 $STANDARD_fhd : 1920px;
 
+$STANDARD_mobileMin : 769px;
+
 // 스마트폰 사이즈 전용
 @mixin phone {
     @media screen and (max-width : $STANDARD_mobile){
+        @content;
+    }
+}
+
+//스마트폰 이상일때
+
+@mixin overPhone {
+    @media screen and (min-width : $STANDARD_mobileMin){
         @content;
     }
 }

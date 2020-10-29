@@ -4,6 +4,10 @@ import store from './store';
 import App  from './App.vue';
 import PageNotSurpport from '@/pages/PageNotSurpport/PageNotSurpport.vue';
 
+import initLogic from '@/init/init.js';
+
+Vue.use(initLogic);
+
 Vue.config.productionTip = false
 
 const IsNotSurpportCondition = false;

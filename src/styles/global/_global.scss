@@ -1,3 +1,10 @@
+html , body {
+    width: 100%;
+    @include phone {
+        overflow-x: hidden;
+    }
+}
+
 body {
     font-family:
         'Apple SD Gothic Neo',
@@ -7,10 +14,12 @@ body {
         'Dotum',
         sans-serif ,
     ;
-    font-weight: 300;
     text-rendering: optimizeLegibility;
-    color: $COLOR_default_1;
+    letter-spacing: -0.04em;
     @include hardSelect {
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 1em;
         color: $COLOR_default_1;
     }
 }
@@ -35,11 +44,17 @@ body {
     width: 10px; height: 10px;
 
     &.icon--account {
-        background-image: url('~@/assets/icon/icon_account_person.svg'); width: 15px; height: 17px;
+        background-image: url('~@/assets/icon/icon_account_person.svg');
+        &.c-white {background-image: url('~@/assets/icon/icon_account_person_white.svg')}
     }
     &.icon--dropdown-arrow {
-        background-image: url('~@/assets/icon/icon_dropdown_arrow.svg'); width: 24px; height: 24px;
-        &.c-white {background-image: url('~@/assets/icon/icon_dropdown_arrow.svg')}
+        background-image: url('~@/assets/icon/icon_dropdown_arrow.svg');
+        &.c-white {background-image: url('~@/assets/icon/icon_dropdown_arrow_white.svg')}
     }
+    &.icon--signout-arrow {
+        background-image: url('~@/assets/icon/icon_signout_arrow.svg');
+        // &.c-white {background-image: url('~@/assets/icon/icon_signout_arrow_white.svg')}
+    }
+
 
 }

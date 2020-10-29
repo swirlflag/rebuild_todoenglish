@@ -2,6 +2,7 @@
     <div    id="app"
             :class="`
                 ${appClassNamePage}
+                ${appClassNameTouchdevice}
             `"
     >
 
@@ -40,9 +41,9 @@ export default {
         // appClassNameLanguage() {
         //     return `language--${this.$store.state.languageType}`;
         // },
-        // appClassNameTouchdevice() {
-        //     return this.$store.state.is_touchDevice ? 'use_touch' : 'unuse_touch';
-        // },
+        appClassNameTouchdevice() {
+            return this.$store.state.is_touchDevice ? 'use_touch' : 'unuse_touch';
+        },
     },
     created() {
         // console.log(this.$route);

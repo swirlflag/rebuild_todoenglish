@@ -1,4 +1,16 @@
+$EASE_outCubic : cubic-bezier(0.33, 1, 0.68, 1);
+$EASE_outQuart : cubic-bezier(0.25, 1, 0.5, 1);
+$EASE_outBack : cubic-bezier(0.34, 1.56, 0.64, 1);
+$EASE_outBack2 : cubic-bezier(.34,2.05,.56,.97);
+
+
+
+$EASE_inOutCubic : cubic-bezier(0.65, 0, 0.35, 1);
+$EASE_inOutQuint : cubic-bezier(0.83, 0, 0.17, 1);
+$EASE_inOutExpo : cubic-bezier(0.87, 0, 0.13, 1);
+
 $SIZE_PC_contentWidth : 1000px;
+$SIZE_MO_contentWidth : 500px;
 
 
 $SIZE_PC_outlinePadding : 10px;
@@ -6,3 +18,5 @@ $SIZE_MO_outlinePadding : 16px;
 
 
 $COLOR_default_1 : #342d51;
+$COLOR_default_2 : #372c77;
+$COLOR_offWhite : #f2f0e9;

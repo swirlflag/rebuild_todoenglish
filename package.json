@@ -11,6 +11,7 @@
         "axios": "^0.20.0",
         "core-js": "^3.6.5",
         "detect-browser": "^5.1.1",
+        "gsap": "^3.5.1",
         "sass": "^1.26.10",
         "universal-analytics": "^0.4.23",
         "vue": "^2.6.11",
