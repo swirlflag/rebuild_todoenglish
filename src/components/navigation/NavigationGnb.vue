@@ -1,12 +1,13 @@
 <template>
-    <div    class="nav-gnb"
+    <div    class="nav-gnb trs"
             :class="`
+                ${useTransition ? 'use-trs' : ''}
                 ${isLogin ? 'is-login' : ''}
                 ${isOpenMenu ? 'st-open-menu' : ''}
                 ${isOpenAccount ? 'st-open-account' : ''}
                 ${isReduce ? 'st-reduce' : ''}
-                ${themeTypeClear ? 'type-clear' : ''}
-                ${themeColorWhite ? 'color-white' : ''}
+                ${themeClear ? 'type-clear' : ''}
+                ${themeWhite ? 'color-white' : ''}
             `"
     >
 
@@ -26,7 +27,7 @@
 
                 <ul class="nav-gnb__links">
                     <li class="nav-gnb__link"><router-link to="/" exact>토도영어 소개</router-link></li>
-                    <li class="nav-gnb__link"><router-link to="/1" exact>멤버십 가입</router-link></li>
+                    <li class="nav-gnb__link"><router-link to="/products" exact>멤버십 가입</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/2" exact>멤버십 후기</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/3" exact>커리큘럼</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/4" exact>도움말</router-link></li>
@@ -87,35 +88,46 @@ export default {
             isOpenAccount       : false,
             isReduce            : false,
 
-            themeTypeClear      : false,
-            themeColorWhite     : true,
+            useTransition       : true,
 
             mobileMenuHeight    : 0,
             mobileSignoutHeight : 0,
+
+            themeClear     : false,
+            themeWhite     : true,
+
         }
     },
     computed : {
         whiteCondition() {
-            return this.isOpenMenu || this.themeColorWhite;
+            return this.isOpenMenu || this.themeWhite;
         }
     },
-    watch : {
-
+    watch: {
+        '$route.path' () {
+            this.$store.commit('unuseClaerGnb');
+            this.$store.commit('useWhiteGnb');
+            this.closeMenu(false);
+        },
+        '$store.state.nav' : {
+            handler({is_clearGnb ,is_whiteGnb}) {
+                this.themeClear = is_clearGnb;
+                this.themeWhite = is_whiteGnb;
+            },
+            deep: true,
+        }
     },
     methods : {
-
-        openMenu() {
+        openMenu(trs = true) {
+            this.useTransition = trs;
             this.isOpenMenu = true;
         },
-        closeMenu() {
+        closeMenu(trs = true) {
+            this.useTransition = trs;
             this.isOpenMenu = false;
         },
         toggleMenu() {
-            if(this.isOpenMenu){
-                this.closeMenu();
-            }else {
-                this.openMenu();
-            }
+            this.isOpenMenu ? this.closeMenu() : this.openMenu();
         },
         toggleAccountInfo() {
             this.isOpenAccount = !this.isOpenAccount;
@@ -126,10 +138,32 @@ export default {
         },
     },
     mounted () {
-        this.closeMenu(false);
+        this.closeMenu();
         window.addEventListener('resize' , this.closeMenu)
     }
 }
+
+export const gnbStore = {
+    state : {
+        is_clearGnb    : false,
+        is_whiteGnb   : true,
+    },
+    mutations : {
+        useClaerGnb(state) {
+            state.nav.is_clearGnb = true;
+        },
+        unuseClaerGnb(state) {
+            state.nav.is_clearGnb = false;
+        },
+        useWhiteGnb(state) {
+            state.nav.is_whiteGnb = true;
+        },
+        unuseWhiteGnb(state) {
+            state.nav.is_whiteGnb = false;
+        }
+    }
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -143,10 +177,14 @@ $SIZE_MO_linkDistance : 15px;
     box-sizing: border-box;
     padding: 20px $SIZE_PC_outlinePadding;
     position: relative;
-    transition  : background-color 300ms ease
-                , height 780ms $EASE_inOutQuint
-                , transform 300ms $EASE_outCubic
-                ;
+
+    &.use-trs {
+        transition  : background-color 300ms ease
+            // , height 780ms $EASE_inOutQuint
+            , height 700ms $EASE_inOutQuint
+            , transform 300ms $EASE_outCubic
+            ;
+    }
     border-bottom: 1px solid rgba(0,0,0,0.1);
 
     @include phone {
@@ -199,7 +237,7 @@ $SIZE_MO_linkDistance : 15px;
     display: flex;
     align-items: center;
     > span {
-        width: 88px; height: 72px;
+        width: 80px; height: 72px;
         display: inline-block;
         background-image: url('~@/assets/logo/logo_todoenglish.svg');
         background-size: contain;
