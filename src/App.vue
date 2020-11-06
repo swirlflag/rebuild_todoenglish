@@ -8,6 +8,9 @@
                 ${appClassNameTouchdevice}
             `"
     >
+        <PlateTest
+            v-if="1"
+        />
 
         <PlateTransitionCover
              v-if="1"
@@ -24,7 +27,7 @@
 </template>
 
 <script>
-
+import PlateTest                from '@/plates/PlateTest.vue';
 import PlateTransitionCover     from '@/plates/PlateTransitionCover.vue';
 import PlateNavigation          from '@/plates/PlateNavigation.vue';
 import PlatePage                from '@/plates/PlatePage.vue';
@@ -32,7 +35,7 @@ import PlatePage                from '@/plates/PlatePage.vue';
 export default {
     name: 'App',
     components: {
-        PlateTransitionCover , PlateNavigation , PlatePage ,
+        PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest
     },
     computed : {
         appClassNamePage() {
@@ -53,6 +56,15 @@ export default {
         appClassNameTouchdevice() {
             return this.$store.state.is_touchDevice ? 'use_touch' : 'unuse_touch';
         },
+    },
+    watch : {
+        '$store.state.is_pageScrollLock'(now){
+            document.body.classList[now ? 'add' : 'remove']('st-lockscroll')
+        },
+        '$route.path'() {
+            // window.scrollTo(0,0);
+        },
+
     },
     created() {
         // console.log(this.$route);

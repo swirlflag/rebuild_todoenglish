@@ -19,25 +19,23 @@ export default {
 }
 .page-contents  {
     // width: 100%;
-
 }
+
 .page-contents section{
     background-color: #aaa;
+    min-width: $SIZE_PC_contentWidth;
 
+    @include phone {
+        min-width : 100%;
+    }
 
     .section--inner {
-        width: $SIZE_PC_contentWidth;
         padding : 0 $SIZE_PC_outlinePadding;
         box-sizing: border-box;
         background-color: #acc;
         margin-left : auto;
         margin-right :auto;
-
-        @include phone {
-            width : 100%;
-        }
     }
-
 
 }
 

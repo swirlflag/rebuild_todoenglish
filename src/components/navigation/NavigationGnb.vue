@@ -119,10 +119,12 @@ export default {
     },
     methods : {
         openMenu(trs = true) {
+            this.$store.commit('SCROLL_lock');
             this.useTransition = trs;
             this.isOpenMenu = true;
         },
         closeMenu(trs = true) {
+            this.$store.commit('SCROLL_unlock');
             this.useTransition = trs;
             this.isOpenMenu = false;
         },
@@ -170,6 +172,12 @@ export const gnbStore = {
 
 $SIZE_MO_linkDistance : 15px;
 
+@mixin lessThenPcWidth {
+    @include lessThenSize($SIZE_PC_contentWidth) {
+        @content;
+    };
+};
+
 .nav-gnb {
     z-index: 1100;
     font-size: 16px;
@@ -177,15 +185,13 @@ $SIZE_MO_linkDistance : 15px;
     box-sizing: border-box;
     padding: 20px $SIZE_PC_outlinePadding;
     position: relative;
-
-    &.use-trs {
-        transition  : background-color 300ms ease
-            // , height 780ms $EASE_inOutQuint
-            , height 700ms $EASE_inOutQuint
-            , transform 300ms $EASE_outCubic
-            ;
-    }
     border-bottom: 1px solid rgba(0,0,0,0.1);
+    &.use-trs {
+        transition  : background-color 450ms ease
+                    , height 700ms $EASE_inOutQuint
+                    , transform 300ms $EASE_outCubic
+                    ;
+    }
 
     @include phone {
         padding: 0;
@@ -216,7 +222,7 @@ $SIZE_MO_linkDistance : 15px;
 
 .nav-gnb__wrap {
     max-width: $SIZE_PC_contentWidth;
-    min-width : 920px;
+    // min-width : 920px;
     margin: 0 auto;
     display: flex;
     box-sizing: border-box;
@@ -342,11 +348,7 @@ $SIZE_MO_linkDistance : 15px;
     margin-left: 64px;
     align-items: center;
     box-sizing: border-box;
-    @include overPhone {
-        a {
-            font-size: 18px;
-        }
-    }
+
     @include phone {
         flex-direction: column;
         margin: 0;
@@ -356,11 +358,16 @@ $SIZE_MO_linkDistance : 15px;
     .nav-gnb__link {
         margin-left: 72px;
 
+        @include lessThenPcWidth {
+            margin-left: calc(20px + 1vw);
+            font-size: 14px;
+        }
+
         @include phone {
             width: 100%;
             margin: $SIZE_MO_linkDistance 0;
         }
-        
+
         &:nth-child(1) {
             margin-left: 0;
         }
@@ -540,12 +547,13 @@ $SIZE_MO_linkDistance : 15px;
                 background-color: #fff;
             }
 
-            &:nth-child(1) {top: 0;}
+            &:nth-child(1) {top: 0; transition-delay: 300ms;}
             &:nth-child(2) {top: calc(50% - 1px); }
             &:nth-child(3) {top: calc(50% - 1px); }
-            &:nth-child(4) {bottom: 0; }
+            &:nth-child(4) {bottom: 0; transition-delay: 350ms;}
 
             .st-open-menu & {
+                transition-delay: 0ms;
                 &:nth-child(1) {transform : translateX(100%); }
                 &:nth-child(2) {transform : rotate(45deg); }
                 &:nth-child(3) {transform : rotate(-45deg); }

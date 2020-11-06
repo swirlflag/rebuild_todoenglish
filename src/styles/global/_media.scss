@@ -36,6 +36,13 @@ $STANDARD_mobileMin : 769px;
     }
 }
 
+// 받은 값보다 이하일때
+@mixin lessThenSize($size) {
+    @media screen and (max-width : $size){
+        @content;
+    }
+}
+
 @mixin desktop {
 }
 

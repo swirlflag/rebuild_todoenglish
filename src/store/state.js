@@ -5,6 +5,7 @@ const state = {
     type_device : '',
     is_touchDevice : null,
     is_dev : false,
+    is_pageScrollLock : false,
 
     standardMobilePixelSize : 768,
 
