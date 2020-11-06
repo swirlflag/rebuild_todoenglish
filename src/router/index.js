@@ -34,7 +34,7 @@ router.beforeEach((to,from, next) => {
         return
     }
 
-    store.commit('pageTransitionNext' , next);
+    store.commit('registTransitionNext' , next);
     store.commit('pageTransition');
 });
 

@@ -105,8 +105,8 @@ export default {
     },
     watch: {
         '$route.path' () {
-            this.$store.commit('unuseClaerGnb');
-            this.$store.commit('useWhiteGnb');
+            this.$store.commit('unuse_claerGnb');
+            this.$store.commit('use_whiteGnb');
             this.closeMenu(false);
         },
         '$store.state.nav' : {
@@ -149,16 +149,16 @@ export const gnbStore = {
         is_whiteGnb   : true,
     },
     mutations : {
-        useClaerGnb(state) {
+        use_claerGnb(state) {
             state.nav.is_clearGnb = true;
         },
-        unuseClaerGnb(state) {
+        unuse_claerGnb(state) {
             state.nav.is_clearGnb = false;
         },
-        useWhiteGnb(state) {
+        use_whiteGnb(state) {
             state.nav.is_whiteGnb = true;
         },
-        unuseWhiteGnb(state) {
+        unuse_whiteGnb(state) {
             state.nav.is_whiteGnb = false;
         }
     }
@@ -447,6 +447,7 @@ $SIZE_MO_linkDistance : 15px;
     }
 
     .nav-gnb__account-info {
+
         display: flex;
 
         @include overPhone {
@@ -466,7 +467,7 @@ $SIZE_MO_linkDistance : 15px;
                 color: $COLOR_default_1;
             }
 
-            .st-open-account & {
+            .st-open-account.is-login & {
                 opacity: 1;
                 pointer-events: all;
                 transition : opacity 150ms ease , transform 300ms $EASE_outBack2;

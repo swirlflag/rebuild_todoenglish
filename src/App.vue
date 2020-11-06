@@ -10,9 +10,11 @@
     >
 
         <PlateTransitionCover
+             v-if="1"
         />
 
         <PlateNavigation
+            v-if="1"
         />
 
         <PlatePage

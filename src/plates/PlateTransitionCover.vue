@@ -102,9 +102,9 @@ export const transitionStore = {
     },
     mutations : {
         pageTransition(state , bool) {
-            state.pageTransition.trigger = bool ===  undefined ? !state.pageTransition.trigger : bool;
+            state.pageTransition.trigger = bool === undefined ? !state.pageTransition.trigger : bool;
         },
-        pageTransitionNext(state, next) {
+        registTransitionNext(state, next) {
             state.pageTransition.next = next;
         },
     },
