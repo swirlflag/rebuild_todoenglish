@@ -18,6 +18,15 @@ button {
     -webkit-tap-highlight-color :transparent;
 }
 
+img {
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
 
 /*
 아래 리셋은 가져온 것입니다

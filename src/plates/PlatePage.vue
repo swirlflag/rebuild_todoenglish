@@ -22,7 +22,6 @@ export default {
 }
 
 .page-contents section{
-    background-color: #aaa;
     min-width: $SIZE_PC_contentWidth;
 
     @include phone {
@@ -32,9 +31,13 @@ export default {
     .section--inner {
         padding : 0 $SIZE_PC_outlinePadding;
         box-sizing: border-box;
-        background-color: #acc;
         margin-left : auto;
         margin-right :auto;
+        width: $SIZE_PC_contentWidth;
+        @include phone {
+            width: auto;
+            min-width : 100%;
+        }
     }
 
 }

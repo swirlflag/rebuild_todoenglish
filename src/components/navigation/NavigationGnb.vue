@@ -119,11 +119,13 @@ export default {
     },
     methods : {
         openMenu(trs = true) {
+            console.log(trs);
             this.$store.commit('SCROLL_lock');
             this.useTransition = trs;
             this.isOpenMenu = true;
         },
         closeMenu(trs = true) {
+            console.log(trs);
             this.$store.commit('SCROLL_unlock');
             this.useTransition = trs;
             this.isOpenMenu = false;
@@ -140,6 +142,9 @@ export default {
         },
     },
     mounted () {
+        // setInterval(() => {
+        //     console.log(this.useTransition);
+        // },1000)
         this.closeMenu();
         window.addEventListener('resize' , this.closeMenu)
     }
@@ -181,16 +186,16 @@ $SIZE_MO_linkDistance : 15px;
 .nav-gnb {
     z-index: 1100;
     font-size: 16px;
-    background-color: $COLOR_default_2;
+    background-color: $COLOR_navy_2;
     box-sizing: border-box;
     padding: 20px $SIZE_PC_outlinePadding;
     position: relative;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     &.use-trs {
         transition  : background-color 450ms ease
-                    , height 700ms $EASE_inOutQuint
-                    , transform 300ms $EASE_outCubic
-                    ;
+                , height 700ms $EASE_inOutQuint
+                , transform 300ms $EASE_outCubic
+                ;
     }
 
     @include phone {
@@ -209,7 +214,7 @@ $SIZE_MO_linkDistance : 15px;
         background-color: transparent;
     }
     &.st-open-menu {
-        background-color: $COLOR_default_2;
+        background-color: $COLOR_navy_2;
         height: 100%;
     }
     &.st-reduce:not(.st-open-menu){
@@ -471,7 +476,7 @@ $SIZE_MO_linkDistance : 15px;
             transition : opacity 200ms ease , transform 300ms $EASE_outCubic;
             transform : translateY(-10px);
             @include hardSelect {
-                color: $COLOR_default_1;
+                color: $COLOR_navy_1;
             }
 
             .st-open-account.is-login & {
@@ -538,7 +543,7 @@ $SIZE_MO_linkDistance : 15px;
             width: 100%; height: 2px;
             display: inline-block;
             left: 0;
-            background-color:$COLOR_default_1;
+            background-color:$COLOR_navy_1;
             transition: transform 300ms ease;
             transform : translate3d(0,0,0) ,rotate(0deg);
 

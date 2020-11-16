@@ -98,6 +98,7 @@ export const transitionStore = {
     name : 'pageTransition',
     state : {
         trigger : false,
+        isTransitionPaging : false,
         next : () => {},
     },
     mutations : {

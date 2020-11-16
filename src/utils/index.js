@@ -180,6 +180,10 @@ export const detectTouchdevice = () => {
 
 export const iterElement = (els, fn) => {
     for(let i = 0, l = els.length; i < l; ++i){
-        fn(els[i],i ,els)
+        fn(els[i],i,els)
     }
 }
+
+export const randomOne = (...l) => l[Math.floor((Math.random() * l.length))];
+export const randomRange = (a,b,toFixed = 0) => +(Math.min(a,b) + Math.random() * (Math.max(a,b) - Math.min(a,b))).toFixed(toFixed);
+

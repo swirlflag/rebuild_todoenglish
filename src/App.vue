@@ -9,7 +9,7 @@
             `"
     >
         <PlateTest
-            v-if="1"
+            v-if="0"
         />
 
         <PlateTransitionCover
@@ -21,6 +21,7 @@
         />
 
         <PlatePage
+            v-if="1"
         />
 
     </div>
@@ -36,6 +37,11 @@ export default {
     name: 'App',
     components: {
         PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest
+    },
+    data() {
+        return {
+            // before
+        }
     },
     computed : {
         appClassNamePage() {
@@ -66,9 +72,21 @@ export default {
         },
 
     },
+    methods : {
+        detectScrollDirectionNav(e) {
+            {e}
+            // console.log(e);
+        }
+    },
     created() {
-        // console.log(this.$route);
-        window.vv = this
+        // /     const mobileStoreUrl = isAndroid ? process.env.GOOGLEPLAY_URL : browserName == 'Chrome' ? process.env.APPSTORE_URL_CHROME : process.env.APPSTORE_URL
+            //   const appStoreUrl = browserName == 'Chrome' ? process.env.APPSTORE_URL_CHROME_PC : process.env.APPSTORE_URL_PC
+        console.log(process.env);
+
+        window.addEventListener('scroll' , this.detectScrollDirectionNav)
+    },
+    destroyed() {
+        window.removeEventListener('scroll' , this.detectScrollDirectionNav)
     }
 }
 </script>
