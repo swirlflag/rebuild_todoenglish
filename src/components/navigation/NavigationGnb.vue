@@ -13,7 +13,7 @@
 
         <div class="nav-gnb__wrap">
 
-            <div class="nav-gnb__source">
+            <div class="nav-gnb__source" v-if="0">
                 <video autoplay loop muted playsinline>
                     <source src="@/assets/video/sample.mp4" type="video/mp4">
                 </video>
@@ -27,9 +27,9 @@
 
                 <ul class="nav-gnb__links">
                     <li class="nav-gnb__link"><router-link to="/" exact>토도영어 소개</router-link></li>
-                    <li class="nav-gnb__link"><router-link to="/products" exact>멤버십 가입</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/2" exact>멤버십 후기</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/3" exact>커리큘럼</router-link></li>
+                    <li class="nav-gnb__link"><router-link to="/products" exact>멤버십 가입</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/4" exact>도움말</router-link></li>
                 </ul>
 
@@ -107,7 +107,8 @@ export default {
         '$route.path' () {
             this.$store.commit('unuse_claerGnb');
             this.$store.commit('use_whiteGnb');
-            this.closeMenu(false);
+            // this.closeMenu(false);
+            this.closeMenu();
         },
         '$store.state.nav' : {
             handler({is_clearGnb ,is_whiteGnb}) {
@@ -119,13 +120,13 @@ export default {
     },
     methods : {
         openMenu(trs = true) {
-            console.log(trs);
+            // console.log(trs);
             this.$store.commit('SCROLL_lock');
             this.useTransition = trs;
             this.isOpenMenu = true;
         },
         closeMenu(trs = true) {
-            console.log(trs);
+            // console.log(trs);
             this.$store.commit('SCROLL_unlock');
             this.useTransition = trs;
             this.isOpenMenu = false;
@@ -188,14 +189,15 @@ $SIZE_MO_linkDistance : 15px;
     font-size: 16px;
     background-color: $COLOR_navy_2;
     box-sizing: border-box;
-    padding: 20px $SIZE_PC_outlinePadding;
+    // padding: 20px $SIZE_PC_outlinePadding;
+    padding: 20px 0;
     position: relative;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     &.use-trs {
-        transition  : background-color 450ms ease
-                , height 700ms $EASE_inOutQuint
-                , transform 300ms $EASE_outCubic
-                ;
+        transition  : background-color 250ms ease 100ms
+                    , height 400ms $EASE_outQuart
+                    , transform 200ms $EASE_outCubic
+                    ;
     }
 
     @include phone {
@@ -216,6 +218,10 @@ $SIZE_MO_linkDistance : 15px;
     &.st-open-menu {
         background-color: $COLOR_navy_2;
         height: 100%;
+        transition  : background-color 450ms ease
+                    , height 450ms $EASE_inOutCubic
+                    , transform 500ms $EASE_outCubic
+                    !important ;
     }
     &.st-reduce:not(.st-open-menu){
         transform : translateY(-100%);
@@ -227,6 +233,7 @@ $SIZE_MO_linkDistance : 15px;
 
 .nav-gnb__wrap {
     max-width: $SIZE_PC_contentWidth;
+    padding : 0 $SIZE_PC_outlinePadding;
     // min-width : 920px;
     margin: 0 auto;
     display: flex;
@@ -255,7 +262,7 @@ $SIZE_MO_linkDistance : 15px;
         background-repeat: no-repeat;
         background-position: center center;
 
-        // transition: background-image 200ms ease;
+        transition: background-image 300ms ease 200ms;
 
         @include phone {
             width: 70px; height: 50px;
@@ -264,6 +271,7 @@ $SIZE_MO_linkDistance : 15px;
         .color-white & ,
         .st-open-menu & {
             background-image: url('~@/assets/logo/logo_todoenglish_white.svg');
+            // transition: background-image 300ms ease 200ms;
         }
 
     }

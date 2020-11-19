@@ -3,22 +3,32 @@ $EASE_inCubic : cubic-bezier(0.32, 0, 0.67, 0);
 
 $EASE_outCubic : cubic-bezier(0.33, 1, 0.68, 1);
 $EASE_outQuart : cubic-bezier(0.25, 1, 0.5, 1);
+$EASE_outExpo : cubic-bezier(0.16, 1, 0.3, 1);
 $EASE_outBack : cubic-bezier(0.34, 1.56, 0.64, 1);
 $EASE_outBack2 : cubic-bezier(.34,2.05,.56,.97);
 $EASE_outBack3 : cubic-bezier(.4,2.5,.42,.73);
-
 
 $EASE_inOutCubic : cubic-bezier(0.65, 0, 0.35, 1);
 $EASE_inOutQuint : cubic-bezier(0.83, 0, 0.17, 1);
 $EASE_inOutExpo : cubic-bezier(0.87, 0, 0.13, 1);
 
-$SIZE_PC_contentWidth : 1000px;
+$SIZE_PC_contentWidth : 1024px;
 $SIZE_MO_contentWidth : 500px;
 
+$SIZE_PC_outlinePadding : 35px;
+$SIZE_MO_outlinePadding : calc(2px + 3.5vw);
 
-$SIZE_PC_outlinePadding : 10px;
-$SIZE_MO_outlinePadding : 16px;
+$SIZE_lineheight_high2  : 1.8em;
+$SIZE_lineheight_high   : 1.62em;
+$SIZE_lineheight_middle : 1.43em;
+$SIZE_lineheight_low    : 1.25em;
 
+$SIZE_letterspacing_high        : 0.06em;
+$SIZE_letterspacing_middle      : 0.035em;
+$SIZE_letterspacing_low         : 0em;
+$SIZE_letterspacing_default     : -0.035em;
+$SIZE_letterspacing_short       : -0.06em;
+$SIZE_letterspacing_shorter     : -0.09em;
 
 $COLOR_navy_1 : #342d51;
 $COLOR_navy_2 : #372c77;

@@ -33,6 +33,10 @@ import PlateTransitionCover     from '@/plates/PlateTransitionCover.vue';
 import PlateNavigation          from '@/plates/PlateNavigation.vue';
 import PlatePage                from '@/plates/PlatePage.vue';
 
+// import '@/styles/font/font.scss';
+// import '@/styles/global/_reset.css';
+// import '@/styles/global/_global.scss';
+
 export default {
     name: 'App',
     components: {
@@ -81,7 +85,7 @@ export default {
     created() {
         // /     const mobileStoreUrl = isAndroid ? process.env.GOOGLEPLAY_URL : browserName == 'Chrome' ? process.env.APPSTORE_URL_CHROME : process.env.APPSTORE_URL
             //   const appStoreUrl = browserName == 'Chrome' ? process.env.APPSTORE_URL_CHROME_PC : process.env.APPSTORE_URL_PC
-        console.log(process.env);
+        // console.log(process.env);
 
         window.addEventListener('scroll' , this.detectScrollDirectionNav)
     },

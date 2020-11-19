@@ -26,16 +26,21 @@ const router = new VueRouter(routerInfo);
 
 let firstRender = true;
 
+
 router.beforeEach((to,from, next) => {
 
-    if(firstRender){
-        firstRender = false;
-        next();
-        return
-    }
+    next();
+    {firstRender}
+    return;
 
-    store.commit('registTransitionNext' , next);
-    store.commit('pageTransition');
+    // if(firstRender){
+    //     firstRender = false;
+    //     next();
+    //     return
+    // }
+
+    // store.commit('registTransitionNext' , next);
+    // store.commit('pageTransition');
 });
 
 export default router;

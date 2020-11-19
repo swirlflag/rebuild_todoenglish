@@ -1,0 +1,75 @@
+// [class^=icon] {
+.icon {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    width: 10px; height: 10px;
+
+    &.icon--account {
+        background-image: url('~@/assets/icon/icon_account_person.svg');
+        &.c-white {background-image: url('~@/assets/icon/icon_account_person_white.svg')}
+    }
+    &.icon--dropdown-arrow {
+        background-image: url('~@/assets/icon/icon_dropdown_arrow.svg');
+        &.c-white {background-image: url('~@/assets/icon/icon_dropdown_arrow_white.svg')}
+    }
+    &.icon--signout-arrow {
+        background-image: url('~@/assets/icon/icon_signout_arrow.svg');
+        // &.c-white {background-image: url('~@/assets/icon/icon_signout_arrow_white.svg')}
+    }
+
+    &.icon--alphabet {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_alphabet.svg');
+    }
+    &.icon--movieslate {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_movieslate.svg');
+    }
+    &.icon--talkwow {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_talkwow.svg');
+    }
+    &.icon--waypoint {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_waypoint.svg');
+    }
+    &.icon--movieslate {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_movieslate.svg');
+    }
+    &.icon--uppergraph {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_uppergraph.svg');
+    }
+    &.icon--todoenglish-school {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_todoenglish_school.svg');
+    }
+    &.icon--use-tablet {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_use_tablet.svg');
+    }
+    &.icon--calendar {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_calendar.svg');
+    }
+
+    &.icon--arrow {
+        width: 19px; height: 19px;
+        background-image: url('~@/assets/icon/icon_arrow_purple.svg');
+        &.c-cyan    {background-image: url('~@/assets/icon/icon_arrow_cyan.svg');}
+        &.c-yellow  {background-image: url('~@/assets/icon/icon_arrow_yellow.svg');}
+        &.c-green   {background-image: url('~@/assets/icon/icon_arrow_green.svg');}
+    }
+
+    &.icon--playbutton {
+        width: 38px; height: 38px;
+        background-image: url('~@/assets/icon/icon_playbutton_cyan.svg');
+        &.c-cyan    {background-image: url('~@/assets/icon/icon_playbutton_cyan.svg');}
+        &.c-yellow  {background-image: url('~@/assets/icon/icon_playbutton_yellow.svg');}
+        &.c-green   {background-image: url('~@/assets/icon/icon_playbutton_green.svg');}
+    }
+
+}

@@ -1,0 +1,514 @@
+.section__inner {
+    // border: 1px solid #d3d;
+    // border: 1px solid #aac;
+}
+
+.page-contents {
+
+}
+.main-header {
+
+    width: 100%;
+    padding-top: 200px;
+    // padding-bottom: 356px;
+    text-align: center;
+    font-weight: 300;
+    word-break: keep-all;
+
+    background-image: url('~@/assets/main/img_header_bg.png');
+    background-position: center;
+    background-position: bottom;
+    background-size: cover;
+
+    @include phone {
+        padding-top: 140px;
+        background-image : url('~@/assets/main/img_header_bg_m.png');
+    }
+
+    .section__inner {
+        display :flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-header__title {
+        font-size: 88px;
+        white-space: nowrap;
+        @include phone {
+            font-size: calc(15px + 8vw);
+        }
+    }
+    .main-header__logo {
+        margin-top: 32px;
+        width: 460px;
+
+        @include phone {
+            margin-top: 40px;
+            width: 88%;
+        }
+
+        img {
+            display: inline-block;
+            width: 100%;
+        }
+
+    }
+    .main-header__description {
+        margin-top: 100px;
+        font-size: 48px;
+        @include phone {
+            margin-top: 90px;
+            font-size: calc(8px + 3.5vw);
+        }
+    }
+
+    .main-header__downloads {
+        width: 100%;
+        margin-top: 50px;
+        @include phone {
+            margin-top: 26px;
+        }
+
+        > button {
+            margin: 10px;
+            @include phone {
+                margin: 0;
+            }
+        }
+    }
+
+    .main-header__source-children {
+        margin-top: 142px;
+        margin-bottom: 30px;
+        background-image : url('~@/assets/main/img_students.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: bottom;
+        width: 100%;
+        height: 177px;
+
+        @include phone {
+            margin-top: calc(100px + 8vw);
+            margin-bottom: 2vw;
+            background-image : url('~@/assets/main/img_students_m.svg');
+        }
+    }
+
+}
+
+.main-introduce {
+    background-color: $COLOR_navy_2;
+    color: #fff;
+    padding: 80px 0;
+
+    .section__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .introduce__logo {
+    }
+    .introduce__description {
+        line-height: $SIZE_lineheight_high;
+        margin-top: 36px;
+        text-align: center;
+        font-weight: 300;
+        font-size: 22px;
+        word-break: keep-all;
+        padding: 0 30px;
+        @include phone {
+            margin-top: 40px;
+            padding: 0 3vw;
+        }
+    }
+}
+
+.main-subheader {
+    text-align: center;
+    box-sizing: border-box;
+    word-break: keep-all;
+    @include phone {
+        padding: 0 3vw;
+    }
+    .section__inner {
+        margin-top: 150px;
+        margin-bottom: 30px;
+    }
+
+    .subheader__title {
+
+        font-size: 60px;
+        @include phone {
+            font-size: calc(12px + 7vw);
+        }
+    }
+    .subheader__description {
+        font-size: 28px;
+        margin-top: 12px;
+        @include phone {
+            font-size: 26px;
+        }
+    }
+}
+
+.main-activity {
+
+    overflow: hidden;
+
+    .section__inner {
+
+    }
+
+    .section__source {
+        min-width: 100%;
+        display: flex;
+        justify-content: center;
+        span {
+            width: 1480px; height: 460px;
+            min-width: 1200px;
+            min-width :1480px;
+            display: inline-block;
+            background-image: url('~@/assets/main/img_activity.png');
+            background-size : contain;
+            background-position: bottom;
+            background-repeat: no-repeat;
+            @include phone {
+                width: 100%; height: 70vw;
+                margin-top: 30px;
+                background-image: url('~@/assets/main/img_activity_m.png');
+            }
+        }
+    }
+
+}
+
+.main-culture {
+    background-color:#F5F5F7;
+    .section__source {
+        min-width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+
+        span {
+            display: inline-block;
+            background-repeat: no-repeat;
+
+            &:nth-child(1) {
+                position: relative;
+                width: 100%; height: 400px;
+                min-width: 1480px;
+                background-image : url('~@/assets/main/img_culture_bg.png');
+                background-size : contain;
+                background-position: center;
+                @include phone {
+                    margin-top: 60px;
+                    width: 100%; height: 73vw;
+                    min-width: 100%;
+                    background-size : 105%;
+                    background-image : url('~@/assets/main/img_culture_bg_m.png');
+                }
+            }
+            &:nth-child(2) {
+                position: absolute;
+                width: 480px; height: 290px;
+                left: 56%; top: 10.5%;
+                background-image : url('~@/assets/main/img_culture_display.png');
+                background-size: contain;
+                background-position: center;
+                border-radius: 15px;
+                overflow: hidden;
+                @include phone {
+                    display: none;
+                }
+            }
+            &:nth-child(3) {
+                position: absolute;
+                width: 352px; height: 162px;
+                bottom: 0; left: 44%;
+                background-image : url('~@/assets/main/img_culture_student.png');
+                background-size: contain;
+                @include phone {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.main-interview {
+    padding: 73px 0;
+    color : #fff;
+    word-break: keep-all;
+
+    @include phone {
+        padding: 80px 0 120px;
+    }
+
+    .section__inner {
+        display: flex;
+
+        @include phone {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .interview__portrait {
+        width: 282px; height: 282px;
+        flex-shrink: 0;
+        @include phone {
+            width: 354px; height: 354px;
+        }
+    }
+    .interview__content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 12px;
+        @include phone {
+            margin-left: 0;
+        }
+
+        .interview__opinion {
+            font-size: 28px;
+            line-height: $SIZE_lineheight_low;
+            @include phone {
+                margin-top: 24px;
+                font-size: 22px;
+                text-align: center;
+                line-height: $SIZE_lineheight_high;
+            }
+        }
+        .interview__info {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            margin-top: 28px;
+
+            @include phone {
+                margin-top: 24px;
+                font-size: 18px;
+                justify-content: center;
+            }
+
+            .interview__name {
+                font-weight: 700;
+            }
+            .interview__position {
+                display: flex;
+                align-items: center;
+                &::before {
+                    content : '';
+                    display: inline-block;
+                    width: 2px; height: 16px;
+                    margin: 0 16px;
+                    margin-top: -2px;
+                    background-color: rgba(255,255,255,0.27);
+                }
+            }
+        }
+    }
+
+    .interview__showvideo {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        font-weight: 700;
+        margin-top: 18px;
+        @include phone {
+            order : -1;
+            justify-content: center;
+            margin-top: 0;
+        }
+
+        .icon--playbutton{
+            margin-right: 10px;
+            width: 32px; height: 32px;
+        }
+        .icon--arrow{
+            margin-left: 8px;
+            margin-bottom: 3px;
+        }
+    }
+
+}
+
+.main-weeklyreport{
+    padding-bottom: 0;
+
+    .section__inner {
+        display: flex;
+        justify-content: space-between;
+
+        @include phone {
+            flex-direction: column !important;
+        }
+    }
+
+    .showing__content {
+        white-space: nowrap;
+        @include phone {
+            white-space: normal;
+        }
+    }
+
+    .showing__source {
+        display: inline-flex;
+        @include phone {
+            margin-top: 60px;
+        }
+
+        .image-box {
+            width: 688px; height: 600px;
+            @include phone {
+                height: auto;
+            }
+            img {
+                width: 100%; height: 100%;
+                object-fit: contain;
+            }
+        }
+
+    }
+}
+
+.main-dailynotice{
+    background-color:#F5F5F7;
+    .section__inner {
+        display: flex;
+        justify-content: space-between;
+
+        @include phone {
+            flex-direction: column;
+        }
+    }
+
+    .showing__content {
+        white-space: nowrap;
+        @include phone {
+            white-space: normal;
+        }
+    }
+
+    .showing__source {
+        display: inline-flex;
+        @include phone {
+            margin-top: 60px;
+        }
+        .image-box {
+            width: 688px; height: 600px;
+            @include phone {
+                height: auto;
+            }
+            img {
+                width: 100%; height: 100%;
+                object-fit: contain;
+            }
+        }
+
+    }
+}
+
+.main-coaching {
+    .section__inner {
+        display: flex;
+        justify-content: space-between;
+
+        @include phone {
+            flex-direction: column !important;
+        }
+    }
+
+    .showing__content {
+        white-space: nowrap;
+        @include phone {
+            white-space: normal;
+        }
+    }
+
+    .showing__source {
+        @include phone {
+            margin-top: 60px;
+        }
+    }
+}
+
+.main-curriculum {
+    overflow: hidden;
+
+    .section__inner {
+        display: flex;
+    }
+
+    .showing__content {
+        white-space: nowrap;
+    }
+
+    .showing__source {
+        margin-left: 70px;
+
+        .image-box {
+            width: 840px;
+        }
+    }
+}
+
+
+.main-digitaltest {
+    min-height: 580px;
+    box-sizing: border-box;
+    .section__inner {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .showing__content {
+        white-space: nowrap;
+    }
+
+    .section__source {
+        top: 0; left: 0;
+        position: absolute;
+        height: 100%; width: 100%;
+
+        .image-box {
+            width: 100%; height: 100%;
+            background-image: url('~@/assets/main/img_quizshow.png');
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-size: contain;
+            width: 636px;
+            position: absolute;
+            left: calc(50% - 630px); bottom :0;
+        }
+    }
+
+}
+
+
+
+.main-learning-content {
+    overflow: hidden;
+
+    .section__source {
+        top: 0; left: 0;
+        position: absolute;
+        height: 100%; width: 100%;
+
+        .image-box {
+            position: absolute;
+            width: 100%; height: 100%;
+            max-width: 720px;
+            background-image: url('~@/assets/main/img_content_tile.png');
+            background-repeat: no-repeat;
+            background-position: right bottom;
+            background-size: contain;
+            right: calc(50% - 630px);
+        }
+    }
+
+}

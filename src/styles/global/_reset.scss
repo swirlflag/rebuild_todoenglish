@@ -45,15 +45,15 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 margin: 0;
 padding: 0;
 border: 0;
 font-size: 100%;
-font: inherit;
+/* font: inherit; */
 vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -183,7 +183,7 @@ font-weight: bolder;
 code,
 kbd,
 samp {
-font-family: monospace, monospace; /* 1 */
+font-family: monospace, monospace; 
 font-size: 1em; /* 2 */
 }
 
@@ -240,7 +240,8 @@ input,
 optgroup,
 select,
 textarea {
-font-family: inherit; /* 1 */
+/* font-family: inherit;  */
+/*s 1 */
 font-size: 100%; /* 1 */
 line-height: 1.15; /* 1 */
 margin: 0; /* 2 */
@@ -385,7 +386,8 @@ outline-offset: -2px; /* 2 */
 
 ::-webkit-file-upload-button {
 -webkit-appearance: button; /* 1 */
-font: inherit; /* 2 */
+/* font: inherit;  */
+/* 2 */
 }
 
 /* Interactive
