@@ -1,0 +1,45 @@
+.page-contents {
+    padding-bottom: 200px;
+}
+
+.curriculum-description{
+    margin-top: 28px;
+
+    .precaution {
+        line-height: 1.2em;
+        margin-top: 10px;
+
+        li {
+            display: inline-block;
+            .link-hover {
+                top: 4px;
+                @include phone {
+                    top: 0;
+                }
+            }
+        }
+
+    }
+}
+
+
+.curriculum-title {
+    margin-top: 88px;
+
+    h2 {
+        position: relative;
+        font-size: 48px;
+        span {
+            display: inline-block;
+        }
+    }
+}
+
+
+.curriculum-map {
+    // border: 1px solid #000;
+
+    .area__inner {
+        // border: 1px solid #000;
+    }
+}

@@ -1,4 +1,4 @@
-.section__inner {
+.area__inner {
     // border: 1px solid #d3d;
     // border: 1px solid #aac;
 }
@@ -25,7 +25,7 @@
         background-image : url('~@/assets/main/img_header_bg_m.png');
     }
 
-    .section__inner {
+    .area__inner {
         display :flex;
         flex-direction: column;
         align-items: center;
@@ -101,7 +101,7 @@
     color: #fff;
     padding: 80px 0;
 
-    .section__inner {
+    .area__inner {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -128,10 +128,11 @@
     text-align: center;
     box-sizing: border-box;
     word-break: keep-all;
+
     @include phone {
         padding: 0 3vw;
     }
-    .section__inner {
+    .area__inner {
         margin-top: 150px;
         margin-bottom: 30px;
     }
@@ -146,17 +147,139 @@
     .subheader__description {
         font-size: 28px;
         margin-top: 12px;
+        line-height: $SIZE_lineheight_middle;
         @include phone {
             font-size: 26px;
         }
     }
 }
 
+.tablet-video {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+
+    @include phone {
+    }
+
+    .tablet-video__frame {
+        position: relative;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: #fff;
+        box-sizing: border-box;
+        border-radius: 25px;
+        border: 1px solid rgba(0,0,0,0.15);
+        box-shadow: 0 0 13px rgba(0,0,0,0.25);
+        @include phone {
+            border-radius: 3vw;
+        }
+    }
+
+    .tablet-video__source {
+        box-sizing: border-box;
+        transform: scale(0.93, 0.905);
+        transform-origin: center;
+        width: 100%; height: 100%;
+        top: 0; left: 0;
+        overflow: hidden;
+
+        video {
+            vertical-align: top;
+            background-color: #aaa;
+            // object-fit: cover;
+            width: 100%; height: 100%;
+            border-radius: 13px;
+            box-shadow: 0 0 5px rgba(255,255,255,0.1);
+            box-sizing: border-box;
+
+            @include phone {
+                border-radius: 1.5vw;
+            }
+        }
+    }
+
+}
+
+.main-howtolearn {
+    position: relative;
+    // padding-bottom: 200px;
+
+    .area__inner {
+        display: flex;
+        justify-content: space-between;
+
+
+    }
+
+    .section__source {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+
+        span {
+            display: inline-block;
+            width: 100%; height: 100%;
+            background-image: url('~@/assets/main/img_forest_bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+
+            @include phone {
+                background-size: 280% ;
+                background-position: center bottom;
+            }
+        }
+    }
+
+    .showing__source {
+        transform: rotate(4deg);
+
+        @include phone {
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+    }
+
+
+}
+
+
+.main-experience {
+    background-color: #F5F5F7;
+
+    .area__inner {
+        display: flex;
+        justify-content: space-between;
+        @include phone {
+            display: flex;
+        }
+    }
+    .showing__source {
+        position: relative;
+        right: 120px;
+        transform: rotate(-4deg);
+
+        @include phone {
+            right: 0;
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+    }
+
+    .tablet-video__frame {
+        background-color: #111;
+    }
+}
+
+
+
 .main-activity {
 
     overflow: hidden;
 
-    .section__inner {
+    .area__inner {
 
     }
 
@@ -247,13 +370,9 @@
         padding: 80px 0 120px;
     }
 
-    .section__inner {
+    .area__inner {
         display: flex;
-
-        @include phone {
-            flex-direction: column;
-            align-items: center;
-        }
+        align-items: center;
     }
 
     .interview__portrait {
@@ -340,13 +459,10 @@
 .main-weeklyreport{
     padding-bottom: 0;
 
-    .section__inner {
+    .area__inner {
         display: flex;
         justify-content: space-between;
 
-        @include phone {
-            flex-direction: column !important;
-        }
     }
 
     .showing__content {
@@ -378,13 +494,11 @@
 
 .main-dailynotice{
     background-color:#F5F5F7;
-    .section__inner {
+    .area__inner {
         display: flex;
         justify-content: space-between;
 
-        @include phone {
-            flex-direction: column;
-        }
+
     }
 
     .showing__content {
@@ -414,13 +528,10 @@
 }
 
 .main-coaching {
-    .section__inner {
+    .area__inner {
         display: flex;
         justify-content: space-between;
 
-        @include phone {
-            flex-direction: column !important;
-        }
     }
 
     .showing__content {
@@ -440,19 +551,31 @@
 .main-curriculum {
     overflow: hidden;
 
-    .section__inner {
+    .area__inner {
         display: flex;
     }
 
     .showing__content {
         white-space: nowrap;
+
+        @include phone {
+            white-space: normal;
+        }
     }
 
     .showing__source {
         margin-left: 70px;
+        @include phone {
+            margin-left: 0;
+            margin-top: 60px;
+        }
 
         .image-box {
             width: 840px;
+
+            @include phone {
+                width: 126%;
+            }
         }
     }
 }
@@ -461,29 +584,47 @@
 .main-digitaltest {
     min-height: 580px;
     box-sizing: border-box;
-    .section__inner {
+    @include phone{
+        padding-bottom: 80vw;
+    }
+    .area__inner {
         display: flex;
         flex-direction: row-reverse;
     }
 
     .showing__content {
         white-space: nowrap;
+        @include phone {
+            white-space: normal;
+        }
     }
 
     .section__source {
         top: 0; left: 0;
         position: absolute;
-        height: 100%; width: 100%;
+        width: 100%;height: 100%;
+
+        @include phone {
+            // display: none;
+        }
 
         .image-box {
             width: 100%; height: 100%;
             background-image: url('~@/assets/main/img_quizshow.png');
             background-repeat: no-repeat;
-            background-position: center bottom;
             background-size: contain;
+            background-position: center bottom;
             width: 636px;
             position: absolute;
             left: calc(50% - 630px); bottom :0;
+
+            @include phone {
+                width: 100%;
+                left: 0;
+                background-size: cover;
+                background-image: url('~@/assets/main/img_quizshow_m.png');
+
+            }
         }
     }
 
@@ -493,6 +634,9 @@
 
 .main-learning-content {
     overflow: hidden;
+    @include phone {
+        padding-bottom: 78vw;
+    }
 
     .section__source {
         top: 0; left: 0;
@@ -508,7 +652,56 @@
             background-position: right bottom;
             background-size: contain;
             right: calc(50% - 630px);
+
+            @include phone {
+                max-width: 100%;
+                right: 0;
+            }
         }
     }
 
 }
+
+.main-footer {
+    background-color: #31235E;
+    background-image: url('~@/assets/main/img_curtain_pattern.png');
+    background-size: contain;
+    background-repeat: repeat-x;
+    text-align: center;
+    padding: 120px 0;
+    color: #fff;
+    line-height: $SIZE_lineheight_high;
+
+    .area__inner {
+
+    }
+
+    .main-footer__info {
+        .main-footer__logo {
+            width: 240px;
+        }
+
+        p {
+            margin-top: 24px;
+            color: #FFB119;
+            font-weight: 700;
+            font-size: 24px;
+        }
+    }
+    .main-footer__downloads {
+        margin-top: 60px;
+
+        > button{
+            @include overPhone {
+                margin: 10px;
+            }
+        }
+    }
+
+    .main-footer__precaution {
+        text-align: center;
+        margin-top: 24px;
+    }
+}
+
+// img_curtain_pattern.png

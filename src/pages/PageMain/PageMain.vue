@@ -1,8 +1,8 @@
 <template>
     <div class="page-contents">
 
-        <header class="main-header section__outer ">
-            <div class="section__inner">
+        <header class="main-header area__outer ">
+            <div class="area__inner">
                 <h1 class="main-header__title">
                     실패가 없는
                     <br>모두의 영어유치원
@@ -17,11 +17,11 @@
                 </p>
                 <div class="main-header__downloads">
 
-                    <DownloadButton type="apple" class="visible-overphone"/>
+                    <DownloadButton type="apple" theme="navy" class="visible-overphone"/>
 
-                    <DownloadButton type="google" class="visible-overphone"/>
+                    <DownloadButton type="google" theme="navy" class="visible-overphone"/>
 
-                    <DownloadButton type="mobile" class="visible-phone"/>
+                    <DownloadButton type="mobile" theme="navy" class="visible-phone"/>
 
                 </div>
 
@@ -30,8 +30,8 @@
             </div>
         </header>
 
-        <section class="main-introduce section__outer">
-            <div class="section__inner">
+        <div class="main-introduce area__outer">
+            <div class="area__inner">
                 <div class="introduce__logo image-box" >
                     <img src="@/assets/logo/logo_todoenglish_vertical_white.svg" alt="토도영어 로고 | TODO ENGLISH">
                 </div>
@@ -46,10 +46,76 @@
                     충분히 할 수 있도록 설계되었습니다.
                 </p>
             </div>
-        </section>
+        </div>
 
-        <section class="main-subheader section__outer">
-            <div class="section__inner">
+        <div class="main-howtolearn showing-section area__outer">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <span class="icon icon--redflag"></span>
+                    </div>
+                    <h3 class="showing__title">
+                        게임처럼
+                        <br class="visible-overphone">
+                        학습 미션을 해결
+                    </h3>
+                    <p class="showing__description">
+                        미션 형태의 학습구성으로 가르쳐주지 않아도
+                        <br class="visible-overphone">
+                        아이들이 스스로 룰을 이해하고 빠르게 몰입해요.
+                    </p>
+                </div>
+
+                <div class="showing__source">
+                    <div class="tablet-video">
+                        <div class="tablet-video__frame"></div>
+                        <div class="tablet-video__source">
+                            <video autoplay muted playsinline loop>
+                                <source src="@/assets/main/video_tablet_1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="section__source">
+                <span></span>
+            </div>
+        </div>
+
+        <div class="main-experience showing-section type-right area__outer">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <span class="icon icon--talking"></span>
+                    </div>
+                    <h3 class="showing__title">
+                        문지르고, 움직이고
+                        <br class="visible-overphone">
+                        연결하고, 말하는
+                        <br class="visible-overphone">
+                        풍부한 인터렉션
+                    </h3>
+                    <p class="showing__description">
+                        아이의 눈, 손과 입이 끊임없이 움직이며 오감으로 영어를 체험해요.
+                    </p>
+                </div>
+                <div class="showing__source">
+                    <div class="tablet-video">
+                        <div class="tablet-video__frame"></div>
+                        <div class="tablet-video__source">
+                            <video autoplay muted playsinline loop>
+                                <source src="@/assets/main/video_tablet_2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="main-subheader area__outer">
+            <div class="area__inner">
                 <h2 class="subheader__title">
                     앱만으로 진짜 공부가 되는
                     <br class="visible-overphone">디지털 콘텐츠
@@ -58,10 +124,10 @@
                     게임과 같은 몰입감, 단순 암기와 반복도 즐거워요.
                 </p>
             </div>
-        </section>
+        </div>
 
-        <section class="main-activity showing-section section__outer">
-            <div class="section__inner">
+        <div class="main-activity showing-section area__outer">
+            <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
                         <span class="icon icon--alphabet"></span>
@@ -77,10 +143,10 @@
             <div class="section__source">
                 <span></span>
             </div>
-        </section>
+        </div>
 
-        <section class="main-culture showing-section section__outer">
-            <div class="section__inner">
+        <div class="main-culture showing-section area__outer">
+            <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
                             <span class="icon icon--movieslate"></span>
@@ -100,10 +166,10 @@
                 <span></span>
                 <span></span>
             </div>
-        </section>
+        </div>
 
-        <section class="main-interview section__outer" style="background-color:#1f96db">
-            <div class="section__inner">
+        <div class="main-interview area__outer" style="background-color:#1f96db">
+            <div class="area__inner">
                 <div class="interview__portrait image-box">
                     <img src="@/assets/main/img_interview_thumb_1.png" alt="토도영어 인터뷰 사진 - Raoul Kim">
                 </div>
@@ -126,10 +192,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="main-weeklyreport showing-section type-right section__outer">
-            <div class="section__inner">
+        <div class="main-weeklyreport showing-section type-right area__outer">
+            <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
                         <span class="icon icon--uppergraph"></span>
@@ -153,10 +219,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="main-dailynotice showing-section section__outer">
-            <div class="section__inner">
+        <div class="main-dailynotice showing-section area__outer">
+            <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
                         <span class="icon icon--talkwow"></span>
@@ -180,10 +246,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="main-coaching showing-section type-right section__outer" >
-            <div class="section__inner">
+        <div class="main-coaching showing-section type-right area__outer" >
+            <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
                         <span class="icon icon--waypoint"></span>
@@ -206,10 +272,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="main-interview section__outer" style="background-color:#E03F82">
-            <div class="section__inner">
+        <div class="main-interview area__outer" style="background-color:#E03F82">
+            <div class="area__inner">
                 <div class="interview__portrait image-box">
                     <img src="@/assets/main/img_interview_thumb_2.png" alt="토도영어 인터뷰 사진 - Jeff Park">
                 </div>
@@ -232,10 +298,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="main-subheader section__outer">
-            <div class="section__inner">
+        <div class="main-subheader area__outer">
+            <div class="area__inner">
                 <h2 class="subheader__title">
                     미국 본사에서 개발한
                     <br class="visible-overphone">
@@ -245,10 +311,10 @@
                     디지털 학습에 최적화 된 ESL 커리큘럼을 자체 개발 했어요.
                 </p>
             </div>
-        </section>
+        </div>
 
-        <section class="main-curriculum showing-section section__outer" style="background-color:#fff">
-            <div class="section__inner">
+        <div class="main-curriculum showing-section area__outer" style="background-color:#fff">
+            <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
                         <span class="icon icon--todoenglish-school"></span>
@@ -258,7 +324,7 @@
                         <br>통합 커리큘럼
                     </h3>
                     <p class="showing__description">
-                        <ul>
+                        <ul class="dot-list">
                             <li>
                                 미국 공통교과 기준, 킨더(유치원) - G2(초2) 수준의 통합 커리큘럼을
                                 <br>
@@ -290,32 +356,31 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="main-digitaltest showing-section type-right section__outer" style="background-color:#F2F0E9">
-            <div class="section__inner">
+        <div class="main-digitaltest showing-section type-right area__outer" style="background-color:#F2F0E9">
+            <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
                         <span class="icon icon--use-tablet"></span>
                     </div>
                     <h3 class="showing__title">
                         시험이라고 느끼지 못하는
-                        <br>디지털 테스트
+                        <br class="visible-overphone">
+                        디지털 테스트
                     </h3>
                     <p class="showing__description">
                         토도영어의 테스트는, 퀴즈와 챌린지 등으로 설계되어 있어요.
-                        <br>
+                        <br class="visible-overphone">
                         아이들은 매주 1회 이상 테스트 과정을 거치지만,
-                        <br>
+                        <br class="visible-overphone">
                         이를 게임의 일부로 여기며 스트레스 없이 진행합니다.
                     </p>
-                    <ul class="showing__precautions">
-                        <li>
-                            학습 진도와 성취도는 아마다 차이가 많습니다.
-                            <br>
-                            진도가 빠르다고 좋은 효과를 내는 것이 아니므로 아이의 속도에 맞추어 진행해 주세요.
-                        </li>
-                    </ul>
+                    <p class="precaution">
+                        학습 진도와 성취도는 아마다 차이가 많습니다.
+                        <br>
+                        진도가 빠르다고 좋은 효과를 내는 것이 아니므로 아이의 속도에 맞추어 진행해 주세요.
+                    </p>
                 </div>
 
             </div>
@@ -323,10 +388,10 @@
             <div class="section__source">
                 <div class="image-box"></div>
             </div>
-        </section>
+        </div>
 
-        <section class="main-learning-content showing-section section__outer">
-            <div class="section__inner">
+        <div class="main-learning-content showing-section area__outer">
+            <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
                         <span class="icon icon--calendar"></span>
@@ -336,7 +401,7 @@
                         <br>풍부한 학습 콘텐츠
                     </h3>
                     <p class="showing__description">
-                        <ul>
+                        <ul class="dot-list">
                             <li>
                                 2000개 이상의 학습 액티비티
                             </li>
@@ -354,11 +419,9 @@
                             </li>
                         </ul>
                     </p>
-                    <ul class="showing__precautions">
-                        <li>
-                            콘텐츠는 계속 업데이트 됩니다.
-                        </li>
-                    </ul>
+                    <p class="precaution">
+                        콘텐츠는 계속 업데이트 됩니다.
+                    </p>
                 </div>
 
             </div>
@@ -367,10 +430,10 @@
                 <div class="image-box"></div>
             </div>
 
-        </section>
+        </div>
 
-        <section class="main-interview section__outer" style="background-color:#F59E1D">
-            <div class="section__inner">
+        <div class="main-interview area__outer" style="background-color:#F59E1D">
+            <div class="area__inner">
                 <div class="interview__portrait image-box">
                     <img src="@/assets/main/img_interview_thumb_3.png" alt="토도영어 인터뷰 사진 - Laura Donahue">
                 </div>
@@ -395,8 +458,40 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
+        <div class="main-footer area__outer">
+            <div class="area__inner">
+
+                <div class="main-footer__info">
+                    <div class="main-footer__logo image-box">
+                        <img src="@/assets/logo/logo_todoenglish_white.svg" alt="토도영어 로고 | TODO ENGLISH">
+                    </div>
+                    <p>15일 무료 체험</p>
+                </div>
+
+                <div class="main-footer__downloads">
+
+                    <DownloadButton type="apple" theme="white" class="visible-overphone" />
+
+                    <DownloadButton type="google" theme="white" class="visible-overphone" />
+
+                    <DownloadButton type="mobile" theme="white" class="visible-phone" />
+
+                </div>
+
+                <p class="main-footer__precaution">
+                    <ul class="dot-list">
+                        <li>
+                            회원가입을 하시고 앱을 설치하시면 토도영어 앱의 모든 콘텐츠 이용이 가능합니다.
+                        </li>
+                        <li>
+                            카카오톡 연결을 해주셔야 우리아이 토도 스코어를 받으실 수 있습니다.
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
 
     </div>
 
@@ -432,6 +527,7 @@ export default {
         },
 
         checkNavStyle() {
+            console.log('main??');
             if(window.scrollY < 100){
                 if(this.isNavClear){
                     return
@@ -450,15 +546,13 @@ export default {
         }
     },
     mounted () {
-
         this.checkNavStyle();
         window.addEventListener('scroll' , this.checkNavStyle );
 
     },
-
-    beforeDestroyed() {
+    destroyed() {
         window.removeEventListener('scroll' , this.checkNavStyle );
-    }
+    },
 }
 </script>
 

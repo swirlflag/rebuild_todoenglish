@@ -1,16 +1,16 @@
 <template>
 
-    <DefaultButton  colorType="navy"
+    <DefaultButton  :theme="theme || defaultTheme"
                     :class="typeClassName"
                     :href="downloadLink" :blank="true"
     >
 
         <template v-if="type === 'apple'">
-            <span></span>
+            <span class="button__content"></span>
         </template>
 
         <template v-else-if="type === 'google'">
-            <span></span>
+            <span class="button__content"></span>
         </template>
 
         <template v-else-if="type === 'mobile'">
@@ -27,6 +27,7 @@ import DefaultButton from '@/components/button/DefaultButton.vue';
 export default {
     props : {
         type : String,
+        theme : String,
     },
     components : {
         DefaultButton,
@@ -52,6 +53,7 @@ export default {
         return {
             typeClassName ,
             downloadLink ,
+            defaultTheme : 'white',
         }
     },
 
@@ -63,24 +65,25 @@ export default {
 .button--default {
     min-width: 220px;
 
-    &.type-appstore {
+    span {
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
 
-        span {
+    &.type-appstore {
+        .button__content {
             width: 133px; height: 33px;
-            background-image : url('~@/assets/common/icon_appstore.svg');
-            background-repeat: no-repeat;
-            background-position: center center;
         }
+        &.theme-white {.button__content {background-image : url('~@/assets/logo/logo_appstore.svg');}}
+        &.theme-navy {.button__content {background-image : url('~@/assets/logo/logo_appstore_white.svg');}}
     }
 
     &.type-playstore {
-
-        span {
+        .button__content {
             width: 149px; height: 33px;
-            background-image : url('~@/assets/common/icon_playstore.svg');
-            background-repeat: no-repeat;
-            background-position: center center;
         }
+        &.theme-white {.button__content {background-image : url('~@/assets/logo/logo_googleplay.svg');}}
+        &.theme-navy {.button__content {background-image : url('~@/assets/logo/logo_googleplay_white.svg');}}
     }
 
     &.type-download {

@@ -18,7 +18,13 @@ export default {
     box-sizing: border-box;
 }
 .page-contents  {
-    // width: 100%;
+
+    &.nav-correction {
+        margin-top: 114px;
+        @include phone {
+            margin-top: 84px;
+        }
+    }
 }
 
 </style>

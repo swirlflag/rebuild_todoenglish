@@ -1,6 +1,6 @@
 <template>
     <button     class="button--default"
-                :class="`${isPressButton ? 'st-press' :''} ${colorType ? `color-${colorType}` : ''}`"
+                :class="`${isPressButton ? 'st-press' :''} ${theme ? `theme-${theme}` : ''}`"
                 ref="ref_root"
                 @click="(e) => clickButton(e)"
 
@@ -73,7 +73,7 @@ export default {
         href        : String,
         blank       : Boolean,
 
-        colorType   : String,
+        theme       : String,
         radius      : null,
         color       : String,
         background  : String,
@@ -179,7 +179,7 @@ export default {
         },
 
         clickButton(e) {
-            // this.clickAnimate();
+            this.clickAnimate();
             this.clickLink();
 
             this.$emit('click',e);
@@ -234,6 +234,7 @@ $radius : 25px;
             background-color: rgba(255,255,255,0.09);
             &::before {
                 background-color: rgba(255,255,255,0.23);
+                background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0) 100%);;
                 left: 105%;
                 transition : left 450ms $EASE_outQuart;
             }
@@ -246,9 +247,13 @@ $radius : 25px;
         }
     }
 
-    &.color-navy {
-        .button__body { background-color: $COLOR_navy_2;}
+    &.theme-navy {
+        .button__body { background-color: $COLOR_navy_2; color: #fff;}
         .button__shadow { box-shadow : 0 $thickness 0 rgb(14, 5, 60);}
+    }
+    &.theme-white {
+        .button__body { background-color: #fff; color: $COLOR_navy_2;}
+        .button__shadow { box-shadow : 0 $thickness 0 rgb(94, 87, 126);}
     }
 
 }
@@ -296,8 +301,8 @@ $radius : 25px;
                 content: '';
                 display: inline-block;
                 position: absolute;
-                width: 8%; height: 130%;
-                left: -13%; top: -15%;
+                width: 18%; height: 130%;
+                left: -20%; top: -15%;
                 transform: skewX(-15deg);
                 transition : none;
             }

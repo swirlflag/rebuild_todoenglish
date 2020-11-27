@@ -11,14 +11,29 @@ const routerInfo = {
     routes : [
         {
             path : '/',
-            component : () => import('@/pages/PageMain/PageMain.vue'),
             name : 'main',
+            component : () => import('@/pages/PageMain/PageMain.vue'),
         },
         {
             path : '/products',
-            component : () => import('@/pages/PageProducts/PageProducts.vue'),
             name : 'products',
+            component : () => import('@/pages/PageProducts/PageProducts.vue'),
         },
+
+        {
+            path : '/curriculum',
+            redirect : '/curriculum/map'
+        },
+        {
+            path : '/curriculum/map',
+            alias: [
+                '/curriculum',
+                '/curriculum/objectives'
+            ],
+            name : 'curriculum',
+            component : () => import('@/pages/PageCurriculum/PageCurriculum.vue'),
+        },
+
     ],
 }
 
@@ -26,21 +41,32 @@ const router = new VueRouter(routerInfo);
 
 let firstRender = true;
 
+const isSameCategoryPath = (to,from) => {
+    const toCategory = to.split('/')[1];
+    const fromCategory = from.split('/')[1];
+
+    return toCategory === fromCategory
+}
+
 
 router.beforeEach((to,from, next) => {
 
-    next();
-    {firstRender}
-    return;
+    const isChangeCategoryPath = !isSameCategoryPath(to.path, from.path);
 
-    // if(firstRender){
-    //     firstRender = false;
-    //     next();
-    //     return
-    // }
+    const useTransition = !firstRender && isChangeCategoryPath;
 
-    // store.commit('registTransitionNext' , next);
-    // store.commit('pageTransition');
+    if(firstRender){
+        firstRender = false;
+    }
+
+    if(!useTransition){
+        next();
+        return
+    }
+
+    store.commit('registTransitionNext' , next);
+    store.commit('pageTransition');
+
 });
 
 export default router;

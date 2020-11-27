@@ -28,7 +28,7 @@
                 <ul class="nav-gnb__links">
                     <li class="nav-gnb__link"><router-link to="/" exact>토도영어 소개</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/2" exact>멤버십 후기</router-link></li>
-                    <li class="nav-gnb__link"><router-link to="/3" exact>커리큘럼</router-link></li>
+                    <li class="nav-gnb__link"><router-link to="/curriculum">커리큘럼</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/products" exact>멤버십 가입</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/4" exact>도움말</router-link></li>
                 </ul>
@@ -185,18 +185,21 @@ $SIZE_MO_linkDistance : 15px;
 };
 
 .nav-gnb {
+
     z-index: 1100;
     font-size: 16px;
     background-color: $COLOR_navy_2;
     box-sizing: border-box;
-    // padding: 20px $SIZE_PC_outlinePadding;
+    // padding: 20px $SIZE_PC_innerPadding;
     padding: 20px 0;
     position: relative;
     border-bottom: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     &.use-trs {
         transition  : background-color 250ms ease 100ms
                     , height 400ms $EASE_outQuart
                     , transform 200ms $EASE_outCubic
+                    , box-shadow 500ms ease
                     ;
     }
 
@@ -214,6 +217,7 @@ $SIZE_MO_linkDistance : 15px;
     }
     &.type-clear {
         background-color: transparent;
+        box-shadow: none;
     }
     &.st-open-menu {
         background-color: $COLOR_navy_2;
@@ -233,19 +237,24 @@ $SIZE_MO_linkDistance : 15px;
 
 .nav-gnb__wrap {
     max-width: $SIZE_PC_contentWidth;
-    padding : 0 $SIZE_PC_outlinePadding;
+    padding : 0 $SIZE_PC_innerPadding;
     // min-width : 920px;
     margin: 0 auto;
     display: flex;
     box-sizing: border-box;
     align-items: center;
+
     @include phone {
         max-width : 100%;
-        min-width : 100%;
         height: 100vh;
         align-items: start;
         flex-direction: column;
-        padding: 14px $SIZE_MO_outlinePadding;
+        padding: 14px $SIZE_MO_innerPadding;
+        pointer-events: none ;
+
+        .st-open-menu & {
+            pointer-events: all;
+        }
     }
 }
 
@@ -266,6 +275,7 @@ $SIZE_MO_linkDistance : 15px;
 
         @include phone {
             width: 70px; height: 50px;
+            pointer-events: all;
         }
 
         .color-white & ,
@@ -537,9 +547,10 @@ $SIZE_MO_linkDistance : 15px;
     margin-left: auto;
     width: 24px; height: 20px;
     position: absolute;
-    top: 32px; right: $SIZE_MO_outlinePadding;
+    top: 32px; right: $SIZE_MO_innerPadding;
     @include phone {
         display: inline-block;
+        pointer-events: all;
     }
     .nav-gnb__menu-button__wrap {
         display: inline-block;

@@ -57,8 +57,8 @@ export default {
                 }, {
                     'x' : 0,
                     'y' : 0,
-                    duration : 0.6,
-                    delay : idx * 0.1,
+                    duration : 0.35,
+                    delay : idx * 0.05,
                     ease : 'power2.in',
                     onComplete (){
                         if(idx === 0){
@@ -78,8 +78,8 @@ export default {
 
             gsap.to(this.curtains ,{
                 [direction[0]] : `${this.reverse ? '' : '-'}100%`,
-                duration : 0.6,
-                stagger : -0.1,
+                duration : 0.5,
+                stagger : -0.05,
                 ease : 'power2.out',
                 onComplete(){
                     _this.transitionActive = false;

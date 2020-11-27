@@ -1,6 +1,6 @@
 <template>
     <div id="plate--test"
-        :class="{'st-open' : isOpen}"
+        :class="{'st-open' : isOpen , 'st-hide' : !useTest}"
         ref="ref_root"
     >
         <div id="test__log">
@@ -11,8 +11,8 @@
 
             <button id="test_scrollock" @click="TEST_scrollock">scrollock</button>
 
-
-
+            <div id="testlog1"></div>
+            <div id="testlog2"></div>
 
 
         </div>
@@ -33,6 +33,9 @@
 
 <script>
 export default {
+    props : {
+        useTest : Boolean
+    },
     data() {
         return {
             rootRect : {},
@@ -69,6 +72,9 @@ export default {
     },
     mounted() {
 
+
+        window.TEST_1 = document.querySelector('#testlog1');
+        window.TEST_2 = document.querySelector('#testlog2');
     }
 }
 </script>
@@ -81,6 +87,10 @@ export default {
     position: fixed;
     top: 0; left: 0;
     z-index: 99999;
+    &.st-hide {
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
     &.st-open {
         border: 1px solid rgb(0, 255, 0);
         padding: 20px;

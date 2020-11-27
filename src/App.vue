@@ -9,7 +9,7 @@
             `"
     >
         <PlateTest
-            v-if="0"
+            :useTest="false"
         />
 
         <PlateTransitionCover
@@ -24,6 +24,8 @@
             v-if="1"
         />
 
+        <PlateFooter/>
+
     </div>
 </template>
 
@@ -32,6 +34,7 @@ import PlateTest                from '@/plates/PlateTest.vue';
 import PlateTransitionCover     from '@/plates/PlateTransitionCover.vue';
 import PlateNavigation          from '@/plates/PlateNavigation.vue';
 import PlatePage                from '@/plates/PlatePage.vue';
+import PlateFooter              from '@/plates/PlateFooter.vue';
 
 // import '@/styles/font/font.scss';
 // import '@/styles/global/_reset.css';
@@ -40,7 +43,7 @@ import PlatePage                from '@/plates/PlatePage.vue';
 export default {
     name: 'App',
     components: {
-        PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest
+        PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter
     },
     data() {
         return {
@@ -72,7 +75,7 @@ export default {
             document.body.classList[now ? 'add' : 'remove']('st-lockscroll')
         },
         '$route.path'() {
-            // window.scrollTo(0,0);
+            window.scrollTo(0,0);
         },
 
     },
@@ -96,5 +99,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+#app {
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
 </style>

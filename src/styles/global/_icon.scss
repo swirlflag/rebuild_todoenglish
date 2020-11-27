@@ -55,6 +55,14 @@
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_calendar.svg');
     }
+    &.icon--redflag {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_redflag.svg');
+    }
+    &.icon--talking {
+        width: 60px; height: 60px;
+        background-image: url('~@/assets/icon/icon_talking.svg');
+    }
 
     &.icon--arrow {
         width: 19px; height: 19px;
@@ -62,6 +70,26 @@
         &.c-cyan    {background-image: url('~@/assets/icon/icon_arrow_cyan.svg');}
         &.c-yellow  {background-image: url('~@/assets/icon/icon_arrow_yellow.svg');}
         &.c-green   {background-image: url('~@/assets/icon/icon_arrow_green.svg');}
+    }
+
+    &.icon--arrow-simple {
+        width: 20px; height: 20px;
+        background-size: 200%;
+        overflow: hidden;
+        background-position: 0 0 ;
+        background-image: url('~@/assets/icon/icon_arrow_simple_1.svg');
+        transition: background-position 300ms $EASE_outCubic;
+
+        &.type-top , &.type-bottom{
+            background-size: 100%;
+            background-image: url('~@/assets/icon/icon_arrow_simple_2.svg');
+        }
+
+        &.type-left {}
+        &.type-right {background-position: 100% 0;}
+        &.type-top {}
+        &.type-bottom {background-position: 0 100%;}
+
     }
 
     &.icon--playbutton {

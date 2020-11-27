@@ -3,7 +3,7 @@
     <nav id="plate--navigation" class="plate">
 
         <NavigationGnb
-
+            v-if="1"
         />
 
     </nav>

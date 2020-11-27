@@ -1,10 +1,10 @@
 <template>
     <div class="page-contents">
         <section>
-            <div class="section__inner"></div>
+            <div class="area__inner"></div>
         </section>
         <section>
-            <div class="section__inner"></div>
+            <div class="area__inner"></div>
         </section>
     </div>
 </template>
