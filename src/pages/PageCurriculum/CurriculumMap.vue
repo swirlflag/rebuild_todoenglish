@@ -141,14 +141,19 @@ export default {
         transition-delay: 600ms !important;
     }
 }
+.curriculum-map {
+    margin-top: 20px;
+}
 
 .map__outer {
-    margin-top: 20px;
     display: flex;
     width: 100%;
-    overflow: scroll;
+
     position: relative;
     flex-wrap: wrap;
+    @include phone {
+        overflow-x: scroll;
+    }
 }
 
 table.map__table {
@@ -163,13 +168,13 @@ table.map__table {
     flex-basis: 100%;
 
     @include phone {
-        overflow-x: scroll;
-        // flex-basis: 100%;
+
     }
 
     tr {
         display: flex;
         align-items: center;
+        border-bottom: 1px solid #F2F0E9;
 
         @include phone {
             width: 100%;
@@ -189,6 +194,10 @@ table.map__table {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @include phone {
+            padding: 7px 0;
+        }
     }
 
     thead {
@@ -210,6 +219,7 @@ table.map__table {
                 width: 100%;
                 justify-content: flex-end;
                 text-align: right;
+
             }
             &:nth-child(1) th{
                 font-weight: 700;
@@ -233,10 +243,10 @@ table.map__table {
                 flex-basis: 100%;
 
                 @include phone {
-                    width: 50px;
+                    width: 40px;
                     flex-grow : 0;
                     flex-shrink: 0;
-                    flex-basis: 50px;
+                    flex-basis: 40px;
                 }
             }
 
@@ -282,7 +292,7 @@ table.map__table {
 
 .map__explain-list {
     margin-top: 80px;
-    line-height: $SIZE_lineheight_high;
+    line-height: $SIZE_lineheight_high1;
     word-break: keep-all;
     .map__explain-item {
         display: flex;
@@ -303,6 +313,10 @@ table.map__table {
         flex-shrink :0;
         width: 170px;
         font-weight: 700;
+        @include phone {
+            width: 100%;
+            font-size: 20px;
+        }
     }
     .map__explain-text {
         @include phone {

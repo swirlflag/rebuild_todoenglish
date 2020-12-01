@@ -85,11 +85,7 @@ export default {
 
     @include hardSelect {
         color: #999;
-        font-size: 14px;
-
-        @include phone {
-            font-size: 16px;
-        }
+        font-size: $SIZE_MO_fontsizeDefault;
     }
 
     @include phone {
@@ -193,7 +189,7 @@ export default {
                     margin-top: -1px;
 
                     @include phone {
-                        font-size: 40px;
+                        font-size: 34px;
                     }
                 }
             }
@@ -207,10 +203,10 @@ export default {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    line-height: $SIZE_lineheight_high;
+    line-height: $SIZE_lineheight_high1;
 
     @include phone {
-        line-height: $SIZE_lineheight_high3;
+        line-height: $SIZE_lineheight_high2;
     }
 
     > div {

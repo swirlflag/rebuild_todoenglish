@@ -12,7 +12,8 @@
                 </span>
                 <p class="main-header__description">
                     아이들의 즐거운 첫 영어 시작을 응원합니다.
-                    <br class="visible-overphone">
+                    <!-- <br class="visible-overphone"> -->
+                    <br>
                     <span class="fw-b">15일 무료 체험</span>을 시작하세요.
                 </p>
                 <div class="main-header__downloads">
@@ -49,6 +50,7 @@
         </div>
 
         <div class="main-howtolearn showing-section area__outer">
+            <span class="area__bg"></span>
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
@@ -78,9 +80,7 @@
                 </div>
 
             </div>
-            <div class="section__source">
-                <span></span>
-            </div>
+
         </div>
 
         <div class="main-experience showing-section type-right area__outer">
@@ -139,33 +139,39 @@
                         똑같은 학습이라도 다양한 방식으로 접근하니 단순 암기와 반복도 즐거워요
                     </p>
                 </div>
+
+                <div class="showing__source">
+                    <span class="image-box"></span>
+                </div>
             </div>
-            <div class="section__source">
+            <!-- <div class="area__source">
                 <span></span>
-            </div>
+            </div> -->
         </div>
 
         <div class="main-culture showing-section area__outer">
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                            <span class="icon icon--movieslate"></span>
-                        </div>
-                        <h3 class="showing__title">
-                            영미 문화와 일상을 체험
-                        </h3>
-                        <p class="showing__description">
-                            미국 또래 아이들의 학교생활, 말하는 스타일 등
-                            <br class="visible-overphone">
-                            짜인 연극이 아닌 리얼한 진짜 영상으로 경험할 수 있어요.
-                        </p>
+                        <span class="icon icon--movieslate"></span>
                     </div>
+                    <h3 class="showing__title">
+                        영미 문화와 일상을 체험
+                    </h3>
+                    <p class="showing__description">
+                        미국 또래 아이들의 학교생활, 말하는 스타일 등
+                        <br class="visible-overphone">
+                        짜인 연극이 아닌 리얼한 진짜 영상으로 경험할 수 있어요.
+                    </p>
                 </div>
-            <div class="section__source">
-                <span></span>
-                <span></span>
-                <span></span>
+
+                <div class="showing__source">
+                    <span class="image-box"></span>
+                    <span class="image-box"></span>
+                    <span class="image-box"></span>
+                </div>
             </div>
+
         </div>
 
         <div class="main-interview area__outer" style="background-color:#1f96db">
@@ -213,7 +219,6 @@
                 </div>
 
                 <div class="showing__source">
-                    <!-- 추후마크업 -->
                     <div class="image-box">
                         <img src="@/assets/main/img_report.png" alt="">
                     </div>
@@ -240,7 +245,6 @@
                 </div>
 
                 <div class="showing__source">
-                    <!-- 추후마크업 -->
                     <div class="image-box">
                         <img src="@/assets/main/img_dailynotice.png" alt="">
                     </div>
@@ -266,7 +270,6 @@
                 </div>
 
                 <div class="showing__source">
-                    <!-- 추후마크업 -->
                     <div class="image-box">
                         <img src="@/assets/main/img_coaching.png" alt="">
                     </div>
@@ -350,7 +353,6 @@
                 </div>
 
                 <div class="showing__source">
-                    <!-- 추후마크업 -->
                     <div class="image-box">
                         <img src="@/assets/main/img_curriculum_map.png" alt="">
                     </div>
@@ -358,7 +360,7 @@
             </div>
         </div>
 
-        <div class="main-digitaltest showing-section type-right area__outer" style="background-color:#F2F0E9">
+        <div class="main-testway showing-section type-right area__outer" style="background-color:#F2F0E9">
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
@@ -383,9 +385,13 @@
                     </p>
                 </div>
 
+                <!-- <div class="showing__source">
+                    <div class="image-box"></div>
+                </div> -->
+
             </div>
 
-            <div class="section__source">
+            <div class="area__source">
                 <div class="image-box"></div>
             </div>
         </div>
@@ -426,7 +432,7 @@
 
             </div>
 
-            <div class="section__source">
+            <div class="area__source">
                 <div class="image-box"></div>
             </div>
 

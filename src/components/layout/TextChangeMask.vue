@@ -32,7 +32,7 @@ export default {
 <style scoped lang="scss">
 
 .mask-text {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     overflow: hidden;
     vertical-align: bottom;

@@ -1,22 +1,22 @@
 .page-contents {
-    padding-bottom: 200px;
+    padding-bottom: 160px;
 }
 
 .curriculum-description{
     margin-top: 28px;
+    // line-height: $SIZE_lineheight_high1;
+
 
     .precaution {
-        line-height: 1.2em;
+        // line-height: 1.2em;
         margin-top: 10px;
+
+        @include hardSelect {
+            font-size: 14px;
+        }
 
         li {
             display: inline-block;
-            .link-hover {
-                top: 4px;
-                @include phone {
-                    top: 0;
-                }
-            }
         }
 
     }
@@ -29,6 +29,10 @@
     h2 {
         position: relative;
         font-size: 48px;
+
+        @include phone {
+            font-size: calc(22px + 3.5vw);
+        }
         span {
             display: inline-block;
         }

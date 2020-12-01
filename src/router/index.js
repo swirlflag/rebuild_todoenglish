@@ -15,9 +15,9 @@ const routerInfo = {
             component : () => import('@/pages/PageMain/PageMain.vue'),
         },
         {
-            path : '/products',
-            name : 'products',
-            component : () => import('@/pages/PageProducts/PageProducts.vue'),
+            path : '/product',
+            name : 'product',
+            component : () => import('@/pages/PageProduct/PageProduct.vue'),
         },
 
         {
@@ -35,6 +35,7 @@ const routerInfo = {
         },
 
     ],
+
 }
 
 const router = new VueRouter(routerInfo);
@@ -59,14 +60,21 @@ router.beforeEach((to,from, next) => {
         firstRender = false;
     }
 
-    if(!useTransition){
+    if(useTransition){
+        // 트랜지션 사용 조건이면 PlateTransitionCover를 통해 페이지 넘김
+        store.commit('registTransitionNext' , next);
+        store.commit('pageTransition');
+    }else {
+        // 트랜지션 사용 조건이 아니면 그냥 넘김
         next();
-        return
+
     }
 
-    store.commit('registTransitionNext' , next);
-    store.commit('pageTransition');
-
 });
+
+router.afterEach(() => {
+    // const title = document.querySelector('.main-header__title');
+    // console.log(router.nextTick);
+})
 
 export default router;

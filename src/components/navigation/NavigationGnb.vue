@@ -29,7 +29,7 @@
                     <li class="nav-gnb__link"><router-link to="/" exact>토도영어 소개</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/2" exact>멤버십 후기</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/curriculum">커리큘럼</router-link></li>
-                    <li class="nav-gnb__link"><router-link to="/products" exact>멤버십 가입</router-link></li>
+                    <li class="nav-gnb__link"><router-link to="/product" exact>멤버십 가입</router-link></li>
                     <li class="nav-gnb__link"><router-link to="/4" exact>도움말</router-link></li>
                 </ul>
 

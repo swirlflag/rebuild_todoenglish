@@ -15,14 +15,15 @@ body {
     line-height: $SIZE_lineheight_middle;
 
     @include hardSelect {
+        word-break: keep-all;
         font-weight: 300;
-        font-size: 16px;
+        font-size: $SIZE_PC_fontsizeDefault;
         line-height: normal;
         letter-spacing: $SIZE_letterspacing_default;
         color: $COLOR_navy_1;
 
         @include phone {
-            font-size: 15px;
+            font-size: $SIZE_MO_fontsizeDefault;
         }
     }
 
@@ -39,6 +40,7 @@ body {
 
 .image-box {
     display: inline-block;
+    vertical-align: top;
     img {
         width: 100%; height: 100%;
         display: inline-block;
@@ -96,6 +98,7 @@ body {
 .area__outer{
     min-width: $SIZE_PC_contentWidth;
     position: relative;
+    box-sizing: border-box;
 
     @include phone {
         min-width : 100%;
@@ -119,8 +122,29 @@ body {
         }
     }
 
-    .section__source {
+    .area__source {
+        z-index: 1;
+        position: absolute;
         top: 0;left: 0;
+        width: 100%; height: 100%;
+        overflow: hidden;
+        .area_source-item {
+            position: absolute;
+            box-sizing: border-box;
+            display: inline-block;
+            width: 100%; height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .area__bg {
+        display: inline-block;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 0;
     }
 
 }
@@ -141,40 +165,46 @@ body {
         font-weight: 700;
 
         .icon{
-            // margin-right: 8px;
+            margin-right: 8px;
         }
     }
 
     .showing__title {
-        font-size: 48px;
+        display: flex;
+        font-size: $SIZE_PC_fontsizeTitle;
         margin-top: 18px;
         line-height: $SIZE_lineheight_low;
 
         @include phone {
             margin-top: 30px;
-            font-size: 36px;
+            // font-size: 36px;
+            font-size: $SIZE_MO_fontsizeTitle;
             margin-right: 10vw;
         }
     }
     .showing__description {
-        font-size: 16px;
         margin-top: 18px;
-        line-height: $SIZE_lineheight_high;
+        line-height: $SIZE_lineheight_high1;
+        display: flex;
         @include phone {
             margin-top: 30px;
-            font-size: 22px;
+            // font-size: 22px;
+            font-size: $SIZE_MO_fontsizeStrong;
             margin-right: 4vw;
         }
     }
-
 
     .showing__link {
         margin-top: 28px;
         display: inline-flex;
         align-items: center;
-        font-size: 22px;
+        font-size: $SIZE_PC_fontsizeLarge;
         font-weight: 700;
         position: relative;
+
+        @include phone {
+            font-size: $SIZE_MO_fontsizeLarge;
+        }
 
         .icon--arrow {
             margin-bottom: 2px;
@@ -186,8 +216,24 @@ body {
         margin-top: 18px;
     }
 
+    .showing__content {
+        position: relative;
+        z-index: 10;
+    }
+
     .showing__source {
-        // pointer-events: none;
+        box-sizing: border-box;
+    }
+
+
+    &.type-center {
+        @include overPhone {
+            .showing__subtitle,
+            .showing__title,
+            .showing__description {
+                justify-content: center;
+            }
+        }
     }
 
     &.type-right {
@@ -199,13 +245,24 @@ body {
             }
 
             .showing__subtitle {
-                flex-direction: row-reverse;
+                // flex-direction: row-reverse;
+
+                .icon {
+                    margin-left: auto;
+                    margin-right: 0;
+
+                     + span {
+                         margin-left: 8px;
+                     }
+                }
             }
 
             .showing__title {
+                justify-content: flex-end;
 
             }
             .showing__description {
+                justify-content: flex-end;
                 ul {
                     li {
                         &::before {
@@ -222,7 +279,7 @@ body {
 }
 
 .precaution {
-    line-height: $SIZE_lineheight_high;
+    // line-height: $SIZE_lineheight_high1;
     // font-size: 14px;
     // margin-top: 18px;
     @include hardSelect {
@@ -246,7 +303,7 @@ body {
             position: relative;
             margin-right: 0.15em;
             font-size: 1.2em;
-            top: -0.05em;
+            top: -0.025em;
         }
     }
 
@@ -258,6 +315,11 @@ body {
 .link-hover{
     position: relative;
     overflow: hidden;
+    height: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    line-height: inherit;
+    vertical-align: middle;
 
     &::before {
         position: absolute;

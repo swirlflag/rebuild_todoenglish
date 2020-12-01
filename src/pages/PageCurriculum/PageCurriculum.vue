@@ -1,5 +1,5 @@
 <template>
-    <section class="page-contents nav-correction">
+    <div class="page-contents nav-correction">
 
         <CommonHeader
             class="curriculum-header"
@@ -16,6 +16,7 @@
                     <li>
                         <a href="#" class="link-hover type-underline">Global Learning Xprize</a>&nbsp;
                         <span>는 Tesla의 Elon Musk가 후원한 전 세계 아동 문맹 퇴치를 위한 소프트웨어 경진대회입니다.</span>
+
                     </li>
                 </ul>
             </div>
@@ -39,13 +40,7 @@
             </transition-group>
         </div>
 
-        <div class="test">
-            <div class="testinner">
-                hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>
-            </div>
-        </div>
-
-    </section>
+    </div>
 </template>
 
 <script>
@@ -101,19 +96,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
-@import './PageCurriculumStyle.scss';
-
-.test {
-    width: 60vw;height: 60vw;
-    border: 1px solid #000;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
-    z-index: 10000;
-}
-</style>
-
-<style >
-
-
-</style>
+<style src="./PageCurriculumStyle.scss" lang="scss" scoped></style>

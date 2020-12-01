@@ -55,10 +55,11 @@
     }
     .main-header__description {
         margin-top: 100px;
-        font-size: 48px;
+        font-size: $SIZE_PC_fontsizeTitle;
         @include phone {
             margin-top: 90px;
-            font-size: calc(8px + 3.5vw);
+            // font-size: calc(8px + 3.5vw);
+            font-size:  $SIZE_MO_fontsizeStrong;
         }
     }
 
@@ -110,14 +111,15 @@
     .introduce__logo {
     }
     .introduce__description {
-        line-height: $SIZE_lineheight_high;
+        line-height: $SIZE_lineheight_high1;
         margin-top: 36px;
         text-align: center;
         font-weight: 300;
-        font-size: 22px;
+        font-size: $SIZE_PC_fontsizeLarge;
         word-break: keep-all;
         padding: 0 30px;
         @include phone {
+            font-size: $SIZE_MO_fontsizeStrong;
             margin-top: 40px;
             padding: 0 3vw;
         }
@@ -138,18 +140,19 @@
     }
 
     .subheader__title {
-
-        font-size: 60px;
+        font-size: $SIZE_PC_fontsizeTitle;
+        // font-weight: 400;
         @include phone {
-            font-size: calc(12px + 7vw);
+            // font-size: calc(12px + 7vw);
+            font-size: $SIZE_MO_fontsizeTitle ;
         }
     }
     .subheader__description {
-        font-size: 28px;
+        font-size: $SIZE_PC_fontsizeLarge ;
         margin-top: 12px;
         line-height: $SIZE_lineheight_middle;
         @include phone {
-            font-size: 26px;
+            font-size: $SIZE_MO_fontsizeLarge ;
         }
     }
 }
@@ -184,6 +187,7 @@
         width: 100%; height: 100%;
         top: 0; left: 0;
         overflow: hidden;
+        border-radius: 12px;
 
         video {
             vertical-align: top;
@@ -204,46 +208,71 @@
 
 .main-howtolearn {
     position: relative;
-    // padding-bottom: 200px;
+
+
+    @include phone {
+        // padding-bottom: 85vw;
+        // height: calc(430px + 60vw);
+        // max-height: 830px;
+        // max-height: 500px !important;;
+    }
+
+    .area__bg{
+        display: inline-block;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-image: url('~@/assets/main/img_forest_bg.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        @include phone {
+            background-size: 280% ;
+            background-position: center bottom;
+        }
+    }
 
     .area__inner {
         display: flex;
         justify-content: space-between;
 
+        @include overPhone {
+            padding-bottom: 200px;
 
-    }
-
-    .section__source {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-
-        span {
-            display: inline-block;
-            width: 100%; height: 100%;
-            background-image: url('~@/assets/main/img_forest_bg.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-
-            @include phone {
-                background-size: 280% ;
-                background-position: center bottom;
-            }
         }
     }
 
     .showing__source {
-        transform: rotate(4deg);
+        position: absolute;
+        right: 0; top: 0;
+        width: 100%; height: 100%;
+        box-sizing: border-box;
+        display: flex;
+        align-items: flex-start;
 
         @include phone {
-            margin-top: 60px;
+            position: relative;
             padding: 0 20px;
+            margin-top: 60px;
         }
+
+        .tablet-video {
+            margin-left: auto;
+            transform: rotate(4deg);
+        }
+
     }
 
-
 }
+
+
+
+
+
+
+
+
 
 
 .main-experience {
@@ -252,42 +281,54 @@
     .area__inner {
         display: flex;
         justify-content: space-between;
+        @include overPhone {
+            padding-bottom: 100px;
+        }
         @include phone {
             display: flex;
         }
     }
+
     .showing__source {
-        position: relative;
-        right: 120px;
-        transform: rotate(-4deg);
+        position: absolute;
+        width: 100%; height: 100%;
+        left: 0; top: 0;
+        display: flex;
+        align-items: flex-start;
 
         @include phone {
-            right: 0;
-            margin-top: 60px;
             padding: 0 20px;
+            margin-top: 60px;
+            position: relative;
+            align-items: flex-end;
+            left: 0;
+            bottom: 0;
         }
+
+        .tablet-video {
+            transform: rotate(-4deg);
+            .tablet-video__frame {
+                background-color: #111;
+            }
+        }
+
     }
 
-    .tablet-video__frame {
-        background-color: #111;
-    }
 }
 
 
 
 .main-activity {
-
     overflow: hidden;
 
     .area__inner {
-
     }
 
-    .section__source {
+    .showing__source {
         min-width: 100%;
         display: flex;
         justify-content: center;
-        span {
+        .image-box {
             width: 1480px; height: 460px;
             min-width: 1200px;
             min-width :1480px;
@@ -308,14 +349,16 @@
 
 .main-culture {
     background-color:#F5F5F7;
-    .section__source {
+    overflow: hidden;
+
+    .showing__source {
         min-width: 100%;
         display: flex;
         justify-content: center;
         position: relative;
-        overflow: hidden;
 
-        span {
+
+        .image-box {
             display: inline-block;
             background-repeat: no-repeat;
 
@@ -399,7 +442,7 @@
                 margin-top: 24px;
                 font-size: 22px;
                 text-align: center;
-                line-height: $SIZE_lineheight_high;
+                line-height: $SIZE_lineheight_high1;
             }
         }
         .interview__info {
@@ -458,10 +501,11 @@
 
 .main-weeklyreport{
     padding-bottom: 0;
-
     .area__inner {
-        display: flex;
-        justify-content: space-between;
+        padding-bottom: 280px;
+        @include phone {
+            padding-bottom: 0;
+        }
 
     }
 
@@ -473,14 +517,24 @@
     }
 
     .showing__source {
-        display: inline-flex;
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
         @include phone {
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
             margin-top: 60px;
         }
 
         .image-box {
-            width: 688px; height: 600px;
+            width: 500px;
+
             @include phone {
+                width: 90%;
                 height: auto;
             }
             img {
@@ -495,10 +549,10 @@
 .main-dailynotice{
     background-color:#F5F5F7;
     .area__inner {
-        display: flex;
-        justify-content: space-between;
 
-
+        @include overPhone {
+            padding-bottom: 240px;
+        }
     }
 
     .showing__content {
@@ -509,18 +563,19 @@
     }
 
     .showing__source {
-        display: inline-flex;
+        position: absolute;
+        right: 70px; top: 0;
+
         @include phone {
-            margin-top: 60px;
+            right: 0;
+            position: relative;
         }
+
         .image-box {
-            width: 688px; height: 600px;
+            width: 500px;
             @include phone {
-                height: auto;
-            }
-            img {
-                width: 100%; height: 100%;
-                object-fit: contain;
+                width: 94%;
+                margin-top: 60px;
             }
         }
 
@@ -529,9 +584,10 @@
 
 .main-coaching {
     .area__inner {
-        display: flex;
-        justify-content: space-between;
-
+        padding-bottom: 150px;
+        @include phone {
+            padding-bottom: 0;
+        }
     }
 
     .showing__content {
@@ -542,7 +598,12 @@
     }
 
     .showing__source {
+        position: absolute;
+        left: 0; top: 0;
+        width: 612px;
         @include phone {
+            position: relative;
+            width: 100%;
             margin-top: 60px;
         }
     }
@@ -552,7 +613,7 @@
     overflow: hidden;
 
     .area__inner {
-        display: flex;
+        padding-bottom: 30px;
     }
 
     .showing__content {
@@ -564,24 +625,29 @@
     }
 
     .showing__source {
-        margin-left: 70px;
+        position: absolute;
+        left: 55%;
+        top: 0;
+        margin-top: -20px;
+
         @include phone {
+            position: relative;
             margin-left: 0;
             margin-top: 60px;
+            left: 0;
         }
-
         .image-box {
             width: 840px;
-
             @include phone {
-                width: 126%;
+                // width: 126%;
+                width: 110%;
             }
         }
     }
 }
 
 
-.main-digitaltest {
+.main-testway {
     min-height: 580px;
     box-sizing: border-box;
     @include phone{
@@ -599,7 +665,7 @@
         }
     }
 
-    .section__source {
+    .area__source {
         top: 0; left: 0;
         position: absolute;
         width: 100%;height: 100%;
@@ -638,7 +704,7 @@
         padding-bottom: 78vw;
     }
 
-    .section__source {
+    .area__source {
         top: 0; left: 0;
         position: absolute;
         height: 100%; width: 100%;
@@ -670,7 +736,7 @@
     text-align: center;
     padding: 120px 0;
     color: #fff;
-    line-height: $SIZE_lineheight_high;
+    line-height: $SIZE_lineheight_high1;
 
     .area__inner {
 
