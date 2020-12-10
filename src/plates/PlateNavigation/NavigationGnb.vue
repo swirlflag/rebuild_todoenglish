@@ -105,12 +105,12 @@ export default {
     },
     watch: {
         '$route.path' () {
-            this.$store.commit('unuse_claerGnb');
-            this.$store.commit('use_whiteGnb');
+            this.$store.commit('GNB_unuseClear');
+            this.$store.commit('GNB_useWhite');
             // this.closeMenu(false);
             this.closeMenu();
         },
-        '$store.state.nav' : {
+        '$store.state.$nav' : {
             handler({is_clearGnb ,is_whiteGnb}) {
                 this.themeClear = is_clearGnb;
                 this.themeWhite = is_whiteGnb;
@@ -153,21 +153,21 @@ export default {
 
 export const gnbStore = {
     state : {
-        is_clearGnb    : false,
+        is_clearGnb   : false,
         is_whiteGnb   : true,
     },
     mutations : {
-        use_claerGnb(state) {
-            state.nav.is_clearGnb = true;
+        GNB_useClear(state) {
+            state.$nav.is_clearGnb = true;
         },
-        unuse_claerGnb(state) {
-            state.nav.is_clearGnb = false;
+        GNB_unuseClear(state) {
+            state.$nav.is_clearGnb = false;
         },
-        use_whiteGnb(state) {
-            state.nav.is_whiteGnb = true;
+        GNB_useWhite(state) {
+            state.$nav.is_whiteGnb = true;
         },
-        unuse_whiteGnb(state) {
-            state.nav.is_whiteGnb = false;
+        GNB_unuseWhite(state) {
+            state.$nav.is_whiteGnb = false;
         }
     }
 }

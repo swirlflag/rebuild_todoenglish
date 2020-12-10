@@ -12,6 +12,7 @@ body {
     // overflow-x: overlay;
     box-sizing: border-box;
     font-family: 'Apple SD Gothic Neo', 'Spoqa Han Sans', 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
+    // font-family: 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
     line-height: $SIZE_lineheight_middle;
 
     @include hardSelect {
@@ -62,10 +63,10 @@ body {
 
 .visible {
     &-phone {
-        @include overPhone { display: none; }
+        @include overPhone { display: none !important; }
     }
     &-overphone {
-        @include phone { display: none; }
+        @include phone { display: none !important; }
     }
 }
 
@@ -161,8 +162,12 @@ body {
     .showing__subtitle {
         display: flex;
         align-items: center;
-        font-size: 22px;
+        font-size: $SIZE_PC_fontsizeLarge;
         font-weight: 700;
+
+        @include phone {
+            font-size: $SIZE_MO_fontsizeStrong;
+        }
 
         .icon{
             margin-right: 8px;
@@ -191,6 +196,7 @@ body {
             // font-size: 22px;
             font-size: $SIZE_MO_fontsizeStrong;
             margin-right: 4vw;
+            margin-right: 15vw;
         }
     }
 
@@ -203,12 +209,16 @@ body {
         position: relative;
 
         @include phone {
-            font-size: $SIZE_MO_fontsizeLarge;
+            font-size: $SIZE_MO_fontsizeStrong;
         }
 
         .icon--arrow {
             margin-bottom: 2px;
             margin-left: 10px;
+
+            @include phone {
+                width: 15px;
+            }
         }
     }
 

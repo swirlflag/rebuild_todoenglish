@@ -1,6 +1,6 @@
 <template>
 
-    <DefaultButton  :theme="theme || defaultTheme"
+    <ButtonDefault  :theme="theme || defaultTheme"
                     :class="typeClassName"
                     :href="downloadLink" :blank="true"
     >
@@ -17,12 +17,12 @@
             토도영어 다운로드
         </template>
 
-    </DefaultButton>
+    </ButtonDefault>
 
 </template>
 
 <script>
-import DefaultButton from '@/components/button/DefaultButton.vue';
+import ButtonDefault from '@/components/button/ButtonDefault.vue';
 
 export default {
     props : {
@@ -30,7 +30,7 @@ export default {
         theme : String,
     },
     components : {
-        DefaultButton,
+        ButtonDefault,
     },
 
     data() {
@@ -38,21 +38,30 @@ export default {
         let downloadLink = '';
         let typeClassName = '';
 
-        if(this.type === 'apple'){
-            typeClassName = 'type-appstore';
-            downloadLink = 'https://apple.co.kr';
-        }
-        if(this.type === 'google'){
-            typeClassName = 'type-playstore';
-            downloadLink = 'https://google.co.kr';
-        }
-        if(this.type === 'mobile'){
-            typeClassName = 'type-download'
+        switch (this.type) {
+            case ('apple') : {
+                typeClassName = 'type-appstore';
+                downloadLink = 'https://apple.co.kr';
+                break;
+            }
+            case ('google') : {
+                typeClassName = 'type-playstore';
+                downloadLink = 'https://google.co.kr';
+                break;
+            }
+            case ('mobile') : {
+                typeClassName = 'type-download';
+                break;
+            }
+            default : {
+                typeClassName = 'type-download';
+            }
         }
 
         return {
             typeClassName ,
             downloadLink ,
+
             defaultTheme : 'white',
         }
     },

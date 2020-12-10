@@ -21,6 +21,7 @@
                     :style="{
                         color : color,
                         backgroundColor : background,
+                        padding : padding,
                     }"
             >
                 <span class="button__flash"></span>
@@ -31,7 +32,7 @@
 
             <span   class="button__shadow"
                     :style="{
-                        boxShadow : `0 7px 0 ${shadow}`
+                        boxShadow : `0 7px 0 ${shadow}`,
                     }"
             >
             </span>
@@ -179,7 +180,7 @@ export default {
         },
 
         clickButton(e) {
-            this.clickAnimate();
+            // this.clickAnimate();
             this.clickLink();
 
             this.$emit('click',e);
@@ -199,7 +200,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$thickness : 7px;
+$thickness : 5px;
 $hoverjump : 10px;
 $radius : 25px;
 
@@ -209,6 +210,7 @@ $radius : 25px;
     position:relative;
     width : auto;
     transition : text-shadow 130ms ease;
+    font-weight: bold;
 
     @include phone {
         width: 100%;
@@ -255,6 +257,22 @@ $radius : 25px;
         .button__body { background-color: #fff; color: $COLOR_navy_2;}
         .button__shadow { box-shadow : 0 $thickness 0 rgb(94, 87, 126);}
     }
+    &.theme-pink {
+        .button__body { background-color: #F7419C; color: #fff;}
+        .button__shadow { box-shadow : 0 $thickness 0 #DF2B85;}
+    }
+    &.type-signin-kakao {
+        .button__body {background-color: $COLOR_kakaoYellow; color: $COLOR_kakaoBrown;}
+        .button__shadow { box-shadow : 0 $thickness 0 #EBD300;}
+    }
+    &.type-signin-google {
+        .button__body { border-color: #4285F4;}
+    }
+    &.theme-navy , &.theme-white , &.theme-pink , &.type-signin-kakao {
+        .button__body {
+            border: none !important;
+        }
+    }
 
 }
 
@@ -269,16 +287,26 @@ $radius : 25px;
 
     .button__body {
         width: 100%;
-        padding: 15px 30px;
+        // padding: 15px 30px;
+        // padding: 17px 30px;
+        padding: 17px 30px;
+        min-width : 180px;
 
         position: relative;
-        background: #aaa;
-        color: #fff;
+        background-color: #fff;
+        // background: #aaa;
+        // color: #fff;
         border-radius: inherit;
         transition: transform 190ms $EASE_inOutCubic;
         z-index: 1;
         overflow: hidden;
         box-sizing: border-box;
+        border: 1px solid $COLOR_navy_1;
+        font-size: $SIZE_PC_fontsizeLarge;
+
+        @include phone {
+            font-size: $SIZE_MO_fontsizeStrong;
+        }
 
         .st-press & {
             transition: transform 67ms $EASE_outCubic;
@@ -315,7 +343,7 @@ $radius : 25px;
         width: 100%; height: 100%;
         bottom: 0; left: 0;
         border-radius: inherit;
-        box-shadow: 0 $thickness 0 #777;
+        box-shadow: 0 $thickness 0 rgba(0,0,0,0.145);
     }
 
 }
@@ -346,7 +374,7 @@ $radius : 25px;
             background-color: $COLOR_violet_1;
         }
         &:nth-child(4n) {
-            background-color: $COLOR_cyan_1;
+            background-color: $COLOR_mint_1;
         }
     }
 }

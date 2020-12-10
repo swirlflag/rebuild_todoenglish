@@ -128,10 +128,10 @@ export default {
     margin: 50px 0 ;
     position: relative;
     @include phone {
-        width: 102vw;
-        left: 50%;
+        // width: 102vw;
+        // left: 50%;
         margin: 40px 0 ;
-        transform: translateX(-50%);
+        // transform: translateX(-50%);
     }
 }
 

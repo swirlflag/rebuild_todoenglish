@@ -18,11 +18,11 @@
                 </p>
                 <div class="main-header__downloads">
 
-                    <DownloadButton type="apple" theme="navy" class="visible-overphone"/>
+                    <ButtonDownload type="apple" theme="navy" class="visible-overphone"/>
 
-                    <DownloadButton type="google" theme="navy" class="visible-overphone"/>
+                    <ButtonDownload type="google" theme="navy" class="visible-overphone"/>
 
-                    <DownloadButton type="mobile" theme="navy" class="visible-phone"/>
+                    <ButtonDownload type="mobile" theme="navy" class="visible-phone"/>
 
                 </div>
 
@@ -478,11 +478,11 @@
 
                 <div class="main-footer__downloads">
 
-                    <DownloadButton type="apple" theme="white" class="visible-overphone" />
+                    <ButtonDownload type="apple" theme="white" class="visible-overphone" />
 
-                    <DownloadButton type="google" theme="white" class="visible-overphone" />
+                    <ButtonDownload type="google" theme="white" class="visible-overphone" />
 
-                    <DownloadButton type="mobile" theme="white" class="visible-phone" />
+                    <ButtonDownload type="mobile" theme="white" class="visible-phone" />
 
                 </div>
 
@@ -504,13 +504,13 @@
 </template>
 
 <script>
-import DownloadButton from '@/components/button/DownloadButton.vue';
+import ButtonDownload from '@/components/button/ButtonDownload.vue';
 
 export default {
     name : 'PageMain',
 
     components : {
-        DownloadButton,
+        ButtonDownload,
 
     },
     data() {
@@ -524,16 +524,15 @@ export default {
         },
 
         clearStyleNav() {
-            this.$store.commit('use_claerGnb');
-            this.$store.commit('unuse_whiteGnb');
+            this.$store.commit('GNB_useClear');
+            this.$store.commit('GNB_unuseWhite');
         },
         defaultStyleNav() {
-            this.$store.commit('unuse_claerGnb');
-            this.$store.commit('use_whiteGnb');
+            this.$store.commit('GNB_unuseClear');
+            this.$store.commit('GNB_useWhite');
         },
 
         checkNavStyle() {
-            console.log('main??');
             if(window.scrollY < 100){
                 if(this.isNavClear){
                     return

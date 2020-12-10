@@ -12,7 +12,7 @@
 
 <script>
 
-import NavigationGnb , { gnbStore } from '@/components/navigation/NavigationGnb.vue';
+import NavigationGnb , { gnbStore } from '@/plates/PlateNavigation/NavigationGnb.vue';
 // import NavigationMenu   from '@/components/navigation/NavigationMenu.vue';
 
 export default {
@@ -21,7 +21,7 @@ export default {
 }
 
 export const navStore = {
-    name : 'nav',
+    name : '$nav',
     gnbStore,
 }
 

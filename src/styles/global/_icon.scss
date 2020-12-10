@@ -104,4 +104,28 @@
         &.c-green   {background-image: url('~@/assets/icon/icon_playbutton_green.svg');}
     }
 
+    &.icon--checked {
+        width: 26px; height: 26px;
+        background-image: url('~@/assets/icon/icon_checked_pink.svg');
+    }
+    &.icon--none-checked{
+        width: 26px; height: 26px;
+        background-image: url('~@/assets/icon/icon_checked_none.svg');
+    }
+
+
+
+
+
+
+    &.icon--google{
+        width: 29px; height: 29px;
+        background-image: url('~@/assets/icon/icon_google.svg');
+    }
+
+    &.icon--kakaobubble {
+        width: 28px; height: 26px;
+        background-image: url('~@/assets/icon/icon_kakaobubble.svg');
+    }
+
 }

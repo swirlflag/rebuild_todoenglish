@@ -62,8 +62,8 @@ router.beforeEach((to,from, next) => {
 
     if(useTransition){
         // 트랜지션 사용 조건이면 PlateTransitionCover를 통해 페이지 넘김
-        store.commit('registTransitionNext' , next);
-        store.commit('pageTransition');
+        store.commit('PAGING_registNext' , next);
+        store.commit('PAGING_action');
     }else {
         // 트랜지션 사용 조건이 아니면 그냥 넘김
         next();

@@ -8,9 +8,20 @@
                 ${appClassNameTouchdevice}
             `"
     >
+
         <PlateTest
-            :useTest="false"
+            v-if="1"
         />
+
+        <PlateModal
+            v-if="1"
+        />
+
+        <transition name="plate--auth">
+            <PlateAuth
+                v-if="$store.state.$auth.is_openAuth"
+            />
+        </transition>
 
         <PlateTransitionCover
              v-if="1"
@@ -30,24 +41,28 @@
 </template>
 
 <script>
-import PlateTest                from '@/plates/PlateTest.vue';
-import PlateTransitionCover     from '@/plates/PlateTransitionCover.vue';
-import PlateNavigation          from '@/plates/PlateNavigation.vue';
-import PlatePage                from '@/plates/PlatePage.vue';
-import PlateFooter              from '@/plates/PlateFooter.vue';
+import PlateTest                from '@/plates/PlateTest/PlateTest.vue';
+import PlateModal               from '@/plates/PlateModal/PlateModal.vue';
+import PlateAuth                from '@/plates/PlateAuth/PlateAuth.vue';
+import PlateTransitionCover     from '@/plates/PlateTransitionCover/PlateTransitionCover.vue';
+import PlateNavigation          from '@/plates/PlateNavigation/PlateNavigation.vue';
+import PlatePage                from '@/plates/PlatePage/PlatePage.vue';
+import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
 
 // import '@/styles/font/font.scss';
 // import '@/styles/global/_reset.css';
 // import '@/styles/global/_global.scss';
 
+
 export default {
     name: 'App',
     components: {
-        PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter
+        PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth
     },
     data() {
         return {
             // before
+            // useAuthField : false,
         }
     },
     computed : {

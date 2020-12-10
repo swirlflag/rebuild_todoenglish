@@ -11,6 +11,17 @@
 
             <button id="test_scrollock" @click="TEST_scrollock">scrollock</button>
 
+            <br>
+
+            <button @click="TEST_openAlert">open alert</button>
+
+            <button @click="TEST_openAlert2">open alert2</button>
+
+            <br>
+
+            <button @click="TEST_toggleAuthPlate"> toggle auth</button>
+
+
             <div id="testlog1"></div>
             <div id="testlog2"></div>
 
@@ -33,11 +44,14 @@
 
 <script>
 export default {
-    props : {
-        useTest : Boolean
-    },
     data() {
+        let useTest = false;
+
+        useTest = true;
+
         return {
+            useTest,
+
             rootRect : {},
             isGrab : false,
             isOpen : false,
@@ -50,6 +64,31 @@ export default {
             }else {
                 this.$store.commit('SCROLL_lock')
             }
+        },
+        TEST_openAlert(){
+            const payload = {
+                title : 'TEST ALERT',
+                message : '테스트용 알림창',
+                confirmButton : '확~인',
+                close : () => {
+                    console.log('test alert close');
+                }
+            };
+            this.$store.dispatch('showModalAlert' , payload);
+        },
+        TEST_openAlert2(){
+            const payload = {
+                message : '비밀번호 변경을 위한 이메일을 발송하였습니다.<br/>메일함을 확인해주세요.',
+            };
+            this.$store.dispatch('showModalAlert' , payload);
+        },
+        TEST_toggleAuthPlate() {
+            if(this.$store.state.$auth.is_openAuth){
+                this.$store.commit('AUTH_close');
+            }else {
+                this.$store.commit('AUTH_open');
+            }
+
         },
         grab() {
             this.isGrab = true;
@@ -86,18 +125,21 @@ export default {
 
     position: fixed;
     top: 0; left: 0;
-    z-index: 99999;
+    z-index: 99999999;
+    @include hardSelect {
+        font-size: 14px !important;
+    }
     &.st-hide {
         opacity: 0 !important;
         pointer-events: none !important;
     }
     &.st-open {
         border: 1px solid rgb(0, 255, 0);
-        padding: 20px;
+        padding: 10px;
     }
     @include phone {
         font-size: 12px;
-        padding : 20px !important;
+        padding : 10px !important;
         border: 1px solid rgb(0, 255, 0) !important;
         transform :translate(-100%,-50%) !important;
         top: 50%;
@@ -110,7 +152,8 @@ export default {
 
 }
 #test__open {
-    width: 50px; height: 50px;display: flex;
+    width: 40px; height: 40px;display: flex;
+    font-weight: bold;
     justify-content: center; align-items: center;
     border: 1px solid rgb(0, 255, 0);
     cursor: pointer;
@@ -120,7 +163,8 @@ export default {
 
     @include phone {
         top: 50%;
-        width: 30px;
+        transform :translateY(-50%);
+        // width: 30px;
         left: 100%;
     }
 
@@ -128,8 +172,8 @@ export default {
 #test__log {
     position: relative;
     z-index: 1;
-    min-width: 300px; min-height: 200px;
-    margin-top: 50px;
+    // min-width: 300px; 
+    margin-top: 40px;
     display: none;
     .st-open & {
         display: block;
@@ -137,8 +181,8 @@ export default {
     @include phone {
         display: block !important;
         margin-top: 0;
-        height: 50vh;
-        min-width: 60vw !important;
+        // height: 50vh;
+        // min-width: 60vw !important;
     }
 }
 

@@ -6,6 +6,8 @@ import PageNotSurpport from '@/pages/PageNotSurpport/PageNotSurpport.vue';
 
 import initLogic from '@/init/init.js';
 
+import '@/utils/expansion.js';
+
 Vue.use(initLogic);
 
 Vue.config.productionTip = false

@@ -32,7 +32,7 @@ export default {
     },
 
     watch : {
-        '$store.state.pageTransition.trigger'() {
+        '$store.state.$paging.trigger'() {
             this.setRandom();
             this.coverd();
         }
@@ -62,7 +62,7 @@ export default {
                     ease : 'power2.in',
                     onComplete (){
                         if(idx === 0){
-                            _this.$store.state.pageTransition.next();
+                            _this.$store.state.$paging.next();
                         }
                         if(idx === _this.curtains.length - 1){
                             _this.uncovered();
@@ -95,18 +95,18 @@ export default {
 }
 
 export const transitionStore = {
-    name : 'pageTransition',
+    name : '$paging',
     state : {
         trigger : false,
         isTransitionPaging : false,
         next : () => {},
     },
     mutations : {
-        pageTransition(state , bool) {
-            state.pageTransition.trigger = bool === undefined ? !state.pageTransition.trigger : bool;
+        PAGING_action(state , bool) {
+            state.$paging.trigger = bool === undefined ? !state.$paging.trigger : bool;
         },
-        registTransitionNext(state, next) {
-            state.pageTransition.next = next;
+        PAGING_registNext(state, next) {
+            state.$paging.next = next;
         },
     },
 }

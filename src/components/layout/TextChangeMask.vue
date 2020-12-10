@@ -19,9 +19,15 @@ export default {
         start() {
             const texts = this.$refs.ref_root.querySelectorAll('span');
             const maxWidth = Math.max(texts[0].getBoundingClientRect().width , texts[1].getBoundingClientRect().width);
+
+            texts[0].style.width = (maxWidth + 1) + 'px';
+            texts[1].style.width = (maxWidth + 1) + 'px';
             this.$refs.ref_root.style.width = (maxWidth + 1) + 'px';
         },
         end () {
+            if(!this.$refs.ref_root){return}
+            const texts = this.$refs.ref_root.querySelectorAll('span');
+            texts[0].style.width = null;
             this.$refs.ref_root.style.width = null;
         }
     }
@@ -37,11 +43,13 @@ export default {
     overflow: hidden;
     vertical-align: bottom;
     position: relative;
+    text-align: inherit;
 
     > span {
         white-space: nowrap;
         width: auto;
         display: inline-block;
+        // transition: transform 800ms $EASE_inOutCubic ;
         transition: transform 800ms $EASE_inOutCubic ;
     }
 }
