@@ -4,7 +4,7 @@
                     @enter="start"
                     @afterLeave="end"
         >
-            <span :key="text">{{ text }}</span>
+            <span :key="text" v-html="text"></span>
         </transition>
     </span>
 </template>

@@ -8,6 +8,7 @@
                 ${appClassNameTouchdevice}
             `"
     >
+        <PlateSetting/>
 
         <PlateTest
             v-if="1"
@@ -42,6 +43,7 @@
 
 <script>
 import PlateTest                from '@/plates/PlateTest/PlateTest.vue';
+import PlateSetting             from '@/plates/PlateSetting/PlateSetting.vue';
 import PlateModal               from '@/plates/PlateModal/PlateModal.vue';
 import PlateAuth                from '@/plates/PlateAuth/PlateAuth.vue';
 import PlateTransitionCover     from '@/plates/PlateTransitionCover/PlateTransitionCover.vue';
@@ -57,7 +59,7 @@ import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
 export default {
     name: 'App',
     components: {
-        PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth
+        PlateSetting, PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth
     },
     data() {
         return {

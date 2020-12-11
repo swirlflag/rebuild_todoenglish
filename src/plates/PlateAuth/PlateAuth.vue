@@ -3,7 +3,7 @@
 
         <div class="auth__dimmed" @click="closePlateAuth"></div>
 
-        <div class="auth__box" v-if="phaseData[phase]">
+        <div class="auth__box" v-if="phaseDataMap[phase]">
 
             <div class="auth__close" @click="closePlateAuth">
                 <span></span>
@@ -11,11 +11,11 @@
             </div>
 
             <h2 class="auth__title">
-                <TextChangeMask :text="phaseData[phase].title"/>
+                <TextChangeMask :text="phaseDataMap[phase].title"/>
             </h2>
 
             <p class="auth__text">
-                <TextChangeMask :text="phaseData[phase].text"/>
+                <TextChangeMask :text="phaseDataMap[phase].text"/>
             </p>
 
             <div class="auth__controller" v-if="this.phaseHistory.length > 1">
@@ -64,13 +64,13 @@ export default {
         return {
             phase   : '',
             phaseHistory : [],
-            phaseData : {
+            phaseDataMap : {
                 select : {
-                    title   : '토도영어에 오신 것을 환영합니다!',
+                    title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
                     text    : '토도영어에 등록한 방법으로 로그인하세요.',
                 },
                 signinEmail : {
-                    title   : '토도영어에 오신 것을 환영합니다!',
+                    title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
                     text    : '가입하신 이메일로 로그인 하세요.',
                 }
             },
@@ -101,7 +101,7 @@ export default {
                 return;
             }
 
-            gsap.fromTo(el_content, 0.9,
+            gsap.fromTo(el_content, 0.6,
             {
                 height : el_leave.offsetHeight,
             },{
@@ -115,7 +115,7 @@ export default {
 
     mounted() {
         this.changePhase('select');
-        this.changePhase('signinEmail');
+        // this.changePhase('signinEmail');
     },
 }
 

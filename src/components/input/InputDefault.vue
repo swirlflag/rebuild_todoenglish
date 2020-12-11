@@ -41,9 +41,7 @@ export default {
         }
     },
     methods : {
-        focusCheck() {
-            console.log('f..');
-        }
+
     }
 }
 </script>
@@ -81,23 +79,31 @@ $radius : 8px;
         color: #999;
         opacity: 0;
         transform : translate3d(20px,0,0);
-        transition : transform 180ms $EASE_outCubic , opacity 150ms $EASE_outCubic;
+        transition : transform 180ms $EASE_outCubic , opacity 150ms $EASE_outCubic , color 300ms ease;
         &.st-show {
             opacity: 1;
             transform : translate3d(0,0,0);
         }
+        .st-focus & {
+            color: $COLOR_mint_1;
+        }
     }
 
     .input__border {
-        border: 1px solid rgba(52,45,81,0.1);
+        // border: 1px solid rgba(52,45,81,0.1);
+        border: 2px solid transparent;
         width: 100%; height: 100%;
         position: absolute;
         pointer-events: none;
         box-sizing: border-box;
         border-radius: inherit;
+        transition : border-color 180ms ease , transform 300ms ease 300ms;
+        transform : scale(1.03) ;
 
         .st-focus & {
             border: 2px solid $COLOR_mint_1;
+            transform : scale(1) ;
+            transition : border-color 180ms ease , transform 300ms ease;
         }
         .st-mark & {
             border: 2px solid $COLOR_pink_1;
@@ -113,6 +119,13 @@ $radius : 8px;
         width: 100%;
         border: none;
         box-sizing: border-box;
+        border: 1px solid rgba(52,45,81,0.1);
+        transition : color 300ms ease;
+
+        &:focus {
+            color: $COLOR_mint_1;
+            border: 1px solid rgba(52,45,81,0);
+        }
 
         &::placeholder {
             opacity: 0;
