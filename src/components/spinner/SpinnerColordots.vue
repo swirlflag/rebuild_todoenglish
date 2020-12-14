@@ -24,10 +24,10 @@ $dotWidth : 12px;
 
 @keyframes dotSpinner {
     0% {
-        transform: translate3d(0,-35%,0);
+        transform: translate3d(0,-45%,0);
     }
     100% {
-        transform: translate3d(0,35%,0);
+        transform: translate3d(0,45%,0);
     }
 }
 
@@ -62,7 +62,7 @@ $dotWidth : 12px;
         &:nth-child(5) {background-color: $COLOR_navy_2;}
 
         $max : 5;
-        $distance : 90ms;
+        $distance : 230ms;
         @for $i from 1 through 5 {
             &:nth-child(#{$i}) {
                 z-index: $max - $i;

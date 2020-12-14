@@ -1,5 +1,7 @@
 <template>
-    <div class="input--default" :class="{'st-focus' : isFocus , 'st-mark' : isMark}">
+    <div    class="input--default" :class="{'st-focus' : isFocus , 'st-mark' : mark}"
+
+    >
         <div class="input__inner">
 
             <span class="input__placeholder" :class="{'st-show' : !value}" v-if="placeholder">
@@ -11,8 +13,10 @@
             <input  :type="inputType"
                     :placeholder="placeholder"
                     v-model="value"
+                    @input="onInput"
                     @focus="() => {isFocus = true}"
                     @blur="() => {isFocus = false}"
+                    ref="ref_input"
             />
 
         </div>
@@ -27,6 +31,8 @@ export default {
     props : {
         type : String,
         placeholder : String,
+
+        mark : Boolean,
     },
     data() {
         const inputType = this.type || 'text';
@@ -41,7 +47,9 @@ export default {
         }
     },
     methods : {
-
+        onInput() {
+            this.$emit('input' , this.value);
+        },
     }
 }
 </script>
@@ -84,9 +92,6 @@ $radius : 8px;
             opacity: 1;
             transform : translate3d(0,0,0);
         }
-        .st-focus & {
-            color: $COLOR_mint_1;
-        }
     }
 
     .input__border {
@@ -97,17 +102,8 @@ $radius : 8px;
         pointer-events: none;
         box-sizing: border-box;
         border-radius: inherit;
-        transition : border-color 180ms ease , transform 300ms ease 300ms;
-        transform : scale(1.03) ;
-
-        .st-focus & {
-            border: 2px solid $COLOR_mint_1;
-            transform : scale(1) ;
-            transition : border-color 180ms ease , transform 300ms ease;
-        }
-        .st-mark & {
-            border: 2px solid $COLOR_pink_1;
-        }
+        transition : border-color 180ms ease , transform 0ms ease 300ms;
+        transform : scale(1.05) ;
     }
 
     input {
@@ -123,7 +119,6 @@ $radius : 8px;
         transition : color 300ms ease;
 
         &:focus {
-            color: $COLOR_mint_1;
             border: 1px solid rgba(52,45,81,0);
         }
 
@@ -136,6 +131,32 @@ $radius : 8px;
         &::selection {
             background-color: $COLOR_mint_1;
             color: #fff;
+        }
+    }
+
+    .st-focus & {
+        .input__placeholder , input{
+            color: $COLOR_mint_1;
+        }
+        .input__border {
+            border: 2px solid $COLOR_mint_1;
+            transform : scale(1) ;
+            transition : border-color 180ms ease , transform 500ms $EASE_outCubic;
+        }
+
+    }
+
+    .st-mark & {
+        .input__placeholder , input{
+            color: $COLOR_pink_1;
+        }
+        .input__border {
+            transform : scale(1) ;
+            border: 2px solid $COLOR_pink_1;
+            transition : border-color 180ms ease , transform 500ms $EASE_outCubic;
+        }
+        input::selection {
+            background-color: $COLOR_pink_1;
         }
     }
 

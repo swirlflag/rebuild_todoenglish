@@ -187,3 +187,4 @@ export const iterElement = (els, fn) => {
 export const randomOne = (...l) => l[Math.floor((Math.random() * l.length))];
 export const randomRange = (a,b,toFixed = 0) => +(Math.min(a,b) + Math.random() * (Math.max(a,b) - Math.min(a,b))).toFixed(toFixed);
 
+export const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);

@@ -331,6 +331,18 @@ body {
     line-height: inherit;
     vertical-align: middle;
 
+    span {
+        box-sizing: border-box;
+        display: inline-block;
+        line-height: inherit;
+        vertical-align: middle;
+        position: relative;
+    }
+
+    > * {
+        z-index: 2;
+    }
+
     &::before {
         position: absolute;
         content: '';
@@ -339,7 +351,7 @@ body {
         transform: translateY(calc(100% + 1px));
         transition: transform 250ms $EASE_outExpo, color 100ms ease , opacity 200ms ease;
         background: $COLOR_navy_2;
-        z-index: -1;
+        z-index: 1 !important;
     }
 
     &.type-underline {
@@ -351,7 +363,7 @@ body {
 
     @include hover {
         color: #fff;
-        // font-weight: 700;
+        font-weight: 700;
         &::before {
             transform: translateY(0);
             opacity: 1;

@@ -1,39 +1,58 @@
 <template>
-    <div id="plate--auth">
+    <div id="plate--auth" ref="ref_root">
 
         <div class="auth__dimmed" @click="closePlateAuth"></div>
 
-        <div class="auth__box" v-if="phaseDataMap[phase]">
+        <div class="auth__box" v-if="phaseDataMap[nowPhase]">
 
             <div class="auth__close" @click="closePlateAuth">
                 <span></span>
                 <span></span>
             </div>
 
-            <h2 class="auth__title">
-                <TextChangeMask :text="phaseDataMap[phase].title"/>
+            <h2 class="auth__title" ref="ref_title">
+                <TextChangeMask :text="phaseDataMap[nowPhase].title"/>
             </h2>
 
-            <p class="auth__text">
-                <TextChangeMask :text="phaseDataMap[phase].text"/>
+            <p class="auth__text" ref="ref_text">
+                <TextChangeMask :text="phaseDataMap[nowPhase].text"/>
             </p>
 
-            <div class="auth__controller" v-if="this.phaseHistory.length > 1">
-                <span class="auth__history-back" @click="backPhase">
-                    뒤로가기
-                </span>
+            <div class="auth__controller" :class="{'st-show' : this.phaseHistory.length > 1}">
+                <ButtonUnderMask    class="auth__history-back"
+                                    :text="historyButtonText"
+                                    @click="onClickHistoryButton"
+                />
             </div>
 
             <div class="auth__content" ref="ref_content">
-                <transition-group name="auth-content" @enter="contentTrsEnter">
+                <transition-group   name="auth-content"
+                                    @before-enter="onBeforeEnterTransition"
+                                    @enter="onEnterTransition"
+                                    @after-enter="onAfterEnterTransition"
+                >
 
-                    <AuthSelection  v-if="phase === 'select'" :key="phase"
+                    <AuthSelection  v-if="nowPhase === 'selectType'" :key="nowPhase"
                                     @change-phase="changePhase"
                     />
 
-                    <AuthSigninEmail v-if="phase === 'signinEmail'" :key="phase"
+                    <AuthSignin v-if="nowPhase === 'signinEmail'" :key="nowPhase"
+                                @change-phase="changePhase"
 
                     />
+
+                    <AuthSignup v-if="nowPhase === 'signupEmail'" :key="nowPhase"
+
+                    />
+
+                    <AuthSuccess v-if="nowPhase === 'signinSuccess'" :key="nowPhase"
+
+                    />
+
+                    <AuthFindPassword v-if="nowPhase === 'findPassword'" :key="nowPhase"
+
+                    />
+
 
                     <!-- <div  >
                         <span @click="changePhase('select')">back</span>
@@ -47,9 +66,14 @@
 </template>
 
 <script>
-import TextChangeMask from '@/components/layout/TextChangeMask.vue';
-import AuthSelection from '@/plates/PlateAuth/AuthSelection.vue';
-import AuthSigninEmail from '@/plates/PlateAuth/AuthSigninEmail.vue';
+import TextChangeMask   from '@/components/layout/TextChangeMask.vue';
+import ButtonUnderMask  from '@/components/button/ButtonUnderMask.vue';
+import AuthSelection    from '@/plates/PlateAuth/AuthSelection.vue';
+import AuthSignin       from '@/plates/PlateAuth/AuthSignin.vue';
+import AuthSignup       from '@/plates/PlateAuth/AuthSignup.vue';
+import AuthSuccess      from '@/plates/PlateAuth/AuthSuccess.vue';
+import AuthFindPassword from '@/plates/PlateAuth/AuthFindPassword.vue';
+
 import gsap from 'gsap';
 {gsap}
 
@@ -57,25 +81,55 @@ export default {
     name : 'PlateAuth',
     components : {
         TextChangeMask,
+        ButtonUnderMask,
         AuthSelection,
-        AuthSigninEmail,
+        AuthSignin,
+        AuthSignup,
+        AuthSuccess,
+        AuthFindPassword
     },
     data() {
         return {
-            phase   : '',
+            nowPhase   : '',
             phaseHistory : [],
-            phaseDataMap : {
-                select : {
+
+            isRunTransition : false,
+        }
+    },
+
+    computed : {
+        phaseDataMap() {
+            return ({
+                selectType : {
                     title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
                     text    : '토도영어에 등록한 방법으로 로그인하세요.',
                 },
                 signinEmail : {
                     title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
                     text    : '가입하신 이메일로 로그인 하세요.',
-                }
-            },
+                },
+                signupEmail : {
+                    title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
+                    text    : '회원 가입',
+                },
+                signinSuccess : {
+                    title   : `${this.$store.state.username}님, 안녕하세요! &#x1F44B;`,
+                    text    : '성공적으로 로그인 되었습니다.',
+                },
+                findPassword : {
+                    title   : '비밀번호 찾기',
+                    text    : '이메일 주소를 입력하세요.',
+                },
+
+            });
+        },
+
+        historyButtonText () {
+            return this.nowPhase === 'signinSuccess'  ? '닫기' : '이전 단계로'
         }
+
     },
+
     methods : {
         closePlateAuth() {
             this.$store.dispatch('closeAuthPanel');
@@ -83,48 +137,118 @@ export default {
 
         changePhase(phase) {
             this.phaseHistory.push(phase);
-            this.phase = phase;
+            this.nowPhase = phase;
         },
         backPhase() {
             if(this.phaseHistory.length <= 1){
                 console.dev('ERC_AT1 : 더 이상 뒤로 갈 수 없습니다.')
                 return;
             }
+
             this.phaseHistory.pop();
-            this.phase = this.phaseHistory[this.phaseHistory.length-1];
+            this.nowPhase = this.phaseHistory[this.phaseHistory.length-1];
         },
-        contentTrsEnter() {
+
+        onClickHistoryButton () {
+            if(this.nowPhase === 'signinSuccess'){
+                this.closePlateAuth();
+            }else {
+                this.backPhase();
+            }
+        },
+
+        onBeforeEnterTransition() {
+        },
+        onAfterEnterTransition() {
+        },
+        onEnterTransition() {
             const el_content = this.$refs.ref_content;
             const el_leave = el_content.querySelector('.auth-content-leave');
             const el_enter = el_content.querySelector('.auth-content-enter');
+
             if(!el_leave || !el_enter){
                 return;
             }
 
-            gsap.fromTo(el_content, 0.6,
-            {
+            gsap.fromTo(el_content, 0.6, {
                 height : el_leave.offsetHeight,
             },{
                 height : el_enter.offsetHeight,
-                ease : 'power4.out'
+                ease : 'power4.out',
             });
+
+        },
+
+        onMountedMotion() {
+
+            const el_targets = [
+                this.$refs.ref_title,
+                this.$refs.ref_text,
+            ];
+
+            gsap.from( el_targets, {
+                opacity : 0,
+                y : 50,
+                ease : 'power2.out',
+                duration : 0.6,
+                delay : 0.25,
+                stagger : 0.05,
+            });
+
+            const el_selection = this.$refs.ref_root.querySelector('.auth__selection');
+
+            if(this.nowPhase === 'selectType'&& el_selection){
+
+                const el_buttons = el_selection.querySelectorAll('.button--default');
+                const el_dividerbar = el_selection.querySelectorAll('.auth__divider__bar');
+                const el_precaution = el_selection.querySelectorAll('.auth__divider .precaution');
+
+                gsap.from( el_buttons,  {
+                    opacity : 0,
+                    y : 50,
+                    ease : 'power4.out',
+                    duration : 0.6,
+                    delay : 0.45,
+                    stagger : 0.1,
+                });
+
+                gsap.from(el_precaution, {
+                    opacity : 0,
+                    duration : 1,
+                    delay : 0.7,
+                })
+
+                gsap.from(el_dividerbar , {
+                    scaleX : 0,
+                    ease: 'power2.out',
+                    duration : 1,
+                    delay : 0.7,
+                })
+
+            }
 
         },
 
     },
 
-    mounted() {
-        this.changePhase('select');
+    created() {
+        this.changePhase('selectType');
         // this.changePhase('signinEmail');
+        // this.changePhase('signinSuccess');
     },
+
+    mounted() {
+        this.onMountedMotion();
+    },
+
 }
 
 export const authStore = {
     name : '$auth',
 
     state : {
-        // is_openAuth : false,
-        is_openAuth : true,
+        is_openAuth : false,
+        // is_openAuth : true,
     },
 
     mutations : {
@@ -149,10 +273,10 @@ export const authStore = {
 
 <style scoped lang="scss">
 .plate--auth-enter-active {
-    transition: transform 550ms $EASE_outExpo;
+    transition: transform 700ms $EASE_outExpo 30ms;
 }
 .plate--auth-leave-active {
-    transition: transform 250ms $EASE_outCubic;
+    transition: transform 400ms $EASE_inOutCubic 10ms;
 }
 .plate--auth-leave-active   {transform : translate3d(0, 100%, 0) ;}
 .plate--auth-leave          {transform : translate3d(0, 0, 0);}
@@ -163,12 +287,12 @@ export const authStore = {
 
 .auth-content-enter-active,  .auth-content-leave-active {
     transition: opacity 600ms ease ;
-    position:relative;
     position: absolute;
     top: 0;
 }
 
 .auth-content-leave-active{
+    // transition: opacity 150ms ease ;
     transition: opacity 150ms ease ;
 }
 
@@ -248,12 +372,16 @@ export const authStore = {
     font-size: $SIZE_PC_fontsizeTitle;
     font-weight: 300;
     text-align: center;
+    // background-color: #aac;
+    min-height: 65px;
 }
 
 .auth__text {
+    // background-color: #aca;
     font-size: $SIZE_PC_fontsizeLarge;
     margin-top: 25px;
     text-align: center;
+    min-height: 30px;
 }
 
 
@@ -267,22 +395,24 @@ export const authStore = {
 
 .auth__controller {
     position: absolute;
-    
     bottom: 100px;
     width: 100%;
     display: flex;
     justify-content: center;
+    font-weight: 700;
+    opacity: 0;
+    transform : translate3d(-10px,0,0);
+    transition: opacity 200ms ease, transform 400ms $EASE_outCubic;
+    text-align: center;
+
+    &.st-show {
+        opacity: 1;
+        transform : translate3d(0,0,0);
+    }
 
     .auth__history-back {
-
-        display: inline-block;
-        color: #fff;
-        background-color: $COLOR_pink_1;
-        // font-weight: 700;
-        padding: 10px 20px;
-        font-size: $SIZE_PC_fontsizeStrong;
-        cursor: pointer;
-        border-radius: 9999px;
+        padding: 2px 4px;
+        font-weight: 700;
     }
 }
 

@@ -8,9 +8,9 @@
                     ⓒ 2018 Enuma, Inc. All Rights Reserved.
                 </div>
                 <ul class="footer__notice-links">
-                    <li><a href="#" class="link-hover">이용약관</a></li>
-                    <li><a href="#" class="link-hover">개인정보처리방침</a></li>
-                    <li><a href="#" class="link-hover">법적고지</a></li>
+                    <li><a href="#" class="link-hover"><span>이용약관</span></a></li>
+                    <li><a href="#" class="link-hover"><span>개인정보처리방침</span></a></li>
+                    <li><a href="#" class="link-hover"><span>법적고지</span></a></li>
                 </ul>
                 <ul class="footer__sns-links">
                     <li>

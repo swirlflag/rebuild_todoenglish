@@ -1,11 +1,11 @@
 <template>
-    <div class="auth__selection">
+    <div class="auth__selection" ref="ref_root">
 
         <ButtonSignin type="kakao"/>
 
         <ButtonSignin type="google"/>
 
-        <div class="auth__divider">
+        <div class="auth__divider" ref="ref_divider">
             <span class="auth__divider__bar"></span>
             <span class="precaution">또는</span>
             <span class="auth__divider__bar"></span>
@@ -17,7 +17,9 @@
 </template>
 
 <script>
+import gsap from 'gsap';
 import ButtonSignin from '@/components/button/ButtonSignin.vue';
+{gsap}
 
 export default {
     name : 'AuthSelection',
@@ -25,8 +27,13 @@ export default {
         ButtonSignin,
     },
     methods: {
+        onMountedMotion() {
 
-    }
+        },
+    },
+    mounted() {
+        this.onMountedMotion();
+    },
 
 }
 </script>
@@ -36,6 +43,7 @@ export default {
     display: flex;
     flex-direction: column;
     width: 360px;
+
     > * {
         margin-top: 23px;
         &:nth-child(1) {

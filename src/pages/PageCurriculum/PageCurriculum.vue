@@ -14,7 +14,9 @@
                 </p>
                 <ul class="dot-list precaution">
                     <li>
-                        <a href="#" class="link-hover type-underline">Global Learning Xprize</a>&nbsp;
+                        <a href="#" class="link-hover type-underline">
+                            <span>Global Learning Xprize</span>
+                        </a>&nbsp;
                         <span>는 Tesla의 Elon Musk가 후원한 전 세계 아동 문맹 퇴치를 위한 소프트웨어 경진대회입니다.</span>
 
                     </li>

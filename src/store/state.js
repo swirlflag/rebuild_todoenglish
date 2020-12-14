@@ -1,4 +1,10 @@
+
+const testState = {
+    username : 'TEST_username',
+}
+
 const state = {
+    ...testState,
 
     type_browser : '',
     type_os : '',
@@ -11,4 +17,7 @@ const state = {
 
 }
 
+
 export default state;
+
+export { testState }

@@ -21,6 +21,13 @@
 
             <button @click="TEST_toggleAuthPlate"> toggle auth</button>
 
+            <div>
+
+                {{
+                    hey
+                }}
+            </div>
+
 
             <div id="testlog1"></div>
             <div id="testlog2"></div>
@@ -55,6 +62,9 @@ export default {
             rootRect : {},
             isGrab : false,
             isOpen : false,
+
+            hey : document.createEvent("MouseEvent"),
+
         }
     },
     methods : {

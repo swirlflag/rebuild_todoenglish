@@ -166,7 +166,7 @@ export const alertStore = {
         opacity: 1;
         transform : none;
         pointer-events: all;
-        transition: transform 300ms $EASE_outCubic ,
+        transition: transform 650ms $EASE_outExpo ,
                     opacity 300ms ease
                     ;
         transition-delay: 0ms;

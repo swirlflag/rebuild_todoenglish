@@ -1,14 +1,19 @@
 <template>
     <button     class="button--default"
-                :class="`${isPressButton ? 'st-press' :''} ${theme ? `theme-${theme}` : ''}`"
+                :class="`${isPressButton ? ' st-press' :''}${theme ? ` theme-${theme}` : ''}${isHover ? ' st-hover' : ''}${disable ? ' st-disable': ''}${isFocus ? ' st-focus' :''}`"
                 ref="ref_root"
-                @click="(e) => clickButton(e)"
+                tabindex="0"
 
+                @click="(e) => onClick(e)"
+
+                @mouseenter="onMouseEnter"
                 @mousedown="pressButton"
                 @mouseup="releaseButton"
-                @mouseleave="releaseButton"
+                @mouseleave="onMouseLeave"
                 @touchstart="pressButton"
-                @touchend="releaseButton"
+                @touchend="onTouchEnd"
+                @focus="onFocus"
+                @blur="onBlur"
 
     >
         <span class="button__inner"
@@ -80,12 +85,15 @@ export default {
         background  : String,
         shadow      : String,
         padding     : String,
+        disable     : Boolean,
     },
     data() {
         return {
             ref_particles : null,
 
             isPressButton : false,
+            isHover : false,
+            isFocus : false,
 
             stateAnimate : {
                 isRun : false
@@ -160,38 +168,61 @@ export default {
             tl.play();
 
         },
-
         clickLink() {
-
             if(this.to){
-
                 this.$router.push(this.to)
-
             } else if (this.href) {
-
                 if(this.blank){
                     const targetBlank = window.open('about:blank');
                     targetBlank.location.href = this.href;
                 }else {
                     window.location.href = this.href
                 }
-
             }
         },
-
-        clickButton(e) {
-            // this.clickAnimate();
-            this.clickLink();
-
-            this.$emit('click',e);
-        },
-
         pressButton() {
+            if(this.disable){
+                return;
+            }
             this.isPressButton = true;
         },
         releaseButton() {
             this.isPressButton = false;
         },
+
+
+    // Evnet Bind
+        onTouchEnd() {
+            // this.$refs.ref_root.blur();
+            this.releaseButton();
+        },
+        onFocus() {
+            if(this.disable){
+                return
+            }
+            this.isFocus = true;
+        },
+        onBlur() {
+            this.isFocus = false;
+        },
+        onMouseEnter() {
+            if(this.disable){
+                return;
+            }
+            this.isHover = true;
+        },
+        onMouseLeave() {
+            this.isHover = false;
+            this.releaseButton();
+            this.$refs.ref_root && this.$refs.ref_root.blur();
+        },
+
+        onClick(e) {
+            // this.clickAnimate();
+            this.clickLink();
+            this.$emit('click',e);
+        },
+
     },
     mounted() {
         this.ref_particles = this.$refs.ref_particle.querySelectorAll('span');
@@ -209,8 +240,14 @@ $radius : 25px;
     box-sizing: border-box;
     position:relative;
     width : auto;
-    transition : text-shadow 130ms ease;
+    transition : text-shadow 130ms ease , opacity 200ms ease;
     font-weight: bold;
+    cursor : pointer;
+    &.st-disable {
+        opacity: 0.3;
+        cursor :default;
+        pointer-events: none;
+    }
 
     @include phone {
         width: 100%;
@@ -223,25 +260,8 @@ $radius : 25px;
         box-sizing: border-box;
     }
 
-    @include hover {
-
-        .button__inner {
-            box-shadow:  0 $thickness+$hoverjump 5px rgba(0,0,0,0.1);
-            text-shadow : 0 3px 2px rgba(0,0,0,0.15);
-            transition : transform 380ms $EASE_outBack3 , box-shadow 380ms $EASE_outCubic;
-            transform : translate3d(0,-$hoverjump,0);
-        }
-
-        .button__flash {
-            background-color: rgba(255,255,255,0.09);
-            &::before {
-                background-color: rgba(255,255,255,0.23);
-                background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0) 100%);;
-                left: 105%;
-                transition : left 450ms $EASE_outQuart;
-            }
-        }
-
+    // &.st-hover , &.st-focus{
+    &.st-hover{
         &.st-press {
             .button__inner {
                 transform : translate3d(0,-$hoverjump/1.4,0);
@@ -284,6 +304,17 @@ $radius : 25px;
     box-shadow:  0 $thickness+$hoverjump 5px rgba(0,0,0,0);
     transition : transform 450ms $EASE_outCubic , box-shadow 450ms ease;
     box-sizing: border-box;
+
+    .st-hover & , .st-focus & {
+        box-shadow:  0 $thickness+$hoverjump 5px rgba(0,0,0,0.1);
+        text-shadow : 0 3px 2px rgba(0,0,0,0.15);
+        transition : transform 380ms $EASE_outBack3 , box-shadow 380ms $EASE_outCubic;
+        transform : translate3d(0,-$hoverjump,0);
+    }
+
+    .st-hover.st-press & {
+        transform : translate3d(0,-$hoverjump/1.4,0);
+    }
 
     .button__body {
         width: 100%;
@@ -333,6 +364,16 @@ $radius : 25px;
                 left: -20%; top: -15%;
                 transform: skewX(-15deg);
                 transition : none;
+            }
+
+            .st-hover &, .st-focus & {
+                background-color: rgba(255,255,255,0.09);
+                &::before {
+                    background-color: rgba(255,255,255,0.23);
+                    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+                    left: 105%;
+                    transition : left 450ms $EASE_outQuart;
+                }
             }
         }
 
