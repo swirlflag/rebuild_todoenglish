@@ -7,7 +7,6 @@
 
             <div class="auth__close" @click="closePlateAuth">
                 <span></span>
-                <span></span>
             </div>
 
             <h2 class="auth__title" ref="ref_title">
@@ -100,22 +99,37 @@ export default {
     computed : {
         phaseDataMap() {
             return ({
+            // 로그인 타입 선택
                 selectType : {
                     title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
                     text    : '토도영어에 등록한 방법으로 로그인하세요.',
                 },
+            // 이메일 로그인 폼
                 signinEmail : {
                     title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
                     text    : '가입하신 이메일로 로그인 하세요.',
                 },
+            // 카카오 로그인 선택
+                signinKakao : {
+                    title   : '카카오로 로그인 합니다.',
+                    text    : '로그인 방식을 선택해주세요.',
+                },
+            //  외부 로그인 중...
+                signinExternal : {
+                    title   : '외부 로그인 중입니다..',
+                    text    : '로그인 과정을 완료해주세요.',
+                },
+            // 로그인 성공시
+                signinSuccess : {
+                    title   : `${this.$store.state.username}님, 안녕하세요! &#x1F64C;`,
+                    text    : '성공적으로 로그인 되었습니다.',
+                },
+            // 회원 가입 폼
                 signupEmail : {
                     title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
                     text    : '회원 가입',
                 },
-                signinSuccess : {
-                    title   : `${this.$store.state.username}님, 안녕하세요! &#x1F44B;`,
-                    text    : '성공적으로 로그인 되었습니다.',
-                },
+            // 비밀번호 찾기 폼
                 findPassword : {
                     title   : '비밀번호 찾기',
                     text    : '이메일 주소를 입력하세요.',
@@ -351,33 +365,58 @@ export const authStore = {
 
 .auth__close {
     position: absolute;
-    top: 51px; right: 51px;
-    width: 40px; height: 40px;
-    transform : translateY(-50%);
+    top: 20px; left: 50%;
+    transform: translateX(-50%);
     cursor: pointer;
+    box-sizing: border-box;
+    display: flex;
+    padding: 15px 0 ;
 
-    &::before {
-        content: '';
-        border-top: 2px solid $COLOR_navy_2;
-        border-left: 2px solid $COLOR_navy_2;
-        width: 100%; height: 100%;
+    span {
+        vertical-align: top;
         display: inline-block;
         position: relative;
-        transform: rotate(-135deg);
+        width: 150px; height: 5px;
+
+        display: flex;
+        flex-wrap: nowrap;
+
+        &::before , &::after {
+            content : '';
+            width: 50%; height: 100%;
+            position: relative;
+            background-color: #dfdfdf;
+            transition:  transform 250ms ease ,background-color 300ms ease;
+            border-radius: 9999px;
+        }
+        &::before {left: 2%;}
+        &::after {right: 2%;}
+
     }
 
+    @include hover {
+        span {
+            &::after,&::before{
+                background-color: #ccc;
+            }
+            &::before {
+                transform: rotate(15deg);
+            }
+            &::after {
+                transform: rotate(-15deg);
+            }
+        }
+    }
 }
 
 .auth__title {
     font-size: $SIZE_PC_fontsizeTitle;
     font-weight: 300;
     text-align: center;
-    // background-color: #aac;
     min-height: 65px;
 }
 
 .auth__text {
-    // background-color: #aca;
     font-size: $SIZE_PC_fontsizeLarge;
     margin-top: 25px;
     text-align: center;
@@ -389,8 +428,6 @@ export const authStore = {
     width: 360px;
     margin-top: 56px;
     position: relative;
-    // border: 1px solid #f11;
-
 }
 
 .auth__controller {

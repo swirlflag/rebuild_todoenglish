@@ -260,14 +260,6 @@ $radius : 25px;
         box-sizing: border-box;
     }
 
-    // &.st-hover , &.st-focus{
-    &.st-hover{
-        &.st-press {
-            .button__inner {
-                transform : translate3d(0,-$hoverjump/1.4,0);
-            }
-        }
-    }
 
     &.theme-navy {
         .button__body { background-color: $COLOR_navy_2; color: #fff;}
@@ -305,15 +297,22 @@ $radius : 25px;
     transition : transform 450ms $EASE_outCubic , box-shadow 450ms ease;
     box-sizing: border-box;
 
-    .st-hover & , .st-focus & {
-        box-shadow:  0 $thickness+$hoverjump 5px rgba(0,0,0,0.1);
-        text-shadow : 0 3px 2px rgba(0,0,0,0.15);
-        transition : transform 380ms $EASE_outBack3 , box-shadow 380ms $EASE_outCubic;
-        transform : translate3d(0,-$hoverjump,0);
-    }
+    // @include unuseTouch {
+        .st-hover & , .st-focus & {
+            @include unuseTouch {
+                box-shadow:  0 $thickness+$hoverjump 5px rgba(0,0,0,0.1);
+                text-shadow : 0 3px 2px rgba(0,0,0,0.15);
+                transition : transform 380ms $EASE_outBack3 , box-shadow 380ms $EASE_outCubic;
+                transform : translate3d(0,-$hoverjump,0);
+            }
+        }
+    // }
 
     .st-hover.st-press & {
-        transform : translate3d(0,-$hoverjump/1.4,0);
+        @include unuseTouch {
+            transform : translate3d(0,-$hoverjump/1.4,0);
+        }
+
     }
 
     .button__body {
@@ -367,14 +366,18 @@ $radius : 25px;
             }
 
             .st-hover &, .st-focus & {
-                background-color: rgba(255,255,255,0.09);
-                &::before {
-                    background-color: rgba(255,255,255,0.23);
-                    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-                    left: 105%;
-                    transition : left 450ms $EASE_outQuart;
+                @include unuseTouch {
+                    background-color: rgba(255,255,255,0.09);
+                    &::before {
+                        background-color: rgba(255,255,255,0.23);
+                        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+                        left: 105%;
+                        transition : left 450ms $EASE_outQuart;
+                    }
                 }
+
             }
+
         }
 
     }

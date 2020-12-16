@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store';
+import { VM } from '@/main.js';
 
 {store}
 
@@ -41,6 +42,7 @@ const routerInfo = {
 const router = new VueRouter(routerInfo);
 
 let firstRender = true;
+{firstRender}
 
 const isSameCategoryPath = (to,from) => {
     const toCategory = to.split('/')[1];
@@ -48,33 +50,44 @@ const isSameCategoryPath = (to,from) => {
 
     return toCategory === fromCategory
 }
+{isSameCategoryPath}
 
+let isPaging = false;
+{isPaging}
 
 router.beforeEach((to,from, next) => {
 
     const isChangeCategoryPath = !isSameCategoryPath(to.path, from.path);
 
     const useTransition = !firstRender && isChangeCategoryPath;
+    {useTransition}
 
     if(firstRender){
         firstRender = false;
     }
 
     if(useTransition){
-        // 트랜지션 사용 조건이면 PlateTransitionCover를 통해 페이지 넘김
-        store.commit('PAGING_registNext' , next);
-        store.commit('PAGING_action');
+        if(isPaging){
+            return
+        }
+        isPaging = true;
+
+        store.dispatch('coverPage' , next);
     }else {
         // 트랜지션 사용 조건이 아니면 그냥 넘김
         next();
-
     }
-
 });
 
 router.afterEach(() => {
-    // const title = document.querySelector('.main-header__title');
-    // console.log(router.nextTick);
+    if(!VM){
+        return
+    }
+    VM.$nextTick(() => {
+        isPaging = false;
+        store.dispatch('uncoverPage');
+    })
 })
+
 
 export default router;

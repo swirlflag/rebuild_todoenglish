@@ -553,7 +553,6 @@ export default {
     mounted () {
         this.checkNavStyle();
         window.addEventListener('scroll' , this.checkNavStyle );
-
     },
     destroyed() {
         window.removeEventListener('scroll' , this.checkNavStyle );

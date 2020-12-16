@@ -1,5 +1,5 @@
 <template>
-    <span class="spinner--colordots" :class="{'st-show' : isShow}">
+    <span class="spinner--colordots" :class="{'st-hide' : isHide}">
         <span></span>
         <span></span>
         <span></span>
@@ -10,9 +10,9 @@
 
 <script>
 export default {
-    name : 'SpinnerColordots',
+    name : 'SpinnerColordotsWave',
     props : {
-        isShow : Boolean,
+        isHide : Boolean,
     },
 }
 </script>
@@ -37,11 +37,11 @@ $dotWidth : 12px;
     justify-content: center;
     align-items: center;
     pointer-events: none;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 120ms ease ;
 
-    &.st-show {
-        opacity: 1;
+    &.st-hide {
+        opacity: 0;
         transition: opacity 300ms ease ;
     }
 

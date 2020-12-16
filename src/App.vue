@@ -1,17 +1,15 @@
 <template>
     <div    id="app"
-            :class="`
-                ${appClassNamePage}
-                ${appClassNameBrowser}
-                ${appClassNameOS}
-                ${appClassNameDevice}
-                ${appClassNameTouchdevice}
-            `"
+            :class="`${appClassNamePage} ${appClassNameBrowser} ${appClassNameOS} ${appClassNameDevice} ${appClassNameTouchdevice}`"
     >
         <PlateSetting/>
 
         <PlateTest
             v-if="1"
+        />
+
+        <PlateTransitionCover
+             v-if="1"
         />
 
         <PlateModal
@@ -23,10 +21,6 @@
                 v-if="$store.state.$auth.is_openAuth"
             />
         </transition>
-
-        <PlateTransitionCover
-             v-if="1"
-        />
 
         <PlateNavigation
             v-if="1"
@@ -54,7 +48,6 @@ import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
 // import '@/styles/font/font.scss';
 // import '@/styles/global/_reset.css';
 // import '@/styles/global/_global.scss';
-
 
 export default {
     name: 'App',

@@ -1,20 +1,12 @@
 <template>
-    <div    class="nav-gnb trs"
-            :class="`
-                ${useTransition ? 'use-trs' : ''}
-                ${isLogin ? 'is-login' : ''}
-                ${isOpenMenu ? 'st-open-menu' : ''}
-                ${isOpenAccount ? 'st-open-account' : ''}
-                ${isReduce ? 'st-reduce' : ''}
-                ${themeClear ? 'type-clear' : ''}
-                ${themeWhite ? 'color-white' : ''}
-            `"
+    <div    class="nav-gnb"
+            :class="`${useTransition ? 'use-trs' : ''}${isLogin ? ' is-login' : ''}${isOpenMenu ? ' st-open-menu' : ''}${isOpenAccount ? ' st-open-account' : ''}${isReduce ? ' st-reduce' : ''}${themeClear ? ' type-clear' : ''}${themeWhite ? ' color-white' : ''}`"
     >
 
         <div class="nav-gnb__wrap">
 
             <div class="nav-gnb__source" v-if="0">
-                <video autoplay loop muted playsinline>
+                <video autoplay loop muted playsinline ref="ref_video">
                     <source src="@/assets/video/sample.mp4" type="video/mp4">
                 </video>
             </div>
@@ -120,16 +112,16 @@ export default {
     },
     methods : {
         openMenu(trs = true) {
-            // console.log(trs);
             this.$store.commit('SCROLL_lock');
             this.useTransition = trs;
             this.isOpenMenu = true;
+            // this.$refs.ref_video.play();
         },
         closeMenu(trs = true) {
-            // console.log(trs);
             this.$store.commit('SCROLL_unlock');
             this.useTransition = trs;
             this.isOpenMenu = false;
+            // this.$refs.ref_video.pause();
         },
         toggleMenu() {
             this.isOpenMenu ? this.closeMenu() : this.openMenu();

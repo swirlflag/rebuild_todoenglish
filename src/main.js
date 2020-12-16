@@ -14,14 +14,18 @@ Vue.config.productionTip = false
 
 const IsNotSurpportCondition = false;
 
+let VM = null
+
 if(IsNotSurpportCondition){
-    new Vue({render: h => h(PageNotSurpport)}).$mount('#app')
+    VM = new Vue({render: h => h(PageNotSurpport)}).$mount('#app')
 }else {
-    new Vue({
+    VM = new Vue({
         render: h => h(App),
         router,
         store,
     }).$mount('#app')
 }
+
+export { VM }
 
 
