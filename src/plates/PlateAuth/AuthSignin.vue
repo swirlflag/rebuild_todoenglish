@@ -8,16 +8,18 @@
                             placeholder="이메일"
                             id="form-signin__id"
                             ref="ref_id"
-                            :mark="nowState === 'wrongId'"
-                            @input="onInputEmail"
+                            :mark="markEmail"
+                            v-model="value.id"
+                            @change="onInputEmail"
             />
 
             <InputDefault   type="password"
                             placeholder="비밀번호"
                             id="form-signin__password"
                             ref="ref_password"
-                            :mark="nowState === 'wrongPassword'"
-                            @input="onInputPassword"
+                            v-model="value.password"
+                            :mark="markPassword"
+                            @change="onInputPassword"
             />
 
             <div id="form-signin__alert" >
@@ -34,7 +36,7 @@
             <ButtonDefault  theme="pink"
                             id="form-signin__submit"
                             @click.prevent="tryLogin"
-                            :disable="!isValidAllclear"
+                            :disable="!isCanConfirm"
                             ref="ref_submit"
             >
                 로그인
@@ -45,7 +47,7 @@
         <div class="auth__signin-email__etc">
             <div class="auth__signin-email__etc__item">
                 <ButtonUnderMask    text="회원가입"
-                                    @click="$emit('change-phase', 'signupEmail')"
+                                    @click="$emit('change-phase', 'signupCheck')"
                 />
             </div>
 
@@ -87,15 +89,18 @@ const API_tryLogin = (signData = {id: '' , password : ''}) => {
 }
 
 
-import { validateEmail , randomOne} from '@/utils';
-import InputDefault         from '@/components/input/InputDefault.vue';
-import ButtonDefault        from '@/components/button/ButtonDefault.vue';
+import { randomOne} from '@/utils';
+import InputDefault             from '@/components/input/InputDefault.vue';
+import ButtonDefault            from '@/components/button/ButtonDefault.vue';
 import SpinnerColordotsWave     from '@/components/spinner/SpinnerColordotsWave.vue';
-import AlertFlashText       from '@/components/layout/AlertFlashText.vue';
+import AlertFlashText           from '@/components/layout/AlertFlashText.vue';
 
-import ButtonUnderMask from '@/components/button/ButtonUnderMask.vue';
+import ButtonUnderMask          from '@/components/button/ButtonUnderMask.vue';
 
 export default {
+    props : {
+        nowPhase : String,
+    },
     components : {
         ButtonUnderMask,
         InputDefault ,
@@ -105,17 +110,16 @@ export default {
     },
     data() {
         return {
-
-            alertFlash : false,
-
+            isDestory : false,
+            mydata: '',
             nowState : 'idle',
 
             alertDataMap : {
                 idle                : '',
-                wrongId             : '해당 아이디가 없습니다.',
-                wrongPassword       : '비밀번호가 맞지 않습니다.',
-                validFailId         : '올바른 이메일 형식을 입력해주세요.',
+                validFailEmail      : '올바른 이메일 형식을 입력해주세요.',
                 validFailPassword   : '비밀번호를 입력해주세요.',
+                wrongEmail          : '해당 아이디가 없습니다.',
+                wrongPassword       : '비밀번호가 맞지 않습니다.',
             },
 
             value : {
@@ -132,37 +136,43 @@ export default {
     },
 
     computed : {
-        isValidAllclear() {
-            return Object.values(this.valid).indexOf(false) === -1;
+        isCanConfirm() {
+            return  Object.values(this.valid).indexOf(false) === -1
+                && this.nowState !== 'loading'
         },
+        markEmail() {
+            return  this.nowState === 'validFailEmail'
+                ||  this.nowState === 'wrongEmail'
+        },
+        markPassword() {
+            return  this.nowState === 'validFailPassword'
+                ||  this.nowState === 'wrongPassword'
+        }
     },
     methods : {
-
-        focusId() {
+        focusEmail() {
             this.$refs.ref_id.$refs.ref_input.focus();
         },
         focusPassword() {
             this.$refs.ref_password.$refs.ref_input.focus();
         },
 
-        onInputEmail (value) {
-            this.value.id = value;
-            this.valid.id = validateEmail(value);
-            if(this.nowState === 'wrongId'){
+        onInputEmail (value,valid) {
+            this.valid.id = valid;
+            if(this.markEmail){
                 this.stateToIdle();
             }
         },
         onInputPassword(value) {
-            this.value.password = value;
             this.valid.password = !!value;
-            if(this.nowState === 'wrongPassword'){
+            if(this.markPassword){
                 this.stateToIdle();
             }
         },
 
         validCheck() {
             if(!this.valid.id){
-                this.stateToVaildFailId();
+                this.stateToVaildFailEmail();
                 return
             }
             if(!this.valid.password){
@@ -171,7 +181,7 @@ export default {
             }
         },
 
-        startFlashAlert() {
+        flashAlert() {
             this.$refs.ref_flashAlert.flash();
         },
 
@@ -180,7 +190,7 @@ export default {
                 return;
             }
 
-            if(!this.isValidAllclear){
+            if(!this.isCanConfirm){
                 this.validCheck();
                 return;
             }
@@ -194,7 +204,9 @@ export default {
 
         async sendLogin() {
             const { result , errorCode , data } = await API_tryLogin(this.value);
-
+            if(this.isDestory){
+                return null;
+            }
             if(result){
                 this.loginSuccess(data);
             }else {
@@ -208,7 +220,7 @@ export default {
         },
         loginFail(errorCode) {
             if(errorCode === "ID"){
-                this.stateToWrongId();
+                this.stateToWrongEmail();
             }else if(errorCode === "PW"){
                 this.stateToWrongpassword();
             }
@@ -220,29 +232,34 @@ export default {
         stateToLoading() {
             this.nowState = 'loading';
         },
-        stateToVaildFailId() {
-            this.nowState = 'validFailId';
-            this.startFlashAlert();
+        stateToVaildFailEmail() {
+            this.nowState = 'validFailEmail';
+            this.flashAlert();
+            this.focusEmail();
         },
         stateToVaildFailPassword() {
             this.nowState = 'validFailPassword';
-            this.startFlashAlert();
+            this.flashAlert();
+            this.focusPassword();
         },
-        stateToWrongId() {
-            this.nowState = 'wrongId';
-            this.startFlashAlert();
-            this.focusId();
+        stateToWrongEmail() {
+            this.nowState = 'wrongEmail';
+            this.flashAlert();
+            this.focusEmail();
         },
         stateToWrongpassword() {
             this.nowState = 'wrongPassword';
-            this.startFlashAlert();
+            this.flashAlert();
             this.focusPassword();
         },
 
     },
 
     mounted () {
-        this.focusId();
+        this.focusEmail();
+    },
+    beforeDestroy() {
+        this.isDestory = true;
     }
 }
 </script>
@@ -250,35 +267,6 @@ export default {
 <style lang="scss" scoped>
 .auth__signin-email {
     width: 100%;
-}
-
-.auth__signin-email__etc {
-    margin-top: 30px;
-    width: 100%;
-    display : flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-
-    .auth__signin-email__etc__item {
-        display: flex;
-        align-items: center;
-
-        button {
-            font-weight: 400;
-        }
-
-        &::before {
-            content : '';
-            display: inline-block;
-            width: 1px; height: 16px;
-            background-color: #F2F0E9;
-            position: relative;
-            margin: 0 15px;
-        }
-
-        &:nth-child(1)::before { display: none;}
-    }
 }
 
 #form-signin {
@@ -312,7 +300,35 @@ export default {
         margin-top: 40px;
     }
 
+}
 
+.auth__signin-email__etc {
+    margin-top: 30px;
+    width: 100%;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .auth__signin-email__etc__item {
+        display: flex;
+        align-items: center;
+
+        button {
+            font-weight: 400;
+        }
+
+        &::before {
+            content : '';
+            display: inline-block;
+            width: 1px; height: 16px;
+            background-color: #F2F0E9;
+            position: relative;
+            margin: 0 15px;
+        }
+
+        &:nth-child(1)::before { display: none;}
+    }
 }
 
 </style>

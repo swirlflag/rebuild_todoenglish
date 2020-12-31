@@ -129,7 +129,7 @@ export default {
     tr {
         display: flex;
         padding: 18px 0;
-        border-bottom: 1px solid rgba(52, 45, 81,0.15);
+        border-bottom: 1px solid $COLOR_linegray;
 
         th:nth-child(1){
             flex-grow : 0;

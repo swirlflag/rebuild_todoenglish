@@ -13,7 +13,6 @@
             <input  :type="inputType"
                     :placeholder="placeholder"
                     v-model="value"
-                    @input="onInput"
                     @focus="() => {isFocus = true}"
                     @blur="() => {isFocus = false}"
                     ref="ref_input"
@@ -24,6 +23,7 @@
 </template>
 
 <script>
+import { validateEmail } from '@/utils';
 
 
 export default {
@@ -33,6 +33,10 @@ export default {
         placeholder : String,
 
         mark : Boolean,
+    },
+    model : {
+        prop : 'stringData',
+        event : 'change',
     },
     data() {
         const inputType = this.type || 'text';
@@ -46,11 +50,17 @@ export default {
             value : '',
         }
     },
-    methods : {
-        onInput() {
-            this.$emit('input' , this.value);
-        },
-    }
+    watch : {
+        "value"(){
+            const payloads = [
+                this.value,
+            ];
+            if(this.type === 'email'){
+                payloads.push(validateEmail(this.value));
+            }
+            this.$emit('change' , ...payloads)
+        }
+    },
 }
 </script>
 
@@ -95,7 +105,7 @@ $radius : 8px;
     }
 
     .input__border {
-        // border: 1px solid rgba(52,45,81,0.1);
+        // border: 1px solid $COLOR_linegray
         border: 2px solid transparent;
         width: 100%; height: 100%;
         position: absolute;
@@ -115,7 +125,7 @@ $radius : 8px;
         width: 100%;
         border: none;
         box-sizing: border-box;
-        border: 1px solid rgba(52,45,81,0.1);
+        border: 1px solid $COLOR_linegray;
         transition : color 300ms ease;
 
         &:focus {

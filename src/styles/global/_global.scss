@@ -17,7 +17,7 @@ body {
 
     @include hardSelect {
         word-break: keep-all;
-        font-weight: 300;
+        // font-weight: 300;
         font-size: $SIZE_PC_fontsizeDefault;
         line-height: normal;
         letter-spacing: $SIZE_letterspacing_default;
@@ -34,7 +34,7 @@ body {
     }
 
     @include phone {
-        // overflow-x: hidd en;
+        // overflow-x: hidden;
     }
 
 }

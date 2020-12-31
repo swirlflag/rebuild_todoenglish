@@ -28,12 +28,16 @@ export default {
     },
     data() {
         return {
-            count : 4,
+            count : 3,
+            // counting : false,
+            counting : true,
         }
     },
     methods : {
         closeCounting() {
-
+            if(!this.counting){
+                return
+            }
             setTimeout(() => {
                 if(this.count > 1){
                     this.closeCounting();
@@ -46,7 +50,9 @@ export default {
         },
     },
     mounted() {
-        this.closeCounting();
+        setTimeout(() => {
+            this.closeCounting();
+        },500);
     }
 }
 </script>
@@ -142,6 +148,9 @@ $green : #2cd62c;
             box-sizing: border-box;
             box-shadow: none;
             overflow: hidden;
+            bottom: 0; left: 0;
+            height: 20%;
+            transform-origin: bottom left;
 
             &::before {
                 content: '';
@@ -151,18 +160,14 @@ $green : #2cd62c;
                 vertical-align: top;
                 background-color: #fff;
                 border-radius: inherit;
+                transform-origin: left;
+                bottom: 0; left: 0;
             }
 
             &:nth-child(1) {
-                width: 60%; height: 20%;
-                transform-origin: top;
-                transition :transform 2s ease;
-                bottom: 0;
-                left: 20%;
-                transform : rotate(-90deg);
-                transform-origin: bottom left;
+                width: 60%;
+                transform : rotate(90deg) translateX(-100%);
                 &::before {
-                    transform-origin: right;
                     .st-check & {
                         animation: checkLine 500ms $EASE_inOutCubic both;
                         animation-delay: 500ms !important;
@@ -170,10 +175,8 @@ $green : #2cd62c;
                 }
             }
             &:nth-child(2) {
-                bottom: 0; left: 0;
-                width: 100%; height: 20%;
+                width: 100%;
                 &::before {
-                    transform-origin: left;
                     .st-check & {
                         animation: checkLine 600ms $EASE_inOutCubic both;
                         animation-delay: 820ms !important;

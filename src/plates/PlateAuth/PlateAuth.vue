@@ -17,9 +17,9 @@
                 <TextChangeMask :text="phaseDataMap[nowPhase].text"/>
             </p>
 
-            <div class="auth__controller" :class="{'st-show' : this.phaseHistory.length > 1}">
+            <div class="auth__controller" :class="{'st-show' : isShowHistoryButton}">
                 <ButtonUnderMask    class="auth__history-back"
-                                    :text="historyButtonText"
+                                    text="이전 단계로"
                                     @click="onClickHistoryButton"
                 />
             </div>
@@ -31,27 +31,51 @@
                                     @after-enter="onAfterEnterTransition"
                 >
 
+                <!-- 로그인 방식 분류 -->
                     <AuthSelection  v-if="nowPhase === 'selectType'" :key="nowPhase"
                                     @change-phase="changePhase"
                     />
 
-                    <AuthSignin v-if="nowPhase === 'signinEmail'" :key="nowPhase"
-                                @change-phase="changePhase"
+                <!-- 자체 이메일 로그인 입력 폼 -->
+                    <AuthSignin     v-if="nowPhase === 'signinEmail'" :key="nowPhase"
+                                    :nowPhase="nowPhase"
+                                    @change-phase="changePhase"
 
                     />
 
-                    <AuthSignup v-if="nowPhase === 'signupEmail'" :key="nowPhase"
+                <!-- 회원가입에 필요한 동의 체크 -->
+                    <AuthSignupCheck    v-if="nowPhase === 'signupCheck'" :key="nowPhase"
+                                        @change-phase="changePhase"
 
                     />
 
-                    <AuthSuccess v-if="nowPhase === 'signinSuccess'" :key="nowPhase"
+                <!-- 회원가입을 위한 아이디,비밀번호 입력 폼 -->
+                    <AuthSignupForm  v-if="nowPhase === 'signupEmailForm'" :key="nowPhase"
+                                     @change-phase="changePhase"
+                    />
+
+                <!-- 회원가입 완료후 마케팅 동의-->
+                    <AuthSignupMarketingAgree   v-if="nowPhase === 'signupMarketingAgree'" :key="nowPhase"
+                                                @change-phase="changePhase"
+                    />
+
+                <!-- 로그인 완료 -> 인증 종료 -->
+                    <AuthSuccess    v-if="nowPhase === 'signinSuccess'" :key="nowPhase"
+                                    @change-phase="changePhase"
+                                    @reset-history="resetHistory"
+                    />
+
+                <!-- 회원가입 완료 -->
+                    <AuthSignupSuccess  v-if="nowPhase === 'signupSuccess'" :key="nowPhase"
+                                        @change-phase="changePhase"
+                                        @reset-history="resetHistory"
 
                     />
 
+                <!-- 비밀번호 찾기를 위한 이메일 입력 폼 -->
                     <AuthFindPassword v-if="nowPhase === 'findPassword'" :key="nowPhase"
 
                     />
-
 
                     <!-- <div  >
                         <span @click="changePhase('select')">back</span>
@@ -65,13 +89,17 @@
 </template>
 
 <script>
-import TextChangeMask   from '@/components/layout/TextChangeMask.vue';
-import ButtonUnderMask  from '@/components/button/ButtonUnderMask.vue';
-import AuthSelection    from '@/plates/PlateAuth/AuthSelection.vue';
-import AuthSignin       from '@/plates/PlateAuth/AuthSignin.vue';
-import AuthSignup       from '@/plates/PlateAuth/AuthSignup.vue';
-import AuthSuccess      from '@/plates/PlateAuth/AuthSuccess.vue';
-import AuthFindPassword from '@/plates/PlateAuth/AuthFindPassword.vue';
+import TextChangeMask           from '@/components/layout/TextChangeMask.vue';
+import ButtonUnderMask          from '@/components/button/ButtonUnderMask.vue';
+import AuthSelection            from '@/plates/PlateAuth/AuthSelection.vue';
+import AuthSignin               from '@/plates/PlateAuth/AuthSignin.vue';
+import AuthSignupForm           from '@/plates/PlateAuth/AuthSignupForm.vue';
+import AuthSignupCheck          from '@/plates/PlateAuth/AuthSignupCheck.vue';
+import AuthSignupMarketingAgree from '@/plates/PlateAuth/AuthSignupMarketingAgree.vue';
+import AuthSuccess              from '@/plates/PlateAuth/AuthSuccess.vue';
+import AuthFindPassword         from '@/plates/PlateAuth/AuthFindPassword.vue';
+
+import AuthSignupSuccess        from '@/plates/PlateAuth/AuthSignupSuccess.vue';
 
 import gsap from 'gsap';
 {gsap}
@@ -83,9 +111,12 @@ export default {
         ButtonUnderMask,
         AuthSelection,
         AuthSignin,
-        AuthSignup,
+        AuthSignupForm,
+        AuthSignupCheck,
+        AuthSignupMarketingAgree,
+        AuthSignupSuccess,
         AuthSuccess,
-        AuthFindPassword
+        AuthFindPassword,
     },
     data() {
         return {
@@ -124,22 +155,39 @@ export default {
                     title   : `${this.$store.state.username}님, 안녕하세요! &#x1F64C;`,
                     text    : '성공적으로 로그인 되었습니다.',
                 },
-            // 회원 가입 폼
-                signupEmail : {
+            // 회원 가입 : 약관 및 체크박스 (필수 및 선택)
+                signupCheck : {
                     title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
-                    text    : '회원 가입',
+                    text    : '약관 동의',
+                },
+            // 회원 가입 : 마케팅 수신 동의/미동의
+                signupMarketingAgree : {
+                    title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
+                    text    : '마케팅 수신 동의 여부를 확인합니다. 나중에 변경할 수 있어요.',
+                },
+            // 회원가입 : 회원정보 입력
+                signupEmailForm : {
+                    title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
+                    text    : '가입에 필요한 정보를 입력해주세요.',
+                },
+                signupSuccess : {
+                    title   : `${this.$store.state.username}님, 가입을 환영합니다!`,
+                    text    : '회원가입이 완료되었습니다.',
                 },
             // 비밀번호 찾기 폼
                 findPassword : {
-                    title   : '비밀번호 찾기',
-                    text    : '이메일 주소를 입력하세요.',
+                    title   : '비밀번호를 잊으셨나요?',
+                    text    : '가입한 이메일 주소를 입력해주세요.',
                 },
 
             });
         },
 
-        historyButtonText () {
-            return this.nowPhase === 'signinSuccess'  ? '닫기' : '이전 단계로'
+        isShowHistoryButton() {
+            return this.phaseHistory.length > 1
+                && this.nowPhase !== 'signinSuccess'
+                && this.nowPhase !== 'signupSuccess'
+
         }
 
     },
@@ -148,10 +196,13 @@ export default {
         closePlateAuth() {
             this.$store.dispatch('closeAuthPanel');
         },
-
         changePhase(phase) {
             this.phaseHistory.push(phase);
             this.nowPhase = phase;
+        },
+        resetHistory() {
+            this.phaseHistory = [];
+            console.log(this.phaseHistory);
         },
         backPhase() {
             if(this.phaseHistory.length <= 1){
@@ -164,11 +215,12 @@ export default {
         },
 
         onClickHistoryButton () {
-            if(this.nowPhase === 'signinSuccess'){
-                this.closePlateAuth();
-            }else {
-                this.backPhase();
-            }
+            this.backPhase();
+            // if(this.nowPhase === 'signinSuccess'){
+            //     this.closePlateAuth();
+            // }else {
+            //     this.backPhase();
+            // }
         },
 
         onBeforeEnterTransition() {
@@ -177,6 +229,7 @@ export default {
         },
         onEnterTransition() {
             const el_content = this.$refs.ref_content;
+            // el_content.style.width = 'auto';
             const el_leave = el_content.querySelector('.auth-content-leave');
             const el_enter = el_content.querySelector('.auth-content-enter');
 
@@ -185,10 +238,12 @@ export default {
             }
 
             gsap.fromTo(el_content, 0.6, {
-                height : el_leave.offsetHeight,
+                height  : el_leave.offsetHeight,
+                // width   : el_leave.offsetWidth,
             },{
-                height : el_enter.offsetHeight,
-                ease : 'power4.out',
+                height  : el_enter.offsetHeight,
+                // width   : el_enter.offsetWidth,
+                ease    : 'power4.out',
             });
 
         },
@@ -205,8 +260,8 @@ export default {
                 y : 50,
                 ease : 'power2.out',
                 duration : 0.6,
-                delay : 0.25,
-                stagger : 0.05,
+                delay : 0.45,
+                stagger : 0.07,
             });
 
             const el_selection = this.$refs.ref_root.querySelector('.auth__selection');
@@ -222,21 +277,21 @@ export default {
                     y : 50,
                     ease : 'power4.out',
                     duration : 0.6,
-                    delay : 0.45,
+                    delay : 0.7,
                     stagger : 0.1,
                 });
 
                 gsap.from(el_precaution, {
                     opacity : 0,
                     duration : 1,
-                    delay : 0.7,
+                    delay : 1,
                 })
 
                 gsap.from(el_dividerbar , {
                     scaleX : 0,
-                    ease: 'power2.out',
+                    ease: 'power3.out',
                     duration : 1,
-                    delay : 0.7,
+                    delay : 1.1,
                 })
 
             }
@@ -247,8 +302,10 @@ export default {
 
     created() {
         this.changePhase('selectType');
+        // this.changePhase('signupCheck');
         // this.changePhase('signinEmail');
-        // this.changePhase('signinSuccess');
+
+        // this.changePhase('signupMarketingAgree');
     },
 
     mounted() {
@@ -261,8 +318,8 @@ export const authStore = {
     name : '$auth',
 
     state : {
-        is_openAuth : false,
-        // is_openAuth : true,
+        // is_openAuth : false,
+        is_openAuth : true,
     },
 
     mutations : {
@@ -324,9 +381,7 @@ export const authStore = {
 //     position: absolute;
 // }
 
-.button--default {
-   width: 100%;
-}
+
 
 #plate--auth {
     position: fixed;
@@ -413,7 +468,13 @@ export const authStore = {
     font-size: $SIZE_PC_fontsizeTitle;
     font-weight: 300;
     text-align: center;
-    min-height: 65px;
+    // min-height: 65px;
+    // min-height: 70px;
+    // min-height: 100px;
+    // background-color: #aaa;
+    display: flex;
+    align-items: center;
+    // flex-direction: column;
 }
 
 .auth__text {
@@ -425,10 +486,25 @@ export const authStore = {
 
 
 .auth__content {
-    width: 360px;
+    // min-width: 510px;
+    // min-width:800px;
+
+    // min-width: 360px;
+    // max-width: 360px;
+    max-width: 510px;
+    width: 100%;
+
+
+
     margin-top: 56px;
     position: relative;
+
+    > span {
+        // white-space: nowrap;
+    }
 }
+
+
 
 .auth__controller {
     position: absolute;
@@ -441,8 +517,10 @@ export const authStore = {
     transform : translate3d(-10px,0,0);
     transition: opacity 200ms ease, transform 400ms $EASE_outCubic;
     text-align: center;
+    pointer-events: none;
 
     &.st-show {
+        pointer-events: all;
         opacity: 1;
         transform : translate3d(0,0,0);
     }
@@ -451,6 +529,19 @@ export const authStore = {
         padding: 2px 4px;
         font-weight: 700;
     }
+}
+
+</style>
+
+<style lang="scss">
+.auth__content .auth__contain,
+.auth__content .button--default,
+.auth__content .input--default {
+    // border: 1px solid #3d3;
+    max-width : 360px;
+    position: relative;
+    width: 100%;
+    align-self: center;
 }
 
 </style>

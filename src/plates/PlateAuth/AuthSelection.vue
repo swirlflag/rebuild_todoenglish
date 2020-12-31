@@ -5,13 +5,13 @@
 
         <ButtonSignin type="google"/>
 
-        <div class="auth__divider" ref="ref_divider">
+        <div class="auth__divider auth__contain" ref="ref_divider">
             <span class="auth__divider__bar"></span>
             <span class="precaution">또는</span>
             <span class="auth__divider__bar"></span>
         </div>
 
-        <ButtonSignin type="email" @click="$emit('change-phase' , 'signinEmail')"/>
+        <ButtonSignin type="email" @click="selectEmail"/>
 
     </div>
 </template>
@@ -27,12 +27,11 @@ export default {
         ButtonSignin,
     },
     methods: {
-        onMountedMotion() {
-
+        selectEmail() {
+            this.$emit('change-phase' , 'signinEmail')
         },
     },
     mounted() {
-        this.onMountedMotion();
     },
 
 }
@@ -43,6 +42,7 @@ export default {
     display: flex;
     flex-direction: column;
     width: 360px;
+    width: 100%;
 
     > * {
         margin-top: 23px;

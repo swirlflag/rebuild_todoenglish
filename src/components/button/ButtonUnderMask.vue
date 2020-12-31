@@ -53,14 +53,15 @@ export default {
         width: 102%; height: 100%;
         top: 0; left: -1%;
         transform: translateY(calc(100% + 1px));
-        transition: transform 250ms $EASE_outExpo, color 100ms ease , opacity 200ms ease;
-        background: $COLOR_navy_2;
+        transition: transform 200ms $EASE_outCubic, color 100ms ease , opacity 200ms ease;
+
         z-index: 1 !important;
     }
 
     &.type-underline {
         &::before  {
-            transform: translateY(calc(100% - 0.1em));
+            transform: translateY(calc(100% - 0.08em));
+            background: #999;
             opacity: 0.5;
         }
     }
@@ -70,6 +71,7 @@ export default {
         font-weight: 700;
         &::before {
             transform: translateY(0);
+            background: $COLOR_navy_2;
             opacity: 1;
         }
     }
