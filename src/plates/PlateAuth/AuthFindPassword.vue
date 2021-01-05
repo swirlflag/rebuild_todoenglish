@@ -105,8 +105,12 @@ export default {
         flashAlert() {
             this.$refs.ref_flashAlert.flash();
         },
+        focusTarget(target) {
+            if(this.$store.state.is_touchDevice){return}
+            target.focus();
+        },
         focusEmail(){
-            this.$refs.ref_id.$refs.ref_input.focus();
+            this.focusTarget(this.$refs.ref_id.$refs.ref_input);
         },
         stateToIdle() {
             this.nowState = 'idle';

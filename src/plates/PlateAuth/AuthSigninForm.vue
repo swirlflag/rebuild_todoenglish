@@ -88,7 +88,6 @@ const API_tryLogin = (signData = {id: '' , password : ''}) => {
     })
 }
 
-
 import { randomOne} from '@/utils';
 import InputDefault             from '@/components/input/InputDefault.vue';
 import ButtonDefault            from '@/components/button/ButtonDefault.vue';
@@ -147,16 +146,20 @@ export default {
         markPassword() {
             return  this.nowState === 'validFailPassword'
                 ||  this.nowState === 'wrongPassword'
-        }
-    },
-    methods : {
-        focusEmail() {
-            this.$refs.ref_id.$refs.ref_input.focus();
-        },
-        focusPassword() {
-            this.$refs.ref_password.$refs.ref_input.focus();
         },
 
+    },
+    methods : {
+        focusTarget(target) {
+            if(this.$store.state.is_touchDevice){ return }
+            target.focus();
+        },
+        focusEmail() {
+            this.focusTarget(this.$refs.ref_id.$refs.ref_input);
+        },
+        focusPassword() {
+            this.focusTarget(this.$refs.ref_password.$refs.ref_input);
+        },
         onInputEmail (value,valid) {
             this.valid.id = valid;
             if(this.markEmail){
@@ -275,13 +278,16 @@ export default {
 
     > * {
         margin-top: 20px;
+        @include phone {
+            margin-top: 15px;
+        }
         &:nth-child(1) {
             margin-top: 0;
         }
     }
 
     #form-signin__submit {
-        margin-top: 40px;
+        margin-top: 20px;
     }
 
 }

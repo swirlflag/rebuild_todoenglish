@@ -24,7 +24,7 @@
             <div>
 
                 {{
-                    hey
+                    $store.state.is_pageScrollLock
                 }}
             </div>
 
@@ -54,7 +54,7 @@ export default {
     data() {
         let useTest = false;
 
-        useTest = true;
+        // useTest = true;
 
         return {
             useTest,
@@ -63,7 +63,6 @@ export default {
             isGrab : false,
             isOpen : false,
 
-            hey : document.createEvent("MouseEvent"),
 
         }
     },

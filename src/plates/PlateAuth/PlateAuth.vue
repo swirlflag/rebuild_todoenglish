@@ -1,20 +1,20 @@
 <template>
-    <div id="plate--auth" ref="ref_root">
+    <div id="plate--auth" ref="ref_root" :class="{'st-open' : $store.state.$auth.is_openAuth}" >
 
         <div class="auth__dimmed" @click="closeAuth"></div>
 
-        <div class="auth__box" v-if="phaseDataMap[nowPhase]">
+        <div class="auth__box" v-if="phaseDataMap[nowPhase]" ref="ref_box" @transitionend="closeAuthAfter">
 
             <div class="auth__close" @click="closeAuth">
                 <span></span>
             </div>
 
             <h2 class="auth__title" ref="ref_title">
-                <TextChangeMask :text="phaseDataMap[nowPhase].title"/>
+                <TextChangeMask :text="phaseDataMap[nowPhase].title" />
             </h2>
 
-            <p class="auth__text" ref="ref_text">
-                <TextChangeMask :text="phaseDataMap[nowPhase].text"/>
+            <p class="auth__text" ref="ref_text" v-if="true">
+                <TextChangeMask :text="phaseDataMap[nowPhase].text" :delay="350"/>
             </p>
 
             <div class="auth__controller" :class="{'st-show' : isShowHistoryButton}">
@@ -43,7 +43,7 @@
                     />
 
                 <!-- 자체 이메일 로그인 입력 폼 -->
-                    <AuthSigninForm     v-if="nowPhase === 'signinEmail'" :key="nowPhase"
+                    <AuthSigninForm     v-if="nowPhase === 'signinForm'" :key="nowPhase"
                                         :nowPhase="nowPhase"
                                         @change-phase="changePhase"
                     />
@@ -165,7 +165,7 @@ export default {
                     text    : '로그인 과정을 완료해주세요.',
                 },
             // 이메일 로그인 폼
-                signinEmail : {
+                signinForm : {
                     title   : '토도영어에 오신 것을 환영합니다! &#x1F44B;',
                     text    : '가입하신 이메일로 로그인 하세요.',
                 },
@@ -196,12 +196,12 @@ export default {
                 },
             // 비밀번호 찾기 : 이메일 입력 폼
                 findPassword : {
-                    title   : '비밀번호를 잊으셨나요?',
+                    title   : '비밀번호를 잊으셨나요? &#128269;',
                     text    : '가입한 이메일 주소를 입력해주세요.',
                 },
             // 비밀번호 찾기 : 이메일 발송 완료
                 findPasswordSuccess : {
-                    title   : '메일함을 확인해주세요!',
+                    title   : '메일함을 확인해주세요! &#128236;',
                     text    : '비밀번호 변경을 위한 이메일을 발송하였습니다.'
                 },
 
@@ -228,17 +228,49 @@ export default {
 
     },
 
+    watch : {
+        "$store.state.$auth.is_openAuth"(now) {
+            if(now){
+                this.openAuthMotion();
+            }
+        }
+    },
+
     methods : {
+        closeAuthAfter(e) {
+            if(e.target !== this.$refs.ref_box){
+                return
+            }
+            if(e.propertyName !== 'transform'){
+                return
+            }
+            if(this.$store.state.$auth.is_openAuth){
+                return
+            }
+            this.changePhaseBase();
+        },
         closeAuth() {
             this.$store.dispatch('closeAuthPanel');
+        },
+        openAuthMotion() {
+            this.onMountedMotion();
         },
         changePhase(phase) {
             this.phaseHistory.push(phase);
             this.nowPhase = phase;
         },
+        changePhaseBase() {
+            this.resetHistory();
+            const isSignin = this.$store.state.$user.isSignin;
+
+            if(isSignin){
+                this.changePhase('signoutCheck');
+            }else {
+                this.changePhase('selectType');
+            }
+        },
         resetHistory() {
             this.phaseHistory = [];
-            console.log(this.phaseHistory);
         },
         backPhase() {
             if(this.phaseHistory.length <= 1){
@@ -347,13 +379,13 @@ export default {
         }
 
         // this.changePhase('signupConsent');
-        // this.changePhase('signinEmail');
+        // this.changePhase('signinForm');
 
         // this.changePhase('signupMarketingAgree');
     },
 
     mounted() {
-        this.onMountedMotion();
+        // this.onMountedMotion();
     },
 
 }
@@ -377,10 +409,12 @@ export const authStore = {
 
     actions : {
         openAuthPanel({commit}) {
-            commit('AUTH_open')
+            commit('AUTH_open');
+            commit('SCROLL_lock');
         },
         closeAuthPanel({commit}) {
             commit('AUTH_close')
+            commit('SCROLL_unlock');
         },
     }
 }
@@ -389,6 +423,9 @@ export const authStore = {
 <style scoped lang="scss">
 .plate--auth-enter-active {
     transition: transform 700ms $EASE_outExpo 30ms;
+    @include phone {
+        transition: transform 800ms $EASE_outQuart 0;
+    }
 }
 .plate--auth-leave-active {
     transition: transform 400ms $EASE_inOutCubic 10ms;
@@ -425,24 +462,34 @@ export const authStore = {
 //     position: absolute;
 // }
 
-
-
 #plate--auth {
     position: fixed;
     top: 0; left:0 ;
     box-sizing: border-box;
     width: 100%; height: 100%;
     z-index: 1010;
-    padding: 20px 20px 0;
+    padding: 20px;
+    padding-bottom: 0 !important;
     display: flex;
     align-items: center;
     flex-direction: column;
+    @include phone {
+        padding : $SIZE_MO_innerPadding;
+    }
+
+    transition:  transform 1s ease ;
+
+    pointer-events: none;
+    &.st-open {
+        pointer-events: all;
+    }
 }
 
 .auth__dimmed {
     position: absolute;
     top:0 ; left: 0;
     width: 100%; height: 100%;
+    // cursor: pointer;
 }
 
 .auth__box {
@@ -459,6 +506,18 @@ export const authStore = {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transform : translate3d(0,100%,0);
+    will-change: transform;
+    transition: transform 400ms $EASE_inOutCubic 10ms;
+
+    @include phone {
+        padding : $SIZE_MO_innerPadding;
+    }
+
+    .st-open & {
+        transform : translate3d(0,0,0);
+        transition: transform 700ms $EASE_outExpo 70ms;
+    }
 
 }
 
@@ -512,39 +571,57 @@ export const authStore = {
     font-size: $SIZE_PC_fontsizeTitle;
     font-weight: 300;
     text-align: center;
-    // min-height: 65px;
-    // min-height: 70px;
-    // min-height: 100px;
-    // background-color: #aaa;
     display: flex;
     align-items: center;
-    // flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+
+    @include phone {
+        width: 100%;
+        font-size: $SIZE_MO_fontsizeTitle;
+        // padding: 0 $SIZE_MO_innerPadding;
+    }
+
+    > .mask-text {
+        width: 100%;
+    }
 }
 
 .auth__text {
+    width: 100%;
     font-size: $SIZE_PC_fontsizeLarge;
     margin-top: 25px;
     text-align: center;
-    min-height: 30px;
+    // min-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    @include phone {
+        font-size: $SIZE_MO_fontsizeDefault;
+        padding: 0 $SIZE_MO_innerPadding;
+    }
+
+    > .mask-text {
+        width: 100%;
+    }
+
 }
 
 
 .auth__content {
     // min-width: 510px;
     // min-width:800px;
-
     // min-width: 360px;
     // max-width: 360px;
     max-width: 510px;
     width: 100%;
-
-
-
     margin-top: 56px;
     position: relative;
 
-    > span {
-        // white-space: nowrap;
+    @include phone {
+        margin-top: 40px;
     }
 }
 
@@ -603,6 +680,10 @@ export const authStore = {
     .spinner--colordots {
         position: absolute;
         width: 100%; height: 100%;
+
+        @include phone {
+            transform:scale(0.8);
+        }
     }
 
 }

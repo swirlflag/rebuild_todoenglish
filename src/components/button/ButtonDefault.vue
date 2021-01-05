@@ -241,7 +241,10 @@ export default {
 <style scoped lang="scss">
 $thickness : 5px;
 $hoverjump : 10px;
-$radius : 25px;
+
+$PC_radius : 25px;
+
+$MO_radius : 18px;
 
 .button--default {
 
@@ -299,11 +302,15 @@ $radius : 25px;
 .button__inner {
 
     width: 100%; height: 100%;
-    border-radius: $radius;
+    border-radius: $PC_radius;
     transform : none;
     box-shadow:  0 $thickness+$hoverjump 5px rgba(0,0,0,0);
     transition : transform 450ms $EASE_outCubic , box-shadow 450ms ease;
     box-sizing: border-box;
+
+    @include phone {
+        border-radius: $MO_radius;
+    }
 
     // @include unuseTouch {
         .st-hover & , .st-focus & {
@@ -344,6 +351,8 @@ $radius : 25px;
 
         @include phone {
             font-size: $SIZE_MO_fontsizeStrong;
+            font-size: $SIZE_MO_fontsizeDefault;
+            padding: 15px;
         }
 
         .st-press & {

@@ -18,25 +18,26 @@
             <div class="nav-gnb__linkwrap" ref="ref_linkwrap">
 
                 <ul class="nav-gnb__links">
-                    <li class="nav-gnb__link"><router-link to="/" exact>토도영어 소개</router-link></li>
-                    <li class="nav-gnb__link"><router-link to="/2" exact>멤버십 후기</router-link></li>
-                    <li class="nav-gnb__link"><router-link to="/curriculum">커리큘럼</router-link></li>
-                    <li class="nav-gnb__link"><router-link to="/product" exact>멤버십 가입</router-link></li>
-                    <li class="nav-gnb__link"><router-link to="/4" exact>도움말</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/" exact>토도영어 소개</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/2" exact>멤버십 후기</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/curriculum">커리큘럼</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/product" exact>멤버십 가입</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/4" exact>도움말</router-link></li>
                 </ul>
 
                 <div class="nav-gnb__account"
                 >
                     <div class="nav-gnb__user">
-                        <router-link to="/10" exact class="nav-gnb__link--user" @click.prevent>
+                        <div class="nav-gnb__link--user">
                             <span class="icon icon--account" :class="{'c-white' : whiteCondition}"></span>
-                            <div class="nav-gnb__account__parents">
-                                <a href="#" @click.prevent="TEST_logout">Signin</a>
+                            <div class="nav-gnb__account__parents" >
+                                <router-link v-if="$user.isSignin" to="/parentsss" exact class="style-gnb-link"> Parents </router-link>
+                                <span v-else @click.prevent="TEST_" class="style-gnb-link"> Sign in </span>
                             </div>
                             <div class="nav-gnb__account__username">
                                 {{ $user.username }}
                             </div>
-                        </router-link>
+                        </div>
                         <button class="nav-gnb__openinfo-button"
                                 @click="toggleAccountInfo"
                         >
@@ -49,12 +50,12 @@
 
                     <span class="nav-gnb__listline" ref="ref_accountLine"></span>
 
-                    <div    class="nav-gnb__account-info"
+                    <div    class="nav-gnb__account-info style-gnb-link"
                             ref="ref_accountInfo"
                     >
                         <div class="nav-gnb__account-email">seunghyun@enuma.com</div>
                         <span class="icon icon--signout-arrow"></span>
-                        <a href="#" class="nav-gnb__signout" @click.prevent="TEST_logout">Sign Out</a>
+                        <a href="#" class="nav-gnb__signout" @click.prevent="TEST_">Sign Out</a>
                     </div>
 
                 </div>
@@ -139,10 +140,9 @@ export default {
         toggleAccountInfo() {
             this.isOpenAccount = !this.isOpenAccount;
         },
-        TEST_logout() {
-            this.toggleAccountInfo();
+        TEST_() {
+            this.closeMenu();
             this.$store.dispatch('openAuthPanel')
-            // this.closeMenu();
         },
     },
     mounted () {
@@ -211,7 +211,7 @@ $SIZE_MO_linkDistance : 15px;
         padding: 0;
         width: 100%;
         font-size: 24px;
-        height: 84px;
+        height: $SIZE_MO_gnbHeight;
         overflow: hidden;
     }
     &.color-white{
@@ -267,25 +267,36 @@ $SIZE_MO_linkDistance : 15px;
     z-index: 10;
     display: flex;
     align-items: center;
+    pointer-events: all;
+
+    @include phone {
+        position: absolute;
+        top: 0; left: $SIZE_MO_innerPadding;
+    }
+
     > span {
         width: 80px; height: 72px;
         display: inline-block;
         background-image: url('~@/assets/logo/logo_todoenglish.svg');
         background-size: contain;
         background-repeat: no-repeat;
-        background-position: center center;
+        background-position: center 45%;
 
-        transition: background-image 300ms ease 200ms;
+        transition: background-image 100ms ease 200ms;
 
         @include phone {
-            width: 70px; height: 50px;
-            pointer-events: all;
+            width: 70px;
+            width: 34px;
+            height: $SIZE_MO_gnbHeight;
+            background-image: url('~@/assets/logo/logo_school.svg');
         }
 
         .color-white & ,
         .st-open-menu & {
             background-image: url('~@/assets/logo/logo_todoenglish_white.svg');
-            // transition: background-image 300ms ease 200ms;
+            @include phone {
+                background-image: url('~@/assets/logo/logo_school_white.svg');
+            }
         }
 
     }
@@ -299,7 +310,9 @@ $SIZE_MO_linkDistance : 15px;
     display:flex;
     height :auto;
 
-    a {
+    .style-gnb-link {
+        cursor: pointer;
+        white-space: nowrap;
         @include phone {
             opacity: 0.4;
         }
@@ -313,7 +326,8 @@ $SIZE_MO_linkDistance : 15px;
         height: auto !important;
     }
     @include phone {
-        margin-top: 30px;
+        // margin-top: 30px;
+        margin-top: $SIZE_MO_gnbHeight;
         left: 0;
         margin-left: 0;
         height: 0;
@@ -330,7 +344,7 @@ $SIZE_MO_linkDistance : 15px;
             color: #fff;
         }
         .st-open-menu & {
-            height: calc(100% - 84px);
+            height: calc(100% - $SIZE_MO_gnbHeight);
         }
 
         .type-clear & {
@@ -549,9 +563,11 @@ $SIZE_MO_linkDistance : 15px;
     z-index: 10;
     display: none;
     margin-left: auto;
-    width: 24px; height: 20px;
+    width: 26px; height: 22px;
     position: absolute;
-    top: 32px; right: $SIZE_MO_innerPadding;
+    top: 32px;
+    top: 23px;
+    right: $SIZE_MO_innerPadding;
     @include phone {
         display: inline-block;
         pointer-events: all;
@@ -563,28 +579,29 @@ $SIZE_MO_linkDistance : 15px;
         overflow: hidden;
         > span {
             position: absolute;
-            width: 100%; height: 2px;
+            width: 100%; height: 13%;
             display: inline-block;
             left: 0;
             background-color:$COLOR_navy_1;
-            transition: transform 300ms ease;
+            transition: transform 300ms $EASE_outCubic;
             transform : translate3d(0,0,0) ,rotate(0deg);
+            border-radius: 9999px;
 
             .color-white &,
             .st-open-menu &  {
                 background-color: #fff;
             }
 
-            &:nth-child(1) {top: 0; transition-delay: 300ms;}
-            &:nth-child(2) {top: calc(50% - 1px); }
-            &:nth-child(3) {top: calc(50% - 1px); }
-            &:nth-child(4) {bottom: 0; transition-delay: 350ms;}
+            &:nth-child(1) {top: 0; transition-delay: 270ms;}
+            &:nth-child(2) {top: calc(50% - 7.5%); }
+            &:nth-child(3) {top: calc(50% - 7.5%); }
+            &:nth-child(4) {bottom: 0; transition-delay: 190ms;}
 
             .st-open-menu & {
                 transition-delay: 0ms;
                 &:nth-child(1) {transform : translateX(100%); }
-                &:nth-child(2) {transform : rotate(45deg); }
-                &:nth-child(3) {transform : rotate(-45deg); }
+                &:nth-child(2) {transform : rotate(45deg);}
+                &:nth-child(3) {transform : rotate(-45deg);}
                 &:nth-child(4) {transform : translateX(-100%); }
             }
         }

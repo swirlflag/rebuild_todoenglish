@@ -140,14 +140,18 @@ export default {
         flashAlert() {
             this.$refs.ref_flashAlert.flash();
         },
+        focusTarget(target) {
+            if(this.$store.state.is_touchDevice){return}
+            target.focus();
+        },
         focusEmail() {
-            this.$refs.ref_id.$refs.ref_input.focus();
+            this.focusTarget(this.$refs.ref_id.$refs.ref_input);
         },
         focusPassword() {
-            this.$refs.ref_password.$refs.ref_input.focus();
+            this.focusTarget(this.$refs.ref_password.$refs.ref_input);
         },
         focusPasswordMatch() {
-            this.$refs.ref_passwordMatch.$refs.ref_input.focus();
+            this.focusTarget(this.$refs.ref_passwordMatch.$refs.ref_input);
         },
         onInputEmail(value, valid) {
             this.valid.id = valid;
@@ -202,17 +206,16 @@ export default {
         validCheck() {
             if(!this.valid.id){
                 this.stateToVaildFailEmail();
-                return
+                return;
             }
             if(!this.valid.password){
                 this.stateToVaildFailPassword();
-                return
+                return;
             }
             if(!this.valid.passwordMatch){
                 this.stateToVaildFailPasswordMatch();
-                return
+                return;
             }
-
         },
         trySignup() {
             if(this.nowState === 'loading'){

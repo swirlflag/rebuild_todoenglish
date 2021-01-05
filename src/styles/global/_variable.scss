@@ -31,7 +31,8 @@ $SIZE_PC_contentWidth           : 1024px;
 $SIZE_MO_contentWidth           : 560px;
 
 $SIZE_PC_innerPadding           : 35px;
-$SIZE_MO_innerPadding           : calc(2px + 3.5vw);
+// $SIZE_MO_innerPadding           : calc(1px + 3vw);
+$SIZE_MO_innerPadding           : calc(3px + 2.8vw);
 
 $SIZE_lineheight_high3          : 2em;
 $SIZE_lineheight_high2          : 1.8em;
@@ -62,3 +63,6 @@ $COLOR_linegray : rgba(52, 45, 81, 0.15);
 
 $COLOR_kakaoBrown : #3C1E1E;
 $COLOR_kakaoYellow : #FAE100;
+
+
+$SIZE_MO_gnbHeight : 64px;

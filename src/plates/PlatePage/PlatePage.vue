@@ -22,7 +22,7 @@ export default {
     &.nav-correction {
         margin-top: 114px;
         @include phone {
-            margin-top: 84px;
+            margin-top: $SIZE_MO_gnbHeight;
         }
     }
 }

@@ -16,11 +16,13 @@
             v-if="1"
         />
 
-        <transition name="plate--auth">
-            <PlateAuth
-                v-if="$store.state.$auth.is_openAuth"
-            />
-        </transition>
+        <!-- <transition name="plate--auth">
+            
+        </transition> -->
+
+        <PlateAuth
+            v-if="1"
+        />
 
         <PlateNavigation
             v-if="1"

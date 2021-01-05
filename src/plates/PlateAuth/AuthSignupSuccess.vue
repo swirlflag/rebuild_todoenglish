@@ -12,9 +12,9 @@
         </div>
 
         <ButtonDefault
-                @click="CLICK"
+                @click="TEMP_CLICK"
         >
-            임시 : 가입 정보로 로그인
+            임시 : 로그인하러가기
         </ButtonDefault>
     </div>
 </template>
@@ -35,13 +35,13 @@ export default {
         }
     },
     methods : {
-        CLICK(){
+        TEMP_CLICK(){
 
-            this.temp_value = false;
-            setTimeout(() => {
-                this.temp_value = true;
-                this.$emit('change-phase' ,'signinSuccess' )
-            },1000)
+            this.$emit('change-phase' ,'signinForm');
+            // this.temp_value = false;
+            // setTimeout(() => {
+            //     this.temp_value = true;
+            // },1000)
         }
     },
     mounted() {

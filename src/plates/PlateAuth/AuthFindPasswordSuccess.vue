@@ -1,10 +1,10 @@
 <template>
     <div class="auth__find-password-success">
         <p>
-            비밀번호 변경 이메일 완료화면
+            [비밀번호 변경 이메일 완료화면]
         </p>
 
-        <ButtonDefault @click.prevent="$emit('change-phase' , 'signinEmail')">
+        <ButtonDefault @click.prevent="$emit('change-phase' , 'signinForm')">
             로그인 하기
         </ButtonDefault>
 
@@ -43,7 +43,7 @@ export default {
     }
 
     p {
-        color: red;
+        color: #aaa;
     }
 
 }

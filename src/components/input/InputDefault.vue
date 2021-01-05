@@ -25,6 +25,7 @@
 <script>
 import { validateEmail } from '@/utils';
 
+
 export default {
     name : 'DefaultText',
     props : {
@@ -65,8 +66,12 @@ export default {
 
 <style lang="scss" scoped>
 
-$padding  :20px;
-$radius : 8px;
+
+
+$PC_padding     : 20px;
+$PC_radius      : 8px;
+$MO_padding     : 16px;
+$MO_radius      : 8px;
 
 .input--default {
     display: inline-block;
@@ -84,19 +89,24 @@ $radius : 8px;
     position: relative;
     display: inline-block;
     box-sizing: border-box;
-    border-radius: $radius;
+    border-radius: $PC_radius;
 
     .input__placeholder {
         position: absolute;
         width: 100%; height: 100%;
-        padding: $padding;
-        padding-left : $padding + 2px;
+        padding: $PC_padding;
+        padding-left : $PC_padding + 2px;
         pointer-events: none;
         box-sizing: border-box;
         color: #999;
         opacity: 0;
         transform : translate3d(20px,0,0);
         transition : transform 180ms $EASE_outCubic , opacity 150ms $EASE_outCubic , color 300ms ease;
+
+        @include phone {
+            padding: $MO_padding;
+        }
+
         &.st-show {
             opacity: 1;
             transform : translate3d(0,0,0);
@@ -120,12 +130,16 @@ $radius : 8px;
         background-color: #F5F5F7;
         border-radius: 8px;
         outline: none;
-        padding: $padding;
+        padding: $PC_padding;
         width: 100%;
         border: none;
         box-sizing: border-box;
         border: 1px solid $COLOR_linegray;
         transition : color 300ms ease;
+
+        @include phone {
+            padding: $MO_padding;
+        }
 
         &:focus {
             border: 1px solid rgba(52,45,81,0);

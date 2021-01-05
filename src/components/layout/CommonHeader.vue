@@ -145,7 +145,7 @@ export default {
 
     @include phone {
         padding-top: 0;
-        top: 84px;
+        top: $SIZE_MO_gnbHeight;
         @include hardSelect {
             font-size: 16px;
         }

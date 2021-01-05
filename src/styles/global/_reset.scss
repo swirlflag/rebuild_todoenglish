@@ -27,6 +27,16 @@ img {
     -ms-user-select: none;
 }
 
+input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    outline: none;
+
+    background-clip: padding-box;
+}
+
 
 /*
 아래 리셋은 가져온 것입니다
