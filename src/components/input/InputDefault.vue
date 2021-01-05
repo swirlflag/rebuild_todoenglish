@@ -25,7 +25,6 @@
 <script>
 import { validateEmail } from '@/utils';
 
-
 export default {
     name : 'DefaultText',
     props : {

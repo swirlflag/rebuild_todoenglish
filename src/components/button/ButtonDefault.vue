@@ -42,7 +42,7 @@
             >
             </span>
 
-            <span class="button__particle" ref="ref_particle" :class="{'st-show' : stateAnimate.isRun}">
+            <span class="button__particle" ref="ref_particle" :class="{'st-show' : stateAnimate.isRun}" v-if="particle">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -86,6 +86,8 @@ export default {
         shadow      : String,
         padding     : String,
         disable     : Boolean,
+
+        particle    : Boolean,
     },
     data() {
         return {
@@ -218,14 +220,20 @@ export default {
         },
 
         onClick(e) {
-            // this.clickAnimate();
             this.clickLink();
             this.$emit('click',e);
+            if(this.particle){
+                this.clickAnimate();
+            }
         },
-
+        bindParticle() {
+            if(this.particle){
+                this.ref_particles = this.$refs.ref_particle.querySelectorAll('span');
+            }
+        }
     },
     mounted() {
-        this.ref_particles = this.$refs.ref_particle.querySelectorAll('span');
+        this.bindParticle();
     }
 }
 </script>

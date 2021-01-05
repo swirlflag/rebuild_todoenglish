@@ -22,7 +22,7 @@
                             @change="onInputPassword"
             />
 
-            <div id="form-signin__alert" >
+            <div class="auth__alert-area" >
 
                 <SpinnerColordotsWave   :isHide="nowState !== 'loading'"
                 />
@@ -47,7 +47,7 @@
         <div class="auth__signin-email__etc">
             <div class="auth__signin-email__etc__item">
                 <ButtonUnderMask    text="회원가입"
-                                    @click="$emit('change-phase', 'signupCheck')"
+                                    @click="$emit('change-phase', 'signupConsent')"
                 />
             </div>
 
@@ -72,7 +72,7 @@ const API_tryLogin = (signData = {id: '' , password : ''}) => {
 
     // (대충 랜덤으로로그인시도하기)
     const serverResult = randomOne(
-        {result : true , data : { username : 'TEST_loginSuccess' }},
+        {result : true , data : { username : id }},
         {result: false, errorCode : 'ID' },
         {result: false, errorCode : 'PW' },
     );
@@ -213,10 +213,9 @@ export default {
                 this.loginFail(errorCode);
             }
         },
-
         loginSuccess(data) {
             this.$emit('change-phase' , 'signinSuccess');
-            this.$store.commit('RECORD_username' , data.username );
+            this.$store.dispatch('siginIn' , data);
         },
         loginFail(errorCode) {
             if(errorCode === "ID"){
@@ -279,21 +278,6 @@ export default {
         &:nth-child(1) {
             margin-top: 0;
         }
-    }
-    #form-signin__alert {
-        height: 30px;
-        color: $COLOR_pink_1;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-
-        .spinner--colordots {
-            position: absolute;
-            width: 100%; height: 100%;
-        }
-
     }
 
     #form-signin__submit {

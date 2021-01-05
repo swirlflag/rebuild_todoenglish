@@ -11,6 +11,7 @@ import { transitionStore } from '@/plates/PlateTransitionCover/PlateTransitionCo
 import { navStore } from '@/plates/PlateNavigation/PlateNavigation.vue';
 import { modalStore } from '@/plates/PlateModal/PlateModal.vue';
 import { authStore } from '@/plates/PlateAuth/PlateAuth.vue';
+import { userStore } from './userStore.js';
 
 Vue.use(Vuex);
 
@@ -23,10 +24,15 @@ const storeInfo = combineStore(
     navStore,
     modalStore,
     authStore,
+    userStore,
 );
+
+// console.log(storeInfo);
 
 const store = new Vuex.Store(storeInfo)
 
 export default store;
+
+export {storeInfo}
 
 

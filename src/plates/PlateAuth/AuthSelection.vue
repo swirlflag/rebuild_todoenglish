@@ -1,9 +1,9 @@
 <template>
     <div class="auth__selection" ref="ref_root">
 
-        <ButtonSignin type="kakao"/>
+        <ButtonSignin type="kakao" @click="selectKakao"/>
 
-        <ButtonSignin type="google"/>
+        <ButtonSignin type="google" @click="selectGoogle"/>
 
         <div class="auth__divider auth__contain" ref="ref_divider">
             <span class="auth__divider__bar"></span>
@@ -29,6 +29,12 @@ export default {
     methods: {
         selectEmail() {
             this.$emit('change-phase' , 'signinEmail')
+        },
+        selectKakao() {
+            this.$emit('change-phase' , 'signinKakao')
+        },
+        selectGoogle() {
+            this.$emit('change-phase' , 'signinGoogle')
         },
     },
     mounted() {

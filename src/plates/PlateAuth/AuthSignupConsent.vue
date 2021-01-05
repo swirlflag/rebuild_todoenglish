@@ -31,7 +31,7 @@ import ButtonUnderMask from  '@/components/button/ButtonUnderMask.vue';
 import CheckboxDefault from '@/components/input/CheckboxDefault.vue';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
 export default {
-    name : 'AuthSignupCheck',
+    name : 'AuthsignupConsent',
     components : {
         ButtonUnderMask,
         CheckboxDefault,

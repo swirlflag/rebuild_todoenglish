@@ -1,6 +1,6 @@
 <template>
     <div    class="nav-gnb"
-            :class="`${useTransition ? 'use-trs' : ''}${isLogin ? ' is-login' : ''}${isOpenMenu ? ' st-open-menu' : ''}${isOpenAccount ? ' st-open-account' : ''}${isReduce ? ' st-reduce' : ''}${themeClear ? ' type-clear' : ''}${themeWhite ? ' color-white' : ''}`"
+            :class="`${useTransition ? 'use-trs' : ''}${$user.isSignin ? ' is-login' : ''}${isOpenMenu ? ' st-open-menu' : ''}${isOpenAccount ? ' st-open-account' : ''}${isReduce ? ' st-reduce' : ''}${themeClear ? ' type-clear' : ''}${themeWhite ? ' color-white' : ''}`"
     >
 
         <div class="nav-gnb__wrap">
@@ -30,13 +30,18 @@
                     <div class="nav-gnb__user">
                         <router-link to="/10" exact class="nav-gnb__link--user" @click.prevent>
                             <span class="icon icon--account" :class="{'c-white' : whiteCondition}"></span>
-                            <div class="nav-gnb__account__parents">Parents</div>
-                            <div class="nav-gnb__account__username">seunghyun</div>
+                            <div class="nav-gnb__account__parents">
+                                <a href="#" @click.prevent="TEST_logout">Signin</a>
+                            </div>
+                            <div class="nav-gnb__account__username">
+                                {{ $user.username }}
+                            </div>
                         </router-link>
-                        <button class="nav-gnb__openinfo-button">
+                        <button class="nav-gnb__openinfo-button"
+                                @click="toggleAccountInfo"
+                        >
                             <span   class="icon icon--dropdown-arrow"
                                     :class="{'c-white' : whiteCondition}"
-                                    @click="toggleAccountInfo"
                             >
                             </span>
                         </button>
@@ -71,6 +76,8 @@
 
 <script>
 
+import { mapState } from 'vuex';
+
 export default {
     name : 'NavagationGnb',
     data() {
@@ -91,6 +98,9 @@ export default {
         }
     },
     computed : {
+        ...mapState([
+            '$user'
+        ]),
         whiteCondition() {
             return this.isOpenMenu || this.themeWhite;
         }
@@ -130,8 +140,9 @@ export default {
             this.isOpenAccount = !this.isOpenAccount;
         },
         TEST_logout() {
-            this.isLogin = false;
-            this.closeMenu();
+            this.toggleAccountInfo();
+            this.$store.dispatch('openAuthPanel')
+            // this.closeMenu();
         },
     },
     mounted () {
@@ -140,6 +151,7 @@ export default {
         // },1000)
         this.closeMenu();
         window.addEventListener('resize' , this.closeMenu)
+
     }
 }
 

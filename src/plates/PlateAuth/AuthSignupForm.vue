@@ -31,7 +31,7 @@
             />
 
 
-            <div id="form-signup__alert">
+            <div class="auth__alert-area">
 
                 <SpinnerColordotsWave   :isHide="nowState !== 'loading'"
                 />
@@ -137,6 +137,9 @@ export default {
         }
     },
     methods : {
+        flashAlert() {
+            this.$refs.ref_flashAlert.flash();
+        },
         focusEmail() {
             this.$refs.ref_id.$refs.ref_input.focus();
         },
@@ -165,67 +168,6 @@ export default {
                 this.stateToIdle();
             }
         },
-        flashAlert() {
-            this.$refs.ref_flashAlert.flash();
-        },
-        validCheck() {
-            if(!this.valid.id){
-                this.stateToVaildFailEmail();
-                return
-            }
-            if(!this.valid.password){
-                this.stateToVaildFailPassword();
-                return
-            }
-            if(!this.valid.passwordMatch){
-                this.stateToVaildFailPasswordMatch();
-                return
-            }
-
-        },
-        signupSuccess() {
-            this.$emit('change-phase' , 'signupSuccess');
-        },
-        signupFail(errorCode) {
-            if(errorCode === 'USE'){
-                this.stateToUseAlreadyEmail();
-            }
-            if(errorCode === 'CANT'){
-                this.stateToCantUseThisEmail();
-            }
-        },
-
-        async sendSignup() {
-            const { result , errorCode , data } = await API_trySignup(this.value);
-            if(this.isDestory){
-                return null;
-            }
-            if(result){
-                this.signupSuccess(data);
-            }else {
-                this.signupFail(errorCode);
-            }
-        },
-
-        trySignup() {
-
-            if(this.nowState === 'loading'){
-                return;
-            }
-
-            if(!this.isValidAllclear){
-                this.validCheck();
-                return;
-            }
-
-            this.$refs.ref_submit.$el.focus();
-            this.$refs.ref_submit.$el.blur();
-
-            this.stateToLoading();
-            this.sendSignup();
-
-        },
-
         stateToIdle() {
             this.nowState = 'idle';
         },
@@ -256,11 +198,61 @@ export default {
             this.nowState = 'cantUseThisEmail';
             this.focusEmail();
             this.flashAlert();
-        }
+        },
+        validCheck() {
+            if(!this.valid.id){
+                this.stateToVaildFailEmail();
+                return
+            }
+            if(!this.valid.password){
+                this.stateToVaildFailPassword();
+                return
+            }
+            if(!this.valid.passwordMatch){
+                this.stateToVaildFailPasswordMatch();
+                return
+            }
 
+        },
+        trySignup() {
+            if(this.nowState === 'loading'){
+                return;
+            }
+            if(!this.isValidAllclear){
+                this.validCheck();
+                return;
+            }
+            this.$refs.ref_submit.$el.focus();
+            this.$refs.ref_submit.$el.blur();
+
+            this.stateToLoading();
+            this.sendSignup();
+        },
+        async sendSignup() {
+            const { result , errorCode , data } = await API_trySignup(this.value);
+            if(this.isDestory){
+                return null;
+            }
+            if(result){
+                this.signupSuccess(data);
+            }else {
+                this.signupFail(errorCode);
+            }
+        },
+        signupSuccess() {
+            this.$emit('change-phase' , 'signupSuccess');
+        },
+        signupFail(errorCode) {
+            if(errorCode === 'USE'){
+                this.stateToUseAlreadyEmail();
+            }
+            if(errorCode === 'CANT'){
+                this.stateToCantUseThisEmail();
+            }
+        },
     },
     mounted() {
-
+        this.focusEmail();
     },
     isDestory() {
         this.isDestory = true;
@@ -286,22 +278,6 @@ export default {
         &:nth-child(1) {
             margin-top: 0;
         }
-    }
-    #form-signup__alert {
-        height: 30px;
-        color: $COLOR_pink_1;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        width: auto;
-
-        .spinner--colordots {
-            position: absolute;
-            width: 100%; height: 100%;
-        }
-
     }
 
     #form-signup__submit {

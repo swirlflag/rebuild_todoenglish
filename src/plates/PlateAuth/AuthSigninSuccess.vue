@@ -28,6 +28,7 @@ export default {
     },
     data() {
         return {
+            isDestory : false,
             count : 3,
             // counting : false,
             counting : true,
@@ -35,7 +36,7 @@ export default {
     },
     methods : {
         closeCounting() {
-            if(!this.counting){
+            if(this.isDestory || !this.counting){
                 return
             }
             setTimeout(() => {
@@ -44,15 +45,15 @@ export default {
                 }else {
                     this.$store.dispatch('closeAuthPanel');
                 }
-
                 --this.count;
             },1000);
         },
     },
     mounted() {
-        setTimeout(() => {
-            this.closeCounting();
-        },500);
+        this.closeCounting();
+    },
+    beforeDestroy(){
+        this.isDestory = true;
     }
 }
 </script>
