@@ -2,7 +2,7 @@
         <p  ref="ref_alert"
             :class="{'am-flash' : isFlash}"
             @animationend="finish"
-            v-html="text"
+            v-html="text || '&nbsp;'"
         >
 
         </p>

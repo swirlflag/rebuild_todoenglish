@@ -218,13 +218,14 @@ export default {
             this.releaseButton();
             this.$refs.ref_root && this.$refs.ref_root.blur();
         },
-
         onClick(e) {
-            this.clickLink();
-            this.$emit('click',e);
             if(this.particle){
                 this.clickAnimate();
             }
+            setTimeout(() => {
+                this.clickLink();
+                this.$emit('click',e);
+            },120)
         },
         bindParticle() {
             if(this.particle){

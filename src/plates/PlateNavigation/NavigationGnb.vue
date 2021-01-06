@@ -49,10 +49,10 @@
 
                     <span class="nav-gnb__listline" ref="ref_accountLine"></span>
 
-                    <div    class="nav-gnb__account-info style-gnb-link"
+                    <div    class="nav-gnb__account-info"
                             ref="ref_accountInfo"
                     >
-                        <div class="nav-gnb__account-email">seunghyun@enuma.com</div>
+                        <div class="nav-gnb__account-email">{{ $user.username }}</div>
                         <span class="icon icon--signout-arrow"></span>
                         <a href="#" class="nav-gnb__signout style-gnb-link hover-underline" @click.prevent="TEST_">Sign Out</a>
                     </div>

@@ -277,18 +277,18 @@ export default {
     flex-direction: column;
 
     > * {
-        margin-top: 20px;
+        margin-top: 22px;
         @include phone {
-            margin-top: 15px;
+            margin-top: 14px;
         }
         &:nth-child(1) {
             margin-top: 0;
         }
     }
 
-    #form-signin__submit {
-        margin-top: 20px;
-    }
+    // #form-signin__submit {
+    //     margin-top: 20px;
+    // }
 
 }
 

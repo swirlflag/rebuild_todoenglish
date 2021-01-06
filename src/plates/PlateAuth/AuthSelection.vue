@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         selectEmail() {
-            this.$emit('change-phase' , 'signinEmail')
+            this.$emit('change-phase' , 'signinForm')
         },
         selectKakao() {
             this.$emit('change-phase' , 'signinKakao')
@@ -51,9 +51,9 @@ export default {
     width: 100%;
 
     > * {
-        margin-top: 23px;
+        margin-top: 22px;
         @include phone {
-            margin-top: 18px;
+            margin-top: 14px;
         }
         &:nth-child(1) {
             margin-top: 0;

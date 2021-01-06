@@ -505,7 +505,7 @@ export const authStore = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 13px 5px rgba(0,0,0,0.2);
     transform : translate3d(0,100%,0);
     will-change: transform;
     transition: transform 400ms $EASE_inOutCubic 10ms;
@@ -537,11 +537,10 @@ export const authStore = {
     cursor: pointer;
     box-sizing: border-box;
     display: flex;
-    padding: 15px 0 ;
-    border: 1px solid #000;
+    padding: 15px 0;
 
     @include phone {
-        padding: 10px 0 ;
+        padding: 10px 0;
         top: 5px;
         // top: 0;
     }
@@ -620,6 +619,7 @@ export const authStore = {
     box-sizing: border-box;
 
     @include phone {
+        margin-top: 13px;
         font-size: $SIZE_MO_fontsizeDefault;
         padding: 0 $SIZE_MO_innerPadding;
     }
@@ -642,7 +642,7 @@ export const authStore = {
     position: relative;
 
     @include phone {
-        margin-top: 40px;
+        margin-top: 30px;
     }
 }
 
@@ -660,6 +660,10 @@ export const authStore = {
     transition: opacity 200ms ease, transform 400ms $EASE_outCubic;
     text-align: center;
     pointer-events: none;
+
+    @include phone {
+        bottom: 20px;
+    }
 
     &.st-show {
         pointer-events: all;
@@ -681,7 +685,6 @@ export const authStore = {
 .auth__content .auth__contain,
 .auth__content .button--default,
 .auth__content .input--default {
-    // border: 1px solid #3d3;
     max-width : 360px;
     position: relative;
     width: 100%;
@@ -689,7 +692,7 @@ export const authStore = {
 }
 
 .auth__alert-area {
-    min-height: 30px;
+    // min-height: 30px;
     color: $COLOR_pink_1;
     text-align: center;
     display: flex;
@@ -697,6 +700,10 @@ export const authStore = {
     align-items: center;
     position: relative;
     width: auto;
+    padding-bottom: 15px !important;
+    @include phone {
+        padding-bottom: 0 !important;
+    }
 
     .spinner--colordots {
         position: absolute;
