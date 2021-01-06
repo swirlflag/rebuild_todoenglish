@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         selectEmail() {
-            this.$emit('change-phase' , 'signinForm')
+            this.$emit('change-phase' , 'signinEmail')
         },
         selectKakao() {
             this.$emit('change-phase' , 'signinKakao')

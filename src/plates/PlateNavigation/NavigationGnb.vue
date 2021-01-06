@@ -18,25 +18,24 @@
             <div class="nav-gnb__linkwrap" ref="ref_linkwrap">
 
                 <ul class="nav-gnb__links">
-                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/" exact>토도영어 소개</router-link></li>
-                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/2" exact>멤버십 후기</router-link></li>
-                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/curriculum">커리큘럼</router-link></li>
-                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/product" exact>멤버십 가입</router-link></li>
-                    <li class="nav-gnb__link"><router-link class="style-gnb-link" to="/4" exact>도움말</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/" exact>토도영어 소개</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/2" exact>멤버십 후기</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/curriculum">커리큘럼</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/product" exact>멤버십 가입</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/4" exact>도움말</router-link></li>
                 </ul>
 
-                <div class="nav-gnb__account"
-                >
+                <div class="nav-gnb__account">
                     <div class="nav-gnb__user">
                         <div class="nav-gnb__link--user">
                             <span class="icon icon--account" :class="{'c-white' : whiteCondition}"></span>
                             <div class="nav-gnb__account__parents" >
-                                <router-link v-if="$user.isSignin" to="/parentsss" exact class="style-gnb-link"> Parents </router-link>
-                                <span v-else @click.prevent="TEST_" class="style-gnb-link"> Sign in </span>
+                                <router-link v-if="$user.isSignin" to="/parentsss" exact class="style-gnb-link hover-underline color-white"> Parents </router-link>
+                                <span v-else @click.prevent="TEST_" class="style-gnb-link hover-underline color-white"> Sign in </span>
                             </div>
-                            <div class="nav-gnb__account__username">
+                            <router-link to="/parentsss" class="nav-gnb__account__username style-gnb-link hover-underline color-white">
                                 {{ $user.username }}
-                            </div>
+                            </router-link>
                         </div>
                         <button class="nav-gnb__openinfo-button"
                                 @click="toggleAccountInfo"
@@ -55,7 +54,7 @@
                     >
                         <div class="nav-gnb__account-email">seunghyun@enuma.com</div>
                         <span class="icon icon--signout-arrow"></span>
-                        <a href="#" class="nav-gnb__signout" @click.prevent="TEST_">Sign Out</a>
+                        <a href="#" class="nav-gnb__signout style-gnb-link hover-underline" @click.prevent="TEST_">Sign Out</a>
                     </div>
 
                 </div>
@@ -222,6 +221,9 @@ $SIZE_MO_linkDistance : 15px;
     &.type-clear {
         background-color: transparent;
         box-shadow: none;
+        .hover-underline::before{
+            background-color: $COLOR_navy_1;
+        }
     }
     &.st-open-menu {
         background-color: $COLOR_navy_2;
@@ -303,7 +305,6 @@ $SIZE_MO_linkDistance : 15px;
 }
 
 .nav-gnb__linkwrap {
-
     width: 100%;
     box-sizing: border-box;
     position: relative;
@@ -313,6 +314,27 @@ $SIZE_MO_linkDistance : 15px;
     .style-gnb-link {
         cursor: pointer;
         white-space: nowrap;
+        // box-sizing: border-box;
+        // position: relative;
+
+        // &::before{
+        //     content: '';
+        //     position: absolute;
+        //     height: 2px;
+        //     width: 100%;
+        //     background: #fff;
+        //     bottom: 0; left: 0;
+        //     transform : scaleX(0);
+        //     transition: transform 120ms $EASE_outCubic;
+        //     transform-origin: center;
+        // }
+
+        // @include hover {
+        //     &::before {
+        //         transform : scaleX(1);
+        //     }
+        // }
+
         @include phone {
             opacity: 0.4;
         }
@@ -320,6 +342,15 @@ $SIZE_MO_linkDistance : 15px;
             font-weight: 800;
             opacity: 1;
         }
+
+        // &.nav-gnb__signout {
+        //     @include overPhone {
+        //         border: 1px solid #000;
+        //         &::before {
+        //             background: $COLOR_navy_1;
+        //         }
+        //     }
+        // }
     }
 
     @include overPhone {

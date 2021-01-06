@@ -8,25 +8,25 @@
                     ⓒ 2018 Enuma, Inc. All Rights Reserved.
                 </div>
                 <ul class="footer__notice-links">
-                    <li><a href="#" class="link-hover"><span>이용약관</span></a></li>
-                    <li><a href="#" class="link-hover"><span>개인정보처리방침</span></a></li>
-                    <li><a href="#" class="link-hover"><span>법적고지</span></a></li>
+                    <li><a href="#" class="hover-link"><span>이용약관</span></a></li>
+                    <li><a href="#" class="hover-link"><span>개인정보처리방침</span></a></li>
+                    <li><a href="#" class="hover-link"><span>법적고지</span></a></li>
                 </ul>
                 <ul class="footer__sns-links">
                     <li>
-                        <a href="#" class="link-hover">
+                        <a href="#" class="hover-link">
                             <i class="fab fa-instagram"></i>
                             <span class="visible-overphone">인스타그램</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="link-hover">
+                        <a href="#" class="hover-link">
                             <i class="fab fa-facebook-square"></i>
                             <span class="visible-overphone">페이스북</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="link-hover">
+                        <a href="#" class="hover-link">
                             <i class="fab fa-youtube-square"></i>
                             <span class="visible-overphone">유튜브</span>
                         </a>

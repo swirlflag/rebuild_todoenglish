@@ -1,45 +1,4 @@
 /*
-추가로 필요한 리셋은 이곳에 적어줍니다.
-*/
-
-a {
-    color: #000;
-    text-decoration : none;
-    display: inline-block;
-}
-
-button {
-    background-color: transparent;
-    outline:none;
-    cursor: pointer;
-    box-shadow: none;
-    border: none;
-    padding: 0; margin: 0;
-    -webkit-tap-highlight-color :transparent;
-}
-
-img {
-    user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-
-input{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: transparent;
-    outline: none;
-
-    background-clip: padding-box;
-}
-
-
-/*
-아래 리셋은 가져온 것입니다
 출처
 http://meyerweb.com/eric/tools/css/reset/
 v2.0 | 20110126
@@ -183,7 +142,7 @@ text-decoration: underline dotted; /* 2 */
 
 b,
 strong {
-font-weight: bolder;
+// font-weight: bolder;
 }
 
 /**
@@ -194,7 +153,7 @@ font-weight: bolder;
 code,
 kbd,
 samp {
-font-family: monospace, monospace; 
+font-family: monospace, monospace;
 font-size: 1em; /* 2 */
 }
 

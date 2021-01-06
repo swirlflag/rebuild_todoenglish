@@ -322,7 +322,7 @@ body {
     }
 }
 
-.link-hover{
+.hover-link{
     position: relative;
     overflow: hidden;
     height: 100%;
@@ -367,6 +367,33 @@ body {
         &::before {
             transform: translateY(0);
             opacity: 1;
+        }
+    }
+}
+
+.hover-underline {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        transform : scaleX(0);
+        background-color: $COLOR_navy_1;
+        transition: transform 120ms $EASE_outCubic;
+        transform-origin: center;
+        height: 2px; width: 100%;
+    }
+
+    @include hover {
+        &::before {
+            transform: scaleX(1);
+        }
+    }
+
+    &.color-white {
+        &::before {
+            background-color: #fff;
         }
     }
 }

@@ -9,32 +9,58 @@
 
         </header>
 
-        <div class="product-additional area__outer">
+        <!-- <div class="product-additional area__outer">
             <div class="area__inner">
                 추가상품
             </div>
-
         </div>
 
         <div class="product-precaution area__outer">
             <div class="area__inner">
                 주의사항
             </div>
-        </div>
-
-
-        <!-- <div class=" showing-section area__outer">
-            <div class="area__inner">
-                토도영어 멤버십 공통 혜택
-            </div>
         </div> -->
 
         <div class="product-explain">
-            <div class="product-explain-benefit showing-section area__outer">
+
+            <div class="product-explain-benefit showing-section type-center area__outer">
+                <div class="area__inner">
+                    <div class="showing__content">
+                        <h3 class="showing__title">
+                            토도영어 멤버십 공통 혜택
+                        </h3>
+
+                        <ul class="explain-benefit__list">
+                            <li class="explain-benefit__item">
+                                <span class="icon icon--todoenglish"></span>
+                                <p><strong>토도영어&nbsp;</strong><br class="visible-overphone">콘텐츠 무제한 이용</p>
+                            </li>
+                            <li class="explain-benefit__item">
+                                <span class="icon icon--report"></span>
+                                <p><strong>토도 리포트&nbsp;</strong><br class="visible-overphone">매주 발송</p>
+                            </li>
+                            <li class="explain-benefit__item">
+                                <span class="icon icon--write-paper"></span>
+                                <p>복습 <strong>워크시트&nbsp;</strong><br class="visible-overphone">매달 발송</p>
+                            </li>
+                            <li class="explain-benefit__item">
+                                <span class="icon icon--hihello"></span>
+                                <p><strong>화상 튜터링&nbsp;</strong><br class="visible-overphone">2회 무료 체험권</p>
+                            </li>
+                            <li class="explain-benefit__item">
+                                <span class="icon icon--celebrate"></span>
+                                <p>가입 축하<br class="visible-overphone"><strong>&nbsp;웰컴 패키지&nbsp;</strong>제공</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-explain-content showing-section area__outer">
                 <div class="area__inner">
                     <div class="showing__content">
                         <div class="showing__subtitle">
-                            <span class="icon icon--todo-logo"></span>
+                            <span class="icon icon--todoenglish-school"></span>
                             토도영어
                         </div>
                         <h3 class="showing__title">

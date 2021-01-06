@@ -13,7 +13,7 @@
                 <TextChangeMask :text="phaseDataMap[nowPhase].title" />
             </h2>
 
-            <p class="auth__text" ref="ref_text" v-if="true">
+            <p class="auth__text" ref="ref_text">
                 <TextChangeMask :text="phaseDataMap[nowPhase].text" :delay="350"/>
             </p>
 
@@ -521,6 +521,15 @@ export const authStore = {
 
 }
 
+@keyframes authFloat {
+    0% {
+        transform : translateY(-50%);
+    }
+    100% {
+        transform : translateY(50%);
+    }
+}
+
 .auth__close {
     position: absolute;
     top: 20px; left: 50%;
@@ -529,12 +538,24 @@ export const authStore = {
     box-sizing: border-box;
     display: flex;
     padding: 15px 0 ;
+    border: 1px solid #000;
+
+    @include phone {
+        padding: 10px 0 ;
+        top: 5px;
+        // top: 0;
+    }
 
     span {
+        animation: authFloat 1000ms $EASE_inOutCubic infinite alternate;
         vertical-align: top;
         display: inline-block;
         position: relative;
         width: 150px; height: 5px;
+        @include phone {
+            width: 140px;
+            height: 5px;
+        }
 
         display: flex;
         flex-wrap: nowrap;

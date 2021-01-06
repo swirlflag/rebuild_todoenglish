@@ -3,6 +3,66 @@
 }
 
 .product-explain-benefit {
+    display: flex;
+    flex-direction: column;
+
+    .showing__title {
+        @include phone {
+            margin:0 auto;
+        }
+    }
+    .explain-benefit__list {
+        width: 100%;
+        margin-top: 100px;
+        display: inline-flex;
+        justify-content: space-between;
+
+        @include phone {
+            flex-direction: column;
+            width: auto;
+            margin: 0 auto;
+            margin-top: 34px;
+        }
+
+        .explain-benefit__item {
+            width:auto;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            @include phone {
+                margin-top: 18px;
+                flex-direction: row;
+                align-items: center;
+                width: auto;
+            }
+
+            .icon {
+                width: 140px;
+                height: 140px;
+                @include phone {
+                    margin-right: 10px;
+                    width: 60px;
+                    height: 60px;
+                    flex: 0 0 60px;
+                }
+            }
+
+            p {
+                font-size: $SIZE_PC_fontsizeLarge;
+                margin-top: 40px;
+                @include phone {
+                    font-size: $SIZE_MO_fontsizeLarge;
+                    margin-top: 0;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
+
+.product-explain-content {
     background-color: rgb(152,87,219);
     overflow: hidden;
 
