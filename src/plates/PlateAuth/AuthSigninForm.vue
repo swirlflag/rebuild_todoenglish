@@ -2,7 +2,7 @@
 
     <div class="auth__signin-email" ref="ref_root">
 
-        <form id="form-signin" ref="ref_form">
+        <form id="form-signin" ref="ref_form" @submit.prevent>
 
             <InputDefault   type="email"
                             placeholder="이메일"

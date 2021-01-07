@@ -2,7 +2,7 @@
 
     <div class="auth__signup-email">
 
-        <form id="form-signup">
+        <form id="form-signup" @submit.prevent>
 
             <InputDefault   type="email"
                             placeholder="이메일"
@@ -277,14 +277,17 @@ export default {
     flex-direction: column;
 
     > * {
-        margin-top: 20px;
+        margin-top: 22px;
+        @include phone {
+            margin-top: 14px;
+        }
         &:nth-child(1) {
             margin-top: 0;
         }
     }
 
     #form-signup__submit {
-        margin-top: 40px;
+        // margin-top: 40px;
     }
 
 

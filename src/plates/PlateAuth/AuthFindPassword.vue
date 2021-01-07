@@ -1,7 +1,7 @@
 <template>
     <div class="auth__find-password">
 
-        <form id="form-find-password">
+        <form id="form-find-password" @submit.prevent>
             <InputDefault   placeholder="이메일"
                             id="form-find-password__id"
                             ref="ref_id"

@@ -73,9 +73,12 @@ export default {
     flex-direction: column;
     justify-content: center;
 
-    .default--checkbox {
-
+    > * {
         margin-top: 25px;
+
+        @include phone {
+            margin-top: 14px;
+        }
 
         &:nth-child(1) {
             margin-top: 0;
@@ -85,10 +88,15 @@ export default {
     .precaution {
         text-align: center;
         margin-top: 85px;
+
+        @include phone {
+            margin-top: 14px;
+            // margin-top: 0;
+        }
     }
 
     .button--default {
-        margin-top: 25px;
+        // margin-top: 25px;
     }
 }
 </style>
