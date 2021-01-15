@@ -1,5 +1,5 @@
 <template>
-    <div class="page-contents nav-correction">
+    <div class="page-contents use-bottom-margin">
 
 
         <header class="product-membership area__outer">

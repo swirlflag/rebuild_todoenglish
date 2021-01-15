@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 
 const IsNotSurpportCondition = false;
 
-let VM = null
+let VM = null;
 
 if(IsNotSurpportCondition){
     VM = new Vue({render: h => h(PageNotSurpport)}).$mount('#app')

@@ -1,0 +1,7 @@
+.mypage-content {
+    margin-top: 26px;
+
+    @include phone {
+        margin-top: 20px;
+    }
+}

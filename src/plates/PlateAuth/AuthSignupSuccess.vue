@@ -65,6 +65,6 @@ export default {
     }
 }
 .temp__wave {
-    margin: 30px 0;
+    // margin: 30px 0;
 }
 </style>

@@ -90,7 +90,7 @@ export default {
         margin-top: 85px;
 
         @include phone {
-            margin-top: 14px;
+            margin-top: 25px;
             // margin-top: 0;
         }
     }

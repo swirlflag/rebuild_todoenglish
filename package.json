@@ -17,6 +17,7 @@
         "universal-analytics": "^0.4.23",
         "vue": "^2.6.11",
         "vue-cookies": "^1.7.4",
+        "vue-fragment": "^1.5.1",
         "vue-google-oauth2": "^1.5.5",
         "vue-router": "^3.4.3",
         "vuex": "^3.5.1"

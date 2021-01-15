@@ -1,3 +1,5 @@
+import { VM } from '@/main.js';
+
 export const targetPathDetect = (path,target) => {
 
     let result = false;
@@ -66,9 +68,9 @@ export const installCDN = (Vue, cdns, prefix = '$_') => {
 
     const setStatePlugin = (pluginList,state = 'ready') => {
         pluginList.forEach((plugin) => {
-            Vue.prototype[`${prefix}${plugin}`] = 
-                state === 'load' 
-                ? window[plugin] 
+            Vue.prototype[`${prefix}${plugin}`] =
+                state === 'load'
+                ? window[plugin]
                 : { pluginState : state };
             window[plugin] = null;
         });
@@ -177,7 +179,6 @@ export const detectTouchdevice = () => {
     }
 };
 
-
 export const iterElement = (els, fn) => {
     for(let i = 0, l = els.length; i < l; ++i){
         fn(els[i],i,els)
@@ -188,3 +189,5 @@ export const randomOne = (...l) => l[Math.floor((Math.random() * l.length))];
 export const randomRange = (a,b,toFixed = 0) => +(Math.min(a,b) + Math.random() * (Math.max(a,b) - Math.min(a,b))).toFixed(toFixed);
 
 export const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
+
+export const detectLastPath = (prefixPath) => VM.$route.path.split(prefixPath)[1] || null;

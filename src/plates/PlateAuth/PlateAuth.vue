@@ -3,7 +3,7 @@
 
         <div class="auth__dimmed" @click="closeAuth"></div>
 
-        <div class="auth__box" v-if="phaseDataMap[nowPhase]" ref="ref_box" @transitionend="closeAuthAfter">
+        <div class="auth__box" v-if="phaseDataMap[nowPhase]" ref="ref_box" >
 
             <div class="auth__close" @click="closeAuth">
                 <span></span>
@@ -144,6 +144,7 @@ export default {
             phaseHistory : [],
 
             isRunTransition : false,
+            isOpenAuth : this.$store.state.$auth.is_openAuth || false
         }
     },
 
@@ -230,36 +231,51 @@ export default {
 
     watch : {
         "$store.state.$auth.is_openAuth"(now) {
+            this.isOpenAuth = now;
             if(now){
                 this.openAuthMotion();
+            }else {
+                this.closeAuthMotion();
             }
         }
     },
 
     methods : {
-        closeAuthAfter(e) {
-            if(e.target !== this.$refs.ref_box){
-                return
-            }
-            if(e.propertyName !== 'transform'){
-                return
-            }
-            if(this.$store.state.$auth.is_openAuth){
-                return
-            }
-            this.changePhaseBase();
-        },
         closeAuth() {
             this.$store.dispatch('closeAuthPanel');
         },
         openAuthMotion() {
+            const tween = gsap.to(this.$refs.ref_box , {
+                y : "0%",
+                ease        : 'power4.out',
+                duration    : 0.7,
+                delay       : 0.1,
+                onUpdate    : () => {
+                    if(!this.isOpenAuth){
+                        tween.kill();
+                    }
+                }
+            });
+
             this.onMountedMotion();
         },
+        closeAuthMotion() {
+            gsap.to(this.$refs.ref_box , {
+                y : '100%',
+                ease        : 'power2.inOut',
+                duration    : 0.4,
+                delay       : 0.1,
+                onComplete  : () => {
+                    this.changePhaseToBase();
+                }
+            })
+        },
+
         changePhase(phase) {
             this.phaseHistory.push(phase);
             this.nowPhase = phase;
         },
-        changePhaseBase() {
+        changePhaseToBase() {
             this.resetHistory();
             const isSignin = this.$store.state.$user.isSignin;
 
@@ -325,44 +341,65 @@ export default {
                     this.$refs.ref_text,
                 ];
 
-                gsap.from( el_targets, {
+                const tl = new gsap.timeline();
+
+                let isKill = false;
+
+                const tlFrame = () => {
+                    if(!this.isOpenAuth & !isKill){
+                        isKill = true;
+                        tl.progress(1);
+                        tl.kill();
+                    }
+                }
+
+                const defaultOption = {
+                    onUpdate    : tlFrame,
+                    clearProps  : 'all',
+                }
+
+                tl.from( el_targets, {
                     opacity : 0,
-                    y : 50,
-                    ease : 'power2.out',
-                    duration : 0.6,
-                    delay : 0.45,
-                    stagger : 0.07,
-                });
+                    y       : 50,
+                    ease        : 'power2.out',
+                    duration    : 0.6,
+                    delay       : 0.45,
+                    stagger     : 0.07,
+                    ...defaultOption,
+                } , 0);
 
                 const el_content = this.$refs.ref_content;
                 const el_buttons = el_content.querySelectorAll('.button--default');
                 const el_dividerbar = el_content.querySelectorAll('.auth__divider__bar');
                 const el_precaution = el_content.querySelectorAll('.auth__divider .precaution');
 
-                el_buttons.length && gsap.from( el_buttons,  {
+                el_buttons.length && tl.from( el_buttons,  {
                     opacity : 0,
                     y : 50,
-                    ease : 'power4.out',
-                    duration : 0.6,
-                    delay : 0.7,
-                    stagger : 0.1,
-                    clearProps : 'all',
-                });
+                    ease        : 'power4.out',
+                    duration    : 0.6,
+                    stagger     : 0.1,
+                    delay       : 0.7,
+                    ...defaultOption,
+                } , 0);
 
-                el_dividerbar.length && gsap.from(el_precaution, {
+                el_dividerbar.length && tl.from(el_precaution, {
                     opacity : 0,
-                    duration : 1,
-                    delay : 1,
-                });
+                    duration    : 1,
+                    delay       : 1,
+                    ...defaultOption,
+                } , 0);
 
-                el_precaution.length && gsap.from(el_dividerbar , {
+                el_precaution.length && tl.from(el_dividerbar , {
                     scaleX : 0,
-                    ease: 'power3.out',
-                    duration : 1,
-                    delay : 1.1,
-                });
+                    ease        : 'power3.out',
+                    duration    : 1,
+                    delay       : 1.1,
+                    ...defaultOption,
+                }, 0);
 
             }
+
 
         },
 
@@ -506,17 +543,17 @@ export const authStore = {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 13px 5px rgba(0,0,0,0.2);
-    transform : translate3d(0,100%,0);
+    transform : translateY(100%);
     will-change: transform;
-    transition: transform 400ms $EASE_inOutCubic 10ms;
+    // transition: transform 400ms $EASE_inOutCubic 10ms;
 
     @include phone {
         padding : $SIZE_MO_innerPadding;
     }
 
     .st-open & {
-        transform : translate3d(0,0,0);
-        transition: transform 700ms $EASE_outExpo 70ms;
+        // transform : translate3d(0,0,0);
+        // transition: transform 700ms $EASE_outExpo 70ms;
     }
 
 }

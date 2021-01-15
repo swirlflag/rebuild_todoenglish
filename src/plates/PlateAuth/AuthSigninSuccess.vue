@@ -78,7 +78,7 @@ $green : #2cd62c;
     }
     100% {
         opacity: 1;
-        transform: rotate(0) translate3d(0,0);
+        transform: none;
     }
 }
 

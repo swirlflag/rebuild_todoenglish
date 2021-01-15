@@ -195,14 +195,17 @@ export default {
     flex-direction: column;
 
     > * {
-        margin-top: 20px;
+        margin-top: 22px;
+        @include phone {
+            margin-top: 14px;
+        }
         &:nth-child(1) {
             margin-top: 0;
         }
     }
 
     #form-find-password__submit {
-        margin-top: 40px;
+        // margin-top: 40px;
     }
 
 }

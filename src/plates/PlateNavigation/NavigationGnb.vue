@@ -23,6 +23,7 @@
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/curriculum">커리큘럼</router-link></li>
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/product" exact>멤버십 가입</router-link></li>
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/4" exact>도움말</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/mypage">TEST</router-link></li>
                 </ul>
 
                 <div class="nav-gnb__account">
@@ -30,10 +31,10 @@
                         <div class="nav-gnb__link--user">
                             <span class="icon icon--account" :class="{'c-white' : whiteCondition}"></span>
                             <div class="nav-gnb__account__parents" >
-                                <router-link v-if="$user.isSignin" to="/parentsss" exact class="style-gnb-link hover-underline color-white"> Parents </router-link>
-                                <span v-else @click.prevent="TEST_" class="style-gnb-link hover-underline color-white"> Sign in </span>
+                                <router-link v-if="$user.isSignin" to="/mypage" exact class="style-gnb-link hover-underline color-white"> Parents </router-link>
+                                <span v-else @click.prevent="TEST_OPENAUTH" class="style-gnb-link hover-underline color-white"> Sign in </span>
                             </div>
-                            <router-link to="/parentsss" class="nav-gnb__account__username style-gnb-link hover-underline color-white">
+                            <router-link to="/mypage" class="nav-gnb__account__username style-gnb-link hover-underline color-white">
                                 {{ $user.username }}
                             </router-link>
                         </div>
@@ -54,7 +55,7 @@
                     >
                         <div class="nav-gnb__account-email">{{ $user.username }}</div>
                         <span class="icon icon--signout-arrow"></span>
-                        <a href="#" class="nav-gnb__signout style-gnb-link hover-underline" @click.prevent="TEST_">Sign Out</a>
+                        <a href="#" class="nav-gnb__signout style-gnb-link hover-underline" @click.prevent="TEST_OPENAUTH">Sign Out</a>
                     </div>
 
                 </div>
@@ -139,7 +140,7 @@ export default {
         toggleAccountInfo() {
             this.isOpenAccount = !this.isOpenAccount;
         },
-        TEST_() {
+        TEST_OPENAUTH() {
             this.closeMenu();
             this.$store.dispatch('openAuthPanel')
         },
@@ -198,6 +199,8 @@ $SIZE_MO_linkDistance : 15px;
     position: relative;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    height: $SIZE_PC_gnbHeight;
+
     &.use-trs {
         transition  : background-color 250ms ease 100ms
                     , height 400ms $EASE_outQuart
@@ -375,7 +378,7 @@ $SIZE_MO_linkDistance : 15px;
             color: #fff;
         }
         .st-open-menu & {
-            height: calc(100% - $SIZE_MO_gnbHeight);
+            height: calc(100% - #{$SIZE_MO_gnbHeight});
         }
 
         .type-clear & {

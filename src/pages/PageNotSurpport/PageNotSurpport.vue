@@ -1,5 +1,5 @@
 <template>
-    <div>PageNotSurpport</div>
+    <div>PageNotSurpport ~</div>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
-    <div class="page-contents">
+    <div class="page-contents nav-correction">
 
-        <header class="main-header area__outer ">
+        <header class="main-header area__outer">
             <div class="area__inner">
                 <h1 class="main-header__title">
                     실패가 없는

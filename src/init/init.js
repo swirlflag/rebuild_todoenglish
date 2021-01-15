@@ -1,5 +1,8 @@
 
 import store from '@/store/index.js';
+import Fragment from 'vue-fragment';
+
+
 import {
     detectBrowser ,
     detectOS ,
@@ -21,5 +24,6 @@ store.state.is_touchDevice   = detectTouchdevice();
 export default {
     install(Vue) {
         {Vue}
+        Vue.use(Fragment.Plugin)
     }
 }

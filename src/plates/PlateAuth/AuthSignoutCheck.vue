@@ -74,22 +74,31 @@ export default {
 }
 </script>
 
-<style scopde lang="scss">
+<style scoped lang="scss">
 .auth__signout-check {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    border: 1px solid #000 ;
 
+    > * {
+        border: 1px solid #d3d ;
+        margin-top: 22px;
+        @include phone {
+            margin-top: 14px;
+        }
+        &:nth-child(1) {
+            margin-top: 0;
+        }
+    }
 
     .auth__alert-area {
         width: 100%;
-        margin-bottom: 30px;
+        // margin-bottom: 30px;
     }
 
     > .button--default {
-        margin-top: 20px;
+        // margin-top: 20px;
     }
 
 }

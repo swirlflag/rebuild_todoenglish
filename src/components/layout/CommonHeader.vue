@@ -138,12 +138,14 @@ export default {
     // padding-top: 30px;
     position: relative;
     position: sticky;
-    top: 113px;
-    background: rgba(255,255,255,0.97);
+    top: $SIZE_PC_gnbHeight;
+    min-width : $SIZE_PC_contentWidth;
+    background-color: rgba(255,255,255,0.97);
     text-shadow: 0 2px 3px #fff;
     font-size: 16px;
 
     @include phone {
+        min-width: 100%;
         padding-top: 0;
         top: $SIZE_MO_gnbHeight;
         @include hardSelect {

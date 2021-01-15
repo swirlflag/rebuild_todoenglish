@@ -91,6 +91,33 @@
         &.c-green   {background-image: url('~@/assets/icon/icon_arrow_green.svg');}
     }
 
+    &.icon--linearrow {
+        width:22px; height: 22px;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 22%; left: 11%;
+            width: 56%; height: 56%;
+            border-right: 1px solid $COLOR_navy_2;
+            border-top: 1px solid $COLOR_navy_2;
+            transform : rotate(45deg);
+        }
+
+        &.type-right::before {
+            left: 11%;
+            transform : rotate(45deg);
+        }
+        &.type-top::before {}
+        &.type-bottom::before {}
+        &.type-left::before {
+            left: 33%;
+            transform : rotate(-135deg);
+        }
+
+    }
+
     &.icon--arrow-simple {
         width: 20px; height: 20px;
         background-size: 200%;
@@ -140,6 +167,22 @@
     &.icon--kakaobubble {
         width: 28px; height: 26px;
         background-image: url('~@/assets/icon/icon_kakaobubble.svg');
+    }
+
+
+    &.icon--rect-kakao {
+        width: 28px; height: 28px;
+        background-image: url('~@/assets/icon/icon_rect_kakao.svg');
+    }
+    &.icon--rect-google {
+        width: 28px; height: 28px;
+        background-image: url('~@/assets/icon/icon_rect_google.svg');
+    }
+
+
+    &.icon--mail {
+        width: 20px; height: 20px;
+        background-image: url('~@/assets/icon/icon_mail.svg');
     }
 
 

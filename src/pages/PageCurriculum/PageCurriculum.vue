@@ -1,5 +1,5 @@
 <template>
-    <div class="page-contents nav-correction">
+    <div class="page-contents use-bottom-margin">
 
         <CommonHeader
             class="curriculum-header"
@@ -47,11 +47,12 @@
 
 <script>
 
-import CommonHeader from '@/components/layout/CommonHeader.vue';
-import TextChangeMask from '@/components/layout/TextChangeMask.vue';
-import CurriculumMap from './CurriculumMap.vue';
+import CommonHeader         from '@/components/layout/CommonHeader.vue';
+import TextChangeMask       from '@/components/layout/TextChangeMask.vue';
+import CurriculumMap        from './CurriculumMap.vue';
 import CurriculumObjectives from './CurriculumObjectives.vue';
 
+import { detectLastPath }   from '@/utils';
 export default {
     components : {
         CommonHeader, TextChangeMask , CurriculumMap ,CurriculumObjectives
@@ -82,18 +83,16 @@ export default {
     },
     watch :{
         '$route.path'() {
-            this.getCurriculumPath();
+            this.getChildPath();
         }
     },
     methods : {
-        getCurriculumPath() {
-            const path = this.$route.path.split('/curriculum')[1];
-            this.nowRoute = path || '/map';
+        getChildPath() {
+            this.nowRoute = detectLastPath('/curriculum') || '/map';
         },
     },
     created() {
-        // console.log(1);
-        this.getCurriculumPath();
+        this.getChildPath();
     },
 }
 </script>

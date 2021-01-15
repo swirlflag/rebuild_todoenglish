@@ -32,11 +32,11 @@ import gsap from 'gsap';
 export default {
     props: {
         text        : null, // Number , String
-        direction   : String, // top,bottom, left, right => 미구현
+
         speed       : null ,// Number, String
         delay       : null , // Number ,String
-
         contain     : Boolean,  // true면 컴포넌트의 텍스트를 inline화한 사이즈를 사용함. false면 외부의 사이즈에 100%로 적용
+        direction   : String, // top,bottom, left, right => 미구현
     },
     data() {
         return {
@@ -68,6 +68,7 @@ export default {
             this.remainderTexts = [now,old];
         },
         remainderAnimate() {
+        // 지연 동작
             if(!this.remainderTexts.length){
                 return
             }
@@ -79,35 +80,51 @@ export default {
             this.animate();
         },
         animate() {
-
             const fly       = this.$refs.ref_fly;
             const target    = this.$refs.ref_target;
+            const contain   = this.$refs.ref_contain;
             const before    = this.$refs.ref_before;
             const after     = this.$refs.ref_after;
 
-            const testspeed = 0.58;
+            const defaultSpeed = 0.58;
 
-            const duration  = this.speed ? this.speed * 0.001 : testspeed;
+            const duration  = this.speed ? this.speed * 0.001 : defaultSpeed;
             const delay     = this.delay ? this.delay * 0.001 : 0;
 
             setTimeout(() => {
 
+                const startWidth    = target.offsetWidth;
+                // const startHeight   = target.offsetHeight;
+
                 gsap.set(fly, {css : {width : this.contain ? 'auto' : null}});
 
-                const maxWidth = Math.max(before.offsetWidth,after.offsetWidth);
+                const ofs = {
+                    before : {
+                        width   : before.offsetWidth,
+                        height  : contain.offsetHeight,
+                    },
+                    after : {
+                        width   : after.offsetWidth,
+                        height  : after.offsetHeight,
+                    },
+                };
 
-                gsap.set(target , {css : {width : maxWidth }});
+                const maxWidth = Math.max(startWidth, ofs.before.width, ofs.after.width);
 
-                gsap.to(target, {
-                    width : after.offsetWidth,
-                    height: after.offsetHeight,
+                gsap.set(target , {css : {width : maxWidth}});
+
+                gsap.fromTo(target, {
+                    height  : ofs.before.height,
+                }, {
+                    height  : ofs.after.height,
                     ease: 'power3.out',
                     duration,
                     delay ,
-                })
+                    clearProps : 'all',
+                });
 
                 gsap.to(fly, {
-                    y : before.offsetHeight * -1,
+                    y : -ofs.before.height,
                     ease: 'power3.out',
                     duration,
                     delay,
@@ -160,7 +177,7 @@ export default {
     flex-direction: column;
     text-align: inherit;
     display: inline-flex;
-    // pointer-events: none;
+    pointer-events: none;
     user-select: none !important;
     transform: translateY(0);
     vertical-align: top;
@@ -182,10 +199,7 @@ export default {
         display: inline-block;
         text-align: inherit;
 
-        // background-color: rgba(50,255,50,0.2);
-        &:nth-child(2) {
-            // background-color: rgba(255,0,50,0.2);
-        }
+        background-color: rgba(50,255,50,0.2); &:nth-child(2) {background-color: rgba(255,0,50,0.2);}
     }
 }
 

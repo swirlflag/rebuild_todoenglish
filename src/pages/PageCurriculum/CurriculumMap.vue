@@ -142,7 +142,7 @@ export default {
     }
 }
 .curriculum-map {
-    margin-top: 20px;
+    // margin-top: 20px;
 }
 
 .map__outer {

@@ -116,7 +116,7 @@ export default {
 <style scoped lang="scss">
 
 .curriculum-objectives {
-    margin-top: 20px;
+    // margin-top: 20px;
 }
 .objectives__outer {
     width: 100%;

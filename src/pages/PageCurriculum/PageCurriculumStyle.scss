@@ -1,5 +1,5 @@
 .page-contents {
-    padding-bottom: $SIZE_PC_footerMargin;
+    
 }
 
 .curriculum-description{
@@ -24,13 +24,15 @@
 
 .curriculum-title {
     margin-top: 88px;
+    margin-bottom: 20px;
 
     h2 {
         position: relative;
-        font-size: 48px;
+        font-size: $SIZE_PC_fontsizeTitle;
 
         @include phone {
-            font-size: calc(22px + 3.5vw);
+            font-size : $SIZE_MO_fontsizeTitle;
+            // font-size: calc(22px + 3.5vw);
         }
         span {
             display: inline-block;

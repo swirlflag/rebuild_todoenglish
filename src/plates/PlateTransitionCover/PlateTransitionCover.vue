@@ -11,10 +11,23 @@
 
         <div class="transition__cover" :class="`st-lean-${coverLeanDirection ? 'left' : 'right'}`" ref="ref_cover">
             <div class="transition__cover-inner">
-                <img src="@/assets/logo/logo_todoenglish.svg" alt="">
+
+                <div class="transition__cover__logo">
+                    <img src="@/assets/logo/logo_todoenglish.svg" alt="">
+                </div>
+
+                <div class="transition__cover__characters">
+                    <img src="@/assets/icon/character_1.svg" alt="">
+                    <img src="@/assets/icon/character_2.svg" alt="">
+                    <img src="@/assets/icon/character_3.svg" alt="">
+                    <img src="@/assets/icon/character_4.svg" alt="">
+                </div>
+
                 <SpinnerColordotsWave v-if="0"/>
+
             </div>
         </div>
+
 
     </div>
 </template>
@@ -97,6 +110,7 @@ export default {
                     onComplete : () => {
                         if(idx === 0){
                             this.reverseLean();
+
                             this.$store.state.$paging.next();
                         }
                         // if(idx === this.curtains.length - 1){
@@ -222,13 +236,13 @@ export const transitionStore = {
         z-index: 1000;
 
         &:nth-child(1) {
-            background-color: #f7419c;
+            background-color: $COLOR_pink_1;
         }
         &:nth-child(2) {
-            background-color: #372c77;
+            background-color: $COLOR_navy_2;
         }
         &:nth-child(3) {
-            background-color: #9857db;
+            background-color: $COLOR_violet_1 ;
         }
         &:nth-child(4) {
             background-color: #fff;
@@ -260,6 +274,76 @@ export const transitionStore = {
 
         .spinner--colordots {
             margin-top: 30px;
+        }
+
+        .transition__cover__logo {
+
+        }
+
+        @keyframes floatCharacter {
+            0% {
+                transform : translate3d(0,10px,0);
+            }
+            100% {
+                transform : translate3d(0,-10px,0);
+            }
+        }
+        .transition__cover__characters {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+
+            img {
+
+                @keyframes tick1 {
+                    0% {transform : rotate(5deg);}
+                    100% {transform : rotate(-30deg);}
+                }
+                @keyframes tick2 {
+                    0% {transform : rotate(15deg);}
+                    100% {transform : rotate(-20deg);}
+                }
+                @keyframes tick3 {
+                    0% {transform : rotate(-0deg);}
+                    100% {transform : rotate(-30deg) translateY(-200%);}
+                }
+                @keyframes tick4 {
+                    0% {transform : rotate(25deg);}
+                    100% {transform : rotate(-5deg)}
+                }
+                position: absolute;
+
+
+                &:nth-child(1) {
+                    top: 50px;
+                    right: 100px;
+                    filter: drop-shadow(8px 8px 0  $COLOR_violet_1);
+                    animation: tick1 800ms steps(2) infinite ;
+                    transform-origin: 80%;
+                }
+                &:nth-child(2) {
+                    top: 0;
+                    left: 100px;
+                    filter: drop-shadow(8px 8px 0 $COLOR_orange_1);
+                    animation: tick2 750ms steps(2) infinite;
+                    transform-origin: 20%;
+                }
+
+                &:nth-child(3) {
+                    bottom: 70px;
+                    right: 60px;
+                    filter: drop-shadow(8px 8px 0 $COLOR_pink_1);
+                    animation: tick3 850ms steps(2) infinite;
+                    transform-origin: 80%;
+                }
+                &:nth-child(4) {
+                    bottom: 50px;
+                    left: 50px;
+                    filter: drop-shadow(8px 8px 0 $COLOR_blue_1);
+                    animation: tick4 900ms steps(2) infinite;
+                    transform-origin: 50%;
+                }
+            }
         }
 
     }

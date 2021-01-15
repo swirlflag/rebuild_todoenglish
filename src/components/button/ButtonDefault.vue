@@ -308,6 +308,7 @@ $MO_radius : 18px;
     box-shadow:  0 $thickness+$hoverjump 5px rgba(0,0,0,0);
     transition : transform 450ms $EASE_outCubic , box-shadow 450ms ease;
     box-sizing: border-box;
+    position: relative;
 
     @include phone {
         border-radius: $MO_radius;
@@ -332,11 +333,14 @@ $MO_radius : 18px;
     }
 
     .button__body {
-        width: 100%;
+        width: 100%; height: 100%;
         // padding: 15px 30px;
         // padding: 17px 30px;
         padding: 17px 30px;
         min-width : 180px;
+        display :flex;
+        justify-content: center;
+        align-items: center;
 
         position: relative;
         background-color: #fff;
@@ -354,6 +358,7 @@ $MO_radius : 18px;
             font-size: $SIZE_MO_fontsizeStrong;
             font-size: $SIZE_MO_fontsizeDefault;
             padding: 15px;
+            min-width : unset;
         }
 
         .st-press & {

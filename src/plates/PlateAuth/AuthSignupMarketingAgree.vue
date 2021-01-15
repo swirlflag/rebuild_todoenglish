@@ -60,21 +60,30 @@ export default {
     display: flex;
     flex-direction: column;
 
+    > * {
+        margin-top: 25px;
+        // border: 1px solid #d3d;
+
+        @include phone {
+            margin-top: 14px;
+        }
+
+        &:nth-child(1) {
+            margin-top: 0;
+        }
+    }
+
     p {
         // text-align: center;
     }
 
-    .dot-list {
-        margin-top: 27px;
-    }
-
     .auth__signup-marketing-agree {
         display: flex;
-        margin-top: 40px;
         justify-content: space-around;
-    }
-    .button--default {
-        margin-top: 56px;
+        margin-top: 55px;
+        @include phone {
+            margin-top: 30px;
+        }
     }
 }
 

@@ -117,8 +117,9 @@ export default {
                 idle                : '',
                 validFailEmail      : '올바른 이메일 형식을 입력해주세요.',
                 validFailPassword   : '비밀번호를 입력해주세요.',
-                wrongEmail          : '해당 아이디가 없습니다.',
-                wrongPassword       : '비밀번호가 맞지 않습니다.',
+
+                wrongEmail          : '해당 아이디가 없습니다. [이 메시지 표시 확률 33%]',
+                wrongPassword       : '비밀번호가 맞지 않습니다. [이 메시지 표시 확률 33%]',
             },
 
             value : {

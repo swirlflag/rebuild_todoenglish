@@ -36,8 +36,11 @@ export default {
     width: 100%;
 
     > * {
-        margin-top: 20px;
-        :nth-child(1) {
+        margin-top: 22px;
+        @include phone {
+            margin-top: 14px;
+        }
+        &:nth-child(1) {
             margin-top: 0;
         }
     }

@@ -10,8 +10,11 @@ body {
     font-style: normal;
     // text-rendering: optimizeLegibility;
     // overflow-x: overlay;
+    overflow: overlay;
     box-sizing: border-box;
-    font-family: 'Apple SD Gothic Neo', 'Spoqa Han Sans', 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
+    // font-family: 'Apple SD Gothic Neo', 'Spoqa Han Sans', 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
+    font-family: 'Spoqa Han Sans', 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
+
     // font-family: 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
     line-height: $SIZE_lineheight_middle;
 
@@ -113,14 +116,27 @@ body {
         margin-left : auto;
         margin-right :auto;
         width: $SIZE_PC_contentWidth;
+
         @include phone {
+            // padding: 0;
             padding : 0 $SIZE_MO_innerPadding;
-            width: auto;
+            width: 100%;
             max-width : $SIZE_MO_contentWidth;
             // min-width : 100%;
-            // border: 1px solid #d3d;
             flex-direction: column;
+            // border: 1px solid #d3d;
+            // > * {
+            //     border: 1px solid #aaa;
+            //     padding : 0 $SIZE_MO_innerPadding;
+            // }
+
+            &.mo-max{
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+
         }
+
     }
 
     .area__source {
@@ -306,6 +322,9 @@ body {
         align-items: top;
         &+li {
             margin-top: 8px;
+            @include phone {
+                margin-top: 5px;
+            }
         }
         &::before {
             content: '•';
@@ -325,11 +344,13 @@ body {
 .hover-link{
     position: relative;
     overflow: hidden;
-    height: 100%;
+    // height: 100%;
+    height: auto;
     box-sizing: border-box;
     display: inline-block;
     line-height: inherit;
     vertical-align: middle;
+    cursor: pointer;
 
     span {
         box-sizing: border-box;
@@ -348,17 +369,23 @@ body {
         content: '';
         width: 102%; height: 100%;
         top: 0; left: -1%;
-        transform: translateY(calc(100% + 1px));
+        transform: translateY(calc(100% + 0px));
         transition: transform 250ms $EASE_outExpo, color 100ms ease , opacity 200ms ease;
         background: $COLOR_navy_2;
         z-index: 1 !important;
+        vertical-align: top;
     }
 
     &.type-underline {
         &::before  {
-            transform: translateY(calc(100% - 0.08em));
-            opacity: 0.5;
+            transform: translateY(calc(100% - 0.1em));
+            opacity: 0.85;
         }
+    }
+
+    &.theme-pink {
+        color: $COLOR_pink_1;
+        &::before {background: $COLOR_pink_1;}
     }
 
     @include hover {
@@ -394,6 +421,67 @@ body {
     &.color-white {
         &::before {
             background-color: #fff;
+        }
+    }
+}
+
+
+
+.valueboard{
+    display: block;
+    // border: 1px solid #d3d;
+    padding-top: 70px;
+    margin-bottom: 70px;
+
+    & + .valueboard {
+        border-top: 1px solid $COLOR_linegray;
+    }
+
+    .valueboard__header {
+        // border: 1px solid #000;
+
+        h3.valueboard__title {
+            font-size: $SIZE_PC_fontsizeTitle;
+        }
+    }
+
+    .valueboard__content {
+        margin-top: 30px;
+        // border: 1px solid #000;
+
+        .valueboard__block {
+            // border: 1px solid #000;
+            display: flex;
+            padding: 16px 0;
+            // min-height: 30px;
+
+            .valueboard__key {
+                // border: 1px solid #000;
+                font-weight: bold;
+                width: 160px;
+                flex: 0 0 160px;
+                margin-top: 6px;
+                .valueboard__keyname {
+                    display: inline-block;
+                    width: 100%;
+                }
+            }
+
+            .valueboard__value{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: start;
+                // border: 1px solid #d3d;
+                flex-wrap: wrap;
+
+                &.type-column {
+                    flex-direction: column;
+                    justify-content: center;
+                    align-self: start;
+                }
+            }
         }
     }
 }

@@ -24,10 +24,10 @@ const userStore = {
         siginIn(context,data) {
             context.commit('USER_SIGNDATA',data);
             context.commit('USER_SIGNIN');
-            console.log('로그인');
+            // console.log('로그인');
         },
         siginOut(context) {
-            console.log('로그아웃');
+            // console.log('로그아웃');
             context.commit('USER_SIGNOUT');
         }
     }

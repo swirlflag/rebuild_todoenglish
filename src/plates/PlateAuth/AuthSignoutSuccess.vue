@@ -1,9 +1,9 @@
 <template>
     <div class="auth__signout-success">
-        <p>로그아웃 완료화면~</p>
+        <p>임시로만든~ 로그아웃 완료화면~</p>
 
         <ButtonDefault @click="closeAuth">
-            확인
+            닫으세용~
         </ButtonDefault>
     </div>
 </template>

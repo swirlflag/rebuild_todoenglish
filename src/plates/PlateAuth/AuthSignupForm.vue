@@ -105,8 +105,8 @@ export default {
                 validFailPassword       : '비밀번호를 입력해주세요.',
                 validFailPasswordMatch  : '비밀번호와 확인란이 일치하지 않습니다.',
 
-                useAlreadyEmail         : '이미 사용중인 이메일 입니다.',
-                cantUseThisEmail        : '이 이메일은 사용할 수 없습니다.'
+                useAlreadyEmail         : '이미 사용중인 이메일 입니다. [이 메시지 표시 확률 33%]',
+                cantUseThisEmail        : '이 이메일은 사용할 수 없습니다. [이 메시지 표시 확률 33%]',
             },
 
             value : {
