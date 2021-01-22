@@ -55,11 +55,11 @@
     }
     .main-header__description {
         margin-top: 100px;
-        font-size: $SIZE_PC_fontsizeTitle;
+        font-size: $SIZE_PC_fontsize_title;
         @include phone {
             margin-top: 90px;
             // font-size: calc(8px + 3.5vw);
-            font-size:  $SIZE_MO_fontsizeStrong;
+            font-size:  $SIZE_MO_fontsize_strong;
         }
     }
 
@@ -115,11 +115,11 @@
         margin-top: 36px;
         text-align: center;
         font-weight: 300;
-        font-size: $SIZE_PC_fontsizeLarge;
+        font-size: $SIZE_PC_fontsize_large;
         word-break: keep-all;
         padding: 0 30px;
         @include phone {
-            font-size: $SIZE_MO_fontsizeStrong;
+            font-size: $SIZE_MO_fontsize_strong;
             margin-top: 40px;
             padding: 0 3vw;
         }
@@ -140,19 +140,19 @@
     }
 
     .subheader__title {
-        font-size: $SIZE_PC_fontsizeTitle;
+        font-size: $SIZE_PC_fontsize_title;
         // font-weight: 400;
         @include phone {
             // font-size: calc(12px + 7vw);
-            font-size: $SIZE_MO_fontsizeTitle ;
+            font-size: $SIZE_MO_fontsize_title ;
         }
     }
     .subheader__description {
-        font-size: $SIZE_PC_fontsizeLarge ;
+        font-size: $SIZE_PC_fontsize_large ;
         margin-top: 12px;
         line-height: $SIZE_lineheight_middle;
         @include phone {
-            font-size: $SIZE_MO_fontsizeLarge ;
+            font-size: $SIZE_MO_fontsize_large ;
         }
     }
 }

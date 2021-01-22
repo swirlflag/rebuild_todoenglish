@@ -244,26 +244,34 @@ $thickness : 5px;
 $hoverjump : 10px;
 
 $PC_radius : 25px;
-
 $MO_radius : 18px;
 
-.button--default {
+$PC_padding : 18px 30px #{18px - (floor($thickness/2))};
+$MO_padding : 15px;
 
+
+.button--default {
+    cursor : pointer;
     box-sizing: border-box;
     position:relative;
     width : auto;
     transition : text-shadow 130ms ease , opacity 200ms ease;
     font-weight: bold;
-    cursor : pointer;
+    width: 180px;
+    // top: #{floor(-$thickness/2)};
+    top: #{(-$thickness/2)};
+   
+    border-radius: $PC_radius;
+
+    @include phone {
+        width: 100%;
+        border-radius: $MO_radius;
+    }
+
     &.st-disable {
         opacity: 0.3;
         cursor :default;
         pointer-events: none;
-    }
-
-    @include phone {
-        width: 100%;
-        // font-size: 14px;
     }
 
     span {
@@ -301,18 +309,15 @@ $MO_radius : 18px;
 }
 
 .button__inner {
-
     width: 100%; height: 100%;
-    border-radius: $PC_radius;
+    border-radius: inherit;
     transform : none;
     box-shadow:  0 $thickness+$hoverjump 5px rgba(0,0,0,0);
     transition : transform 450ms $EASE_outCubic , box-shadow 450ms ease;
     box-sizing: border-box;
     position: relative;
 
-    @include phone {
-        border-radius: $MO_radius;
-    }
+
 
     // @include unuseTouch {
         .st-hover & , .st-focus & {
@@ -336,8 +341,8 @@ $MO_radius : 18px;
         width: 100%; height: 100%;
         // padding: 15px 30px;
         // padding: 17px 30px;
-        padding: 17px 30px;
-        min-width : 180px;
+        padding: $PC_padding;
+
         display :flex;
         justify-content: center;
         align-items: center;
@@ -352,12 +357,12 @@ $MO_radius : 18px;
         overflow: hidden;
         box-sizing: border-box;
         border: 1px solid $COLOR_navy_1;
-        font-size: $SIZE_PC_fontsizeLarge;
+        font-size: $SIZE_PC_fontsize_large;
 
         @include phone {
-            font-size: $SIZE_MO_fontsizeStrong;
-            font-size: $SIZE_MO_fontsizeDefault;
-            padding: 15px;
+            font-size: $SIZE_MO_fontsize_strong;
+            font-size: $SIZE_MO_fontsize_default;
+            padding: $MO_padding;
             min-width : unset;
         }
 

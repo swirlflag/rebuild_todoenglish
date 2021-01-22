@@ -15,17 +15,17 @@ $EASE_inOutCubic    : cubic-bezier(0.65, 0, 0.35, 1);
 $EASE_inOutQuint    : cubic-bezier(0.83, 0, 0.17, 1);
 $EASE_inOutExpo     : cubic-bezier(0.87, 0, 0.13, 1);
 
-$SIZE_PC_fontsizeTitle          : 48px;
-$SIZE_PC_fontsizeLarge          : 22px;
-$SIZE_PC_fontsizeStrong         : 18px;
-$SIZE_PC_fontsizeDefault        : 16px;
-$SIZE_PC_fontsizeSmall          : 14px;
+$SIZE_PC_fontsize_title          : 48px;
+$SIZE_PC_fontsize_large          : 22px;
+$SIZE_PC_fontsize_strong         : 18px;
+$SIZE_PC_fontsize_default        : 16px;
+$SIZE_PC_fontsize_small          : 14px;
 
-$SIZE_MO_fontsizeTitle          : 30px;
-$SIZE_MO_fontsizeLarge          : 20px;
-$SIZE_MO_fontsizeStrong         : 16px;
-$SIZE_MO_fontsizeDefault        : 14px;
-$SIZE_MO_fontsizeSmall          : 13px;
+$SIZE_MO_fontsize_title          : 30px;
+$SIZE_MO_fontsize_large          : 20px;
+$SIZE_MO_fontsize_strong         : 16px;
+$SIZE_MO_fontsize_default        : 14px;
+$SIZE_MO_fontsize_small          : 13px;
 
 $SIZE_PC_contentWidth           : 1024px;
 $SIZE_MO_contentWidth           : 560px;
@@ -34,11 +34,11 @@ $SIZE_PC_innerPadding           : 35px;
 // $SIZE_MO_innerPadding           : calc(1px + 3vw);
 $SIZE_MO_innerPadding           : calc(3px + 2.8vw);
 
-$SIZE_lineheight_high3          : 2em;
-$SIZE_lineheight_high2          : 1.8em;
-$SIZE_lineheight_high1          : 1.62em;
-$SIZE_lineheight_middle         : 1.43em;
-$SIZE_lineheight_low            : 1.25em;
+$SIZE_lineheight_high3          : 2;
+$SIZE_lineheight_high2          : 1.8;
+$SIZE_lineheight_high1          : 1.62;
+$SIZE_lineheight_middle         : 1.4;
+$SIZE_lineheight_low            : 1.25;
 
 $SIZE_letterspacing_high        : 0.06em;
 $SIZE_letterspacing_middle      : 0.035em;
@@ -59,7 +59,8 @@ $COLOR_orange_1     : #E5801B;
 $COLOR_blue_1       : #1D8BCF;
 
 $COLOR_offWhite     : #f2f0e9;
-$COLOR_lightgray    : #F9F9F9;
+$COLOR_lightgray_1    : #F9F9F9;
+$COLOR_lightgray_2    : #F5F5F7;
 $COLOR_gray         : #979797;
 $COLOR_linegray     : rgba(52, 45, 81, 0.15);
 

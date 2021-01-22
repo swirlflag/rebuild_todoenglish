@@ -11,9 +11,9 @@
 
         <p class="precaution">
             토도영어의
-            <ButtonUnderMask text="이용약관" type="underline"/>
+            <button class="hover-link type-underline"><span>이용약관</span></button>
             및
-            <ButtonUnderMask text="개인정보 수집 및 이용" type="underline"/>
+            <button class="hover-link type-underline"><span>개인정보 수집 및 이용</span></button>
             에 동의하시면 확인을 눌러주세요.
         </p>
 
@@ -27,13 +27,12 @@
 </template>
 
 <script>
-import ButtonUnderMask from  '@/components/button/ButtonUnderMask.vue';
+
 import CheckboxDefault from '@/components/input/CheckboxDefault.vue';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
 export default {
     name : 'AuthsignupConsent',
     components : {
-        ButtonUnderMask,
         CheckboxDefault,
         ButtonDefault,
     },
@@ -88,6 +87,9 @@ export default {
     .precaution {
         text-align: center;
         margin-top: 85px;
+        // display: flex;
+        vertical-align: top;
+        // align-items: center;
 
         @include phone {
             margin-top: 25px;

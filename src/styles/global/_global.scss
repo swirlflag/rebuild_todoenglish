@@ -16,18 +16,17 @@ body {
     font-family: 'Spoqa Han Sans', 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
 
     // font-family: 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
-    line-height: $SIZE_lineheight_middle;
+    line-height: $SIZE_lineheight_middle ;
 
     @include hardSelect {
         word-break: keep-all;
         // font-weight: 300;
-        font-size: $SIZE_PC_fontsizeDefault;
-        line-height: normal;
+        font-size: $SIZE_PC_fontsize_default;
         letter-spacing: $SIZE_letterspacing_default;
         color: $COLOR_navy_1;
 
         @include phone {
-            font-size: $SIZE_MO_fontsizeDefault;
+            font-size: $SIZE_MO_fontsize_default;
         }
     }
 
@@ -178,11 +177,11 @@ body {
     .showing__subtitle {
         display: flex;
         align-items: center;
-        font-size: $SIZE_PC_fontsizeLarge;
+        font-size: $SIZE_PC_fontsize_large;
         font-weight: 700;
 
         @include phone {
-            font-size: $SIZE_MO_fontsizeStrong;
+            font-size: $SIZE_MO_fontsize_strong;
         }
 
         .icon{
@@ -192,14 +191,14 @@ body {
 
     .showing__title {
         display: flex;
-        font-size: $SIZE_PC_fontsizeTitle;
+        font-size: $SIZE_PC_fontsize_title;
         margin-top: 18px;
         line-height: $SIZE_lineheight_low;
 
         @include phone {
             margin-top: 30px;
             // font-size: 36px;
-            font-size: $SIZE_MO_fontsizeTitle;
+            font-size: $SIZE_MO_fontsize_title;
             margin-right: 10vw;
         }
     }
@@ -210,7 +209,7 @@ body {
         @include phone {
             margin-top: 30px;
             // font-size: 22px;
-            font-size: $SIZE_MO_fontsizeStrong;
+            font-size: $SIZE_MO_fontsize_strong;
             margin-right: 4vw;
             margin-right: 15vw;
         }
@@ -220,12 +219,12 @@ body {
         margin-top: 28px;
         display: inline-flex;
         align-items: center;
-        font-size: $SIZE_PC_fontsizeLarge;
+        font-size: $SIZE_PC_fontsize_large;
         font-weight: 700;
         position: relative;
 
         @include phone {
-            font-size: $SIZE_MO_fontsizeStrong;
+            font-size: $SIZE_MO_fontsize_strong;
         }
 
         .icon--arrow {
@@ -309,7 +308,7 @@ body {
     // font-size: 14px;
     // margin-top: 18px;
     @include hardSelect {
-        color: #999;
+        color: $COLOR_gray;
     }
 }
 
@@ -344,20 +343,23 @@ body {
 .hover-link{
     position: relative;
     overflow: hidden;
-    // height: 100%;
-    height: auto;
+    // background-color: #aaa;
     box-sizing: border-box;
     display: inline-block;
     line-height: inherit;
-    vertical-align: middle;
+    line-height: normal;
+    vertical-align: top;
+    font-size: inherit;
     cursor: pointer;
 
-    span {
+    > span {
         box-sizing: border-box;
-        display: inline-block;
+        // display: inline-block;
         line-height: inherit;
-        vertical-align: middle;
+        vertical-align: top;
         position: relative;
+        height: 100%;
+        // height: auto;
     }
 
     > * {
@@ -370,10 +372,11 @@ body {
         width: 102%; height: 100%;
         top: 0; left: -1%;
         transform: translateY(calc(100% + 0px));
-        transition: transform 250ms $EASE_outExpo, color 100ms ease , opacity 200ms ease;
+        transition: transform 250ms $EASE_outExpo, color 100ms ease , opacity 200ms ease , background-color 200ms ease;
         background: $COLOR_navy_2;
         z-index: 1 !important;
         vertical-align: top;
+        // display: none;
     }
 
     &.type-underline {
@@ -383,17 +386,27 @@ body {
         }
     }
 
+    .precaution & {
+        color: $COLOR_gray;
+        &::before {background: $COLOR_gray;}
+    }
+
     &.theme-pink {
         color: $COLOR_pink_1;
         &::before {background: $COLOR_pink_1;}
     }
 
     @include hover {
-        color: #fff;
+        color: #fff !important;
         font-weight: 700;
         &::before {
             transform: translateY(0);
             opacity: 1;
+            background: $COLOR_navy_2;
+        }
+
+        &.theme-pink {
+            &::before {background: $COLOR_pink_1;}
         }
     }
 }
@@ -429,11 +442,11 @@ body {
 
 .valueboard{
     display: block;
-    // border: 1px solid #d3d;
+    // line-height :$SIZE_lineheight_middle;
     padding-top: 70px;
-    margin-bottom: 70px;
 
     & + .valueboard {
+        margin-top: 70px;
         border-top: 1px solid $COLOR_linegray;
     }
 
@@ -441,7 +454,7 @@ body {
         // border: 1px solid #000;
 
         h3.valueboard__title {
-            font-size: $SIZE_PC_fontsizeTitle;
+            font-size: $SIZE_PC_fontsize_title;
         }
     }
 
@@ -452,7 +465,7 @@ body {
         .valueboard__block {
             // border: 1px solid #000;
             display: flex;
-            padding: 16px 0;
+            padding: 18px 0;
             // min-height: 30px;
 
             .valueboard__key {
@@ -460,7 +473,7 @@ body {
                 font-weight: bold;
                 width: 160px;
                 flex: 0 0 160px;
-                margin-top: 6px;
+                // margin-top: 6px;
                 .valueboard__keyname {
                     display: inline-block;
                     width: 100%;
@@ -483,5 +496,23 @@ body {
                 }
             }
         }
+
+
     }
+}
+
+
+
+[class^=prefix--] {
+    display: flex;
+    &::before {
+        font-size: inherit;
+        margin-right: 0.2em;
+        position: relative;
+    }
+}
+
+.prefix--asterisk::before{
+    content : '*';
+    top: 0.2em;
 }

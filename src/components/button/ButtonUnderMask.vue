@@ -61,7 +61,7 @@ export default {
     &.type-underline {
         &::before  {
             transform: translateY(calc(100% - 0.08em));
-            background: #999;
+            background: $COLOR_gray;
             opacity: 0.5;
         }
     }

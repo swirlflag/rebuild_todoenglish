@@ -40,6 +40,9 @@
 
 <script>
 
+
+import gsap from 'gsap';
+
 export default {
     props : {
         breadcrumb : Array,
@@ -71,6 +74,7 @@ export default {
             this.isOpen = false;
         },
         animateUnderline() {
+            {gsap}
             setTimeout(() => {
                 const target = this.$refs.ref_links.querySelector('a.router-link-active');
 
@@ -79,10 +83,17 @@ export default {
                 }
                 const targetRect = target.getBoundingClientRect();
 
+                // console.log(targetRect);
+
                 this.$refs.ref_linkbar.style.transform  = `translate3d(${target.offsetLeft}px,0,0)`;
                 this.$refs.ref_linkbar.style.width      = `${targetRect.width+1}px`;
 
-            },20);
+                // gsap.to(this.$refs.ref_linkbar , {
+                //     x : target.offsetLeft,
+                //     width : targetRect.width
+                // })
+
+            },50);
         },
 
         toggle() {

@@ -18,10 +18,11 @@
             </p>
 
             <div class="auth__controller" :class="{'st-show' : isShowHistoryButton}">
-                <ButtonUnderMask    class="auth__history-back"
-                                    text="이전 단계로"
-                                    @click="onClickHistoryButton"
-                />
+                <button class="auth__history-back hover-link"
+                        @click="onClickHistoryButton"
+                >
+                    <span>이전 단계로</span>
+                </button>
             </div>
 
             <div class="auth__content" ref="ref_content">
@@ -104,7 +105,6 @@
 <script>
 import gsap from 'gsap';
 import TextChangeMask               from '@/components/layout/TextChangeMask.vue';
-import ButtonUnderMask              from '@/components/button/ButtonUnderMask.vue';
 
 
 import AuthSelection                from './AuthSelection.vue';
@@ -124,7 +124,6 @@ export default {
     name : 'PlateAuth',
     components : {
         TextChangeMask,
-        ButtonUnderMask,
         AuthSelection,
         AuthExternal,
         AuthSigninForm,
@@ -625,7 +624,7 @@ export const authStore = {
 }
 
 .auth__title {
-    font-size: $SIZE_PC_fontsizeTitle;
+    font-size: $SIZE_PC_fontsize_title;
     font-weight: 300;
     text-align: center;
     display: flex;
@@ -635,7 +634,7 @@ export const authStore = {
 
     @include phone {
         width: 100%;
-        font-size: $SIZE_MO_fontsizeTitle;
+        font-size: $SIZE_MO_fontsize_title;
         // padding: 0 $SIZE_MO_innerPadding;
     }
 
@@ -646,7 +645,7 @@ export const authStore = {
 
 .auth__text {
     width: 100%;
-    font-size: $SIZE_PC_fontsizeLarge;
+    font-size: $SIZE_PC_fontsize_large;
     margin-top: 25px;
     text-align: center;
     // min-height: 30px;
@@ -657,7 +656,7 @@ export const authStore = {
 
     @include phone {
         margin-top: 13px;
-        font-size: $SIZE_MO_fontsizeDefault;
+        font-size: $SIZE_MO_fontsize_default;
         padding: 0 $SIZE_MO_innerPadding;
     }
 

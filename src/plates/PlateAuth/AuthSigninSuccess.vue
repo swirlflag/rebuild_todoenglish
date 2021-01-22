@@ -203,7 +203,7 @@ $green : #2cd62c;
 .auth__success__alert {
     margin-top: 50px;
     color: $green;
-    font-size: $SIZE_PC_fontsizeStrong;
+    font-size: $SIZE_PC_fontsize_strong;
     animation: appearY 600ms $EASE_outCubic 500ms both;
 
     .mask-text {

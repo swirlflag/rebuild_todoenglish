@@ -199,7 +199,7 @@ export default {
         display: inline-block;
         text-align: inherit;
 
-        background-color: rgba(50,255,50,0.2); &:nth-child(2) {background-color: rgba(255,0,50,0.2);}
+        // background-color: rgba(50,255,50,0.2); &:nth-child(2) {background-color: rgba(255,0,50,0.2);}
     }
 }
 

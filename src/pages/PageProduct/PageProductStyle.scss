@@ -50,10 +50,10 @@
             }
 
             p {
-                font-size: $SIZE_PC_fontsizeLarge;
+                font-size: $SIZE_PC_fontsize_large;
                 margin-top: 40px;
                 @include phone {
-                    font-size: $SIZE_MO_fontsizeLarge;
+                    font-size: $SIZE_MO_fontsize_large;
                     margin-top: 0;
                     height: auto;
                 }
@@ -297,16 +297,16 @@
         }
 
         .subscribe-notice__title {
-            font-size: $SIZE_PC_fontsizeLarge !important;
+            font-size: $SIZE_PC_fontsize_large !important;
             @include phone {
                 text-align: center;
-                font-size: $SIZE_MO_fontsizeTitle !important;
+                font-size: $SIZE_MO_fontsize_title !important;
             }
         }
 
         .subscribe-notice__precaution {
             margin-top: 18px;
-            font-size: $SIZE_PC_fontsizeSmall;
+            font-size: $SIZE_PC_fontsize_small;
             @include phone {
                 width: auto;
             }
@@ -321,7 +321,7 @@
 
     .subscribe-notice__price {
         padding: 40px 48px;
-        background-color: $COLOR_lightgray;
+        background-color: $COLOR_lightgray_1;
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
@@ -335,7 +335,7 @@
         }
 
         .subscribe-notice__price__unit {
-            font-size: $SIZE_PC_fontsizeLarge;
+            font-size: $SIZE_PC_fontsize_large;
             font-weight: 300;
         }
 
@@ -344,13 +344,13 @@
 
             @include phone {
                 width: 100%;
-                font-size: $SIZE_MO_fontsizeLarge;
+                font-size: $SIZE_MO_fontsize_large;
                 margin-bottom: 18px;
             }
         }
 
         .subscribe-notice__price__discount {
-            font-size: $SIZE_PC_fontsizeLarge;
+            font-size: $SIZE_PC_fontsize_large;
             margin-top:20px;
 
             @include phone {
@@ -362,15 +362,15 @@
             }
             .subscribe-notice__price__origin {
                 text-decoration: line-through;
-                color: #999;
+                color: $COLOR_gray;
             }
         }
         .subscribe-notice__price__result {
             margin-top: 4px;
-            font-size: $SIZE_PC_fontsizeTitle;
+            font-size: $SIZE_PC_fontsize_title;
             font-weight: 700;
             @include phone {
-                font-size: $SIZE_MO_fontsizeTitle;
+                font-size: $SIZE_MO_fontsize_title;
                 margin-left: auto;
                 margin-top: 0;
             }
@@ -390,10 +390,10 @@
     }
 
     .subscribe-compare__title {
-        font-size: $SIZE_PC_fontsizeTitle;
+        font-size: $SIZE_PC_fontsize_title;
         text-align: center;
         @include phone {
-            font-size: $SIZE_MO_fontsizeTitle;
+            font-size: $SIZE_MO_fontsize_title;
         }
     }
 
@@ -417,7 +417,7 @@
         table {
             width: 100%;
             @include phone {
-                font-size: $SIZE_MO_fontsizeStrong;
+                font-size: $SIZE_MO_fontsize_strong;
             }
             tr {
                 padding: 17px 0;

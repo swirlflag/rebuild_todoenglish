@@ -47,7 +47,7 @@ export default {
             isFocus : false,
             isMark : false,
 
-            value : '',
+            value : null,
         }
     },
     watch : {
@@ -66,11 +66,10 @@ export default {
 
 <style lang="scss" scoped>
 
-
-
-$PC_padding     : 20px;
-$PC_radius      : 8px;
+$PC_padding     : 18px 18px;
 $MO_padding     : 16px;
+
+$PC_radius      : 8px;
 $MO_radius      : 8px;
 
 .input--default {
@@ -78,6 +77,7 @@ $MO_radius      : 8px;
     position: relative;
     box-sizing: border-box;
     width: 100%;
+    line-height: inherit;
     @include hardSelect {
         letter-spacing: $SIZE_letterspacing_low;
     }
@@ -89,6 +89,7 @@ $MO_radius      : 8px;
     position: relative;
     display: inline-block;
     box-sizing: border-box;
+    line-height: inherit;
     border-radius: $PC_radius;
 
     .input__placeholder {
@@ -98,9 +99,12 @@ $MO_radius      : 8px;
         padding-left : $PC_padding + 2px;
         pointer-events: none;
         box-sizing: border-box;
-        color: #999;
+        background-color : transparent;
+        // line-height: 1em;
+        color: $COLOR_gray;
         opacity: 0;
         transform : translate3d(20px,0,0);
+        vertical-align: top;
         transition : transform 180ms $EASE_outCubic , opacity 150ms $EASE_outCubic , color 300ms ease;
 
         @include phone {
@@ -114,7 +118,7 @@ $MO_radius      : 8px;
     }
 
     .input__border {
-        // border: 1px solid $COLOR_linegray
+        // border: 1px solid $COLOR_linegray;
         border: 2px solid transparent;
         width: 100%; height: 100%;
         position: absolute;
@@ -123,11 +127,12 @@ $MO_radius      : 8px;
         border-radius: inherit;
         transition : border-color 180ms ease , transform 0ms ease 300ms;
         transform : scale(1.05) ;
+        background-color:transparent ;
     }
 
     input {
         border-radius: inherit;
-        background-color: #F5F5F7;
+        background-color:$COLOR_lightgray_2;
         border-radius: 8px;
         outline: none;
         padding: $PC_padding;
@@ -136,13 +141,17 @@ $MO_radius      : 8px;
         box-sizing: border-box;
         border: 1px solid $COLOR_linegray;
         transition : color 300ms ease;
+        line-height: inherit;
+        transition: background-color 350ms ease;
 
         @include phone {
             padding: $MO_padding;
         }
 
         &:focus {
+            // background-color: #;
             border: 1px solid rgba(52,45,81,0);
+            // border: 3px solid #d3d;
         }
 
         &::placeholder {

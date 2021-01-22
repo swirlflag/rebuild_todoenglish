@@ -84,8 +84,8 @@ export default {
     box-sizing: border-box;
 
     @include hardSelect {
-        color: #999;
-        font-size: $SIZE_MO_fontsizeDefault;
+        color: $COLOR_gray;
+        font-size: $SIZE_MO_fontsize_default;
     }
 
     @include phone {
@@ -184,9 +184,10 @@ export default {
             a {
                 display: flex;
                 i.fab {
+                    // border: 1px solid #d3d;
                     font-size: 20px;
                     margin-right: 4px;
-                    margin-top: -1px;
+                    // margin-top: -1px;
 
                     @include phone {
                         font-size: 34px;

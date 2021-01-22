@@ -46,15 +46,15 @@
 
         <div class="auth__signin-email__etc">
             <div class="auth__signin-email__etc__item">
-                <ButtonUnderMask    text="회원가입"
-                                    @click="$emit('change-phase', 'signupConsent')"
-                />
+                <button class="hover-link" @click="$emit('change-phase', 'signupConsent')">
+                    <span>회원가입</span>
+                </button>
             </div>
 
             <div class="auth__signin-email__etc__item">
-                <ButtonUnderMask    text="비밀번호 찾기"
-                                    @click="$emit('change-phase', 'findPassword')"
-                />
+                <button class="hover-link" @click="$emit('change-phase', 'findPassword')">
+                    <span>비밀번호 찾기</span>
+                </button>
             </div>
 
         </div>
@@ -94,14 +94,12 @@ import ButtonDefault            from '@/components/button/ButtonDefault.vue';
 import SpinnerColordotsWave     from '@/components/spinner/SpinnerColordotsWave.vue';
 import AlertFlashText           from '@/components/layout/AlertFlashText.vue';
 
-import ButtonUnderMask          from '@/components/button/ButtonUnderMask.vue';
 
 export default {
     props : {
         nowPhase : String,
     },
     components : {
-        ButtonUnderMask,
         InputDefault ,
         ButtonDefault ,
         SpinnerColordotsWave,

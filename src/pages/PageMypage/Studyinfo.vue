@@ -333,11 +333,11 @@ export default {
 }
 
 .study__subtitle {
-    font-size: $SIZE_PC_fontsizeLarge;
+    font-size: $SIZE_PC_fontsize_large;
     font-weight: bold;
 
     @include phone {
-        font-size: $SIZE_MO_fontsizeLarge;
+        font-size: $SIZE_MO_fontsize_large;
     }
 }
 
@@ -346,17 +346,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     @include phone {
-        font-size: $SIZE_MO_fontsizeStrong;
+        font-size: $SIZE_MO_fontsize_strong;
     }
 
     .study__info__nickname {
-        font-size: $SIZE_PC_fontsizeTitle;
+        font-size: $SIZE_PC_fontsize_title;
         width: 100%;
         margin-bottom: 13px;
         // border: 1px solid #d3d;
 
         @include phone {
-            font-size: $SIZE_MO_fontsizeTitle;
+            font-size: $SIZE_MO_fontsize_title;
         }
 
         > .mask-text {
@@ -632,7 +632,7 @@ export default {
                         justify-content: space-between;
                         align-items: start;
                         margin-left: $SIZE_MO_innerPadding;
-                        font-size: $SIZE_MO_fontsizeStrong;
+                        font-size: $SIZE_MO_fontsize_strong;
                     }
 
                     > span {
