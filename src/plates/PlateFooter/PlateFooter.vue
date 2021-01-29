@@ -7,12 +7,14 @@
                 <div class="footer__copyright">
                     ⓒ 2018 Enuma, Inc. All Rights Reserved.
                 </div>
-                <ul class="footer__notice-links">
+
+                <ul class="footer__link-list footer__notice">
                     <li><a href="#" class="hover-link"><span>이용약관</span></a></li>
                     <li><a href="#" class="hover-link"><span>개인정보처리방침</span></a></li>
                     <li><a href="#" class="hover-link"><span>법적고지</span></a></li>
                 </ul>
-                <ul class="footer__sns-links">
+
+                <ul class="footer__link-list footer__sns">
                     <li>
                         <a href="#" class="hover-link">
                             <i class="fab fa-instagram"></i>
@@ -82,6 +84,7 @@ export default {
     justify-self: flex-end;
     padding: 60px 0 75px;
     box-sizing: border-box;
+    line-height: $SIZE_lineheight_high2;
 
     @include hardSelect {
         color: $COLOR_gray;
@@ -90,12 +93,12 @@ export default {
 
     @include phone {
         overflow: hidden;
+        line-height: $SIZE_lineheight_high2;
     }
 
     .footer__inner {
         margin: 0 auto;
-        // width: 100%;
-        width: $SIZE_PC_contentWidth;
+        max-width: $SIZE_PC_contentWidth;
         padding: 0 $SIZE_PC_innerPadding;
         box-sizing: border-box;
 
@@ -107,7 +110,10 @@ export default {
     }
 
     a {
-        padding: 0.07em 0.1em;
+        // line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        vertical-align: top;
         @include hover {
             font-weight: 700;
         }
@@ -149,53 +155,45 @@ export default {
         }
     }
 
-    .footer__notice-links {
-        display: flex;
-        @include phone {
-            margin-top:10px;
-        }
+    .footer__link-list {
+        display:flex;
         li {
             display: flex;
-            align-items: center;
-            & + li {
-                &::before {
-                    content: '';
-                    display: inline-block;
-                    width: 1px; height: 12px;
-                    background-color: #F2F0E9;
-                    margin-left: 15px;
-                    margin-right: 15px;
-                }
-            }
-        }
-    }
-
-    .footer__sns-links{
-        display: flex;
-        @include phone {
-            order : -1;
-        }
-
-        li {
-            & + li {
-                margin-left: 25px;
-            }
 
             a {
                 display: flex;
                 i.fab {
-                    // border: 1px solid #d3d;
                     font-size: 20px;
                     margin-right: 4px;
-                    // margin-top: -1px;
-
                     @include phone {
                         font-size: 34px;
                     }
                 }
             }
         }
+    }
 
+    .footer__notice {
+        li + li {
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 1px; height: 12px;
+                background-color: #F2F0E9;
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+        }
+    }
+
+    .footer__sns{
+        display: flex;
+        @include phone {
+            order : -1;
+        }
+        li + li {
+            margin-left: 25px;
+        }
     }
 
 }
@@ -204,11 +202,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    line-height: $SIZE_lineheight_high1;
 
-    @include phone {
-        line-height: $SIZE_lineheight_high2;
-    }
 
     > div {
         margin-right: 30px;

@@ -1,7 +1,6 @@
 
 $EASE_inCubic       : cubic-bezier(0.32, 0, 0.67, 0);
 $EASE_inExpo        : cubic-bezier(0.7, 0, 0.84, 0);
-
 $EASE_outCubic      : cubic-bezier(0.33, 1, 0.68, 1);
 $EASE_outQuart      : cubic-bezier(0.25, 1, 0.5, 1);
 $EASE_outQuint      : cubic-bezier(0.22, 1, 0.36, 1);
@@ -9,7 +8,6 @@ $EASE_outExpo       : cubic-bezier(0.16, 1, 0.3, 1);
 $EASE_outBack       : cubic-bezier(0.34, 1.56, 0.64, 1);
 $EASE_outBack2      : cubic-bezier(.34,2.05,.56,.97);
 $EASE_outBack3      : cubic-bezier(.4,2.5,.42,.73);
-
 $EASE_inOutSine     : cubic-bezier(0.37, 0, 0.63, 1);
 $EASE_inOutCubic    : cubic-bezier(0.65, 0, 0.35, 1);
 $EASE_inOutQuint    : cubic-bezier(0.83, 0, 0.17, 1);
@@ -50,24 +48,24 @@ $SIZE_letterspacing_shorter     : -0.09em;
 
 $SIZE_PC_footerMargin : 160px;
 
-$COLOR_navy_1       : #342d51;
-$COLOR_navy_2       : #372c77;
-$COLOR_violet_1     : #9857db;
-$COLOR_mint_1       : #15ab99;
-$COLOR_pink_1       : #f7419c;
-$COLOR_orange_1     : #E5801B;
-$COLOR_blue_1       : #1D8BCF;
+$COLOR_navy_1           : rgba(52,45,81,1);
+$COLOR_navy_2           : rgba(55,44,119,1);
+$COLOR_violet_1         : rgba(152,87,219,1);
+$COLOR_mint_1           : rgba(21,171,153,1);
+$COLOR_pink_1           : rgba(247,65,156,1);
+$COLOR_orange_1         : rgba(229,128,27,1);
+$COLOR_blue_1           : rgba(29,139,207,1);
 
-$COLOR_offWhite     : #f2f0e9;
-$COLOR_lightgray_1    : #F9F9F9;
-$COLOR_lightgray_2    : #F5F5F7;
-$COLOR_gray         : #979797;
-$COLOR_linegray     : rgba(52, 45, 81, 0.15);
+$COLOR_offWhite         : rgba(242,240,233,1);
+$COLOR_lightgray_1      : rgba(249,249,249,1);
+$COLOR_lightgray_2      : rgba(245,245,247,1);
+$COLOR_gray             : rgba(151,151,151,1);
+$COLOR_linegray         : rgba(52,45,81,0.15);
 
-$COLOR_kakaoBrown   : #3C1E1E;
-$COLOR_kakaoYellow  : #FAE100;
+$COLOR_kakaoBrown       : rgba(60,30,30,1);
+$COLOR_kakaoYellow      : rgba(250,225,0,1);
 
-$COLOR_laterBlue    : rgba(0, 119, 255, 0.877);
+$COLOR_laterBlue        : rgba(0, 119, 255, 0.877);
 
 $SIZE_PC_gnbHeight : 114px;
 $SIZE_MO_gnbHeight : 64px;

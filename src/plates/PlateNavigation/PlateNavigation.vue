@@ -3,6 +3,10 @@
     <nav id="plate--navigation" class="plate">
 
         <NavigationGnb
+            v-if="0"
+        />
+
+        <NavigationGnb2
             v-if="1"
         />
 
@@ -13,11 +17,15 @@
 <script>
 
 import NavigationGnb , { gnbStore } from '@/plates/PlateNavigation/NavigationGnb.vue';
+import NavigationGnb2 from '@/plates/PlateNavigation/NavigationGnb2.vue';
 // import NavigationMenu   from '@/components/navigation/NavigationMenu.vue';
 
 export default {
     name : 'PlateNavigation',
-    components : { NavigationGnb }
+    components : {
+        NavigationGnb,
+        NavigationGnb2
+    }
 }
 
 export const navStore = {

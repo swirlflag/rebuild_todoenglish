@@ -186,4 +186,11 @@
     }
 
 
+    &.icon--logoschool {
+        width: 20px; height: 20px;
+        background-image: url('~@/assets/logo/logo_school.svg');
+        &.c-white { background-image: url('~@/assets/logo/logo_school_white.svg');}
+    }
+
+
 }
