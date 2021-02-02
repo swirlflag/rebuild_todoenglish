@@ -3,10 +3,14 @@
     <nav id="plate--navigation" class="plate">
 
         <NavigationGnb
-            v-if="0"
+            v-if="1"
         />
 
         <NavigationGnb2
+            v-if="0"
+        />
+
+        <Scrollbar
             v-if="1"
         />
 
@@ -16,15 +20,17 @@
 
 <script>
 
-import NavigationGnb , { gnbStore } from '@/plates/PlateNavigation/NavigationGnb.vue';
-import NavigationGnb2 from '@/plates/PlateNavigation/NavigationGnb2.vue';
+import NavigationGnb , { gnbStore }     from './NavigationGnb.vue';
+import Scrollbar                        from './Scrollbar.vue';
+import NavigationGnb2                   from '@/plates/PlateNavigation/NavigationGnb2.vue';
 // import NavigationMenu   from '@/components/navigation/NavigationMenu.vue';
 
 export default {
-    name : 'PlateNavigation',
+    name : 'NavagationGnb',
     components : {
         NavigationGnb,
-        NavigationGnb2
+        NavigationGnb2,
+        Scrollbar
     }
 }
 

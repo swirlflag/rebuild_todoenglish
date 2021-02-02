@@ -1,5 +1,5 @@
 <template>
-    <div    class="nav-gnb"
+    <div    id="nav-gnb"
             :class="`${useTransition ? 'use-trs' : ''}${$user.isSignin ? ' is-login' : ''}${isOpenMenu ? ' st-open-menu' : ''}${isOpenAccount ? ' st-open-account' : ''}${isReduce ? ' st-reduce' : ''}${themeClear ? ' type-clear' : ''}${themeWhite ? ' color-white' : ''}`"
     >
 
@@ -19,7 +19,7 @@
 
                 <ul class="nav-gnb__links">
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/" exact>토도영어 소개</router-link></li>
-                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/2" exact>멤버십 후기</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/review" exact>멤버십 후기</router-link></li>
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/curriculum">커리큘럼</router-link></li>
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/product" exact>멤버십 가입</router-link></li>
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/4" exact>도움말</router-link></li>
@@ -188,7 +188,7 @@ $SIZE_MO_linkDistance : 15px;
     };
 };
 
-.nav-gnb {
+#nav-gnb {
 
     z-index: 1100;
     font-size: 16px;

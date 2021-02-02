@@ -3,20 +3,26 @@ import VueRouter from 'vue-router';
 import store from '@/store';
 import { VM } from '@/main.js';
 
-{store}
-
 Vue.use(VueRouter);
 
 const routerInfo = {
     mode : 'history',
+    base : process.env.BASE_URL,
     routes : [
 
 
-    // 메인
+    // 메인 (토도영어 소개)
         {
             path : '/',
             name : 'main',
             component : () => import('@/pages/PageMain/PageMain.vue'),
+        },
+
+    // 멤버십 후기
+        {
+            path : '/review',
+            name : 'review',
+            component : () => import('@/pages/PageReview/PageReview.vue'),
         },
 
 

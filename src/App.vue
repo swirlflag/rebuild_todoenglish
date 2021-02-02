@@ -2,6 +2,8 @@
     <div    id="app"
             :class="`${appClassNamePage} ${appClassNameBrowser} ${appClassNameOS} ${appClassNameDevice} ${appClassNameTouchdevice}`"
     >
+
+
         <PlateSetting/>
 
         <PlateTest
@@ -54,7 +56,7 @@ import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
 export default {
     name: 'App',
     components: {
-        PlateSetting, PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth
+        PlateSetting, PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth ,
     },
     data() {
         return {

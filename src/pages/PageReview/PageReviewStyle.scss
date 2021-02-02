@@ -1,0 +1,30 @@
+
+
+.layout {
+
+}
+
+.layout__content {
+    display: flex;
+    border: 1px solid #000;
+    flex-direction: column;
+
+    > * {
+        display: inline-block;
+        width: 100%;
+        max-width: $SIZE_PC_contentWidth;
+        padding: 0 $SIZE_PC_innerPadding;
+        margin: 0 auto;
+        border: 1px solid #000;
+
+        @include phone {
+            max-width: 100%;
+            // padding: 0 $SIZE_;
+        }
+
+        &.layout__break {
+            max-width: unset;
+            padding: unset;
+        }
+    }
+}

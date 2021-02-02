@@ -3,16 +3,25 @@ html , body {
     // @include phone {
     //     overflow-x: hidden;
     // }
+    overflow: overlay;
     -webkit-overflow-scrolling: touch !important;
 }
 
-body {
-    overflow: overlay;
-    @include hardSelect {
 
+body {
+    &::-webkit-scrollbar {
+        // opacity: 0.5;
+    }
+    &::-webkit-scrollbar-thumb {
+
+    }
+    &::-webkit-scrollbar-track {
+
+    }
+
+    @include hardSelect {
         font-style: normal;
         // text-rendering: optimizeLegibility;
-        // overflow-x: overlay;
         box-sizing: border-box;
         // font-family: 'Apple SD Gothic Neo', 'Spoqa Han Sans', 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
         // font-family: 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
