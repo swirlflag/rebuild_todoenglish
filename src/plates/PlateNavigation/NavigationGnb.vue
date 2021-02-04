@@ -114,9 +114,9 @@ export default {
             this.closeMenu();
         },
         '$store.state.$nav' : {
-            handler({is_clearGnb ,is_whiteGnb}) {
-                this.themeClear = is_clearGnb;
-                this.themeWhite = is_whiteGnb;
+            handler({is_clear ,is_white}) {
+                this.themeClear = is_clear;
+                this.themeWhite = is_white;
             },
             deep: true,
         }
@@ -157,21 +157,21 @@ export default {
 
 export const gnbStore = {
     state : {
-        is_clearGnb   : false,
-        is_whiteGnb   : true,
+        is_clear   : false,
+        is_white   : true,
     },
     mutations : {
         GNB_useClear(state) {
-            state.$nav.is_clearGnb = true;
+            state.$nav.is_clear = true;
         },
         GNB_unuseClear(state) {
-            state.$nav.is_clearGnb = false;
+            state.$nav.is_clear = false;
         },
         GNB_useWhite(state) {
-            state.$nav.is_whiteGnb = true;
+            state.$nav.is_white = true;
         },
         GNB_unuseWhite(state) {
-            state.$nav.is_whiteGnb = false;
+            state.$nav.is_white = false;
         }
     }
 }

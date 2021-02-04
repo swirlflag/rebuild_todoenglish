@@ -42,7 +42,7 @@
             >
             </span>
 
-            <span class="button__particle" ref="ref_particle" :class="{'st-show' : stateAnimate.isRun}" v-if="particle">
+            <span class="button__particle" ref="ref_particle" :class="{'st-show' : stateAnimate.isRun}" v-show="useParticle">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -97,6 +97,8 @@ export default {
             isHover : false,
             isFocus : false,
 
+            useParticle : this.particle || false,
+
             stateAnimate : {
                 isRun : false
             },
@@ -118,6 +120,7 @@ export default {
             tl.pause();
 
             const finishLength = this.ref_particles.length;
+
             let particleCompleteCount = 0;
 
             const staggerTime = 0.007;
@@ -219,7 +222,7 @@ export default {
             this.$refs.ref_root && this.$refs.ref_root.blur();
         },
         onClick(e) {
-            if(this.particle){
+            if(this.useParticle){
                 this.clickAnimate();
             }
             setTimeout(() => {
@@ -228,7 +231,7 @@ export default {
             },120)
         },
         bindParticle() {
-            if(this.particle){
+            if(this.useParticle){
                 this.ref_particles = this.$refs.ref_particle.querySelectorAll('span');
             }
         }

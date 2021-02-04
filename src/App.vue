@@ -1,6 +1,7 @@
 <template>
     <div    id="app"
-            :class="`${appClassNamePage} ${appClassNameBrowser} ${appClassNameOS} ${appClassNameDevice} ${appClassNameTouchdevice}`"
+            ref="ref_root"
+            :class="`${appClassNamePage} ${appClassNameBrowser} ${appClassNameOS} ${appClassNameDevice} ${appClassNameTouchdevice} ${appClassNameStateFreeze}`"
     >
 
 
@@ -19,7 +20,7 @@
         />
 
         <!-- <transition name="plate--auth">
-            
+
         </transition> -->
 
         <PlateAuth
@@ -62,6 +63,8 @@ export default {
         return {
             // before
             // useAuthField : false,
+
+            isFreeze : false,
         }
     },
     computed : {
@@ -83,6 +86,10 @@ export default {
         appClassNameTouchdevice() {
             return this.$store.state.is_touchDevice ? 'use_touch' : 'unuse_touch';
         },
+        appClassNameStateFreeze() {
+            return this.$store.state.$app.is_freeze ? 'st-freeze' : '';
+        },
+
     },
     watch : {
         '$store.state.is_pageScrollLock'(now){
@@ -91,7 +98,6 @@ export default {
         '$route.path'() {
             window.scrollTo(0,0);
         },
-
     },
     methods : {
         detectScrollDirectionNav(e) {
@@ -110,6 +116,23 @@ export default {
         window.removeEventListener('scroll' , this.detectScrollDirectionNav)
     }
 }
+
+export const appStore = {
+    name : '$app',
+    state : {
+        is_freeze : false,
+    },
+    mutations : {
+        APP_freeze(state) {
+            state.$app.is_freeze = true;
+        },
+        APP_unfreeze(state) {
+            state.$app.is_freeze = false;
+        }
+    }
+
+}
+
 </script>
 
 <style scoped lang="scss" >
@@ -118,5 +141,9 @@ export default {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+
+    &.st-freeze {
+        user-select: none !important;
+    }
 }
 </style>
