@@ -21,6 +21,7 @@ body {
         word-break: keep-all;
         // font-weight: 300;
         font-family: 'Spoqa Han Sans', 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
+
         font-size: $SIZE_PC_fontsize_default;
         letter-spacing: $SIZE_letterspacing_default;
         color: $COLOR_navy_1;
@@ -115,6 +116,10 @@ body {
         margin-left : auto;
         margin-right :auto;
         width: $SIZE_PC_contentWidth;
+
+        > * {
+            border: 1px solid #d3d !important;
+        }
 
         @include phone {
             // padding: 0;
@@ -529,4 +534,43 @@ body {
 .prefix--asterisk::before{
     content : '*';
     top: 0.2em;
+}
+
+.prefix--dot::before{
+    content : '•';
+}
+
+
+.layout {
+
+}
+
+.layout__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > * {
+        display: inline-block;
+        width: 100%;
+        max-width: $SIZE_PC_contentWidth;
+        padding: 0 $SIZE_PC_innerPadding;
+        box-sizing: border-box;
+        // margin: 0 auto;
+
+        @include phone {
+            max-width: $SIZE_MO_contentWidth;
+            padding : 0 $SIZE_MO_innerPadding;
+        }
+
+        &.layout__escape {
+            max-width: unset;
+            padding: unset;
+
+            @include phone {
+                border: 1px solid #000;
+            }
+        }
+    }
 }

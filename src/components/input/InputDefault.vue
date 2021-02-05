@@ -69,7 +69,7 @@ export default {
 $PC_padding     : 18px 18px;
 $MO_padding     : 16px;
 
-$PC_radius      : 8px;
+$PC_radius      : 20px;
 $MO_radius      : 8px;
 
 .input--default {

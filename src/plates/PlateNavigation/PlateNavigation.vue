@@ -3,11 +3,11 @@
     <nav id="plate--navigation" class="plate">
 
         <NavigationGnb
-            v-if="1"
+            v-if="0"
         />
 
         <NavigationGnb2
-            v-if="0"
+            v-if="1"
         />
 
         <Scrollbar

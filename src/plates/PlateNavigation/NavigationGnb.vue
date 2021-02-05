@@ -1,6 +1,6 @@
 <template>
     <div    id="nav-gnb"
-            :class="`${useTransition ? 'use-trs' : ''}${$user.isSignin ? ' is-login' : ''}${isOpenMenu ? ' st-open-menu' : ''}${isOpenAccount ? ' st-open-account' : ''}${isReduce ? ' st-reduce' : ''}${themeClear ? ' type-clear' : ''}${themeWhite ? ' color-white' : ''}`"
+            :class="`${useTransition ? 'use-trs' : ''}${$user.isSignin ? ' is-login' : ''}${isOpenMenu ? ' st-open-menu' : ''}${isOpenAccount ? ' st-open-account' : ''}${isReduce ? ' st-reduce' : ''}${themeClear ? ' type-clear' : ''}${themeWhite ? ' color-white' : ''} ${isHide ? 'st-hide' : ''}`"
     >
 
         <div class="nav-gnb__wrap">
@@ -87,6 +87,7 @@ export default {
             isOpenMenu          : false,
             isOpenAccount       : false,
             isReduce            : false,
+            isHide              : false,
 
             useTransition       : true,
 
@@ -95,6 +96,8 @@ export default {
 
             themeClear     : false,
             themeWhite     : true,
+
+            beforeScrollY : window.scrollY,
 
         }
     },
@@ -144,14 +147,23 @@ export default {
             this.closeMenu();
             this.$store.dispatch('openAuthPanel')
         },
+
+
+        onScrollWindow() {
+            const Y = window.scrollY;
+            this.isHide = this.beforeScrollY < Y ;
+            this.beforeScrollY = Y;
+        },
+
     },
     mounted () {
-        // setInterval(() => {
-        //     console.log(this.useTransition);
-        // },1000)
         this.closeMenu();
-        window.addEventListener('resize' , this.closeMenu)
-
+        window.addEventListener('resize' , this.closeMenu);
+        window.addEventListener('scroll' , this.onScrollWindow);
+    },
+    destroyed() {
+        window.removeEventListener('resize' , this.closeMenu);
+        window.removeEventListener('scroll' , this.onScrollWindow);
     }
 }
 
@@ -238,6 +250,15 @@ $SIZE_MO_linkDistance : 15px;
     }
     &.st-reduce:not(.st-open-menu){
         transform : translateY(-100%);
+    }s
+
+    &.st-hide {
+        transform: translate3d(0,-100%,0);
+        transition  : background-color 250ms ease 100ms
+                    , height 400ms $EASE_outQuart
+                    , transform 400ms $EASE_outCubic 500ms
+                    , box-shadow 500ms ease
+                    ;
     }
     .icon {
         transition : background-image 300ms ease ;

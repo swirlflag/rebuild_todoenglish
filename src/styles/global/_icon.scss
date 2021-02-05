@@ -193,4 +193,14 @@
     }
 
 
+    &.icon--key {
+        width: 26px; height: 14px;
+        background-image: url('~@/assets/icon/icon_key.svg');
+    }
+    &.icon--lock {
+        width: 17px ; height: 20px;
+        background-image: url('~@/assets/icon/icon_lock.svg');
+    }
+
+
 }
