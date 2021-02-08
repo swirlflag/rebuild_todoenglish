@@ -67,12 +67,15 @@
 const API_tryLogin = (signData = {id: '' , password : ''}) => {
 
     const { id, password } = signData;
-    {id,password}
+    {id, password}
+
+    const username = id.split('@')[0];
+
     // (대충 siginData로 서버랑 통신하는코드)
 
     // (대충 랜덤으로로그인시도하기)
     const serverResult = randomOne(
-        {result : true , data : { username : id }},
+        {result : true , data : {  id , username }},
         {result: false, errorCode : 'ID' },
         {result: false, errorCode : 'PW' },
     );
@@ -81,7 +84,7 @@ const API_tryLogin = (signData = {id: '' , password : ''}) => {
         try {
             setTimeout(() => {
                 resolve(serverResult);
-            },2000)
+            },1000)
         }catch(error) {
             reject(error);
         }
@@ -217,7 +220,7 @@ export default {
         },
         loginSuccess(data) {
             this.$emit('change-phase' , 'signinSuccess');
-            this.$store.dispatch('siginIn' , data);
+            this.$store.dispatch('signIn' , data);
         },
         loginFail(errorCode) {
             if(errorCode === "ID"){

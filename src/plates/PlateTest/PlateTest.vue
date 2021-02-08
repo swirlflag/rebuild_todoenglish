@@ -5,11 +5,11 @@
     >
         <div id="test__log">
 
-
-
-
-
             <button id="test_scrollock" @click="TEST_scrollock">scrollock</button>
+            <div>
+                스크롤잠금 :
+                {{$store.state.is_pageScrollLock}}
+            </div>
 
             <br>
 
@@ -19,15 +19,15 @@
 
             <br>
 
-            <button @click="TEST_toggleAuthPlate"> toggle auth</button>
+            <button @click="TEST_toggleAuthPlate">인증창 호출</button>
 
+            <br>
+
+            <button @click="TEST_switchAuth">한방에 로그인/로그아웃</button>
             <div>
-
-                {{
-                    $store.state.is_pageScrollLock
-                }}
+                로그인 유무 :
+                {{$store.state.$user.is_login}}
             </div>
-
 
             <div id="testlog1"></div>
             <div id="testlog2"></div>
@@ -54,7 +54,7 @@ export default {
     data() {
         let useTest = false;
 
-        // useTest = true;
+        useTest = true;
 
         return {
             useTest,
@@ -67,6 +67,29 @@ export default {
         }
     },
     methods : {
+
+        TEST_switchAuth() {
+            this.$store.dispatch('closeAuthPanel');
+
+            if(this.$store.state.$user.is_login){
+                this.$store.dispatch('signOut');
+            }else {
+                this.$store.dispatch('showModalAlert' , {
+                    title : '이렇게 로그인합니다.',
+                    message : `
+                        id : hanbang@gmail.com
+                        <br> username : hanbang
+                    `,
+                    close : () => {
+                        this.$store.dispatch('signIn' , {
+                            id : 'hanbang@gmail.com',
+                            username : 'hanbang',
+                        });
+                    }
+                });
+            }
+        },
+
         TEST_scrollock() {
             if(this.$store.state.is_pageScrollLock){
                 this.$store.commit('SCROLL_unlock')
@@ -92,7 +115,7 @@ export default {
             this.$store.dispatch('showModalAlert' , payload);
         },
         TEST_toggleAuthPlate() {
-            if(this.$store.state.$auth.is_openAuth){
+            if(this.$store.state.$auth.is_open){
                 this.$store.commit('AUTH_close');
             }else {
                 this.$store.commit('AUTH_open');
@@ -135,8 +158,9 @@ export default {
     position: fixed;
     top: 0; left: 0;
     z-index: 99999999;
+    
     @include hardSelect {
-        font-size: 14px !important;
+        font-size: 12px !important;
     }
     &.st-hide {
         opacity: 0 !important;

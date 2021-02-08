@@ -1,6 +1,6 @@
 <template>
     <div    id="nav-gnb"
-            :class="`${useTransition ? 'use-trs' : ''}${$user.isSignin ? ' is-login' : ''}${isOpenMenu ? ' st-open-menu' : ''}${isOpenAccount ? ' st-open-account' : ''}${isReduce ? ' st-reduce' : ''}${themeClear ? ' type-clear' : ''}${themeWhite ? ' color-white' : ''} ${isHide ? 'st-hide' : ''}`"
+            :class="`${useTransition ? 'use-trs' : ''}${$user.is_login ? ' is-login' : ''}${isOpenMenu ? ' st-open-menu' : ''}${isOpenAccount ? ' st-open-account' : ''}${isReduce ? ' st-reduce' : ''}${themeClear ? ' type-clear' : ''}${themeWhite ? ' color-white' : ''} ${isHide ? 'st-hide' : ''}`"
     >
 
         <div class="nav-gnb__wrap">
@@ -31,7 +31,7 @@
                         <div class="nav-gnb__link--user">
                             <span class="icon icon--account" :class="{'c-white' : whiteCondition}"></span>
                             <div class="nav-gnb__account__parents" >
-                                <router-link v-if="$user.isSignin" to="/mypage" exact class="style-gnb-link hover-underline color-white"> Parents </router-link>
+                                <router-link v-if="$user.is_login" to="/mypage" exact class="style-gnb-link hover-underline color-white"> Parents </router-link>
                                 <span v-else @click.prevent="TEST_OPENAUTH" class="style-gnb-link hover-underline color-white"> Sign in </span>
                             </div>
                             <router-link to="/mypage" class="nav-gnb__account__username style-gnb-link hover-underline color-white">
@@ -83,7 +83,7 @@ export default {
     name : 'NavagationGnb',
     data() {
         return {
-            isLogin             : true,
+            is_login             : true,
             isOpenMenu          : false,
             isOpenAccount       : false,
             isReduce            : false,

@@ -20,9 +20,9 @@
 
 <script>
 
-import NavigationGnb , { gnbStore }     from './NavigationGnb.vue';
+import NavigationGnb , {gnbStore}      from './NavigationGnb.vue';
 import Scrollbar                        from './Scrollbar.vue';
-import NavigationGnb2                   from '@/plates/PlateNavigation/NavigationGnb2.vue';
+import NavigationGnb2  , {gnbStore2}     from '@/plates/PlateNavigation/NavigationGnb2.vue';
 // import NavigationMenu   from '@/components/navigation/NavigationMenu.vue';
 
 export default {
@@ -37,6 +37,7 @@ export default {
 export const navStore = {
     name : '$nav',
     gnbStore,
+    gnbStore2,
 }
 
 </script>

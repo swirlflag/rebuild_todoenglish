@@ -78,6 +78,9 @@ export default {
         },
 
         onMouseUpWindow() {
+            if(!this.isGrab){
+                return
+            }
             this.isGrab = false;
             this.$store.commit('APP_unfreeze');
         },
@@ -88,7 +91,6 @@ export default {
             }
 
             const CY = e.clientY;
-
             const nowRatio = 1/this.WH * CY;
             const targetY = this.FH * nowRatio - (this.WH*this.grabStartRatio);
 

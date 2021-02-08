@@ -7,6 +7,7 @@
     width: 10px; height: 10px;
 
     &.icon--account {
+        width: 25px; height: 30px;
         background-image: url('~@/assets/icon/icon_account_person.svg');
         &.c-white {background-image: url('~@/assets/icon/icon_account_person_white.svg')}
     }

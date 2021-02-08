@@ -1,136 +1,141 @@
 <template>
     <div    ref="ref_root"
             class="nav-gnb"
-            :class="{'st-openmenu' : isOpenMenu , 'dt-login' : isLogin}"
+            :class="{'st-openmenu' : $store.state.$nav.is_openGnb , 'dt-login' : isLogin}"
     >
 
-        <div class="gnb__concise" ref="ref_concise">
-            <router-link to="/" class="gnb__logo">
-                <span class="icon icon--logoschool c-white"></span>
-                <span class="typo--todoenglish"></span>
-            </router-link>
+        <div class="gnb__dimmed" @click="closeMenu"></div>
 
-            <div class="gnb__storage">
-                <div class="gnb__emphasis">
-                </div>
-                <div class="gnb__user">user</div>
+        <div class="gnb__wrap" ref="ref_wrap">
+            <div class="gnb__concise" ref="ref_concise">
+                <router-link to="/" class="gnb__logo">
+                    <span class="icon icon--logoschool c-white"></span>
+                    <span class="typo--todoenglish"></span>
+                </router-link>
 
-                <div class="testt" @click="TEST_tooglelogin">
-                    auth
-                </div>
-                <div class="gnb__menu" @click="toggleMenu">MENU</div>
-            </div>
-        </div>
-
-        <div class="gnb__pannel" ref="ref_pannel">
-
-            <div class="gnb__pannel__block">
-                <div class="gnb__public">
-                    <span class="gnb__public__focus">focus</span>
-                    <ul class="gnb__public__list">
-                        <li class="gnb__public__item">
-                            <router-link to="#">
-                                <span class="gnb__public__number">01</span>
-                                <span class="gnb__public__name">멤버십 후기</span>
-                            </router-link>
-                        </li>
-                        <li class="gnb__public__item">
-                            <router-link to="#">
-                                <span class="gnb__public__number">02</span>
-                                <span class="gnb__public__name">커리큘럼 안내</span>
-                            </router-link>
-                        </li>
-                        <li class="gnb__public__item">
-                            <router-link to="#">
-                                <span class="gnb__public__number">03</span>
-                                <span class="gnb__public__name">이용하기</span>
-                            </router-link>
-                        </li>
-                        <li class="gnb__public__item">
-                            <router-link to="#">
-                                <span class="gnb__public__number">04</span>
-                                <span class="gnb__public__name">도움말</span>
-                            </router-link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="gnb__pannel__block">
-                <div    class="gnb__private"
-                >
-
-                    <div    class="gnb__private__title"
-                    >
-                        <span class="icon icon--lock"></span>
-                        {{
-                            isLogin ? `${$store.state.$user.username}님, 안녕하세요!` : '로그인이 필요합니다'
-                        }}
+                <div class="gnb__storage">
+                    <div class="gnb__emphasis">
                     </div>
-
-                    <ul class="gnb__private__list">
-                        <li class="gnb__private__item">
-                            <router-link to="#">계정 관리</router-link>
-                        </li>
-                        <li class="gnb__private__item">
-                            <router-link to="#">학습 정보 열람</router-link>
-                        </li>
-                        <li class="gnb__private__item gnb__auth">
-                            <router-link to="#" style="">
-                                <span class="icon icon--key"></span>
-                                {{
-                                    isLogin ? '로그아웃' : '로그인'
-                                }}
-                            </router-link>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="gnb__banner">
-                    <div class="gnb__banner__badge">
-                        <span>New Event!</span>
+                    <div class="gnb__user">
+                        <span class="gnb__user__dot"></span>
+                        <span class="icon icon--account c-white"></span>
                     </div>
-                    <div class="gnb__banner__source">
-                        <div class="image-box">
-                            <img src="@/assets/illust/rocket_purple.svg" alt="">
+                    <button class="gnb__menu" @click="toggleMenu">
+                        <div class="gnb__menu__icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="gnb__pannel" ref="ref_pannel">
+
+                <div class="gnb__pannel__block">
+                    <div class="gnb__public">
+                        <span class="gnb__public__focus">focus</span>
+                        <ul class="gnb__public__list" ref="ref_public">
+
+                            <template v-for="(item,idx) in gnbData.public">
+                                <li :key="idx" class="gnb__public__item">
+                                    <router-link :to="item.to">
+                                        <span class="gnb__public__number">
+                                            0{{ idx+1}}
+                                        </span>
+                                        <span class="gnb__public__name">
+                                            {{ item.name }}
+                                        </span>
+                                    </router-link>
+                                </li>
+                            </template>
+                        </ul>
                     </div>
-                    <p class="gnb__banner__content">
-                        <strong>월 32,500원</strong>으로 꺼내는
-                        <br>우리 아이 영어 자신감!
-                    </p>
                 </div>
 
-                <div class="gnb__etc">
+                <div class="gnb__pannel__block">
+                    <div    class="gnb__private"
+                    >
 
-                    <a href="#" class="gnb__etc__enuma">
-                        <span class="gnb__etc__enuma__copy">Empower ALL Children</span>
-                        <span class="gnb__etc__enuma__detail" >에누마 공식 홈페이지</span>
-                    </a>
+                        <div    class="gnb__private__title"
+                        >
+                            <span class="icon icon--lock"></span>
+                            {{
+                                isLogin ? `${$store.state.$user.username}님, 안녕하세요!` : '로그인이 필요합니다'
+                            }}
+                        </div>
 
-                    <ul class="gnb__etc__sns">
-                        <li class="gnb__etc__sns__item">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </li>
-                        <li class="gnb__etc__sns__item">
-                            <a href="#"><i class="fab fa-facebook-square"></i></a>
-                        </li>
-                        <li class="gnb__etc__sns__item">
-                            <a href="#"><i class="fab fa-twitter-square"></i></a>
-                        </li>
-                        <li class="gnb__etc__sns__item">
-                            <a href="#"><i class="fab fa-youtube-square"></i></a>
-                        </li>
-                    </ul>
+                        <ul class="gnb__private__list" ref="ref_private">
 
-                    <p class="gnb__etc__copyright">
-                        ⓒ 2018 Enuma, Inc. All Rights Reserved.
-                    </p>
+                            <template v-for="(item,idx) in gnbData.private">
+                                <li :key="idx" class="gnb__private__item">
+                                    <router-link to="#">
+                                        {{ item.name }}
+                                    </router-link>
+                                </li>
+                            </template>
+
+                            <li class="gnb__private__item gnb__auth"
+                                @click="openAuthPanel"
+                            >
+                                <router-link to="#">
+                                    <span class="icon icon--key"></span>
+                                    {{
+                                        isLogin ? '로그아웃' : '로그인'
+                                    }}
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="gnb__banner">
+                        <div class="gnb__banner__badge">
+                            <span>New Event!</span>
+                        </div>
+                        <div class="gnb__banner__source">
+                            <div class="image-box">
+                                <img src="@/assets/illust/rocket_purple.svg" alt="">
+                            </div>
+                        </div>
+                        <p class="gnb__banner__content">
+                            <strong>월 32,500원</strong>으로 꺼내는
+                            <br>우리 아이 영어 자신감!
+                        </p>
+                    </div>
+
+                    <div class="gnb__etc">
+
+                        <a href="#" class="gnb__etc__enuma">
+                            <span class="gnb__etc__enuma__copy">Empower ALL Children</span>
+                            <span class="gnb__etc__enuma__detail" >에누마 공식 홈페이지</span>
+                        </a>
+
+                        <ul class="gnb__etc__sns">
+                            <li class="gnb__etc__sns__item">
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </li>
+                            <li class="gnb__etc__sns__item">
+                                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                            </li>
+                            <li class="gnb__etc__sns__item">
+                                <a href="#"><i class="fab fa-twitter-square"></i></a>
+                            </li>
+                            <li class="gnb__etc__sns__item">
+                                <a href="#"><i class="fab fa-youtube-square"></i></a>
+                            </li>
+                        </ul>
+
+                        <p class="gnb__etc__copyright">
+                            ⓒ 2018 Enuma, Inc. All Rights Reserved.
+                        </p>
+
+                    </div>
 
                 </div>
-
             </div>
         </div>
+
+
 
     </div>
 </template>
@@ -139,14 +144,54 @@
 
 import gsap from 'gsap';
 
+
 export default {
     data() {
         return {
-            isOpenMenu : false,
-            isLogin : false,
 
+            gnbData  : {
+                public : [
+                    {
+                        name : '멤버십 후기',
+                        to : '/review',
+                    },
+                    {
+                        name : '커리큘럼 안내',
+                        to : '/curriculum'
+                    },
+                    {
+                        name : '이용하기',
+                        to : '/product'
+                    },
+                    {
+                        name : '도움말',
+                        to : '/help'
+                    },
+                ],
+
+                private : [
+                    {
+                        name : '계정 관리',
+                        to : '/mypage/account'
+                    },
+                    {
+                        name : '학습정보 열람',
+                        to : '/mypage/study'
+                    },
+                ],
+            },
+
+            isOpenMenu : false,
             navTL : new gsap.timeline(),
+
+            publicList  : null,
+            privateList : null,
         }
+    },
+    computed : {
+        isLogin () {
+            return this.$store.state.$user.is_login
+        },
     },
     watch: {
         'isOpenMenu'(now) {
@@ -156,52 +201,94 @@ export default {
             }else {
                 this.closeMenuMotion();
             }
-        }
+        },
+
+        '$store.state.$nav.is_openGnb'(now) {
+            this.navTL.clear();
+            if(now){
+                this.openMenuMotion();
+            }else {
+                this.closeMenuMotion();
+            }
+        },
     },
     methods : {
-
-        TEST_tooglelogin() {
-            this.isLogin = !this.isLogin;
-        },
         openMenuMotion() {
-            const nav       = this.$refs.ref_root;
+            const wrap      = this.$refs.ref_wrap;
             const concise   = this.$refs.ref_concise;
             const pannel    = this.$refs.ref_pannel;
             const openHeight = concise.offsetHeight + pannel.offsetHeight;
 
-            this.navTL.to(nav, {
+            this.navTL.to(wrap, {
                 height: openHeight,
-                ease: 'power2.inOut',
-                duration: 0.75,
+                ease: 'power2.out',
+                duration: 0.5,
             });
 
         },
         closeMenuMotion() {
-            const nav           = this.$refs.ref_root;
+            const wrap          = this.$refs.ref_wrap;
             const concise       = this.$refs.ref_concise;
             const closeHeight   = concise.offsetHeight;
 
-            this.navTL.to(nav, {
+            this.navTL.to(wrap, {
                 height: closeHeight,
                 ease: 'power2.out',
-                duration: 0.5,
+                duration: 0.45,
             });
         },
 
+        openAuthPanel() {
+            this.$store.dispatch('openAuthPanel');
+        },
+
         openMenu() {
-            this.isOpenMenu = true;
+            this.$store.dispatch('openGnb');
         },
         closeMenu() {
-            this.isOpenMenu = false;
+            this.$store.dispatch('closeGnb');
         },
+
         toggleMenu() {
-            if(this.isOpenMenu){
+            if(this.$store.state.$nav.is_openGnb){
                 this.closeMenu();
             }else {
                 this.openMenu();
             }
+        },
+
+        selectElement() {
+            this.publicList    = this.$refs.ref_public.querySelectorAll('li');
+            this.privateList   = this.$refs.ref_private.querySelectorAll('li');
+        },
+    },
+
+    mounted(){
+        this.selectElement();
+    },
+}
+
+export const gnbStore2 = {
+    state : {
+        is_openGnb : false,
+    },
+    mutations : {
+        GNB_open(state){
+            state.$nav.is_openGnb = true;
+        },
+        GNB_close(state){
+            state.$nav.is_openGnb = false;
+        },
+    },
+    actions : {
+        openGnb({commit}) {
+            commit('GNB_open');
+        },
+        closeGnb({commit}) {
+            commit('GNB_close');
         }
-    }
+    },
+
 }
 
 </script>
@@ -211,17 +298,36 @@ export default {
 $navh : 68px;
 
 .nav-gnb{
+
+}
+
+.gnb__dimmed {
+    width: 100%; height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    transition : opacity 600ms ease;
+    opacity: 0;
+    pointer-events: none;
+    .st-openmenu & {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.gnb__wrap {
+    overflow: hidden;
     background-color: $COLOR_navy_2;
     height : $navh;
     position: relative;
     width: 100%;
     will-change: height;
+    z-index: 10;
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2);
     @include hardSelect {
         color : #fff;
     }
-}
-
-.gnb__wrap {
 }
 
 .gnb__concise {
@@ -267,7 +373,7 @@ $navh : 68px;
             top: 0; left: 100%;
             margin-left: 35px;
             pointer-events: none;
-            width: 90px;height: 100%;
+            width: 90px; height: 100%;
             background-image: url('~@/assets/logo/logo_todoenglish_typo.svg');
             background-size: contain;
             background-position: center;
@@ -275,6 +381,7 @@ $navh : 68px;
             transform : translate3d(0, 20px, 0);
             transition: opacity 200ms ease, transform 300ms $EASE_inCubic 200ms;
             .st-openmenu & {
+                pointer-events: all;
                 transition: opacity 200ms ease 250ms, transform 500ms $EASE_outBack 200ms;
                 opacity: 1;
                 transform : translate3d(0, 0, 0);
@@ -284,11 +391,111 @@ $navh : 68px;
 
     .gnb__storage {
         margin-left: auto;
-        border: 1px solid #000;
         display :flex;
+        align-items: center;
+
+        > * {
+            margin-left: 24px;
+            &:nth-child(1) {
+                margin-left: 0;
+            }
+        }
+
+        .gnb__user {
+            display : flex;
+            align-items: center;
+
+            .gnb__user__dot {
+                display: inline-block;
+                width: 5px; height: 5px;
+                border-radius: 9999px;
+                background-color: rgba(255,255,255,0.4);
+                margin-right: 12px;
+
+                .dt-login & {
+                    background-color: rgba(255,255,255,1);
+                    box-shadow: 0 0 5px 2px rgba(5,255,0,0.8);
+                }
+            }
+
+        }
 
         .gnb__menu {
-            background: #d3d;
+            cursor: pointer;
+            position: relative;
+            border-radius: 8px;
+            padding: 6px;
+            transition : background-color 300ms ease , border 300ms ease;
+            border: 1px solid transparent;
+
+            @include hover {
+                background-color : #fff;
+                .gnb__menu__icon > span::before,
+                .gnb__menu__icon > span::after{
+                    background: $COLOR_navy_1;
+                }
+            }
+
+            .gnb__menu__icon {
+                transition : transform 300ms $EASE_outCubic;
+                overflow: hidden;
+                box-sizing: border-box;
+                width: 30px; height: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+
+                .st-openmenu & {
+                    transform: scale(1.35);
+                }
+                > span {
+                    display: inline-block;
+                    width: 100%; height: 3px;
+                    transform-origin: center;
+                    position: relative;
+
+                    @mixin menuline {
+                        content: '';
+                        display: inline-block;
+                        position: absolute;
+                        top: 0;left: 0;
+                        background-color: #fff;
+                        width: 100%; height: 100%;
+                        transition: transform 500ms $EASE_outExpo, background-color 150ms ease 0ms;
+                        border-radius: 9999px;
+                    }
+
+                    &::before , &:nth-child(2)::after{
+                        @include menuline;
+                    }
+
+                    &:nth-child(1)::before{ transition: transform 500ms $EASE_outExpo 250ms, background-color 150ms ease 0ms; }
+                    &:nth-child(3)::before{ transition: transform 500ms $EASE_outExpo 350ms, background-color 150ms ease 0ms; }
+
+                    .st-openmenu & {
+                        &:nth-child(1)::before{
+                            transform : translate3d(103%,0,0);
+                            transition: transform 500ms $EASE_outExpo 0ms, background-color 150ms ease 0ms;
+                        }
+                        &:nth-child(2) {
+                            &::before{
+                                transform : rotate(45deg);
+                                transition : transform 300ms $EASE_outBack 200ms , background-color 150ms ease 0ms;
+                            }
+                            &::after {
+                                transform : rotate(-45deg);
+                                transition : transform 300ms $EASE_outBack 200ms, background-color 150ms ease 0ms;
+                            }
+                        }
+                        &:nth-child(3)::before{
+                            transform : translate3d(-103%,0,0);
+                            transition: transform 500ms $EASE_outExpo 40ms, background-color 150ms ease 0ms;
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 }
@@ -362,7 +569,7 @@ $navh : 68px;
         }
 
         .gnb__public__list {
-            // border: 1px solid #acc;
+
             display: flex;
             flex-direction: column;
 
@@ -384,12 +591,33 @@ $navh : 68px;
                         font-weight: 300;
                         letter-spacing: 0;
                         opacity: 0.7;
+                        transition: transform 500ms ease 0ms;
                     }
 
                     .gnb__public__name {
                         @include publicFont;
+                        transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
+                        transform: translate3d(30px,0,0);
+                        opacity: 0;
                     }
 
+                }
+
+                .st-openmenu & {
+                    @for $i from 1 through 10 {
+                        $delay : #{$i * 30ms};
+                        &:nth-child(#{$i}) {
+                            .gnb__public__number {
+                                // margin-left: #{$i *10px};
+                            }
+                            .gnb__public__name {
+                                // margin-left: #{$i *10px};
+                                opacity: 1;
+                                transform: translate3d(0,0,0);
+                                transition: transform 800ms $EASE_outExpo $delay, opacity 350ms ease $delay;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -413,7 +641,7 @@ $navh : 68px;
 
             > .icon--lock {
                 .dt-login & {
-                    visibility: hidden;
+                    display: none;
                 }
             }
 
@@ -463,7 +691,7 @@ $navh : 68px;
             .gnb__auth {
                 .icon--key {
                     .dt-login & {
-                        visibility: hidden;
+                        display: none;
                     }
                 }
             }

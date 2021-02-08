@@ -64,7 +64,7 @@ export default {
             setTimeout(() => {
                 this.ongoing = false;
                 this.$emit('change-phase' , 'signoutSuccess');
-                this.$store.dispatch('siginOut');
+                this.$store.dispatch('signOut');
             },1000);
         },
         closeAuth() {

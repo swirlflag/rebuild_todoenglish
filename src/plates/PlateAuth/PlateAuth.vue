@@ -1,11 +1,11 @@
 <template>
-    <div id="plate--auth" ref="ref_root" :class="{'st-open' : $store.state.$auth.is_openAuth}" >
+    <div id="plate--auth" ref="ref_root" :class="{'st-open' : $store.state.$auth.is_open}" >
 
-        <div class="auth__dimmed" @click="closeAuth"></div>
+        <div class="auth__dimmed" @click="closeAuthTrigger"></div>
 
         <div class="auth__box" v-if="phaseDataMap[nowPhase]" ref="ref_box" >
 
-            <div class="auth__close" @click="closeAuth">
+            <div class="auth__close" @click="closeAuthTrigger">
                 <span></span>
             </div>
 
@@ -106,7 +106,6 @@
 import gsap from 'gsap';
 import TextChangeMask               from '@/components/layout/TextChangeMask.vue';
 
-
 import AuthSelection                from './AuthSelection.vue';
 import AuthExternal                 from './AuthExternal.vue';
 import AuthSigninForm               from './AuthSigninForm.vue';
@@ -143,7 +142,7 @@ export default {
             phaseHistory : [],
 
             isRunTransition : false,
-            isOpenAuth : this.$store.state.$auth.is_openAuth || false
+            isOpenAuth : this.$store.state.$auth.is_open || false
         }
     },
 
@@ -224,25 +223,45 @@ export default {
                 && this.nowPhase !== 'signupSuccess'
                 && this.nowPhase !== 'signoutCheck'
                 && this.nowPhase !== 'signoutSuccess'
-        }
+        },
 
     },
 
     watch : {
-        "$store.state.$auth.is_openAuth"(now) {
+        "$store.state.$auth.is_open"(now) {
             this.isOpenAuth = now;
             if(now){
-                this.openAuthMotion();
+                this.openAuth();
             }else {
-                this.closeAuthMotion();
+                this.closeAuth();
             }
+        },
+        "$store.state.$user.is_login"(now) {
+            if(this.isOpenAuth){
+                return;
+            }
+            this.changePhaseToBase(now);
         }
     },
 
     methods : {
-        closeAuth() {
-            this.$store.dispatch('closeAuthPanel');
+        detectLoginState() {
+            if(this.$store.state.$user.is_login){
+                this.changePhase('signoutCheck')
+            }else {
+                this.changePhase('selectType')
+            }
         },
+        openAuthTrigger() {this.$store.dispatch('openAuthPanel');},
+        closeAuthTrigger() {this.$store.dispatch('closeAuthPanel');},
+
+        openAuth() {
+            this.openAuthMotion();
+        },
+        closeAuth() {
+            this.closeAuthMotion();
+        },
+
         openAuthMotion() {
             const tween = gsap.to(this.$refs.ref_box , {
                 y : "0%",
@@ -274,18 +293,17 @@ export default {
             this.phaseHistory.push(phase);
             this.nowPhase = phase;
         },
-        changePhaseToBase() {
+        resetHistory() {
+            this.phaseHistory = [];
+        },
+        changePhaseToBase(isLogin = this.$store.state.$user.is_login) {
             this.resetHistory();
-            const isSignin = this.$store.state.$user.isSignin;
 
-            if(isSignin){
+            if(isLogin){
                 this.changePhase('signoutCheck');
             }else {
                 this.changePhase('selectType');
             }
-        },
-        resetHistory() {
-            this.phaseHistory = [];
         },
         backPhase() {
             if(this.phaseHistory.length <= 1){
@@ -399,25 +417,12 @@ export default {
 
             }
 
-
         },
 
     },
 
     created() {
-
-        const isSignin = this.$store.state.$user.isSignin;
-
-        if(isSignin){
-            this.changePhase('signoutCheck');
-        }else {
-            this.changePhase('selectType');
-        }
-
-        // this.changePhase('signupConsent');
-        // this.changePhase('signinForm');
-
-        // this.changePhase('signupMarketingAgree');
+        this.changePhaseToBase();
     },
 
     mounted() {
@@ -430,16 +435,16 @@ export const authStore = {
     name : '$auth',
 
     state : {
-        is_openAuth : false,
-        // is_openAuth : true,
+        is_open : false,
+        // is_open : true,
     },
 
     mutations : {
         AUTH_open(state) {
-            state.$auth.is_openAuth = true
+            state.$auth.is_open = true
         },
         AUTH_close(state) {
-            state.$auth.is_openAuth = false
+            state.$auth.is_open = false
         }
     },
 

@@ -69,7 +69,7 @@ export default {
 $PC_padding     : 18px 18px;
 $MO_padding     : 16px;
 
-$PC_radius      : 20px;
+$PC_radius      : 8px;
 $MO_radius      : 8px;
 
 .input--default {
@@ -133,7 +133,7 @@ $MO_radius      : 8px;
     input {
         border-radius: inherit;
         background-color:$COLOR_lightgray_2;
-        border-radius: 8px;
+        border-radius: $PC_radius;
         outline: none;
         padding: $PC_padding;
         width: 100%;
@@ -145,6 +145,7 @@ $MO_radius      : 8px;
         transition: background-color 350ms ease;
 
         @include phone {
+            border-radius: $MO_radius;
             padding: $MO_padding;
         }
 

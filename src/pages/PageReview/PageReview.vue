@@ -10,7 +10,7 @@
         <br>
 
 
-        <div class="temp">₩
+        <div id="temp">₩
 
             <div class="layout">
                 <div class="layout__content">
@@ -20,7 +20,7 @@
                     <ul class="dot-list">
                         <li class="precaution">안녕하세요</li>
                         <li>안녕하세요</li>
-                        <li>안녕하세요</li>
+                        <li>안녕하세요</li>  
                         <li>안녕하세요</li>
                     </ul>
                     <p class="precaution">안녕하세요</p>
@@ -30,7 +30,7 @@
                     <ButtonDefault theme="pink"
 
                     >
-                        안녕하세요~~~~~~~~~~~~
+                        123
                     </ButtonDefault>
                 </div>
 
@@ -57,8 +57,10 @@ export default {
 
 <style lang="scss" scoped>
 #temp {
-    margin-top: 500px;
-    height: 1px;
-    background-color: #d3d;
+    // margin-top: 500px;
+    // height: 1px;
+    // background-color: #d3d;
 }
+
+
 </style>
