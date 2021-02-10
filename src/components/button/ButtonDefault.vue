@@ -25,7 +25,7 @@
             <span   class="button__body"
                     :style="{
                         color : color,
-                        backgroundColor : background,
+                        background : background,
                         padding : padding,
                     }"
             >

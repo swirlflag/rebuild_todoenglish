@@ -10,7 +10,7 @@
         <br>
 
 
-        <div id="temp">₩
+        <div id="temp">
 
             <div class="layout">
                 <div class="layout__content">
@@ -50,6 +50,9 @@ export default {
     name : 'PageReview',
     components : {
         ButtonDefault,
+    },
+    mounted() {
+        // console.log('mounted : PageReview.vue');
     }
 }
 </script>

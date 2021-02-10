@@ -11,6 +11,11 @@
             v-if="1"
         />
 
+        <PlateLoading
+            v-if="!appLoadEnd"
+            @loadMotionEnd="loadMotionEnd"
+        />
+
         <PlateTransitionCover
              v-if="1"
         />
@@ -43,6 +48,7 @@
 <script>
 import PlateTest                from '@/plates/PlateTest/PlateTest.vue';
 import PlateSetting             from '@/plates/PlateSetting/PlateSetting.vue';
+import PlateLoading             from '@/plates/PlateLoading/PlateLoading.vue';
 import PlateModal               from '@/plates/PlateModal/PlateModal.vue';
 import PlateAuth                from '@/plates/PlateAuth/PlateAuth.vue';
 import PlateTransitionCover     from '@/plates/PlateTransitionCover/PlateTransitionCover.vue';
@@ -57,12 +63,14 @@ import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
 export default {
     name: 'App',
     components: {
-        PlateSetting, PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth ,
+        PlateSetting, PlateLoading, PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth ,
     },
     data() {
         return {
             // before
             // useAuthField : false,
+
+            appLoadEnd : false,
 
             isFreeze : false,
         }
@@ -100,6 +108,9 @@ export default {
         },
     },
     methods : {
+        loadMotionEnd() {
+            this.appLoadEnd = true;
+        },
         detectScrollDirectionNav(e) {
             {e}
             // console.log(e);
@@ -111,6 +122,9 @@ export default {
         // console.log(process.env);
 
         window.addEventListener('scroll' , this.detectScrollDirectionNav)
+    },
+    mounted() {
+        // console.log('mounted : App.vue');
     },
     destroyed() {
         window.removeEventListener('scroll' , this.detectScrollDirectionNav)

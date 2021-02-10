@@ -1,21 +1,53 @@
 <template>
     <main id="plate--page" class="plate">
-        <router-view></router-view>
+
+        <PageNeedLogin  v-if="$store.getters.is_showNeedLogin"
+                        @hook:mounted="mountedPage"
+
+        />
+
+        <router-view    id="page-router"
+                        v-if="!$store.getters.is_showNeedLogin"
+                        @hook:mounted="mountedPage"
+        >
+
+        </router-view>
+
     </main>
 </template>
 
 <script>
 
+import PageNeedLogin from '@/pages/PageNeedLogin/PageNeedLogin.vue';
+
 export default {
     name : 'PlatePage',
+    components : {
+        PageNeedLogin,
+    },
+    computed : {
+    },
+    methods : {
+        mountedPage() {
+            setTimeout(() => {
+                this.$store.commit('PAGE_mounted');
+            },500)
+            // console.log('page mount');
+        },
+    },
+    mounted() {
+
+    },
 }
 </script>
 
 <style lang="scss">
 
 #plate--page {
-    // width: 100%;
     box-sizing: border-box;
+}
+#page-router {
+
 }
 .page-contents {
 

@@ -38,4 +38,4 @@ const userStore = {
 
 }
 
-export { userStore }
+export default userStore;

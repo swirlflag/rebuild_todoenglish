@@ -5,7 +5,10 @@
     >
         <div id="test__log">
 
-            <button id="test_scrollock" @click="TEST_scrollock">scrollock</button>
+            <button id="test_scrollock" @click="TEST_scrollock">
+                scrollock
+            </button>
+
             <div>
                 스크롤잠금 :
                 {{$store.state.is_pageScrollLock}}
@@ -13,25 +16,39 @@
 
             <br>
 
-            <button @click="TEST_openAlert">open alert</button>
+            <button @click="TEST_openAlert">
+                open alert
+            </button>
 
-            <button @click="TEST_openAlert2">open alert2</button>
+            <button @click="TEST_openAlert2">
+                open alert2
+            </button>
 
             <br>
 
-            <button @click="TEST_toggleAuthPlate">인증창 호출</button>
+            <button @click="TEST_toggleAuthPlate">
+                인증창 호출
+            </button>
 
             <br>
 
-            <button @click="TEST_switchAuth">한방에 로그인/로그아웃</button>
+            <button @click="TEST_switchAuth">
+                한방에 로그인/로그아웃
+            </button>
             <div>
                 로그인 유무 :
                 {{$store.state.$user.is_login}}
             </div>
 
+            <router-link to="/mypage/account">
+                강제 이동: 계정 관리
+            </router-link>
+            <router-link to="/mypage/study">
+                강제 이동: 학습정보 열람
+            </router-link>
+
             <div id="testlog1"></div>
             <div id="testlog2"></div>
-
 
         </div>
 
@@ -63,7 +80,6 @@ export default {
             isGrab : false,
             isOpen : false,
 
-
         }
     },
     methods : {
@@ -72,18 +88,28 @@ export default {
             this.$store.dispatch('closeAuthPanel');
 
             if(this.$store.state.$user.is_login){
-                this.$store.dispatch('signOut');
-            }else {
+
                 this.$store.dispatch('showModalAlert' , {
-                    title : '이렇게 로그인합니다.',
+                    message : '로그아웃 합니다',
+                    close : () => {
+                        this.$store.dispatch('signOut');
+                    }
+                })
+            }else {
+
+                const random = `random${Math.round(Math.random()* 100)}`;
+                this.$store.dispatch('showModalAlert' , {
+                    title : '',
                     message : `
-                        id : hanbang@gmail.com
-                        <br> username : hanbang
+                        이렇게 로그인합니다.
+                        <br>
+                        <br>id : ${random}@gmail.com
+                        <br> username : ${random}
                     `,
                     close : () => {
                         this.$store.dispatch('signIn' , {
-                            id : 'hanbang@gmail.com',
-                            username : 'hanbang',
+                            id : `${random}@gmail.com`,
+                            username : `${random}`,
                         });
                     }
                 });
@@ -129,7 +155,6 @@ export default {
             this.isGrab = false;
         },
         drag(e) {
-            {e}
             if(this.isGrab){
                 const target = this.$refs.ref_root;
                 target.style.left = e.clientX - 25 + 'px';
@@ -142,10 +167,12 @@ export default {
 
     },
     mounted() {
-
-
         window.TEST_1 = document.querySelector('#testlog1');
         window.TEST_2 = document.querySelector('#testlog2');
+        window.addEventListener('mousemove' , this.drag)
+    },
+    destroyed() {
+        window.removeEventListener('mousemove' , this.drag);
     }
 }
 </script>
@@ -153,12 +180,11 @@ export default {
 <style scoped lang="scss">
 #plate--test {
     background: rgba(0,0,0,0.9);
-    color:rgb(0, 255, 0);
 
     position: fixed;
     top: 0; left: 0;
     z-index: 99999999;
-    
+
     @include hardSelect {
         font-size: 12px !important;
     }
@@ -181,6 +207,10 @@ export default {
             border: 1px solid rgb(0, 255, 0) !important;
             transform :translate(0,-50%) !important;
         }
+    }
+
+    @include hardSelect {
+        color:rgb(0, 255, 0);
     }
 
 }
@@ -221,8 +251,17 @@ export default {
 
 button {
     border: 1px solid rgb(0, 255, 0) !important;
-    color: rgb(0, 255, 0) !important;
-    padding: 5px;
+    padding: 3px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+a {
+    background: rgb(0, 255, 0) ;
+    color: #000 !important;
+    padding: 3px 5px;
+    border-radius: 9999px;
+    margin-right: 5px; margin-top: 5px;
 }
 
 

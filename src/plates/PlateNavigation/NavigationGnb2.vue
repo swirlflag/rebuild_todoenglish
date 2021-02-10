@@ -6,16 +6,130 @@
 
         <div class="gnb__dimmed" @click="closeMenu"></div>
 
-        <div class="gnb__wrap" ref="ref_wrap">
             <div class="gnb__concise" ref="ref_concise">
+
+                <div class="gnb__concise__wrap">
+                    <router-link to="/" class="gnb__logo">
+                        <span class="icon icon--logoschool c-white"></span>
+                        <span class="typo--todoenglish"></span>
+                    </router-link>
+
+                    <div class="gnb__storage">
+                        <ul class="gnb__emphasis">
+                            <li class="gnb__emphasis__item">
+                                <a>
+                                    <div class="gnb__emphasis__badge" style="background-color : #F4B537">
+                                        <i class="fas fa-hashtag"></i>
+                                        멤버십 후기
+                                    </div>
+                                    <div class="gnb__emphasis__content">
+                                        <div class="gnb__emphasis__source">
+                                            <div class="image-box">
+                                                <img src="@/assets/event/wp_worksheet.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="gnb__emphasis__title">
+                                            토도영어 사용자들의 솔직 후기
+                                        </p>
+                                        <p class="gnb__emphasis__text">
+                                            토도영어를 사용해본 아이들의 부모님이 직접 남기는 솔직한 후기들을 살펴보세요.
+                                        </p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="gnb__emphasis__item">
+                                <a>
+                                    <div class="gnb__emphasis__badge" style="background-color : #1F96DB">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        방침 변경
+                                    </div>
+                                    <div class="gnb__emphasis__content">
+                                        <div class="gnb__emphasis__source">
+                                            <div class="image-box">
+                                                <img src="@/assets/event/wp_worksheet.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="gnb__emphasis__title">
+                                            토도영어의 방침이 변경됩니다.
+                                        </p>
+                                        <p class="gnb__emphasis__text">
+                                            새롭게 변경되는 토도영어 방침을 자세하게 알려드려요.
+                                        </p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="gnb__emphasis__item">
+                                <a>
+                                    <div class="gnb__emphasis__badge" style="background-color : #F7419C">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        토도라이브
+                                    </div>
+                                    <div class="gnb__emphasis__content">
+                                        <div class="gnb__emphasis__source">
+                                            <div class="image-box">
+                                                <img src="@/assets/event/wp_worksheet.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="gnb__emphasis__title">
+                                            토도라이브 런칭!
+                                        </p>
+                                        <p class="gnb__emphasis__text">
+                                            토도영어와 찰떡궁합! 집에서 하는 즐거운 영어수업 토도라이브를 만나보세요.
+                                        </p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="gnb__user">
+                            <span class="gnb__user__dot"></span>
+                            <span class="icon icon--account c-white"></span>
+                        </div>
+                        <button class="gnb__menu" @click="toggleMenu">
+                            <div class="gnb__menu__icon">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        <div class="gnb__panel" ref="ref_panel">
+            <!-- <div class="gnb__concise" ref="ref_concise">
                 <router-link to="/" class="gnb__logo">
                     <span class="icon icon--logoschool c-white"></span>
                     <span class="typo--todoenglish"></span>
                 </router-link>
 
                 <div class="gnb__storage">
-                    <div class="gnb__emphasis">
-                    </div>
+                    <ul class="gnb__emphasis">
+                        <li class="gnb__emphasis__item">
+                            <a>
+                                <div class="gnb__emphasis__badge" style="background-color : #F4B537">
+                                    <i class="fas fa-hashtag"></i>
+                                    멤버십 후기
+                                </div>
+                                <div class="gnb__emphasis__content">
+                                    big
+                                </div>
+                            </a>
+                        </li>
+                        <li class="gnb__emphasis__item">
+                            <a>
+                                <div class="gnb__emphasis__badge" style="background-color : #1F96DB">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    방침변경 안내
+                                </div>
+                                <div class="gnb__emphasis__content">
+                                    big
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                     <div class="gnb__user">
                         <span class="gnb__user__dot"></span>
                         <span class="icon icon--account c-white"></span>
@@ -28,11 +142,11 @@
                         </div>
                     </button>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="gnb__pannel" ref="ref_pannel">
+            <div class="gnb__panel__wrap" ref="ref_panelwrap">
 
-                <div class="gnb__pannel__block">
+                <div class="gnb__panel__block">
                     <div class="gnb__public">
                         <span class="gnb__public__focus">focus</span>
                         <ul class="gnb__public__list" ref="ref_public">
@@ -40,11 +154,12 @@
                             <template v-for="(item,idx) in gnbData.public">
                                 <li :key="idx" class="gnb__public__item">
                                     <router-link :to="item.to">
-                                        <span class="gnb__public__number">
-                                            0{{ idx+1}}
+                                        <span class="gnb__public__prefix">
+                                            <span class="gnb__public__prefix-number">0{{ idx+1}}</span>
+                                            <span class="gnb__nowbadge">now</span>
                                         </span>
                                         <span class="gnb__public__name">
-                                            {{ item.name }}
+                                            <span>{{ item.name }}</span>
                                         </span>
                                     </router-link>
                                 </li>
@@ -53,7 +168,7 @@
                     </div>
                 </div>
 
-                <div class="gnb__pannel__block">
+                <div class="gnb__panel__block">
                     <div    class="gnb__private"
                     >
 
@@ -69,8 +184,9 @@
 
                             <template v-for="(item,idx) in gnbData.private">
                                 <li :key="idx" class="gnb__private__item">
-                                    <router-link to="#">
-                                        {{ item.name }}
+                                    <router-link :to="item.to" class="gnb__private__item__target">
+                                        <span class="gnb__nowbadge">now</span>
+                                        <span class="gnb__private__name">{{ item.name }}</span>
                                     </router-link>
                                 </li>
                             </template>
@@ -78,29 +194,31 @@
                             <li class="gnb__private__item gnb__auth"
                                 @click="openAuthPanel"
                             >
-                                <router-link to="#">
+                                <button class="gnb__private__item__target">
                                     <span class="icon icon--key"></span>
-                                    {{
-                                        isLogin ? '로그아웃' : '로그인'
-                                    }}
-                                </router-link>
+                                    <span class="gnb__private__name">
+                                        {{ isLogin ? '로그아웃' : '로그인' }}
+                                    </span>
+                                </button>
                             </li>
                         </ul>
                     </div>
 
                     <div class="gnb__banner">
-                        <div class="gnb__banner__badge">
-                            <span>New Event!</span>
-                        </div>
-                        <div class="gnb__banner__source">
-                            <div class="image-box">
-                                <img src="@/assets/illust/rocket_purple.svg" alt="">
+                        <a class="gnb__banner__link" href="#">
+                            <div class="gnb__banner__badge">
+                                <span>New Event!</span>
                             </div>
-                        </div>
-                        <p class="gnb__banner__content">
-                            <strong>월 32,500원</strong>으로 꺼내는
-                            <br>우리 아이 영어 자신감!
-                        </p>
+                            <div class="gnb__banner__source">
+                                <div class="image-box">
+                                    <img src="@/assets/illust/rocket_purple.svg" alt="">
+                                </div>
+                            </div>
+                            <p class="gnb__banner__content">
+                                <strong>월 32,500원</strong>으로 꺼내는
+                                <br>우리 아이 영어 자신감!
+                            </p>
+                        </a>
                     </div>
 
                     <div class="gnb__etc">
@@ -134,8 +252,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </div>
 </template>
@@ -181,7 +297,6 @@ export default {
                 ],
             },
 
-            isOpenMenu : false,
             navTL : new gsap.timeline(),
 
             publicList  : null,
@@ -194,15 +309,9 @@ export default {
         },
     },
     watch: {
-        'isOpenMenu'(now) {
-            this.navTL.clear();
-            if(now){
-                this.openMenuMotion();
-            }else {
-                this.closeMenuMotion();
-            }
+        '$route.path'() {
+            this.$store.dispatch('closeGnb');
         },
-
         '$store.state.$nav.is_openGnb'(now) {
             this.navTL.clear();
             if(now){
@@ -214,32 +323,34 @@ export default {
     },
     methods : {
         openMenuMotion() {
-            const wrap      = this.$refs.ref_wrap;
-            const concise   = this.$refs.ref_concise;
-            const pannel    = this.$refs.ref_pannel;
-            const openHeight = concise.offsetHeight + pannel.offsetHeight;
+            // const concise   = this.$refs.ref_concise;
+            const panel    = this.$refs.ref_panel;
+            const panelWrap    = this.$refs.ref_panelwrap;
 
-            this.navTL.to(wrap, {
+            const openHeight = panelWrap.offsetHeight;
+
+            this.navTL.to(panel, {
                 height: openHeight,
-                ease: 'power2.out',
-                duration: 0.5,
+                ease: 'power3.out',
+                duration: 0.7,
             });
 
         },
         closeMenuMotion() {
-            const wrap          = this.$refs.ref_wrap;
-            const concise       = this.$refs.ref_concise;
-            const closeHeight   = concise.offsetHeight;
+            const panel          = this.$refs.ref_panel;
+            // const concise       = this.$refs.ref_concise;
+            // const closeHeight   = concise.offsetHeight;
 
-            this.navTL.to(wrap, {
-                height: closeHeight,
-                ease: 'power2.out',
-                duration: 0.45,
+            this.navTL.to(panel, {
+                height: 0,
+                ease: 'power4.out',
+                duration: 0.6,
             });
         },
 
         openAuthPanel() {
             this.$store.dispatch('openAuthPanel');
+            this.$store.dispatch('closeGnb');
         },
 
         openMenu() {
@@ -251,9 +362,9 @@ export default {
 
         toggleMenu() {
             if(this.$store.state.$nav.is_openGnb){
-                this.closeMenu();
+                this.$store.dispatch('closeGnb');
             }else {
-                this.openMenu();
+                this.$store.dispatch('openGnb');
             }
         },
 
@@ -265,6 +376,7 @@ export default {
 
     mounted(){
         this.selectElement();
+        this.closeMenu()
     },
 }
 
@@ -298,7 +410,10 @@ export const gnbStore2 = {
 $navh : 68px;
 
 .nav-gnb{
-
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.15);
+    @include hardSelect {
+        color : #fff;
+    }
 }
 
 .gnb__dimmed {
@@ -316,30 +431,27 @@ $navh : 68px;
     }
 }
 
-.gnb__wrap {
-    overflow: hidden;
+.gnb__concise {
     background-color: $COLOR_navy_2;
-    height : $navh;
     position: relative;
-    width: 100%;
-    will-change: height;
-    z-index: 10;
-    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2);
-    @include hardSelect {
-        color : #fff;
-    }
+    z-index: 20;
 }
 
-.gnb__concise {
+.gnb__concise__wrap {
     display: flex;
     position: relative;
-    z-index: 10;
     max-width : $SIZE_PC_contentWidth;
     padding: 0 $SIZE_PC_innerPadding ;
     margin: 0 auto;
     box-sizing: border-box;
     height: $navh ;
     transition: transform 500ms $EASE_outQuart;
+
+    @include phone {
+        max-width : $SIZE_MO_contentWidth;
+        width: 100%;
+        padding: 0 $SIZE_MO_innerPadding;
+    }
 
     .st-openmenu & {
         transform : translate3d(0,50%,0);
@@ -362,6 +474,7 @@ $navh : 68px;
         .icon--logoschool {
             width: 34px ; height: 34px;
             transition : transform 300ms $EASE_outBack2;
+            transform-origin : left;
             .st-openmenu & {
                 transform:scale(1.5);
                 transition-delay: 220ms;
@@ -370,8 +483,8 @@ $navh : 68px;
         .typo--todoenglish {
             opacity: 0;
             position: absolute;
-            top: 0; left: 100%;
-            margin-left: 35px;
+            top: 4px; left: 100%;
+            margin-left: 40px;
             pointer-events: none;
             width: 90px; height: 100%;
             background-image: url('~@/assets/logo/logo_todoenglish_typo.svg');
@@ -398,6 +511,99 @@ $navh : 68px;
             margin-left: 24px;
             &:nth-child(1) {
                 margin-left: 0;
+            }
+        }
+
+        .gnb__emphasis {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+
+            @include phone {
+                display: none;
+            }
+
+            .gnb__emphasis__item {
+                margin-left: 12px;
+                &:nth-child(1) {
+                    margin-left: 0;
+                }
+
+                > a {
+                    width: 100%; height: 100%;
+                    display: inline-block;
+                    position: relative;
+                    cursor : pointer;
+
+                    .gnb__emphasis__badge {
+                        padding: 8px 12px;
+                        background: #ccc;
+                        border-radius: 9999px;
+                        line-height: 1em;
+                        font-size: $SIZE_PC_fontsize_small;
+                        font-weight: 700;
+                    }
+
+                    .gnb__emphasis__content {
+                        border: 1px solid #ddd;
+                        position: absolute;
+                        top: calc(100% + 20px); left: 0;
+                        background: #fff;
+                        padding: 16px;
+                        // width: 300px;
+                        border-radius: 16px;
+                        width: 200px;
+                        color: $COLOR_navy_1;
+                        box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2);
+                        transform : translate3d(0,0,0);
+                        opacity: 0;
+                        pointer-events: none !important;
+                        transition: opacity 100ms ease, transform 200ms $EASE_outCubic;
+                        transform : translate3d(0,-10px,0);
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: -3px; left: 0;
+                            width: 20px; height: 20px;
+                            background: #fff;
+                            box-sizing: border-box;
+                            transform :rotate(45deg) translateY(-50%);
+                            border-left: 1px solid #ddd;
+                            border-top: 1px solid #ddd;
+                            left: 25px;
+                        }
+
+                        > * {
+                            margin-top: 16px;
+                            &:nth-child(1) {margin-top: 0}
+                        }
+
+
+                        .gnb__emphasis__source {
+                            min-height: 50px;
+                            border-radius: 10px;
+                            overflow:hidden;
+                        }
+                        .gnb__emphasis__title {
+                            font-weight: 700;
+                            font-size: $SIZE_PC_fontsize_strong ;
+                            padding-right: 20%;
+                        }
+                        .gnb__emphasis__text {
+                            font-size: $SIZE_PC_fontsize_small;
+                        }
+
+                    }
+
+                    @include hover {
+                        .gnb__emphasis__content {
+                            opacity: 1;
+                            transform : translate3d(0,0,0);
+                            transition: opacity 220ms ease, transform 200ms $EASE_outExpo;
+                        }
+                    }
+                }
             }
         }
 
@@ -514,10 +720,37 @@ $navh : 68px;
 
 
 
+.gnb__nowbadge {
+    font-size: 16px;
+    background-color: $COLOR_pink_1;
+    padding: 0px;
+    border-radius: 4px;
+    display : none;
+    line-height: 1em;
+    padding: 0 4px 4px 4px;
+    // color: $COLOR_pink_1;
+    font-weight: 700;
 
+    .router-link-active & {
+        display: inline-block;
+    }
+}
 
+.gnb__panel {
+    overflow: hidden;
+    background-color: $COLOR_navy_2;
+    // height : $navh;
+    // height: 100%;
+    // height: auto;
+    height: 0;
+    position: relative;
+    width: 100%;
+    will-change: height;
+    z-index: 10;
+    
+}
 
-.gnb__pannel {
+.gnb__panel__wrap {
     max-width : $SIZE_PC_contentWidth;
     padding: #{$SIZE_PC_innerPadding*3} $SIZE_PC_innerPadding ;
     margin: 0 auto;
@@ -529,19 +762,21 @@ $navh : 68px;
     box-sizing: border-box;
     pointer-events: none;
 
+    transform : translate3d(0,80px,0);
+    transition: transform 0ms ease 500ms;
+
     .st-openmenu & {
+        transition: transform 800ms $EASE_outExpo 0ms;
+        transform : translate3d(0,0,0);
         pointer-events: all !important;
     }
 
-
-    > .gnb__pannel__block{
+    > .gnb__panel__block{
         box-sizing: border-box;
         display : flex;
         flex-direction: column;
         width: 50%;
         max-width: 380px;
-        border: 1px solid #111;
-        // border: 1px solid #333;
         margin-left: $SIZE_PC_innerPadding;
         &:nth-child(1) {
             margin-left: 0;
@@ -559,7 +794,6 @@ $navh : 68px;
 
         .gnb__public__focus {
             width: 100%;
-            // border: 1px solid #d3d;
             position: absolute;
             top: 0; left: 0;
             user-select: none !important;
@@ -577,41 +811,12 @@ $navh : 68px;
                 margin-top: 34px;
                 &:nth-child(1) {margin-top: 0}
 
-                > a {
-                    width: 100%; height: 100%;
-                    // border: 1px solid #ddd;
-                    box-sizing: border-box;
-                    display: flex;
-
-                    .gnb__public__number {
-                        display: inline-block;
-                        writing-mode: vertical-rl;
-                        text-align: center;
-                        margin-right: 16px;
-                        font-weight: 300;
-                        letter-spacing: 0;
-                        opacity: 0.7;
-                        transition: transform 500ms ease 0ms;
-                    }
-
-                    .gnb__public__name {
-                        @include publicFont;
-                        transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
-                        transform: translate3d(30px,0,0);
-                        opacity: 0;
-                    }
-
-                }
-
                 .st-openmenu & {
-                    @for $i from 1 through 10 {
-                        $delay : #{$i * 30ms};
+                    @for $i from 0 through 10 {
+                        $delay : #{$i * 70ms};
                         &:nth-child(#{$i}) {
-                            .gnb__public__number {
-                                // margin-left: #{$i *10px};
-                            }
-                            .gnb__public__name {
-                                // margin-left: #{$i *10px};
+                            .gnb__public__name ,
+                            .gnb__public__prefix{
                                 opacity: 1;
                                 transform: translate3d(0,0,0);
                                 transition: transform 800ms $EASE_outExpo $delay, opacity 350ms ease $delay;
@@ -619,6 +824,87 @@ $navh : 68px;
                         }
                     }
                 }
+
+                > a {
+                    width: auto; height: 100%;
+                    box-sizing: border-box;
+                    display: inline-flex;
+                    position: relative;
+                    // padding: 5px 10px 5px 0;
+
+                    .gnb__public__prefix {
+                        display: inline-block;
+                        writing-mode: vertical-rl;
+                        text-align: center;
+                        margin-right: 14px;
+                        font-weight: 300;
+                        letter-spacing: 0;
+                        color: rgba(255,255,255,0.6);
+                        transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
+                        transform: translate3d(0,20px,0);
+                        opacity: 0;
+                        line-height : 1em;
+
+                        .gnb__nowbadge {
+                            padding: 4px 0 4px 4px;
+                            transform: translateX(-15%);
+                        }
+                        .gnb__public__prefix-number{
+                            display: inline-block;
+                        }
+                    }
+
+                    .gnb__public__name {
+                        box-sizing: border-box;
+                        @include publicFont;
+                        transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
+                        transform: translate3d(30px,0,0);
+                        opacity: 0;
+                        position: relative;
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            display: inline-block;
+                            width: 100%; height: 0.1em;
+                            left: 0;bottom: 0;
+                            background-color: rgba(255,255,255,1);
+                            transition : transform 200ms $EASE_inOutCubic;
+                            transform-origin : left;
+                            transform : scaleX(0);
+                        }
+                    }
+
+                    @include hover {
+                        .gnb__public__name {
+                            &::before {
+                                transform : scaleX(1);
+                                transition : transform 300ms $EASE_outExpo;
+                            }
+                        }
+                    }
+
+                    &.router-link-active {
+
+                        pointer-events: none;
+                        .gnb__public__prefix{
+                            font-weight: 700;
+                            color: rgba(255,255,255,1);
+                        }
+                        .gnb__public__prefix-number{
+                            display: none;
+                        }
+                        .gnb__public__name {
+                            > span {
+                                display: inline-block;
+                                opacity: 0.4 !important;
+                            }
+                        }
+                    }
+
+                }
+
+
             }
         }
 
@@ -627,6 +913,33 @@ $navh : 68px;
     .gnb__private {
         // margin-left: auto;
         text-align: right;
+
+        @keyframes swingLock {
+            0% {transform : rotate(0);}
+            20% {transform : rotate(8deg);}
+            40% {transform : rotate(-8deg);}
+            60% {transform : rotate(8deg);}
+            80%,
+            100% {transform : rotate(0);}
+        }
+
+        @keyframes floatKey{
+            0% {
+                animation-timing-function: $EASE_inCubic;
+                transform : translate3d(0,0,0);
+            }
+            40% {transform : translate3d(8px,0,0);}
+            80%,
+            100% {transform : translate3d(0,0,0);}
+        }
+        @include hover {
+            .icon--lock {
+                animation : swingLock 1000ms $EASE_outCubic infinite;
+            }
+            .icon--key {
+                animation: floatKey 1000ms $EASE_outCubic infinite;
+            }
+        }
 
         .icon {
             margin-right: 14px;
@@ -638,6 +951,15 @@ $navh : 68px;
             display: flex;
             align-items: center;
             justify-content: flex-end;
+            transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
+            opacity: 0;
+            transform : translate3d(-20px,0,0);
+
+            .st-openmenu & {
+                transition : transform 800ms $EASE_outExpo, opacity 350ms ease;
+                opacity: 1;
+                transform : translate3d(0,0,0);
+            }
 
             > .icon--lock {
                 .dt-login & {
@@ -660,30 +982,102 @@ $navh : 68px;
                 background-color: #fff;
                 height: 1px;
                 right: 0;
+                transform : scaleX(0);
+                opacity: 0;
+                transition : transform 600ms $EASE_outCubic 300ms , opacity 300ms ease;
+                transform-origin : right;
+                .st-openmenu & {
+                    opacity: 1;
+                    transform : scaleX(1);
+                }
             }
-            &::before {top: 0;}
-            &::after {bottom: 0;}
+            &::before {
+                top: 0;
+                .st-openmenu & {
+                    transition : transform 800ms $EASE_outExpo 0ms, opacity 700ms ease;
+                }
+            }
+            &::after {
+                bottom: 0;
+                .st-openmenu & {
+                    transition : transform 950ms $EASE_outExpo 140ms, opacity 700ms ease 140ms;
+                }
+            }
 
             .gnb__private__item {
-                margin-top: 26px;
-                opacity: 0.3;
                 pointer-events: none;
-
-                .dt-login & ,
-                &.gnb__auth{
-                    pointer-events: all;
-                    opacity: 1;
-                }
-
+                transform: translate3d(-20px,0,0);
+                transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
+                opacity: 0;
+                margin-top: 26px;
                 &:nth-child(1) {
-                    margin-top: 0;;
+                    margin-top: 0;
                 }
-                a {
+
+                .st-openmenu & {
+                    @for $i from 1 through 10 {
+                        $delay : #{$i * 50ms + 50ms};
+                        &:nth-child(#{$i}) {
+                            transform: translate3d(0,0,0);
+                            transition: transform 800ms $EASE_outExpo $delay, opacity 350ms ease $delay;
+                            opacity: 1;
+                        }
+                    }
+                }
+
+
+                .gnb__private__item__target {
+                    opacity: 0.4;
                     display :inline-flex;
                     justify-content: flex-end;
                     align-items: center;
                     font-weight: 700;
                     font-size: $SIZE_PC_fontsize_subtitle;
+
+                    .gnb__nowbadge {
+                        margin-right: 10px;
+                    }
+
+                    .gnb__private__name {
+                        box-sizing: border-box;
+                        // transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
+                        // transform: translate3d(30px,0,0);
+                        // opacity: 0;
+                        position: relative;
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            display: inline-block;
+                            width: 100%; height: 0.1em;
+                            left: 0;bottom: 0;
+                            background-color: rgba(255,255,255,1);
+                            transition : transform 200ms $EASE_inOutCubic;
+                            transform-origin : right;
+                            transform : scaleX(0);
+                        }
+                    }
+
+                    @include hover {
+                        .gnb__private__name::before {
+                            transform : scaleX(1);
+                            transition : transform 300ms $EASE_outExpo;
+                        }
+                    }
+
+                    &.router-link-active {
+                        pointer-events: none !important;
+                        .gnb__private__item__target {
+                            opacity: 0.4 !important;
+                        }
+                    }
+
+                }
+
+                .dt-login & .gnb__private__item__target,
+                &.gnb__auth .gnb__private__item__target{
+                    pointer-events: all;
+                    opacity: 1;
                 }
 
             }
@@ -700,54 +1094,76 @@ $navh : 68px;
 
     .gnb__banner {
         margin-top: 52px;
-        position: relative;
-        padding: 26px 30px;
-        border-radius: 16px;
-        background-color: #F5FAFF;
-        background: linear-gradient(129deg, rgba(245,250,255,1) 0%, rgba(251,245,255,1) 100%);
-        // background: linear-gradient(129deg, rgba(245,250,255,1) 0%, rgba(245,255,247,1) 100%);
 
-        .gnb__banner__badge {
-            position: absolute;
-            box-sizing: border-box;
-            width: 100%;
-
-            top: 0; left: 0;
-            transform : translate3d(0,-50%,0);
-            display: flex;
-            justify-content: center;
-
-            span {
-                padding: 3px 15px 5px;
-                border-radius: 9999px;
-                box-sizing: border-box;
-                font-weight: 700;
-                color: #fff;
-                background-color: #F4B537;
-            }
-        }
-        .gnb__banner__source {
-            position: absolute;
-            right: -23%; bottom: -7px;
-            height: 100%;
-            z-index: 1;
-            .image-box {
-                height: 100%;
-            }
-        }
-
-        .gnb__banner__content {
+        .gnb__banner__link {
+            width: 100%; height: 100%;
+            padding: 26px 30px;
+            border-radius: 16px;
             position: relative;
-            z-index: 10;
-            color: #000000;
-            width: 100%;
-            font-size: $SIZE_PC_fontsize_large;
-            font-weight: 700;
-            text-shadow: 0 3px 5px rgba(255,255,255,0.2);
-            strong   {
-                color: #7C32C0;
+            background-color: #F5FAFF;
+            background: linear-gradient(129deg, rgba(245,250,255,1) 0%, rgba(251,245,255,1) 100%);
+            // background: linear-gradient(129deg, rgba(245,250,255,1) 0%, rgba(245,255,247,1) 100%);
+            display: inline-block;
+            transition: transform 800ms $EASE_outExpo 500ms, opacity 500ms ease 0ms;
+            transform : translate3d(0,50px,0);
+            opacity: 0;
+
+            .st-openmenu & {
+                opacity: 1;
+                transition: transform 800ms $EASE_outExpo 200ms, opacity 300ms ease 200ms;
+                transform : translate3d(0,0,0);
+            }
+
+            .gnb__banner__badge {
+                position: absolute;
+                box-sizing: border-box;
+                width: 100%;
+                top: 0; left: 0;
+                transform : translate3d(0,-50%,0);
+                display: flex;
+                justify-content: center;
+
+
+                span {
+                    padding: 3px 15px 5px;
+                    border-radius: 9999px;
+                    box-sizing: border-box;
+                    font-weight: 700;
+                    color: #fff;
+                    background-color: #F4B537;
+                    transform : scale(0);
+                    transition: transform 230ms $EASE_outBack 350ms;
+
+                    .st-openmenu & {
+                        transform : scale(1);
+                    }
+                }
+
+            }
+            .gnb__banner__source {
+                position: absolute;
+                right: -23%; bottom: -7px;
+                height: 100%;
+                z-index: 1;
+                .image-box {
+                    height: 100%;
+                }
+            }
+
+            .gnb__banner__content {
+                position: relative;
+                z-index: 10;
+                color: #000000;
+                width: 100%;
+                font-size: $SIZE_PC_fontsize_large;
+                font-weight: 700;
+                text-shadow: 0 3px 5px rgba(255,255,255,0.2);
+                strong   {
+                    color: #7C32C0;
+                }
             }
         }
+
     }
 
 
@@ -758,12 +1174,21 @@ $navh : 68px;
         flex-direction: column;
         text-align: right;
 
+        transform : translate3d(0,30px,0);
+        opacity: 0;
+        transition: transform 800ms $EASE_outExpo 320ms, opacity 250ms ease 320ms;
+        .st-openmenu & {
+            opacity: 1;
+            transform : translate3d(0,0,0);
+        }
+
         @include hardSelect {
             font-size: $SIZE_PC_fontsize_small;
         }
 
         > * {
             margin-top: 16px;
+
             &:nth-child(1) {
                 margin-top: 0;
             }
@@ -774,6 +1199,11 @@ $navh : 68px;
             flex-direction: column;
             margin-left: auto;
             opacity: $opacityEtc;
+            transition: opacity 400ms ease;
+
+            @include hover {
+                opacity: 1;
+            }
 
             .gnb__etc__enuma__copy {
                 text-decoration: underline;
@@ -789,6 +1219,10 @@ $navh : 68px;
             .gnb__etc__sns__item {
                 opacity: $opacityEtc;
                 margin-left: 22px;
+                transition: opacity 120ms ease;
+                @include hover {
+                    opacity: 1;
+                }
                 > a {
                     display: inline-block;
                     i {

@@ -11,7 +11,13 @@
             <span class="auth__divider__bar"></span>
         </div>
 
-        <ButtonSignin type="email" @click="selectEmail"/>
+        <ButtonDefault @click="selectEmail">
+            이메일로 시작하기
+        </ButtonDefault>
+
+        <ButtonDefault background="linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(29,94,253,1) 30%, rgba(252,69,119,1) 100%)" color="#fff" @click="TEST_onetouchLogin">
+            ★한방에 로그인★
+        </ButtonDefault>
 
     </div>
 </template>
@@ -19,14 +25,34 @@
 <script>
 import gsap from 'gsap';
 import ButtonSignin from '@/components/button/ButtonSignin.vue';
+import ButtonDefault from '@/components/button/ButtonDefault.vue';
 {gsap}
 
 export default {
     name : 'AuthSelection',
     components : {
-        ButtonSignin,
+        ButtonSignin, ButtonDefault
     },
     methods: {
+        TEST_onetouchLogin() {
+            this.$store.dispatch('closeAuthPanel');
+            const random = `random${Math.round(Math.random()* 100)}`;
+            this.$store.dispatch('showModalAlert' , {
+                title : '',
+                message : `
+                    이렇게 로그인합니다.
+                    <br>
+                    <br>id : ${random}@gmail.com
+                    <br> username : ${random}
+                `,
+                close : () => {
+                    this.$store.dispatch('signIn' , {
+                        id : `${random}@gmail.com`,
+                        username : `${random}`,
+                    });
+                }
+            });
+        },
         selectEmail() {
             this.$emit('change-phase' , 'signinForm')
         },

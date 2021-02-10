@@ -5,77 +5,81 @@ import { VM } from '@/main.js';
 
 Vue.use(VueRouter);
 
+const needLoginPages = [
+    'mypage',
+]
+
+const routes =  [
+// 메인 (토도영어 소개)
+    {
+        path : '/',
+        name : 'main',
+        component : () => import('@/pages/PageMain/PageMain.vue'),
+    },
+
+// 멤버십 후기
+    {
+        path : '/review',
+        name : 'review',
+        component : () => import('@/pages/PageReview/PageReview.vue'),
+    },
+
+
+// 제품 소개(멤버십 가입)
+    {
+        path : '/product',
+        name : 'product',
+        component : () => import('@/pages/PageProduct/PageProduct.vue'),
+    },
+
+
+// 커리큘럼
+    {
+        path : '/curriculum',
+        redirect : '/curriculum/map'
+    },
+    {
+        path : '/curriculum/map',
+        alias: [
+            '/curriculum',
+            '/curriculum/objectives'
+        ],
+        name : 'curriculum',
+        component : () => import('@/pages/PageCurriculum/PageCurriculum.vue'),
+    },
+
+
+// 마이페이지
+    {
+        path : '/mypage',
+        redirect : '/mypage/study'
+    },
+    {
+        path : '/mypage/study',
+        alias: [
+            '/mypage',
+            '/mypage/account'
+        ],
+        name : 'mypage',
+        needLogin : true,
+        component : () => import('@/pages/PageMypage/PageMypage.vue'),
+    },
+
+// 404 not found
+    {
+        path : '/404',
+        alias : '*',
+        name : '404',
+        component : () => import('@/pages/Page404/Page404.vue'),
+    },
+
+];
+
 const routerInfo = {
     mode : 'history',
     base : process.env.BASE_URL,
-    routes : [
-
-
-    // 메인 (토도영어 소개)
-        {
-            path : '/',
-            name : 'main',
-            component : () => import('@/pages/PageMain/PageMain.vue'),
-        },
-
-    // 멤버십 후기
-        {
-            path : '/review',
-            name : 'review',
-            component : () => import('@/pages/PageReview/PageReview.vue'),
-        },
-
-
-    // 제품 소개(멤버십 가입)
-        {
-            path : '/product',
-            name : 'product',
-            component : () => import('@/pages/PageProduct/PageProduct.vue'),
-        },
-
-
-    // 커리큘럼
-        {
-            path : '/curriculum',
-            redirect : '/curriculum/map'
-        },
-        {
-            path : '/curriculum/map',
-            alias: [
-                '/curriculum',
-                '/curriculum/objectives'
-            ],
-            name : 'curriculum',
-            component : () => import('@/pages/PageCurriculum/PageCurriculum.vue'),
-        },
-
-
-    // 마이페이지
-        {
-            path : '/mypage',
-            redirect : '/mypage/study'
-        },
-        {
-            path : '/mypage/study',
-            alias: [
-                '/mypage',
-                '/mypage/account'
-            ],
-            name : 'mypage',
-            component : () => import('@/pages/PageMypage/PageMypage.vue'),
-        },
-
-    // 404 not found
-        {
-            path : '/404',
-            alias : '*',
-            name : 'page404',
-            component : () => import('@/pages/Page404/Page404.vue'),
-        },
-
-    ],
-
-}
+    routes ,
+};
 
 const router = new VueRouter(routerInfo);
 
@@ -94,6 +98,19 @@ let isPaging = false;
 {isPaging}
 
 router.beforeEach((to,from, next) => {
+
+    // if(needLoginPages.indexOf(to.name) > -1){
+    //     if(!store.state.$user.is_login){
+    //         store.dispatch('openAuthPanel');
+    //         return;
+    //     }
+    // }
+
+    // const a = true;
+
+    // if(a){
+    //     store
+    // }
 
     const isChangeCategoryPath = !isSameCategoryPath(to.path, from.path);
 
@@ -117,10 +134,19 @@ router.beforeEach((to,from, next) => {
     }
 });
 
-router.afterEach(() => {
+router.afterEach((to) => {
+    // console.log(VM.$nextTick);
+
     if(!VM){
         return
     }
+
+    if(needLoginPages.indexOf(to.name) > -1){
+        store.commit('PAGE_needLogin');
+    }else {
+        store.commit('PAGE_freeLogin');
+    }
+
     VM.$nextTick(() => {
         isPaging = false;
         store.dispatch('uncoverPage');

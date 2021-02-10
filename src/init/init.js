@@ -2,7 +2,6 @@
 import store from '@/store/index.js';
 import Fragment from 'vue-fragment';
 
-
 import {
     detectBrowser ,
     detectOS ,
