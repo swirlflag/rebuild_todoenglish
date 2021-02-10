@@ -22,8 +22,7 @@
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/review" exact>멤버십 후기</router-link></li>
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/curriculum">커리큘럼</router-link></li>
                     <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/product" exact>멤버십 가입</router-link></li>
-                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/4" exact>도움말</router-link></li>
-                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/mypage">TEST</router-link></li>
+                    <li class="nav-gnb__link"><router-link class="style-gnb-link hover-underline color-white" to="/help" exact>도움말</router-link></li>
                 </ul>
 
                 <div class="nav-gnb__account">
@@ -194,6 +193,7 @@ export const gnbStore = {
 
 $SIZE_MO_linkDistance : 15px;
 
+
 @mixin lessThenPcWidth {
     @include lessThenSize($SIZE_PC_contentWidth) {
         @content;
@@ -250,13 +250,13 @@ $SIZE_MO_linkDistance : 15px;
     }
     &.st-reduce:not(.st-open-menu){
         transform : translateY(-100%);
-    }s
+    }
 
     &.st-hide {
         transform: translate3d(0,-100%,0);
         transition  : background-color 250ms ease 100ms
                     , height 400ms $EASE_outQuart
-                    , transform 400ms $EASE_outCubic 500ms
+                    , transform 400ms $EASE_outCubic 200ms
                     , box-shadow 500ms ease
                     ;
     }

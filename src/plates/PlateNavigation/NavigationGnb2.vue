@@ -1067,8 +1067,8 @@ $navh : 68px;
 
                     &.router-link-active {
                         pointer-events: none !important;
-                        .gnb__private__item__target {
-                            opacity: 0.4 !important;
+                        .dt-login & .gnb__private__name {
+                            opacity: 0.4;
                         }
                     }
 

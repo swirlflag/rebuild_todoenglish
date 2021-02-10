@@ -437,27 +437,49 @@ export const authStore = {
     state : {
         is_open : false,
         // is_open : true,
+
+        on_success : null, // 기대 : function
     },
 
     mutations : {
         AUTH_open(state) {
-            state.$auth.is_open = true
+            state.$auth.is_open = true;
         },
         AUTH_close(state) {
-            state.$auth.is_open = false
+            state.$auth.is_open = false;
+        },
+        AUTH_registSuccess(state,fn) {
+            if(typeof fn !== 'function'){
+                console.dev('ERC_AT2');
+                return;
+            }
+            state.$auth.on_success = fn;
+        },
+        AUTH_resetSuccess(state) {
+            state.$auth.on_success = null;
         }
     },
 
     actions : {
         openAuthPanel({commit}) {
-            commit('AUTH_open');
             commit('SCROLL_lock');
+            commit('AUTH_open');
         },
-        closeAuthPanel({commit}) {
-            commit('AUTH_close')
+        closeAuthPanel({state , commit}) {
             commit('SCROLL_unlock');
+            commit('AUTH_close');
+
+            if(state.$auth.on_success){
+                if(state.$user.is_login){
+                    state.$auth.on_success();
+                }
+                commit('AUTH_resetSuccess');
+            }
         },
-    }
+        registSuccessLogin({commit}, fn) {
+            commit('AUTH_registSuccess' , fn);
+        },
+    },
 }
 </script>
 

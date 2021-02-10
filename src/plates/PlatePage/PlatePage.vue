@@ -3,11 +3,10 @@
 
         <PageNeedLogin  v-if="$store.getters.is_showNeedLogin"
                         @hook:mounted="mountedPage"
-
         />
 
-        <router-view    id="page-router"
-                        v-if="!$store.getters.is_showNeedLogin"
+        <router-view    v-else
+                        id="page-router"
                         @hook:mounted="mountedPage"
         >
 
@@ -31,7 +30,7 @@ export default {
         mountedPage() {
             setTimeout(() => {
                 this.$store.commit('PAGE_mounted');
-            },500)
+            },1000)
             // console.log('page mount');
         },
     },

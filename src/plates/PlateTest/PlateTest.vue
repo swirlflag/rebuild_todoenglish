@@ -142,9 +142,9 @@ export default {
         },
         TEST_toggleAuthPlate() {
             if(this.$store.state.$auth.is_open){
-                this.$store.commit('AUTH_close');
+                this.$store.dispatch('closeAuthPanel');
             }else {
-                this.$store.commit('AUTH_open');
+                this.$store.dispatch('openAuthPanel');
             }
 
         },

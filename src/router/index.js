@@ -48,6 +48,11 @@ const routes =  [
         component : () => import('@/pages/PageCurriculum/PageCurriculum.vue'),
     },
 
+    {
+        path : '/help',
+        component : () => import('@/pages/PageHelp/PageHelp.vue'),
+    },
+
 
 // 마이페이지
     {
@@ -99,18 +104,18 @@ let isPaging = false;
 
 router.beforeEach((to,from, next) => {
 
-    // if(needLoginPages.indexOf(to.name) > -1){
-    //     if(!store.state.$user.is_login){
-    //         store.dispatch('openAuthPanel');
-    //         return;
-    //     }
-    // }
+    const checkLoginNeedBeforeHref =   !firstRender
+                                        &&  needLoginPages.indexOf(to.name) > -1
+                                        &&  !store.state.$user.is_login
+                                        ;
 
-    // const a = true;
-
-    // if(a){
-    //     store
-    // }
+    if(checkLoginNeedBeforeHref){
+        store.dispatch('openAuthPanel');
+        store.dispatch('registSuccessLogin' , () => {
+            VM.$router.push(to.path);
+        });
+        return;
+    }
 
     const isChangeCategoryPath = !isSameCategoryPath(to.path, from.path);
 
@@ -135,7 +140,6 @@ router.beforeEach((to,from, next) => {
 });
 
 router.afterEach((to) => {
-    // console.log(VM.$nextTick);
 
     if(!VM){
         return
