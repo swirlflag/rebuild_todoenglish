@@ -104,10 +104,10 @@ let isPaging = false;
 
 router.beforeEach((to,from, next) => {
 
-    const checkLoginNeedBeforeHref =   !firstRender
-                                        &&  needLoginPages.indexOf(to.name) > -1
-                                        &&  !store.state.$user.is_login
-                                        ;
+    const checkLoginNeedBeforeHref  =   !firstRender
+                                    &&  needLoginPages.indexOf(to.name) > -1
+                                    &&  !store.state.$user.is_login
+                                    ;
 
     if(checkLoginNeedBeforeHref){
         store.dispatch('openAuthPanel');
@@ -142,7 +142,7 @@ router.beforeEach((to,from, next) => {
 router.afterEach((to) => {
 
     if(!VM){
-        return
+        return;
     }
 
     if(needLoginPages.indexOf(to.name) > -1){

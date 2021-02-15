@@ -64,18 +64,26 @@
 </template>
 
 <script>
-const API_tryLogin = (signData = {id: '' , password : ''}) => {
+const API_tryLogin = (signData = {emailId: '' , password : ''}) => {
 
-    const { id, password } = signData;
-    {id, password}
+    const { emailId, password } = signData;
+    {emailId , password}
 
-    const username = id.split('@')[0];
+    const username = emailId.split('@')[0];
+
+    const tempAccountId = `TEMP-AUTHACCOUNT-${username.toUpperCase()}`;
 
     // (대충 siginData로 서버랑 통신하는코드)
 
     // (대충 랜덤으로로그인시도하기)
-    const serverResult = randomOne(
-        {result : true , data : {  id , username }},
+    const serverResult = randomOne({
+            result : true ,
+            data : {
+                emailId ,
+                accountId : tempAccountId,
+                username ,
+            }
+        },
         {result: false, errorCode : 'ID' },
         {result: false, errorCode : 'PW' },
     );

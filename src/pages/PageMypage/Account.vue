@@ -1,6 +1,8 @@
 <template>
     <div class="mypage-account area__outer">
-        <div class="area__inner">
+
+        <div class="layout">
+
             <div class="account__basic valueboard">
                 <div class="valueboard__header">
                     <h3 class="valueboard__title">
@@ -54,6 +56,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="area__inner">
+
 
             <div class="account__membership valueboard">
                 <div class="valueboard__header">

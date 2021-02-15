@@ -42,13 +42,14 @@ export default {
                 message : `
                     이렇게 로그인합니다.
                     <br>
-                    <br>id : ${random}@gmail.com
-                    <br> username : ${random}
+                    <br>emailId : ${random}@gmail.com
+                    <br>username : ${random}
                 `,
                 close : () => {
                     this.$store.dispatch('signIn' , {
-                        id : `${random}@gmail.com`,
+                        emailId : `${random}@gmail.com`,
                         username : `${random}`,
+                        accountId : "ACCOUNT_ONETOUCH"
                     });
                 }
             });

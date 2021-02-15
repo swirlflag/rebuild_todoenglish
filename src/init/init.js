@@ -16,13 +16,19 @@ store.state.type_os          = detectOS();
 store.state.type_device      = detectDevice();
 store.state.is_touchDevice   = detectTouchdevice();
 
-// $state.use_coverdPlate = $state.type_browser === 'ie' ;
+if(localStorage.userData){
+    const userData = JSON.parse(localStorage.userData);
+    store.dispatch('signIn' , userData);
+}
 
+// store.state.$user.is_login = true;
+
+// $state.use_coverdPlate = $state.type_browser === 'ie' ;
 // $state.is_dev = process.env.NODE_ENV === 'development';
 
 export default {
     install(Vue) {
         {Vue}
-        Vue.use(Fragment.Plugin)
+        Vue.use(Fragment.Plugin);
     }
 }

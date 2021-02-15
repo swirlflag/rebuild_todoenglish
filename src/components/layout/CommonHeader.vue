@@ -55,7 +55,6 @@ export default {
 
             closeHeight : 0,
             openHeight : 0,
-
         }
     },
     watch : {
@@ -150,7 +149,7 @@ export default {
     position: relative;
     position: sticky;
     top: $SIZE_PC_gnbHeight;
-    min-width : $SIZE_PC_contentWidth;
+    // min-width : $SIZE_PC_contentWidth;
     background-color: rgba(255,255,255,0.97);
     text-shadow: 0 2px 3px #fff;
     font-size: 16px;
@@ -167,148 +166,148 @@ export default {
 }
 
 .page-header__inner  {
-        display: flex;
-        align-items: center;
-        box-sizing: border-box;
-        position: relative;
-        flex-wrap: wrap;
-        width: $SIZE_PC_contentWidth;
-        padding: 30px $SIZE_PC_innerPadding 0 ;
-        margin: 0 auto;
-        z-index: 2;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    flex-wrap: wrap;
+    max-width: $SIZE_PC_contentWidth;
+    padding:20px $SIZE_PC_innerPadding 0 ;
+    margin: 0 auto;
+    z-index: 2;
 
-        @include overPhone {
-            height: auto !important;
-        }
-
-        @include phone {
-            overflow: hidden;
-            transition: height 450ms $EASE_outExpo ;
-            padding: 20px $SIZE_MO_innerPadding;
-            width: 100%;
-            border-bottom: 1px solid #e6e6e6;
-            background-color: #fff;
-        }
+    @include overPhone {
+        height: auto !important;
     }
 
-    .page-header__dimmed {
+    @include phone {
         overflow: hidden;
-        position: absolute;
-        width: 100vw; height: 100vh;
-        top: 0;left: 0;
-        z-index: 1;
-        background: rgba(0,0,0,0.5);
-        opacity: 0;
-        pointer-events:  none;
-        transition: opacity 400ms ease;
-
-        @include overPhone {
-            display: none;
-        };
-
-        .st-open & {
-            pointer-events: all;
-            opacity : 1;
-            display: block;
-        }
-    }
-
-    .header__line {
+        transition: height 450ms $EASE_outExpo ;
+        padding: 20px $SIZE_MO_innerPadding;
         width: 100%;
-        height: 2px;
-        left: 0;
-        margin-top: 20px;
-        display: inline-block;
-        background-color: $COLOR_navy_2;
-        align-self : bottom;
+        border-bottom: 1px solid #e6e6e6;
+        background-color: #fff;
+    }
+}
 
-        @include phone {
-            position: absolute;
-            width: 100vw;
-            bottom: 0;
+.page-header__dimmed {
+    overflow: hidden;
+    position: absolute;
+    width: 100vw; height: 100vh;
+    top: 0;left: 0;
+    z-index: 1;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events:  none;
+    transition: opacity 400ms ease;
+
+    @include overPhone {
+        display: none;
+    };
+
+    .st-open & {
+        pointer-events: all;
+        opacity : 1;
+        display: block;
+    }
+}
+
+.header__line {
+    width: 100%;
+    height: 2px;
+    left: 0;
+    margin-top: 16px;
+    display: inline-block;
+    background-color: $COLOR_navy_2;
+    align-self : bottom;
+
+    @include phone {
+        position: absolute;
+        width: 100vw;
+        bottom: 0;
+        display: none;
+    }
+}
+.header__title {
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
+    @include phone {
+        width: 100%;
+        font-size: 18px;
+    }
+    .header__openbutton {
+        @include overPhone  {
             display: none;
         }
-    }
-    .header__title {
-        width: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 22px;
-        font-weight: 700;
         @include phone {
-            width: 100%;
-            font-size: 18px;
-        }
-        .header__openbutton {
-            @include overPhone  {
-                display: none;
-            }
-            @include phone {
-                display: flex;
-                flex-direction: column;
-                width: 26px; height: 26px;
-                margin-left: auto;
-                overflow: hidden;
-            }
-
-            .icon--arrow-simple {
-                width: 100%;    height: 100%;
-            }
-        }
-    }
-
-    .header__links {
-        display: flex;
-        margin-left: auto;
-        position: relative;
-
-        @include phone {
-            // position: absolute;
-            width: 100%;
-            // top: 100%;
-            // left: 0;
+            display: flex;
             flex-direction: column;
-            margin-top: 20px;
-            padding: 0 $SIZE_MO_innerPadding ;
+            width: 26px; height: 26px;
+            margin-left: auto;
+            overflow: hidden;
         }
 
-        li {
-            & + li {
-                margin-left: 70px;
-
-                @include phone {
-                    margin-top: 10px;
-                    padding-top: 10px;
-                    margin-left: 0;
-                    border-top: 1px solid #e6e6e6;
-                }
-            }
-
-            a {
-                @include phone {
-                    padding: 10px 0;
-                }
-            }
+        .icon--arrow-simple {
+            width: 100%;    height: 100%;
         }
+    }
+}
 
-        .header__links-bar {
-            position: absolute;
-            width: 100%;
-            height: 3px;
-            left: 0;
-            bottom: 0;
-            background: $COLOR_navy_1;
-            transition: transform 400ms $EASE_outQuart, width 200ms $EASE_outCubic;
+.header__links {
+    display: flex;
+    margin-left: auto;
+    position: relative;
+
+    @include phone {
+        // position: absolute;
+        width: 100%;
+        // top: 100%;
+        // left: 0;
+        flex-direction: column;
+        margin-top: 20px;
+        padding: 0 $SIZE_MO_innerPadding ;
+    }
+
+    li {
+        & + li {
+            margin-left: 70px;
+
             @include phone {
-                 display: none;
+                margin-top: 10px;
+                padding-top: 10px;
+                margin-left: 0;
+                border-top: 1px solid #e6e6e6;
+            }
+        }
+
+        a {
+            @include phone {
+                padding: 10px 0;
             }
         }
     }
 
-    .header__breadcrumb {
-
+    .header__links-bar {
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        left: 0;
+        bottom: 0;
+        background: $COLOR_navy_1;
+        transition: transform 400ms $EASE_outQuart, width 200ms $EASE_outCubic;
+        @include phone {
+                display: none;
+        }
     }
+}
+
+.header__breadcrumb {
+
+}
 
 .router-link-active {
     font-weight: 700;

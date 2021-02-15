@@ -97,19 +97,20 @@ export default {
                 })
             }else {
 
-                const random = `random${Math.round(Math.random()* 100)}`;
+                const random = `test_random${Math.round(Math.random()* 100)}`;
                 this.$store.dispatch('showModalAlert' , {
                     title : '',
                     message : `
                         이렇게 로그인합니다.
                         <br>
-                        <br>id : ${random}@gmail.com
+                        <br> emailId : ${random}@gmail.com
                         <br> username : ${random}
                     `,
                     close : () => {
                         this.$store.dispatch('signIn' , {
-                            id : `${random}@gmail.com`,
+                            emailId : `${random}@gmail.com`,
                             username : `${random}`,
+                            accountId : "ACCOUNT_TEST",
                         });
                     }
                 });
