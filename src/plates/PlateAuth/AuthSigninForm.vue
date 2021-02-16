@@ -9,7 +9,7 @@
                             id="form-signin__id"
                             ref="ref_id"
                             :mark="markEmail"
-                            v-model="value.id"
+                            v-model="value.emailId"
                             @change="onInputEmail"
             />
 
@@ -132,12 +132,12 @@ export default {
             },
 
             value : {
-                id          : '',
+                emailId          : '',
                 password    : '',
             },
 
             valid : {
-                id          : false,
+                emailId          : false,
                 password    : false,
             },
 
@@ -171,7 +171,7 @@ export default {
             this.focusTarget(this.$refs.ref_password.$refs.ref_input);
         },
         onInputEmail (value,valid) {
-            this.valid.id = valid;
+            this.valid.emailId = valid;
             if(this.markEmail){
                 this.stateToIdle();
             }
@@ -184,7 +184,7 @@ export default {
         },
 
         validCheck() {
-            if(!this.valid.id){
+            if(!this.valid.emailId){
                 this.stateToVaildFailEmail();
                 return
             }

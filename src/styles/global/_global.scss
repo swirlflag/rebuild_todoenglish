@@ -5,11 +5,13 @@ html , body {
     // }
     // overflow: overlay;
     -webkit-overflow-scrolling: touch !important;
+    // 폰트 부드럽게 만드는 속성
+    -webkit-font-smoothing: antialiased;
+
 }
 
 
 body {
-
 
     @include hardSelect {
         font-style: normal;
