@@ -11,11 +11,15 @@
         <ModalAlert
         />
 
+        <ModalConfirm
+        />
+
         <div    class="modal__dimmed"
                 :class="{'st-show' : $modal.is_dimmedActive}"
                 @click="clickModalDimmed"
         >
         </div>
+
 
         <!-- <ModalConfirm
         />
@@ -33,13 +37,15 @@
 import { mapState } from 'vuex';
 
 // import ModalConfirm     , { confirmStore }      from '@/components/modal/ModalConfirm.vue';
-import ModalAlert       , { alertStore }        from '@/plates/PlateModal/ModalAlert.vue';
+import ModalAlert       , { alertStore }        from './ModalAlert.vue';
+import ModalConfirm     , { confirmStore }      from './ModalConfirm.vue';
 // import ModalBottomSheet , { bottomSheetStore }  from '@/components/modal/ModalBottomSheet.vue';
 
 export default {
     name : "PlateModal",
     components: {
-        ModalAlert
+        ModalAlert,
+        ModalConfirm,
         //  ModalConfirm , ModalAlert , ModalBottomSheet
     },
     computed : {
@@ -63,6 +69,7 @@ export default {
 export const modalStore = {
     name : '$modal',
     alertStore,
+    confirmStore,
     // confirmStore,
     // bottomSheetStore,
 

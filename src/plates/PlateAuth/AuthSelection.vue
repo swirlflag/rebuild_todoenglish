@@ -45,7 +45,7 @@ export default {
                     <br>emailId : ${random}@gmail.com
                     <br>username : ${random}
                 `,
-                close : () => {
+                actionClose : () => {
                     this.$store.dispatch('signIn' , {
                         emailId : `${random}@gmail.com`,
                         username : `${random}`,

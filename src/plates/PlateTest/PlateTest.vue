@@ -24,6 +24,11 @@
                 open alert2
             </button>
 
+            <button @click="TEST_openConfirm1">
+                open confirm
+            </button>
+
+
             <br>
 
             <button @click="TEST_toggleAuthPlate">
@@ -91,7 +96,7 @@ export default {
 
                 this.$store.dispatch('showModalAlert' , {
                     message : '로그아웃 합니다',
-                    close : () => {
+                    actionClose : () => {
                         this.$store.dispatch('signOut');
                     }
                 })
@@ -128,8 +133,8 @@ export default {
             const payload = {
                 title : 'TEST ALERT',
                 message : '테스트용 알림창',
-                confirmButton : '확~인',
-                close : () => {
+                buttonText : '커스텀 확인',
+                actionClose : () => {
                     console.log('test alert close');
                 }
             };
@@ -137,9 +142,18 @@ export default {
         },
         TEST_openAlert2(){
             const payload = {
-                message : '비밀번호 변경을 위한 이메일을 발송하였습니다.<br/>메일함을 확인해주세요.',
+                message : '비밀번호 변경을 위한 이메일을 발송하였습니다.<br/>메일함을 확인해주세요. (가짜입니다)',
             };
             this.$store.dispatch('showModalAlert' , payload);
+        },
+        TEST_openConfirm1() {
+            const payload = {
+                message : '테스트 : 확인 버튼을 누르면 새로운 알림창이 생성됩니다.',
+                actionTrue : () => {
+                    this.$store.dispatch('showModalAlert' ,'ModalConfirm에서 확인을 누른것을 감지했습니다.');
+                },
+            };
+            this.$store.dispatch('showModalConfirm' ,payload);
         },
         TEST_toggleAuthPlate() {
             if(this.$store.state.$auth.is_open){
