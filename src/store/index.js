@@ -8,8 +8,9 @@ import userStore        from './userStore.js';
 import { appStore           } from '@/App.vue';
 import { transitionStore    } from '@/plates/PlateTransitionCover/PlateTransitionCover.vue';
 import { navStore           } from '@/plates/PlateNavigation/PlateNavigation.vue';
-import { modalStore         } from '@/plates/PlateModal/PlateModal.vue';
+import { modalStore         } from '@/plates/PlateInform/PlateInform.vue';
 import { authStore          } from '@/plates/PlateAuth/PlateAuth.vue';
+import { bannerStore        } from '@/plates/PlateBanner/PlateBanner.vue';
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ const storeInfo = combineStore(
     modalStore,
     authStore,
     userStore,
+    bannerStore,
 );
 
 const store = new Vuex.Store(storeInfo)

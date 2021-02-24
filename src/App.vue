@@ -1,7 +1,7 @@
 <template>
     <div    id="app"
             ref="ref_root"
-            :class="`${appClassNamePage} ${appClassNameBrowser} ${appClassNameOS} ${appClassNameDevice} ${appClassNameTouchdevice} ${appClassNameStateFreeze}`"
+            :class="`${appClassNamePage}${appClassNameBrowser}${appClassNameOS}${appClassNameDevice}${appClassNameTouchdevice}${appClassNameStateFreeze}`"
     >
 
 
@@ -20,7 +20,7 @@
              v-if="1"
         />
 
-        <PlateModal
+        <PlateInform
             v-if="1"
         />
 
@@ -33,6 +33,10 @@
         />
 
         <PlateNavigation
+            v-if="1"
+        />
+
+        <PlateBanner
             v-if="1"
         />
 
@@ -49,10 +53,11 @@
 import PlateTest                from '@/plates/PlateTest/PlateTest.vue';
 import PlateSetting             from '@/plates/PlateSetting/PlateSetting.vue';
 import PlateLoading             from '@/plates/PlateLoading/PlateLoading.vue';
-import PlateModal               from '@/plates/PlateModal/PlateModal.vue';
+import PlateInform              from '@/plates/PlateInform/PlateInform.vue';
 import PlateAuth                from '@/plates/PlateAuth/PlateAuth.vue';
 import PlateTransitionCover     from '@/plates/PlateTransitionCover/PlateTransitionCover.vue';
 import PlateNavigation          from '@/plates/PlateNavigation/PlateNavigation.vue';
+import PlateBanner              from '@/plates/PlateBanner/PlateBanner.vue';
 import PlatePage                from '@/plates/PlatePage/PlatePage.vue';
 import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
 
@@ -63,7 +68,7 @@ import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
 export default {
     name: 'App',
     components: {
-        PlateSetting, PlateLoading, PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth ,
+        PlateSetting, PlateLoading, PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateInform ,PlateAuth ,PlateBanner
     },
     data() {
         return {
@@ -77,25 +82,25 @@ export default {
     },
     computed : {
         appClassNamePage() {
-            return `page--${(this.$route.name || 'error').toLowerCase()}`;
+            return ` page--${(this.$route.name || 'error').toLowerCase()}`;
         },
         appClassNameBrowser() {
-            return `browser--${this.$store.state.type_browser}`;
+            return this.$store.state.type_browser ?  ` browser--${this.$store.state.type_browser}`: '';
         },
         appClassNameOS() {
-            return `os--${this.$store.state.type_os}`;
+            return this.$store.state.type_os ? ` os--${this.$store.state.type_os}`: '';
         },
         appClassNameDevice() {
-            return `device--${this.$store.state.type_device}`;
+            return this.$store.state.type_device ? ` device--${this.$store.state.type_device}`: '';
         },
         appClassNameLanguage() {
-            return `language--${this.$store.state.languageType}`;
+            return this.$store.state.languageType ? ` language--${this.$store.state.languageType}` : '';
         },
         appClassNameTouchdevice() {
-            return this.$store.state.is_touchDevice ? 'use_touch' : 'unuse_touch';
+            return this.$store.state.is_touchDevice ? ' use_touch' : ' unuse_touch';
         },
         appClassNameStateFreeze() {
-            return this.$store.state.$app.is_freeze ? 'st-freeze' : '';
+            return this.$store.state.$app.is_freeze ? ' st-freeze' : '';
         },
 
     },
@@ -124,7 +129,7 @@ export default {
         window.addEventListener('scroll' , this.detectScrollDirectionNav)
     },
     mounted() {
-        // console.log('mounted : App.vue');
+        // console.log(this.$store.state.is_dev);
     },
     destroyed() {
         window.removeEventListener('scroll' , this.detectScrollDirectionNav)

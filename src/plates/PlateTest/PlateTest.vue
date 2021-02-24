@@ -28,6 +28,9 @@
                 open confirm
             </button>
 
+            <button @click="TEST_addBanner">
+                add banner
+            </button>
 
             <br>
 
@@ -142,18 +145,23 @@ export default {
         },
         TEST_openAlert2(){
             const payload = {
-                message : '비밀번호 변경을 위한 이메일을 발송하였습니다.<br/>메일함을 확인해주세요. (가짜입니다)',
+                message : '비밀번호 변경을 위한 이메일을 발송하였습니다.<br/>메일함을 확인해주세요. (TEST)',
             };
             this.$store.dispatch('showModalAlert' , payload);
         },
         TEST_openConfirm1() {
             const payload = {
-                message : '테스트 : 확인 버튼을 누르면 새로운 알림창이 생성됩니다.',
+                message : '테스트 : 확인 버튼을 누르면 홈 화면으로 이동합니다.',
                 actionTrue : () => {
-                    this.$store.dispatch('showModalAlert' ,'ModalConfirm에서 확인을 누른것을 감지했습니다.');
+                    if(this.$route.path !== '/'){
+                        this.$router.push('/');
+                    }
                 },
             };
             this.$store.dispatch('showModalConfirm' ,payload);
+        },
+        TEST_addBanner() {
+            this.$store.dispatch('addBannerAlert' , 'hello' + Math.floor(Math.random() * 1000));
         },
         TEST_toggleAuthPlate() {
             if(this.$store.state.$auth.is_open){
@@ -174,10 +182,14 @@ export default {
                 const target = this.$refs.ref_root;
                 target.style.left = e.clientX - 25 + 'px';
                 target.style.top = e.clientY - 25 + 'px';
+
+                localStorage.setItem('TESTMENUX' , e.clientX - 25);
+                localStorage.setItem('TESTMENUY' , e.clientY - 25);
             }
         },
         onoff() {
-            this.isOpen = !this.isOpen
+            this.isOpen = !this.isOpen;
+            localStorage.setItem('TESTMENUOPEN' , this.isOpen);
         }
 
     },
@@ -185,6 +197,17 @@ export default {
         window.TEST_1 = document.querySelector('#testlog1');
         window.TEST_2 = document.querySelector('#testlog2');
         window.addEventListener('mousemove' , this.drag)
+
+        this.isOpen = localStorage.getItem('TESTMENUOPEN') === "true";
+
+        if(localStorage.getItem('TESTMENUX')){
+            const target = this.$refs.ref_root;
+            const x = localStorage.getItem('TESTMENUX');
+            const y = localStorage.getItem('TESTMENUY');
+            target.style.left = x + 'px';
+            target.style.top = y + 'px';
+        }
+
     },
     destroyed() {
         window.removeEventListener('mousemove' , this.drag);

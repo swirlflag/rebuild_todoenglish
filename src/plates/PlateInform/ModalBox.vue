@@ -1,5 +1,5 @@
 <template>
-    <div    class="modal__item"
+    <div    class="modal-item"
             :class="`${isShow ? 'st-show' : ''}${type ? ` type--${type}` : ''}`"
     >
         <div class="modal__box">
@@ -21,7 +21,7 @@ export default {
 
 <style scoped lang="scss">
 
-.modal__item {
+.modal-item {
     &.type--alert ,
     &.type--confirm
     {

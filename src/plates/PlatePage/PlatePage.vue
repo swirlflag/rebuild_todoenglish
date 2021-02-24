@@ -40,6 +40,9 @@ export default {
 }
 </script>
 
+<style scoped>
+
+</style>
 <style lang="scss">
 
 #plate--page {

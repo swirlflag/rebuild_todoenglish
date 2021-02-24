@@ -252,6 +252,8 @@ $MO_radius : 18px;
 $PC_padding : 18px 30px #{18px - (floor($thickness/2))};
 $MO_padding : 15px;
 
+$min-width : 120px;
+
 
 .button--default {
     cursor : pointer;
@@ -260,10 +262,10 @@ $MO_padding : 15px;
     width : auto;
     transition : text-shadow 130ms ease , opacity 200ms ease;
     font-weight: bold;
-    width: 180px;
+    // width: $min-width;
+    min-width:$min-width ;
     // top: #{floor(-$thickness/2)};
     top: #{(-$thickness/2)};
-   
     border-radius: $PC_radius;
 
     @include phone {
@@ -296,6 +298,10 @@ $MO_padding : 15px;
         .button__body { background-color: #F7419C; color: #fff;}
         .button__shadow { box-shadow : 0 $thickness 0 #DF2B85;}
     }
+    &.theme-green {
+        .button__body { background-color: #15AB99; color: #fff;}
+        .button__shadow { box-shadow : 0 $thickness 0 #0C9A89;}
+    }
     &.type-signin-kakao {
         .button__body {background-color: $COLOR_kakaoYellow; color: $COLOR_kakaoBrown;}
         .button__shadow { box-shadow : 0 $thickness 0 #EBD300;}
@@ -303,7 +309,7 @@ $MO_padding : 15px;
     &.type-signin-google {
         .button__body { border-color: #4285F4;}
     }
-    &.theme-navy , &.theme-white , &.theme-pink , &.type-signin-kakao {
+    &.theme-navy , &.theme-white , &.theme-pink , &.type-signin-kakao , &.theme-green  {
         .button__body {
             border: none !important;
         }
@@ -319,8 +325,6 @@ $MO_padding : 15px;
     transition : transform 450ms $EASE_outCubic , box-shadow 450ms ease;
     box-sizing: border-box;
     position: relative;
-
-
 
     // @include unuseTouch {
         .st-hover & , .st-focus & {

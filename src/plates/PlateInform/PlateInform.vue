@@ -1,12 +1,12 @@
 <template>
 <!--
     MEMO :
-    PlateModal 에선, 가로, 세로 100% 인 #modal 이라는 레이어에서
+    PlateInform 에선, 가로, 세로 100% 인 #modal 이라는 레이어에서
     전역 성격으로 적절한 모달 윈도우들(레이어 팝업, 풀 디스플레이 팝업)을 배치합니다.
     #modal 자체는 기본적으로 윈도우(100%,100%)의 크기를 가지며 position : fixed입니다.
     #modal 이하의 컴포넌트들을 자유롭게 수정 확장할수 있습니다.
 -->
-    <div id="plate--modal" >
+    <div id="plate--inform" >
 
         <ModalAlert
         />
@@ -14,11 +14,6 @@
         <ModalConfirm
         />
 
-        <div    class="modal__dimmed"
-                :class="{'st-show' : $modal.is_dimmedActive}"
-                @click="clickModalDimmed"
-        >
-        </div>
 
 
         <!-- <ModalConfirm
@@ -30,6 +25,12 @@
         <ModalBottomSheet
         /> -->
 
+        <div    id="inform__dimmed"
+                :class="{'st-show' : $inform.is_dimmedActive}"
+                @click="clickModalDimmed"
+        >
+        </div>
+
     </div>
 </template>
 
@@ -37,40 +38,46 @@
 import { mapState } from 'vuex';
 
 // import ModalConfirm     , { confirmStore }      from '@/components/modal/ModalConfirm.vue';
-import ModalAlert       , { alertStore }        from './ModalAlert.vue';
-import ModalConfirm     , { confirmStore }      from './ModalConfirm.vue';
+import ModalAlert       , { modalAlertStore }       from './ModalAlert.vue';
+import ModalConfirm     , { modalConfirmStore }     from './ModalConfirm.vue';
+
 // import ModalBottomSheet , { bottomSheetStore }  from '@/components/modal/ModalBottomSheet.vue';
 
 export default {
-    name : "PlateModal",
+    name : "PlateInform",
     components: {
         ModalAlert,
         ModalConfirm,
+
         //  ModalConfirm , ModalAlert , ModalBottomSheet
     },
     computed : {
-        ...mapState(['$modal'])
+        ...mapState(['$inform'])
     },
     methods : {
         clickModalDimmed() {
-            if(!this.$modal.use_clickDimmedThenCloseModal ){
+            if(!this.$inform.use_clickDimmedThenCloseModal ){
                 return;
             }
-            if(!this.$modal.is_active){
+            if(!this.$inform.is_modalActive){
                 return;
             }
-            for(let i = 0, l = this.$modal.clickDimmedActions.length; i < l; ++i){
-                this.$modal.clickDimmedActions[i]();
+
+            if(this.$inform.modalType){
+                this.$inform.clickDimmedActions[this.$inform.modalType]();
+            }else {
+                for(let i = 0, l = this.$inform.clickDimmedActions.length; i < l; ++i){
+                    this.$inform.clickDimmedActions.unkowns[i]();
+                }
             }
         }
     }
 };
 
 export const modalStore = {
-    name : '$modal',
-    alertStore,
-    confirmStore,
-    // confirmStore,
+    name : '$inform',
+    modalAlertStore,
+    modalConfirmStore,
     // bottomSheetStore,
 
     state : {
@@ -79,43 +86,55 @@ export const modalStore = {
         use_openModalWithLockScroll     : false,
         use_openModalWithShowDimmed     : true,
 
-        is_active                       : false,
+        is_modalActive                  : false,
         is_dimmedActive                 : false,
 
-        clickDimmedActions              : [],
+        modalType                       : '',
+
+        clickDimmedActions : {
+            unkowns : []
+        },
 
     },
 
     mutations : {
-
         MODAL_enalbe (state) {
-            state.$modal.is_active = true;
+            state.$inform.is_modalActive = true;
         },
         MODAL_disable (state) {
-            state.$modal.is_active = false;
+            state.$inform.is_modalActive = false;
         },
-
+        MODAL_changeModalType(state,type = '') {
+            state.$inform.modalType = type;
+        },
         MODAL_enableDimmed (state) {
-            state.$modal.is_dimmedActive = true;
+            state.$inform.is_dimmedActive = true;
         },
         MODAL_disableDimmed (state) {
-            state.$modal.is_dimmedActive = false;
+            state.$inform.is_dimmedActive = false;
         },
-        MODAL_addDimmedClickAction(state,action = () => {}) {
-            state.$modal.clickDimmedActions.push(action);
+        MODAL_addDimmedClickAction(state, payload) {
+            if(typeof payload === 'function'){
+                state.$inform.clickDimmedActions.unkowns.push(payload);
+            }
+            if(typeof payload === 'object'){
+                const { type , action } = payload;
+                state.$inform.clickDimmedActions[type] = action;
+            }
         },
 
     },
 
     actions : {
 
-        enableModal({state,commit}) {
+        enableModal({state,commit},type) {
             commit('MODAL_enalbe');
+            commit('MODAL_changeModalType' , type);
 
-            if(state.$modal.use_openModalWithShowDimmed){
+            if(state.$inform.use_openModalWithShowDimmed){
                 commit('MODAL_enableDimmed');
             }
-            if(state.$modal.use_openModalWithLockScroll){
+            if(state.$inform.use_openModalWithLockScroll){
                 commit('SCROLL_lock');
             }
         },
@@ -123,8 +142,9 @@ export const modalStore = {
         disableModal({state,commit}) {
             commit('MODAL_disable');
             commit('MODAL_disableDimmed');
+            commit('MODAL_changeModalType' , '');
 
-            if(state.$modal.use_openModalWithLockScroll){
+            if(state.$inform.use_openModalWithLockScroll){
                 commit('SCROLL_unlock');
             }
         },
@@ -136,7 +156,7 @@ export const modalStore = {
 
 <style lang="scss" scoped>
 
-#plate--modal {
+#plate--inform {
     z-index: 1020;
     min-height: 100vh;
     min-width: 100vw;
@@ -148,7 +168,7 @@ export const modalStore = {
     pointer-events: none;
 }
 
-.modal__dimmed {
+#inform__dimmed {
     width: 100%; height: 100%;
     position: absolute;
     background-color: rgba(0,0,0,0.5);

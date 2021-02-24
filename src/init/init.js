@@ -1,4 +1,3 @@
-
 import store from '@/store/index.js';
 import Fragment from 'vue-fragment';
 
@@ -10,6 +9,8 @@ import {
 } from '@/utils';
 
 // axios.defaults.baseURL = process.env.PROTOCOL + process.env.URLAPI;
+
+store.state.is_dev = process.env.NODE_ENV === 'development';
 
 store.state.type_browser     = detectBrowser();
 store.state.type_os          = detectOS();
@@ -24,11 +25,17 @@ if(localStorage.userData){
 // store.state.$user.is_login = true;
 
 // $state.use_coverdPlate = $state.type_browser === 'ie' ;
-// $state.is_dev = process.env.NODE_ENV === 'development';
+
+
+
+// console.log(process.env.NODE_ENV === 'development');
 
 export default {
     install(Vue) {
-        {Vue}
+        if(store.state.is_dev){
+            Vue.config.devtools = true;
+        }
+
         Vue.use(Fragment.Plugin);
     }
 }

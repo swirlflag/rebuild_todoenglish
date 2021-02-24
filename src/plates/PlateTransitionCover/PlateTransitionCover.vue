@@ -208,7 +208,7 @@ export const transitionStore = {
 
 #plate--transition{
     position: fixed;
-    z-index: 1010;
+    z-index: 1050;
     width: 100vw; height: 100%;
     box-sizing: border-box;
     background: transparent;

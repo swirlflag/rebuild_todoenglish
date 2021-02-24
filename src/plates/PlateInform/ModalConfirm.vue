@@ -1,16 +1,16 @@
 <template>
     <ModalBox   type="confirm"
-                :isShow="$modal.is_confirmActive"
+                :isShow="$inform.is_confirmActive"
     >
-        <div class="alert__title" v-html="$modal.confirmTitle"></div>
-        <div class="alert__message" v-html="$modal.confirmMessage"></div>
+        <div class="alert__title" v-html="$inform.confirmTitle"></div>
+        <div class="alert__message" v-html="$inform.confirmMessage"></div>
         <div class="alert__button">
-            <ButtonDefault @click="actionClose(1)">
-                {{ $modal.confirmFalseButtonText }}
+            <ButtonDefault @click="actionClose(1)" theme="green">
+                {{ $inform.confirmFalseButtonText }}
             </ButtonDefault>
             &nbsp;
             <ButtonDefault @click="actionClose(2)" theme="pink">
-                {{ $modal.confirmTrueButtonText }}
+                {{ $inform.confirmTrueButtonText }}
             </ButtonDefault>
         </div>
     </ModalBox>
@@ -28,8 +28,8 @@ export default {
         ButtonDefault,
     },
     computed : {
-        $modal() {
-            return this.$store.state.$modal;
+        $inform() {
+            return this.$store.state.$inform;
         }
     },
     methods  : {
@@ -38,11 +38,16 @@ export default {
         },
     },
     created() {
-        this.$store.commit('MODAL_addDimmedClickAction',() => {
-            if(this.$modal.is_confirmActive){
-                this.actionClose(0);
+        const payload = {
+            type: 'confirm',
+            action : () => {
+                if(this.$inform.is_confirmActive){
+                    this.actionClose(0);
+                    console.log('dimmed confirm');
+                }
             }
-        });
+        }
+        this.$store.commit('MODAL_addDimmedClickAction',payload);
     },
 }
 
@@ -53,7 +58,7 @@ const idleConfirmState = {
     buttonFalseText  : '취소',
 };
 
-export const confirmStore = {
+export const modalConfirmStore = {
     state : {
         is_confirmActive            : false ,
         confirmTitle                : idleConfirmState.title,
@@ -61,43 +66,43 @@ export const confirmStore = {
         confirmTrueButtonText       : idleConfirmState.buttonTextTrue,
         confirmFalseButtonText      : idleConfirmState.buttonFalseText,
 
-        confirmActionClose          : () => {},
-        confirmActionTrue           : () => {},
-        confirmActionFalse          : () => {},
+        on_confirmClose          : () => {},
+        on_confirmTrue           : () => {},
+        on_confirmFalse          : () => {},
     },
     mutations : {
         MODAL_showConfirm(state) {
-            state.$modal.is_confirmActive = true;
+            state.$inform.is_confirmActive = true;
         },
         MODAL_hideConfirm(state) {
-            state.$modal.is_confirmActive = false;
+            state.$inform.is_confirmActive = false;
         },
         MODAL_changeConfirmTitle(state, title = '') {
-            state.$modal.confirmTitle = title;
+            state.$inform.confirmTitle = title;
         },
         MODAL_changeConfirmMessage(state, message = '') {
-            state.$modal.confirmMessage = message;
+            state.$inform.confirmMessage = message;
         },
         MODAL_changeConfirmTrueButtonText(state,buttonText = '') {
-            state.$modal.confirmTrueButtonText = buttonText;
+            state.$inform.confirmTrueButtonText = buttonText;
         },
         MODAL_changeConfirmFalseButtonText(state,buttonText = '') {
-            state.$modal.confirmFalseButtonText = buttonText;
+            state.$inform.confirmFalseButtonText = buttonText;
         },
-        MODAL_registConfirmActionClose (state, action = () => {}) {
-            state.$modal.confirmActionClose = action;
+        MODAL_registConfirmClose (state, action = () => {}) {
+            state.$inform.on_confirmClose = action;
         },
-        MODAL_registConfirmActionTrue (state , action = () => {}) {
-            state.$modal.confirmActionTrue = action;
+        MODAL_registConfirmTrue (state , action = () => {}) {
+            state.$inform.on_confirmTrue = action;
         },
-        MODAL_registConfirmActionFalse (state , action = () => {}) {
-            state.$modal.confirmActionFalse = action;
+        MODAL_registConfirmFalse (state , action = () => {}) {
+            state.$inform.on_confirmFalse = action;
         },
     },
     actions : {
         showModalConfirm({state,commit, dispatch}, payload = {}) {
 
-            if(state.$modal.is_active){
+            if(state.$inform.is_active){
                 console.dev('ERC_MD1 : 지금은 중복 호출 자체를 막아두었습니다.');
                 return;
             }
@@ -114,12 +119,12 @@ export const confirmStore = {
                 commit('MODAL_changeConfirmTrueButtonText' , buttonTrueText || idleConfirmState.buttonTrueText);
                 commit('MODAL_changeConfirmFalseButtonText' , buttonFalseText || idleConfirmState.buttonFalseText);
 
-                actionClose && commit('MODAL_registConfirmActionClose' , actionClose);
-                actionTrue  && commit('MODAL_registConfirmActionTrue' , actionTrue);
-                actionFalse && commit('MODAL_registConfirmActionFalse' , actionFalse);
+                actionClose && commit('MODAL_registConfirmClose' , actionClose);
+                actionTrue  && commit('MODAL_registConfirmTrue' , actionTrue);
+                actionFalse && commit('MODAL_registConfirmFalse' , actionFalse);
             }
 
-            dispatch('enableModal');
+            dispatch('enableModal' , 'confirm');
             commit('MODAL_showConfirm');
 
         },
@@ -128,18 +133,18 @@ export const confirmStore = {
             dispatch('disableModal');
             commit('MODAL_hideConfirm');
 
-            state.$modal.confirmActionClose();
+            state.$inform.on_confirmClose();
 
             if(result === 1){
-                state.$modal.confirmActionFalse();
+                state.$inform.on_confirmFalse();
             }
             if(result === 2){
-                state.$modal.confirmActionTrue();
+                state.$inform.on_confirmTrue();
             }
 
-            commit('MODAL_registConfirmActionClose' , () => {});
-            commit('MODAL_registConfirmActionTrue' , () => {});
-            commit('MODAL_registConfirmActionFalse' , () => {});
+            commit('MODAL_registConfirmClose' , () => {});
+            commit('MODAL_registConfirmTrue' , () => {});
+            commit('MODAL_registConfirmFalse' , () => {});
         },
 
     },

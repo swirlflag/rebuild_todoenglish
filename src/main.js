@@ -26,6 +26,10 @@ if(IsNotSurpportCondition){
     }).$mount('#app')
 }
 
+if(store.state.is_dev){
+    window.VM = VM;
+}
+
 export { VM }
 
 
