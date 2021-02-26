@@ -170,7 +170,7 @@ $top : 10px;
     box-sizing: border-box;
 
     .banner__list {
-        border: 1px solid #3d3;
+        // border: 1px solid #3d3;
         width: 100%; height: auto;
         max-width : #{$SIZE_PC_contentWidth - ($SIZE_PC_innerPadding*2)};
         margin: 0 $SIZE_PC_innerPadding;

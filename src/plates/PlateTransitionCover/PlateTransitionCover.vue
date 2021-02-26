@@ -192,9 +192,13 @@ export const transitionStore = {
     },
 
     actions : {
-        coverPage(context, next) {
-            context.commit('PAGING_registNext', next);
-            context.commit('PAGING_cover');
+        coverPage({state, commit}, next) {
+            // if(){
+
+            // }
+            {state}
+            commit('PAGING_registNext', next);
+            commit('PAGING_cover');
         },
         uncoverPage(context) {
             context.commit('PAGING_uncover');

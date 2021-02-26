@@ -5,6 +5,12 @@
     >
         <div id="test__log">
 
+            <router-link :to="this.$route.path === '/components' ? '/' : '/components'">
+                {{ this.$route.path === '/components' ? '메인 페이지로' : '컴포넌트 페이지' }}
+            </router-link>
+
+            <br>
+
             <button id="test_scrollock" @click="TEST_scrollock">
                 scrollock
             </button>
