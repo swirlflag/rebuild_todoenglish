@@ -2,26 +2,30 @@
     <div>
         <div id="comp">
             <div id="comp-tab">
-                <div class="tab__category">
-                    <div class="tab__category-name">범주</div>
-                    <div class="tab__list">
-                        <div class="tab__item">요소</div>
-                        <div class="tab__item">요소</div>
-                        <div class="tab__item">요소</div>
-                    </div>
-                </div>
-                <div class="tab__category">
-                    <div class="tab__category-name">범주</div>
-                    <div class="tab__list">
-                        <div class="tab__item">요소</div>
-                        <div class="tab__item">요소</div>
-                        <div class="tab__item">요소</div>
-                    </div>
-                </div>
+                <template v-for="(item,idx) in category">
+                    <Category
+                        :key="idx"
+                        :category="item"
+                        @select="selectComponent"
+                    />
+                </template>
 
             </div>
+
             <div id="comp-content">
-                아이템
+
+                <div id="comp-component">
+                    <template v-if="renderId === '버튼-기본' ">
+                        <ButtonDefault>
+                            버튼
+                        </ButtonDefault>
+                    </template>
+
+                    <template v-if="renderId === '텍스트-제목' ">
+                        render : 텍스트 - 제목
+                    </template>
+                </div>
+
             </div>
 
         </div>
@@ -30,8 +34,46 @@
 </template>
 
 <script>
+import Category from './Category.vue';
+import categoryData from './categoryData.js';
+import ButtonDefault from '@/components/button/ButtonDefault.vue';
+
+
 export default {
     name : 'PageComponents',
+    components : {
+        Category,
+        ButtonDefault,
+    },
+    data() {
+        return {
+            category : categoryData,
+
+            currentItemData : {
+                category : '',
+                item : '',
+            },
+            renderId : '',
+        }
+    },
+    methods : {
+        onClickCategoryName() {
+        },
+        selectComponent(payload) {
+            const { category, item } = payload;
+
+            this.currentItemData.category = category;
+            this.currentItemData.item = item;
+
+            this.renderId = `${category}-${item.name}`;
+
+            console.log(this.renderId);
+        },
+    },
+    mounted() {
+
+
+    }
 }
 </script>
 
@@ -55,4 +97,5 @@ export default {
         }
     }
 }
+
 </style>

@@ -1,54 +1,96 @@
 
+
+::-webkit-scrollbar {
+    width: 4px;
+    position: absolute;
+}
+
+::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: dodgerblue;
+    // background-color: #fff;
+    box-sizing: border-box;
+    // border: 1px solid #000;
+    // box-shadow: 0 0 10px 0 #000;
+}
+
+::-webkit-scrollbar-track {
+    // background-color:transparent;
+    background-color: rgb(211, 233, 255);
+}
 #comp {
-    margin: 50px !important;
+    // margin: 50px !important;
     // border: 1px solid #d3d;
     box-sizing: border-box;
     display: flex;
-
-
-
+    color: rgb(17, 76, 153);
+    // width: 100vw;
+    // height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    padding: 50px;
 }
+
 #comp-tab{
     display: inline-block;
     width: 200px;
     flex-basis: content;
     box-sizing: border-box;
-    border: 1px solid #000;
+    // border: 1px solid #ddd;
+    overflow-y:scroll;
+}
 
-    background: #acc;
-    .tab__category {
-        border: 1px solid #d3d;
-        & + .tab__category {
-            margin-top: 30px;
-        }
+.tab__category {
+    // border: 1px solid #d3d;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    & + .tab__category {
+        // margin-top: 30px;
     }
-    .tab__category-name{
-        border: 1px solid #000;
-        font-weight: 800;
-        padding: 8px;
-        cursor: pointer;
-    }
-    .tab__list {
-        // border: 1px solid #d3d;
-        display: flex;
-        flex-direction: column;
-    }
-    .tab__item {
-        padding: 8px;
-        cursor: pointer;
-        box-sizing: border-box;
-        text-indent: 20px;
-        & + .tab__item {
-            border-top: 1px solid #000;
-        }
+
+}
+
+$categorypadding : 10px;
+.tab__category-name{
+    border: 1px solid dodgerblue;
+    font-weight: 800;
+    padding: $categorypadding;
+    cursor: pointer;
+    box-sizing: border-box;
+    background: dodgerblue;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+}
+.tab__list {
+    display: flex;
+    flex-direction: column;
+    height: 0;
+    .st-open & {
+        height: auto;
     }
 }
+.tab__item {
+    padding: $categorypadding;
+    cursor: pointer;
+    box-sizing: border-box;
+    text-indent: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    & + .tab__item {
+        
+    }
+}
+
 
 #comp-content {
     flex-grow: 1;
     width: auto;
-    // border: 1px solid #000;
-    background-color: #aca;
+    height: 100%;
+    border: 1px solid #aac;
+    // background-color: #aca;
+    // opacity: 0.1;
 }
 
 
