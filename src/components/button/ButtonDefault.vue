@@ -285,7 +285,6 @@ $min-width : 120px;
         box-sizing: border-box;
     }
 
-
     &.theme-navy {
         .button__body { background-color: $COLOR_navy_2; color: #fff;}
         .button__shadow { box-shadow : 0 $thickness 0 rgb(14, 5, 60);}
@@ -309,7 +308,7 @@ $min-width : 120px;
     &.type-signin-google {
         .button__body { border-color: #4285F4;}
     }
-    &.theme-navy , &.theme-white , &.theme-pink , &.type-signin-kakao , &.theme-green  {
+    &.theme-navy , &.theme-pink , &.type-signin-kakao , &.theme-green  {
         .button__body {
             border: none !important;
         }
@@ -341,7 +340,6 @@ $min-width : 120px;
         @include unuseTouch {
             transform : translate3d(0,-$hoverjump/1.4,0);
         }
-
     }
 
     .button__body {
@@ -363,7 +361,7 @@ $min-width : 120px;
         z-index: 1;
         overflow: hidden;
         box-sizing: border-box;
-        border: 1px solid $COLOR_navy_1;
+        border: 1px solid COLOR_navy_1(0.7);
         font-size: $SIZE_PC_fontsize_large;
 
         @include phone {

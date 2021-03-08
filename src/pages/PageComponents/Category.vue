@@ -12,11 +12,6 @@
             </template>
         </div>
 
-        <!-- <div class="tab__list">
-            <div class="tab__item">요소</div>
-            <div class="tab__item">요소</div>
-            <div class="tab__item">요소</div>
-        </div> -->
     </div>
 </template>
 
@@ -36,7 +31,7 @@ export default {
         },
         onClickItem(item) {
             const payload = {
-                category:this.category.name,
+                category: item.name,
                 item :item
             }
             this.$emit('select', payload);

@@ -27,12 +27,12 @@ img {
 }
 
 input{
+    // appearance : 기본 input 모양 속성 . radio, checkbox 등 할당 가능
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background: transparent;
     outline: none;
-
     background-clip: padding-box;
 }
 

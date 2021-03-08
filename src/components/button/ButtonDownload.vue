@@ -32,38 +32,50 @@ export default {
     components : {
         ButtonDefault,
     },
+    watch : {
+        'type'() {
+            this.sortType();
+        }
+    },
 
     data() {
 
-        let downloadLink = '';
-        let typeClassName = '';
-
-        switch (this.type) {
-            case ('apple') : {
-                typeClassName = 'type-appstore';
-                downloadLink = 'https://apple.co.kr';
-                break;
-            }
-            case ('google') : {
-                typeClassName = 'type-playstore';
-                downloadLink = 'https://google.co.kr';
-                break;
-            }
-            case ('mobile') : {
-                typeClassName = 'type-download';
-                break;
-            }
-            default : {
-                typeClassName = 'type-download';
-            }
-        }
-
         return {
-            typeClassName ,
-            downloadLink ,
+            typeClassName : '',
+            downloadLink : '',
 
             defaultTheme : 'white',
+
         }
+    },
+    methods : {
+        sortType() {
+            switch (this.type) {
+                case ('apple') : {
+                    this.typeClassName = 'type-appstore';
+                    this.downloadLink = 'https://apple.co.kr';
+                    break;
+                }
+                case ('google') : {
+                    this.typeClassName = 'type-playstore';
+                    this.downloadLink = 'https://google.co.kr';
+                    break;
+                }
+                case ('mobile') : {
+                    this.typeClassName = 'type-download';
+                    break;
+                }
+                default : {
+                    this.typeClassName = 'type-download';
+                }
+            }
+        }
+    },
+    created() {
+        // this.sortType();
+    },
+    mounted() {
+        this.sortType();
     },
 
 }

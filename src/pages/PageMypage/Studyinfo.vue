@@ -235,6 +235,7 @@ export default {
 
     > input {
         display: none;
+        display: block;
     }
 
     > span {
