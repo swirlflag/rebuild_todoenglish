@@ -68,7 +68,7 @@
 
 
         <div id="test__open"
-            @click="onoff"
+            
             @mousedown="grab"
             @mouseup="drop"
             @mousemove="drag"
@@ -93,6 +93,8 @@ export default {
             rootRect : {},
             isGrab : false,
             isOpen : false,
+
+            grabPoint : [0,0],
 
         }
     },
@@ -177,11 +179,20 @@ export default {
             }
 
         },
-        grab() {
+        grab(e) {
             this.isGrab = true;
+            const { clientX, clientY } = e;
+            this.grabPoint = [clientX,clientY];
         },
-        drop() {
+        drop(e) {
+
             this.isGrab = false;
+
+            const { clientX, clientY } = e;
+            if(this.grabPoint[0] === clientX && this.grabPoint[1] === clientY){
+                this.onoff();
+            }
+
         },
         drag(e) {
             if(this.isGrab){

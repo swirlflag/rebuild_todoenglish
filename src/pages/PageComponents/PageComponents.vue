@@ -30,6 +30,15 @@
 
                 <div id="comp-content">
 
+                    <div v-if="renderId === '맞는 ID'">
+                        <div class="comp-view">
+                        </div>
+                        <div class="comp-control">
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+
                     <div v-if="renderId === '버튼/기본'" class="comp-component" >
                         <div class="comp-view">
                             <ButtonDefault
@@ -89,7 +98,21 @@
                         </div>
                     </div>
 
+                    <div v-if="renderId === '입력/선택 드롭다운'">
+                        <div class="comp-view">
+                            <DropdownSelect placeholder="플레이스홀더"
+                            >
+                                <option value="o1">OPT 1</option>
+                                <option value="o2">OPT 2</option>
+                                <option value="o3">OPT 3</option>
+                            </DropdownSelect>
 
+                        </div>
+                        <!-- <div class="comp-control">
+                            <div></div>
+                            <div></div>
+                        </div> -->
+                    </div>
 
 
                     <div class="comp-infomation">
@@ -128,6 +151,7 @@
 import categoryData from './categoryData.js';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
 import ButtonDownload from '@/components/button/ButtonDownload.vue';
+import DropdownSelect from '@/components/input/DropdownSelect.vue';
 
 export default {
     name : 'PageComponents',
@@ -135,6 +159,7 @@ export default {
         // Category,
         ButtonDefault,
         ButtonDownload,
+        DropdownSelect,
     },
     data() {
 
