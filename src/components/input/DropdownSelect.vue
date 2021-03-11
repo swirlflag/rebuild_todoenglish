@@ -1,12 +1,16 @@
 <template>
-    <div class="input--dropdown-select" ref="ref_root" id="root">
+    <div    class="input--dropdown-select" ref="ref_root" id="root"
+            :class="{'st-open' : isOpen}"
+    >
 
         <select :name="data_name" ref="ref_select" @change="onChange" id="hey">
-            <slot></slot>
+            <option value="" v-if="placeholder" class="dropdown-select__placeholder"></option>
+            <slot>
+
+            </slot>
         </select>
 
         <div    class="dropdown-select__layout"
-                :class="{'st-open' : isOpen}"
                 ref="ref_layout"
                 :style="{'height' : transformStyle.closeHeight + 'px'}"
         >
@@ -19,20 +23,22 @@
                 >
                     <TextChangeMask :text="modelData.html" contain/>
                 </div>
-                <div    v-if="isDetectOption || true"
-                        class="dropdown-select__option"
+                <div    class="dropdown-select__option"
+                        :class="{
+                            'st-before-calc' : !transformStyle.calcFinish,
+                        }"
+                        v-if="isDetectOption || true"
                         ref="ref_selectOption"
                         :style="{
-                            'top' : transformStyle.closeHeight + 'px' ,
+                            'top' : (transformStyle.closeHeight*0) + 'px' ,
                         }"
                 >
                     <template v-for="(item,idx) in el_options">
                         <div    class="dropdown-select__option__item"
-                                :class="{'st-selected' : idx === modelData.index}"
+                                :class="{'st-selected' : idx === modelData.index, 'sync-placeholder' : (placeholder && idx === 0)}"
                                 :key="idx"
                                 :id="`i${idx}`"
                                 @click="onClickItem(idx)"
-
                         >
                             {{ allDatas[idx].html }}
                         </div>
@@ -66,6 +72,7 @@ export default {
                 closeHeight : 'auto',
                 openHeight : 'auto',
                 maxHeight: null,
+                calcFinish : false,
             },
             data_name : this.name || Math.random().toString(),
             isOpen : false,
@@ -97,8 +104,15 @@ export default {
     watch : {
         'isOpen'(now,old) {
             this.isOpenDelay = old;
-            this.tl.isActive() && this.tl.clear();
-            now ? this.openAction() : this.closeAction();
+
+            this.tl.pause();
+            this.tl.clear();
+            if(now){
+                this.openAction();
+            }else {
+                this.closeAction();
+            }
+            this.tl.play();
         }
     },
     methods : {
@@ -177,16 +191,23 @@ export default {
             // 인자가 없다면 직접 순서를 체크해 저장 (memo: selectedindex로 해보자)
                 iterElement(this.el_options, (el,idx) => {
                     if(el.selected){
+
                         this.modelData = {
                             target : el,
                             value : el.value,
                             html : el.innerHTML,
-                            index : idx,
+                            index : idx ,
                             before : beforeData,
                         };
+
                         return true;
                     }
                 });
+
+                if(this.modelData.index === 0 && this.placeholder){
+                    this.modelData.html = this.placeholder
+                }
+
             }
 
         },
@@ -224,17 +245,17 @@ export default {
             const st = rect.top;{st}
 
             let overvalue = 0; {overvalue}
-            const padingValue = 0;
+            const padingValue = 10;
 
             // this.transformStyle.maxHeight = (WH - (padingValue*2)) - this.transformStyle.closeHeight;
             this.transformStyle.maxHeight = (WH - (padingValue*2)) - 0;
 
             const wantHeight = Math.min(this.transformStyle.openHeight, this.transformStyle.maxHeight);
-            console.log(wantHeight);
+            // console.log(wantHeight);
 
             if(st + wantHeight > WH - padingValue){
                 overvalue = WH - (st + wantHeight) - padingValue;
-                console.log('over value =',  overvalue );
+                // console.log('over value =',  overvalue );
             }
 
             // const st = rect.top;{st}
@@ -242,22 +263,43 @@ export default {
 
             // let Y = this.transformStyle.openHeight/2 - st/2;
 
+            const isMove = overvalue !== 0;
+
+            const delay = isMove ? 0.2: 0;
+
+            // console.log(isMove);
+
+            // const tl = new this.gsap.timeline();
+
+
+            this.tl.to(this.$refs.ref_transform , {
+                // height: wantHeight,
+                y: overvalue,
+                duration : 0.5,
+                ease: 'power4.out',
+            },0);
+
             this.tl.to(this.$refs.ref_transform , {
                 height: wantHeight,
-                duration : 0.7,
-                y: overvalue,
-
+                // y: overvalue,
+                duration : 0.8,
                 ease: 'power4.out',
-            });
+            },delay)
+
+            // this.tl.to(this.$refs.ref_transform , {
+            //     height: wantHeight,
+            //     // y: overvalue,
+            //     duration : 0.7,
+            //     ease: 'power4.out',
+            // },delay);
 
         },
 
         closeAction() {
-
             this.tl.to(this.$refs.ref_transform , {
                 height: this.transformStyle.closeHeight,
-                duration : 0.5,
                 y : 0,
+                duration : 0.5,
                 ease: 'power4.out',
             });
 
@@ -289,15 +331,24 @@ export default {
     // 실제 보이는 인터페이스 제작, 바인딩
         formationElements() {
             const el_options = this.$refs.ref_selectOption;
+            const el_transform = this.$refs.ref_transform;
             const el_display = this.$refs.ref_display;
             // const el_display = this.$refs.ref_display;
+
+            // console.log(el_display.offsetHeight);
+
+            // console.log(object);
+            el_transform.style.height = el_display.offsetHeight + 'px';
+
             setTimeout(() => {
 
                 const closeHeight = el_display.offsetHeight;
                 const openHeight = el_options.offsetHeight + closeHeight;
 
                 this.transformStyle = {
-                    openHeight, closeHeight
+                    ...this.transformStyle,
+                    openHeight, closeHeight,
+                    calcFinish : true,
                 }
 
                 // console.log(this.transformStyle);
@@ -335,19 +386,21 @@ export default {
     // 다른 영역 클릭시 보정처리할 기능
         this.bindWindowEvent();
 
-        this.selectedOption('o2');
-        this.selectedOption('o1');
-        this.selectedOption('o3');
-        this.selectedOption(0);
-        this.selectedOption(1);
-        this.selectedOption(2);
-        this.selectedOption(0);
-        this.selectedOption(1);
+        // if(this.placeholder){
+        //     this.modelData.html = this.placeholder;
+        // }
+        // this.selectedOption('o2');
+        // this.selectedOption('o1');
+        // this.selectedOption('o3');
+        // this.selectedOption(0);
+        // this.selectedOption(1);
+        // this.selectedOption(2);
+        // this.selectedOption(0);
+        // this.selectedOption(1);
 
     },
 
     destroyed() {
-        console.log('destory');
     // 파괴시 다른영역 클릭 보정처리 해제
         this.unbindWindowEvent();
     }
@@ -366,6 +419,10 @@ export default {
     width: auto;
     height: auto;
 
+    &.st-open {
+        z-index: 10;
+    }
+
     > select {
         display: none;
     }
@@ -376,20 +433,17 @@ export default {
     cursor: pointer;
     position: relative;
 
-    .dropdown-select__transform {
-        overflow: hidden;
-        position: relative;
-        display: inline-block;
-        border: 1px solid #d3d;
-        border-radius: 8px;
-    }
+}
 
-    &.st-open {
-
-    }
-
-    
-
+.dropdown-select__transform {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    border: 1px solid #d3d;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .dropdown-select__display {
@@ -401,17 +455,27 @@ export default {
 .dropdown-select__option {
 
     position: absolute;
+    position : relative;
     top: auto; left: 0;
     pointer-events: none;
+    border: 1px solid #3d3;
+    box-sizing: border-box;
     // max-height: 500px;
     overflow-y: scroll;
     overflow-x : hidden;
     // -webkit-mask-image: -webkit-radial-gradient(white, black);
     // -webkit-backface-visibility: hidden;
 
+    &.st-before-calc {
+        position: absolute;
+        border: 1px solid #000;
+    }
+
 // 출처: https://webdir.tistory.com/431 [WEBDIR]
     background: #fff;
-    height: auto;
+
+    display: flex;
+    flex-direction: column;
 
     &::-webkit-scrollbar,
     &::-webkit-scrollbar-thumb,
@@ -427,6 +491,11 @@ export default {
         @include itemStyle;
         &.st-selected {
             background: #aac;
+        }
+
+        &.sync-placeholder {
+            height: 0;
+            display: none !important;
         }
 
         @include hover {

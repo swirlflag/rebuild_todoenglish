@@ -232,6 +232,14 @@ $categorypadding : 10px;
     background-image : url('~@/assets/temp/grid.svg');
     background-color : tempblue_a(0.05);
     background-size : 2%;
+
+    &.row  {
+        flex-direction: row;
+        flex-wrap: wrap;
+        > * {
+            margin-right: 10px;
+        }
+    }
 }
 
 .comp-view > * {

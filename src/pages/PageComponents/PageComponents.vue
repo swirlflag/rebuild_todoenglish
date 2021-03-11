@@ -101,30 +101,44 @@
                         </div>
 
                         <div v-if="renderId === '입력/선택 드롭다운'">
-                        hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>
-                            <div class="comp-view">
+                        SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>
 
-                                {{TEMPCOUNT1}}
-                                <DropdownSelect placeholder="`${TEMPCOUNT1.length}개 짜리`"
+                            <div class="comp-view row"
+                            >
+
+                                <DropdownSelect :placeholder="`${TEMPCOUNT2.length}개 짜리`"
+                                                @change="selectItem.control.change"
+                                >
+                                    <option v-for="(item,idx) in TEMPCOUNT2"
+                                            :key="idx"
+                                            :value="item"
+                                    >
+                                        OPTION {{item}}
+                                    </option>
+                                </DropdownSelect>
+                                <DropdownSelect :placeholder="`${TEMPCOUNT1.length}개 짜리`"
                                                 @change="selectItem.control.change"
                                 >
                                     <option v-for="item in TEMPCOUNT1"
                                             :key="item"
                                             :value="item"
                                     >
-                                        OPT {{item}}
+                                        OPTION {{item}}
+                                    </option>
+                                </DropdownSelect>
+                                <DropdownSelect :placeholder="`${TEMPCOUNT3.length}개 짜리`"
+                                                @change="selectItem.control.change"
+                                >
+                                    <option v-for="item in TEMPCOUNT3"
+                                            :key="item"
+                                            :value="item"
+                                    >
+                                        OPTION {{item}}
                                     </option>
                                 </DropdownSelect>
 
                             </div>
-                            <!-- <div class="comp-control">
-                                <div></div>
-                                <div></div>
-                            </div> -->
-
-                            hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>hey<br>
-
-                        <br><br>
+                        SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>
                         </div>
 
 
@@ -196,28 +210,26 @@ export default {
             renderId : '',
 
             TEMPCOUNT1 : (() => {
-                let count = 35;
+                let count = 45;
                 let arr = [];
-                for(let i = 0; i < count; ++i){
+                for(let i = 1; i <= count; ++i){
                     arr.push(i);
                 }
-
-                console.log(arr);
                 return arr
             })(),
 
             TEMPCOUNT2 : (() => {
-                let count = 10;
+                let count = 12;
                 let arr = [];
-                for(let i = 0; i < count; ++i){
+                for(let i = 1; i <= count; ++i){
                     arr.push(i);
                 }
                 return arr
             })(),
             TEMPCOUNT3 : (() => {
-                let count = 5;
+                let count = 4;
                 let arr = [];
-                for(let i = 0; i < count; ++i){
+                for(let i = 1; i <= count; ++i){
                     arr.push(i);
                 }
                 return arr
