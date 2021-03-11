@@ -13,7 +13,7 @@
 
  -->
 
-    <span class="mask-text" ref="ref_root">
+    <span class="mask-text" ref="ref_root" :class="{'st-contain' : contain}">
         <span class="mask-text__target" :class="{'st-animate' : isAnimate}" ref="ref_target">
             <span class="mask-text__fly" ref="ref_fly">
                 <span class="mask-text__before" v-html="beforeText" ref="ref_before"></span>
@@ -155,6 +155,11 @@ export default {
     display: inline-block;
     width: auto;
     box-sizing: border-box;
+
+    &.st-contain {
+        width: 100%;
+        white-space: nowrap;
+    }
 }
 
 .mask-text__target {

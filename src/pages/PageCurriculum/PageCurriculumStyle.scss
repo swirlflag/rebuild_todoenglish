@@ -30,13 +30,15 @@
         position: relative;
         font-size: $SIZE_PC_fontsize_title;
 
+        .curriculum-title__item {
+            display: inline-block;
+        }
+
         @include phone {
             font-size : $SIZE_MO_fontsize_title;
             // font-size: calc(22px + 3.5vw);
         }
-        span {
-            display: inline-block;
-        }
+
     }
 }
 

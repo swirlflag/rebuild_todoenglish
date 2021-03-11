@@ -1,6 +1,8 @@
 import { VM } from '@/main.js';
 
-export const targetPathDetect = (path,target) => {
+export const targetPathDetect = (e,target) => {
+
+    const path = e.composedPath ? e.composedPath() : e.path;
 
     let result = false;
     for(let i = 0, l = path.length; i < l; ++i){
@@ -9,6 +11,7 @@ export const targetPathDetect = (path,target) => {
             break;
         }
     }
+
     return result;
 
 }

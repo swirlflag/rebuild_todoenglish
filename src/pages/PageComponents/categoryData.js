@@ -56,9 +56,13 @@ const data = [
         title : '선택 드롭다운 입력창',
         text : '선택 드롭다운 입력창에 대한 설명',
         info : {
+            '사용' : 'TBD',
         },
         control : {
-
+            change : (e) => {
+                {e}
+                // console.log(e);
+            }
         }
     },
 

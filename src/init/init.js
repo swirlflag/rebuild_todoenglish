@@ -1,5 +1,6 @@
 import store from '@/store/index.js';
 import Fragment from 'vue-fragment';
+import gsap from 'gsap';
 
 import {
     detectBrowser ,
@@ -26,8 +27,6 @@ if(localStorage.userData){
 
 // $state.use_coverdPlate = $state.type_browser === 'ie' ;
 
-
-
 // console.log(process.env.NODE_ENV === 'development');
 
 export default {
@@ -37,5 +36,8 @@ export default {
         }
 
         Vue.use(Fragment.Plugin);
+
+        Vue.prototype.gsap = gsap;
+
     }
 }

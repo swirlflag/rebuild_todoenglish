@@ -27,7 +27,10 @@
         <div class="curriculum-title area__outer">
             <div class="area__inner">
                 <h2>
-                    Curriculum&nbsp;<TextChangeMask :text="curriculumTitle" contain/>
+                    Curriculum&nbsp;
+                    <div class="curriculum-title__item">
+                        <TextChangeMask :text="curriculumTitle" contain/>
+                    </div>
                 </h2>
             </div>
         </div>
