@@ -73,7 +73,7 @@
             @mouseup="drop"
             @mousemove="drag"
         >
-            on/off
+            {{isOpen ? 'close' : 'open'}}
         </div>
 
 
@@ -281,9 +281,13 @@ export default {
 
     @include phone {
         top: 50%;
+        writing-mode: vertical-rl;
         transform :translateY(-50%);
         // width: 30px;
         left: 100%;
+        width: 18px;
+        font-size: 12px;
+        // color: transparent;
     }
 
 }
@@ -303,7 +307,6 @@ export default {
         // min-width: 60vw !important;
     }
 }
-
 button {
     border: 1px solid rgb(0, 255, 0) !important;
     padding: 3px;

@@ -6,26 +6,38 @@
                 <!-- {{selectItem.control.text}} -->
             </div>
             <div id="comp-wrap">
-                <div id="comp-not-mobile">
+                <!-- <div id="comp-not-mobile">
                     모바일에선 안보여줄거임
-                </div>
-                <div id="comp-tab">
-                    <template v-for="([category,items],idx) in Object.entries(categoryOrder)">
-                        <div  class="tab__category" :key="idx">
-                            <div class="tab__category-name" @click="onClickCategoryName">
-                                {{category}}
-                            </div>
-                            <div class="tab__list">
-                                <template v-for="(item, idx) in items">
-                                    <div :key="idx" class="tab__item" :data-id="item" @click="onClickItem(item)">
-                                        {{item.split('/')[1]}}
-                                    </div>
-                                </template>
-                            </div>
+                </div> -->
+                <div    id="comp-tab"
+                        :class="{'st-opentab' : isTabOpen}"
+                >
 
-                        </div>
-                    </template>
+                    <div    class="comp-tab__toggle"
+                            @click="onClickControlTab"
+                    >
+                        menu
+                    </div>
 
+                    <div class="comp-tab__dimmed" @click="onClickControlTab(false)"></div>
+
+                    <div class="comp-tab__wrap">
+                        <template v-for="([category,items],idx) in Object.entries(categoryOrder)">
+                            <div  class="tab__category" :key="idx">
+                                <div class="tab__category-name" @click="onClickCategoryName">
+                                    {{category}}
+                                </div>
+                                <div class="tab__list">
+                                    <template v-for="(item, idx) in items">
+                                        <div :key="idx" class="tab__item" :data-id="item" @click="onClickItem(item)">
+                                            {{item.split('/')[1]}}
+                                        </div>
+                                    </template>
+                                </div>
+
+                            </div>
+                        </template>
+                    </div>
                 </div>
 
                 <div id="comp-content">
@@ -101,8 +113,6 @@
                         </div>
 
                         <div v-if="renderId === '입력/선택 드롭다운'">
-                        SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>
-
                             <div class="comp-view row"
                             >
 
@@ -138,12 +148,11 @@
                                 </DropdownSelect>
 
                             </div>
-                        SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>SCROLL <br>
+
                         </div>
 
-
-                        <div class="comp-infomation">
-                            <template v-if="selectItem.name">
+                        <template v-if="selectItem.name">
+                            <div class="comp-infomation">
 
                                 <div class="comp-title">{{selectItem.title}}</div>
                                 <div class="comp-text">{{selectItem.text}}</div>
@@ -156,12 +165,16 @@
                                     </li>
                                 </ul>
 
-                            </template>
+                            </div>
+                        </template>
 
-                            <template v-else>
-                                <div class="comp-need-select">← please select component</div>
-                            </template>
-                        </div>
+                        <template v-else>
+                            <div class="comp-need-select">
+                                <!-- <span class="visible-overphone">←</span> -->
+                                <!-- <span class="visible-phone">↑</span> -->
+                                ← please select component
+                            </div>
+                        </template>
                     </div>
 
                 </div>
@@ -202,6 +215,7 @@ export default {
 
 
         return {
+            isTabOpen : false,
             categoryData ,
             categoryOrder,
 
@@ -240,6 +254,10 @@ export default {
 
     methods : {
 
+        onClickControlTab(bool) {
+            this.isTabOpen = bool === undefined ? !this.isTabOpen : bool;
+        },
+
         onClickCategoryName(e) {
             const parent = e.currentTarget.parentElement;
 
@@ -272,6 +290,8 @@ export default {
 
             this.renderId = itemName;
 
+            this.onClickControlTab(false);
+
             // console.log(this.selectItem.control);
         },
 
@@ -298,10 +318,17 @@ export default {
         user-select: none !important;
         height: 0 !important;
         overflow:hidden !important;
+        padding: 0 !important;
         * {
             pointer-events: none !important;
             user-select: none !important;
         }
+    }
+    #plate--page {
+        overflow: hidden !important;
+    }
+    #page--router {
+        overflow: hidden !important;
     }
 }
 

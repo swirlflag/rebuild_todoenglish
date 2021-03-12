@@ -133,7 +133,9 @@ export const detectBrowser = () => {
     if(isBlink) { return 'blink'}
 
     console.error('cannot detect browser');
-    return null
+    // return null
+
+    return 'cannot'
 
 };
 

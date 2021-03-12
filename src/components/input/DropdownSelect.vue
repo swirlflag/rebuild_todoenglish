@@ -2,7 +2,6 @@
     <div    class="input--dropdown-select" ref="ref_root" id="root"
             :class="{'st-open' : isOpen}"
     >
-
         <select :name="data_name" ref="ref_select" @change="onChange" id="hey">
             <option value="" v-if="placeholder" class="dropdown-select__placeholder"></option>
             <slot>
@@ -23,28 +22,26 @@
                 >
                     <TextChangeMask :text="modelData.html" contain/>
                 </div>
+                <div class="dropdown-select__dimmed" @click="close"></div>
                 <div    class="dropdown-select__option"
                         :class="{
                             'st-before-calc' : !transformStyle.calcFinish,
                         }"
                         v-if="isDetectOption || true"
                         ref="ref_selectOption"
-                        :style="{
-                            'top' : (transformStyle.closeHeight*0) + 'px' ,
-                        }"
                 >
-                    <template v-for="(item,idx) in el_options">
-                        <div    class="dropdown-select__option__item"
-                                :class="{'st-selected' : idx === modelData.index, 'sync-placeholder' : (placeholder && idx === 0)}"
-                                :key="idx"
-                                :id="`i${idx}`"
-                                @click="onClickItem(idx)"
-                        >
-                            {{ allDatas[idx].html }}
-                        </div>
-                    </template>
+                    <ul class="dropdown-select__option__list">
+                        <template v-for="(item,idx) in el_options">
+                            <li    class="dropdown-select__option__item"
+                                    :class="{'st-selected' : idx === modelData.index, 'sync-placeholder' : (placeholder && idx === 0)}"
+                                    :key="idx"
+                                    @click="onClickItem(idx)"
+                            >
+                                {{ allDatas[idx].html }}
+                            </li>
+                        </template>
+                    </ul>
 
-                    <!-- <div class="dropdown-select__option__item">option2</div> -->
                 </div>
             </div>
 
@@ -76,10 +73,7 @@ export default {
             },
             data_name : this.name || Math.random().toString(),
             isOpen : false,
-            isOpenDelay : false,
             tl : new this.gsap.timeline(),
-
-            // observer : null,
 
             allDatas : [],
 
@@ -94,17 +88,13 @@ export default {
     },
     computed : {
         isDetectOption () {
-            // if(this.el_options.length){
-            //     console.log('hey~');
-            // }
+
             return !!this.el_options.length
         },
     },
 
     watch : {
-        'isOpen'(now,old) {
-            this.isOpenDelay = old;
-
+        'isOpen'(now) {
             this.tl.pause();
             this.tl.clear();
             if(now){
@@ -230,6 +220,7 @@ export default {
 
 
         open() {
+            // console.log('open?');
             this.isOpen = true;
         },
         close() {
@@ -343,6 +334,8 @@ export default {
             setTimeout(() => {
 
                 const closeHeight = el_display.offsetHeight;
+
+                // console.log(closeHeight);
                 const openHeight = el_options.offsetHeight + closeHeight;
 
                 this.transformStyle = {
@@ -412,7 +405,14 @@ export default {
 @mixin itemStyle {
     display: inline-block;
     padding: 10px;
-    min-width : 200px;
+    // padding-bottom: 11px;
+    min-width : 170px;
+    transition: background-color 200ms $EASE_outExpo;
+    box-sizing: border-box;
+
+    @include phone {
+        padding: 15px 20px;
+    }
 }
 
 .input--dropdown-select {
@@ -434,73 +434,136 @@ export default {
     position: relative;
 
 }
+.dropdown-select__dimmed {
+    display: none;
+    @include phone {
+        display: block;
+        width: 100%; height: 100%;
+        position: fixed;
+        top: 0; left: 0;
+        background: #000;
+        transition: opacity 500ms ease;
+        opacity: 0;
+        pointer-events: none;
+
+        .st-open & {
+            pointer-events: all;
+            opacity: 0.5;
+        }
+    }
+}
 
 .dropdown-select__transform {
     overflow: hidden;
     position: relative;
     display: inline-block;
-    border: 1px solid #d3d;
+    // box-sizing: border-box;
+    border: 1px solid #000;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     height: 100%;
+    @include phone {
+        transform : none !important;
+        height : auto !important;
+    }
 }
 
 .dropdown-select__display {
     @include itemStyle;
-    background-color: #ddd;
+    // background-color: #ddd;
     position: relative;
+    background-color: #fff;
+    font-weight: 800;
 }
 
 .dropdown-select__option {
-
-    position: absolute;
     position : relative;
-    top: auto; left: 0;
     pointer-events: none;
-    border: 1px solid #3d3;
     box-sizing: border-box;
-    // max-height: 500px;
     overflow-y: scroll;
     overflow-x : hidden;
-    // -webkit-mask-image: -webkit-radial-gradient(white, black);
-    // -webkit-backface-visibility: hidden;
-
-    &.st-before-calc {
-        position: absolute;
-        border: 1px solid #000;
-    }
-
-// 출처: https://webdir.tistory.com/431 [WEBDIR]
-    background: #fff;
-
-    display: flex;
-    flex-direction: column;
-
+    background-color: #fff;
     &::-webkit-scrollbar,
     &::-webkit-scrollbar-thumb,
     &::-webkit-scrollbar-track {
         display: none;
     }
 
+    &.st-before-calc {
+        position: absolute;
+        opacity: 0;
+    }
+
     .st-open &{
         pointer-events: all;
     }
 
-    .dropdown-select__option__item {
-        @include itemStyle;
-        &.st-selected {
-            background: #aac;
-        }
+    @include phone {
+        position: fixed;
+        bottom: 0 ; left: 0;
+        width: calc(100% - #{$SIZE_MO_innerPadding*2});
+        left: $SIZE_MO_innerPadding;
+        bottom: $SIZE_MO_innerPadding;
+        // left: 5px;
+        // bottom: 5px;
 
-        &.sync-placeholder {
-            height: 0;
-            display: none !important;
+        box-sizing: border-box;
+        // padding: 4px;
+        // margin-bottom: 4px;
+        // overflow: hidden;
+        max-height : 73%;
+        // border: 5px solid #3dd;
+        pointer-events: all !important;
+        border-radius: 20px;
+        transition: transform 400ms $EASE_inOutQuint;
+        transform: translateY(100%);
+        // display: none !important;
+        .st-open & {
+            transition: transform 700ms $EASE_outExpo;
+            transform: translateY(0);
         }
+    }
 
-        @include hover {
-            background-color: #aca;
-        }
+}
+
+.dropdown-select__option__list {
+    display: flex;
+    flex-direction: column;
+
+    @include phone {
+        // border: 5px solid #3d3;
+        // border-radius: 8px;
+    }
+}
+
+.dropdown-select__option__item {
+    @include itemStyle;
+    border-bottom: 1px solid #ededed;
+    box-sizing: border-box;
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &.st-selected {
+        background: #666;
+        font-weight: 800;
+        color: #fff;
+    }
+
+    &.sync-placeholder {
+        height: 0;
+        display: none !important;
+        border: none !important;
+    }
+
+    @include hover {
+        background-color: #ddd;
+        color: #000;
+    }
+
+    @include phone {
+        text-align: center;
     }
 }
 

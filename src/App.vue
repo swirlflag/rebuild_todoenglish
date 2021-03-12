@@ -157,9 +157,15 @@ export const appStore = {
 <style scoped lang="scss" >
 #app {
     min-height: 100vh;
+    height: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+
+    @include phone {
+        min-height: 100%;
+        height: 100%;
+    }
 
     &.st-freeze {
         user-select: none !important;

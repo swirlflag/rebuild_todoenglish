@@ -47,9 +47,10 @@ export default {
 
 #plate--page {
     box-sizing: border-box;
+    height: 100%;
 }
 #page-router {
-
+    height: 100%;
 }
 .page-contents {
 
