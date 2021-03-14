@@ -507,6 +507,8 @@ export default {
         bottom: $SIZE_MO_innerPadding;
         // left: 5px;
         // bottom: 5px;
+        z-index: 30;
+        background-color: #ddd;
 
         box-sizing: border-box;
         // padding: 4px;
@@ -522,6 +524,7 @@ export default {
         .st-open & {
             transition: transform 700ms $EASE_outExpo;
             transform: translateY(0);
+            // border: 1px solid #d3d;
         }
     }
 
