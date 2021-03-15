@@ -65,3 +65,7 @@ $STANDARD_mobileMin : 769px;
         @content;
     }
 }
+
+:export {
+    mobileSize :$STANDARD_mobile
+}

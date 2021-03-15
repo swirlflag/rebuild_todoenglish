@@ -126,7 +126,7 @@
                                         OPTION {{item}}
                                     </option>
                                 </DropdownSelect>
-                                <DropdownSelect :placeholder="`${TEMPCOUNT1.length}개 짜리`"
+                                <!-- <DropdownSelect :placeholder="`${TEMPCOUNT1.length}개 짜리`"
                                                 @change="selectItem.control.change"
                                 >
                                     <option v-for="item in TEMPCOUNT1"
@@ -145,7 +145,7 @@
                                     >
                                         OPTION {{item}}
                                     </option>
-                                </DropdownSelect>
+                                </DropdownSelect> -->
 
                             </div>
 

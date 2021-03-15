@@ -11,7 +11,7 @@ const state = {
 
     is_mountedPage : false,
 
-    standardMobilePixelSize : 768,
+    standard_mobileSize : 768,
 
 }
 
@@ -30,7 +30,7 @@ const getters = {
             // console.log('로그인이 필요없음');
             return false
         }
-    }
+    },
 }
 
 const mutations = {

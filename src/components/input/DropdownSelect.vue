@@ -1,3 +1,17 @@
+<!--
+    <DropdownSelect     placeholder="옵션을 골라주세요"
+                        @change="myChangeFunction"
+                        v-model="selectValue"
+    >
+        <option     v-for="(item,idx) in optionData"
+                    :key="idx"
+                    :selected="idx === myIndex"
+        >
+            {{ item }}
+        </option>
+    </DropdownSelect>
+-->
+
 <template>
     <div    class="input--dropdown-select" ref="ref_root" id="root"
             :class="{'st-open' : isOpen}"
@@ -27,10 +41,12 @@
                         :class="{
                             'st-before-calc' : !transformStyle.calcFinish,
                         }"
-                        v-if="isDetectOption || true"
+                        v-if="isDetectOption"
                         ref="ref_selectOption"
                 >
-                    <ul class="dropdown-select__option__list">
+                    <ul class="dropdown-select__option__list"
+                        ref="ref_selectList"
+                    >
                         <template v-for="(item,idx) in el_options">
                             <li    class="dropdown-select__option__item"
                                     :class="{'st-selected' : idx === modelData.index, 'sync-placeholder' : (placeholder && idx === 0)}"
@@ -47,9 +63,11 @@
 
         </div>
     </div>
+
 </template>
 
 <script>
+
 import TextChangeMask from '@/components/layout/TextChangeMask.vue';
 import { iterElement , targetPathDetect} from '@/utils';
 export default {
@@ -70,6 +88,7 @@ export default {
                 openHeight : 'auto',
                 maxHeight: null,
                 calcFinish : false,
+                paddingValue : 10,
             },
             data_name : this.name || Math.random().toString(),
             isOpen : false,
@@ -88,7 +107,6 @@ export default {
     },
     computed : {
         isDetectOption () {
-
             return !!this.el_options.length
         },
     },
@@ -106,6 +124,13 @@ export default {
         }
     },
     methods : {
+
+        open() {
+            this.isOpen = true;
+        },
+        close() {
+            this.isOpen = false;
+        },
 
     // 엘리먼트 가져와서 컴포넌트에 저장
         fetchElements() {
@@ -155,7 +180,6 @@ export default {
             this.saveModelData(this.el_options[index],index);
 
             this.$emit('change' , this.modelData);
-
         },
 
 
@@ -218,71 +242,37 @@ export default {
             }
         },
 
-
-        open() {
-            // console.log('open?');
-            this.isOpen = true;
-        },
-        close() {
-            this.isOpen = false;
-        },
         openAction() {
-
-            // console.log(this.$refs.ref_root);
-
-            const WH = window.innerHeight;
-
-            const rect = this.$refs.ref_root.getBoundingClientRect();
-            const st = rect.top;{st}
-
-            let overvalue = 0; {overvalue}
-            const padingValue = 10;
-
-            // this.transformStyle.maxHeight = (WH - (padingValue*2)) - this.transformStyle.closeHeight;
-            this.transformStyle.maxHeight = (WH - (padingValue*2)) - 0;
-
-            const wantHeight = Math.min(this.transformStyle.openHeight, this.transformStyle.maxHeight);
-            // console.log(wantHeight);
-
-            if(st + wantHeight > WH - padingValue){
-                overvalue = WH - (st + wantHeight) - padingValue;
-                // console.log('over value =',  overvalue );
+            if(this.$screen.isMobileSize){
+                return
             }
 
-            // const st = rect.top;{st}
-            // console.log(this.transformStyle.openHeight/2 - st/2);
+            const WH = this.$screen.height;
 
-            // let Y = this.transformStyle.openHeight/2 - st/2;
+            const rect = this.$refs.ref_root.getBoundingClientRect();
+            const offsetTop = rect.top;
 
-            const isMove = overvalue !== 0;
+            const wantHeight = Math.min(this.transformStyle.openHeight, this.transformStyle.maxHeight);
 
-            const delay = isMove ? 0.2: 0;
+            let overvalue = 0;
+            let openDelay = 0;
 
-            // console.log(isMove);
-
-            // const tl = new this.gsap.timeline();
-
+            if(offsetTop + wantHeight > WH - this.transformStyle.padingValue){
+                overvalue = WH - (offsetTop + wantHeight) - this.transformStyle.padingValue;
+                openDelay = 0.2;
+            }
 
             this.tl.to(this.$refs.ref_transform , {
-                // height: wantHeight,
                 y: overvalue,
-                duration : 0.5,
                 ease: 'power4.out',
+                duration : 0.5,
             },0);
 
             this.tl.to(this.$refs.ref_transform , {
                 height: wantHeight,
-                // y: overvalue,
-                duration : 0.8,
                 ease: 'power4.out',
-            },delay)
-
-            // this.tl.to(this.$refs.ref_transform , {
-            //     height: wantHeight,
-            //     // y: overvalue,
-            //     duration : 0.7,
-            //     ease: 'power4.out',
-            // },delay);
+                duration : 0.8,
+            },openDelay);
 
         },
 
@@ -306,53 +296,36 @@ export default {
             this.selectedOption(this.$refs.ref_select.selectedIndex);
         },
 
-    // select 태그의 하위 정보 변경시에 onchange발동하게끔 설정
-        syncChangeSelect() {
-            // this.observer = new MutationObserver((mutations) => {
-            //     console.log(mutations);
-            //     mutations.forEach((mutation) => {
-            //         console.log(mutation);
-            //     });
-            // });
+    // 현재 상태에서 원하는 변형 값들을 계산해서 보관
+        setWishSize() {
+            const closeHeight = this.$refs.ref_display.offsetHeight;
+            const openHeight = this.$refs.ref_selectList.offsetHeight + closeHeight;
+            const maxHeight = this.$screen.height - (this.transformStyle.paddingValue*2);
 
-            // this.observer.observe(this.$refs.ref_select, {characterData : true, attributes : true });
-            // console.log(this.$refs.ref_select);
+            this.transformStyle = {
+                ...this.transformStyle,
+                openHeight,
+                closeHeight,
+                maxHeight,
+            };
         },
 
     // 실제 보이는 인터페이스 제작, 바인딩
         formationElements() {
-            const el_options = this.$refs.ref_selectOption;
-            const el_transform = this.$refs.ref_transform;
-            const el_display = this.$refs.ref_display;
-            // const el_display = this.$refs.ref_display;
-
-            // console.log(el_display.offsetHeight);
-
-            // console.log(object);
-            el_transform.style.height = el_display.offsetHeight + 'px';
+            this.$refs.ref_transform.style.height = this.$refs.ref_display.offsetHeight + 'px';
 
             setTimeout(() => {
-
-                const closeHeight = el_display.offsetHeight;
-
-                // console.log(closeHeight);
-                const openHeight = el_options.offsetHeight + closeHeight;
-
-                this.transformStyle = {
-                    ...this.transformStyle,
-                    openHeight, closeHeight,
-                    calcFinish : true,
-                }
-
-                // console.log(this.transformStyle);
-                // console.log();
-                // el_options.offsetHeight
-
+                this.setWishSize();
+                this.transformStyle.calcFinish = true;
             },0);
         },
 
         correctionWindowResize() {
-            this.close();
+            this.setWishSize();
+
+            if(this.isOpen){
+                this.close();
+            }
         },
 
         bindWindowEvent(){
@@ -370,8 +343,6 @@ export default {
     mounted() {
     // select, option 엘리먼트들 가져와서 컴포넌트에 저장
         this.fetchElements();
-    // select 태그의 하위 정보 변경시에 onchange발동하게끔 설정
-        this.syncChangeSelect();
     // 현재 셀렉트된 것 파악후 컴포넌트에 정보 저장. (실제 인터페이스에 들어갈 정보 저장 )
         this.saveModelData();
     // 실제 보이는 인터페이스 제작, 모션,이벤트 바인딩
@@ -379,16 +350,7 @@ export default {
     // 다른 영역 클릭시 보정처리할 기능
         this.bindWindowEvent();
 
-        // if(this.placeholder){
-        //     this.modelData.html = this.placeholder;
-        // }
         // this.selectedOption('o2');
-        // this.selectedOption('o1');
-        // this.selectedOption('o3');
-        // this.selectedOption(0);
-        // this.selectedOption(1);
-        // this.selectedOption(2);
-        // this.selectedOption(0);
         // this.selectedOption(1);
 
     },
@@ -410,9 +372,6 @@ export default {
     transition: background-color 200ms $EASE_outExpo;
     box-sizing: border-box;
 
-    @include phone {
-        padding: 15px 20px;
-    }
 }
 
 .input--dropdown-select {
@@ -441,10 +400,11 @@ export default {
         width: 100%; height: 100%;
         position: fixed;
         top: 0; left: 0;
-        background: #000;
+        background: #333;
         transition: opacity 500ms ease;
         opacity: 0;
         pointer-events: none;
+        z-index: 20;
 
         .st-open & {
             pointer-events: all;
@@ -457,8 +417,7 @@ export default {
     overflow: hidden;
     position: relative;
     display: inline-block;
-    // box-sizing: border-box;
-    border: 1px solid #000;
+    border: 1px solid #333;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -505,26 +464,21 @@ export default {
         width: calc(100% - #{$SIZE_MO_innerPadding*2});
         left: $SIZE_MO_innerPadding;
         bottom: $SIZE_MO_innerPadding;
-        // left: 5px;
-        // bottom: 5px;
         z-index: 30;
-        background-color: #ddd;
-
         box-sizing: border-box;
-        // padding: 4px;
-        // margin-bottom: 4px;
-        // overflow: hidden;
         max-height : 73%;
-        // border: 5px solid #3dd;
-        pointer-events: all !important;
-        border-radius: 20px;
-        transition: transform 400ms $EASE_inOutQuint;
-        transform: translateY(100%);
-        // display: none !important;
+        border-radius: 24px;
+        transition: transform 400ms $EASE_inOutQuint , opacity 0ms linear 700ms;
+        transform: translateY(calc(100% + #{$SIZE_MO_innerPadding}));
+        opacity: 1;
+        pointer-events: none;
+        user-select: none;
         .st-open & {
-            transition: transform 700ms $EASE_outExpo;
+            opacity: 1;
+            pointer-events: all !important;
+            user-select: all;
+            transition: transform 700ms $EASE_outExpo, opacity 0ms linear;
             transform: translateY(0);
-            // border: 1px solid #d3d;
         }
     }
 
@@ -535,8 +489,6 @@ export default {
     flex-direction: column;
 
     @include phone {
-        // border: 5px solid #3d3;
-        // border-radius: 8px;
     }
 }
 
@@ -562,11 +514,13 @@ export default {
 
     @include hover {
         background-color: #ddd;
-        color: #000;
+        color: #333;
     }
 
     @include phone {
         text-align: center;
+        font-size: $SIZE_MO_fontsize_strong;
+        padding: 15px;
     }
 }
 

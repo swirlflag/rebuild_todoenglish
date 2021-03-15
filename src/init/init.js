@@ -9,6 +9,7 @@ import {
     detectTouchdevice ,
 } from '@/utils';
 
+
 // axios.defaults.baseURL = process.env.PROTOCOL + process.env.URLAPI;
 
 store.state.is_dev = process.env.NODE_ENV === 'development';
@@ -29,6 +30,22 @@ if(localStorage.userData){
 
 // console.log(process.env.NODE_ENV === 'development');
 
+const bindScreenData = (Vue) => {
+    Vue.prototype.$screen = Vue.observable({
+        width: window.innerWidth,
+        height: window.innerHeight,
+        isMobileSize : window.innerWidth <= store.state.standard_mobileSize,
+    });
+
+    window.addEventListener('resize', () => {
+        Vue.prototype.$screen = {
+            width: window.innerWidth,
+            height: window.innerHeight,
+            isMobileSize : window.innerWidth <= store.state.standard_mobileSize,
+        }
+    });
+}
+
 export default {
     install(Vue) {
         if(store.state.is_dev){
@@ -38,6 +55,8 @@ export default {
         Vue.use(Fragment.Plugin);
 
         Vue.prototype.gsap = gsap;
+
+        bindScreenData(Vue);
 
     }
 }
