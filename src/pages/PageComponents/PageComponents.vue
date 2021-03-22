@@ -4,6 +4,9 @@
 
             <div id="mylog">
                 <!-- {{selectItem.control.text}} -->
+                <TESTCOMP
+                    v-model="TEMP_VMODEL"
+                />
             </div>
             <div id="comp-wrap">
                 <!-- <div id="comp-not-mobile">
@@ -116,12 +119,13 @@
                             <div class="comp-view row"
                             >
 
-                                <DropdownSelect :placeholder="`${TEMPCOUNT2.length}개 짜리`"
+                                <DropdownSelect :placeholder="`선택해주세요`"
                                                 @change="selectItem.control.change"
+                                                v-model="TEMP_VMODEL"
                                 >
-                                    <option v-for="(item,idx) in TEMPCOUNT2"
-                                            :key="idx"
-                                            :value="item"
+                                    <option     v-for="(item,idx) in TEMPCOUNT2"
+                                                :key="idx"
+                                                :value="`value${item}`"
                                     >
                                         OPTION {{item}}
                                     </option>
@@ -147,6 +151,18 @@
                                     </option>
                                 </DropdownSelect> -->
 
+                            </div>
+
+                            <div class="comp-control">
+                                <button @click="TEST_VMODELCHANGE">
+                                    랜덤 테스트
+                                </button>
+
+                                <div>
+                                    {{
+                                        TEMP_VMODEL
+                                    }}
+                                </div>
                             </div>
 
                         </div>
@@ -194,6 +210,8 @@ import ButtonDefault from '@/components/button/ButtonDefault.vue';
 import ButtonDownload from '@/components/button/ButtonDownload.vue';
 import DropdownSelect from '@/components/input/DropdownSelect.vue';
 
+import TESTCOMP from './TESTCOMP.vue';
+
 export default {
     name : 'PageComponents',
     components : {
@@ -201,6 +219,8 @@ export default {
         ButtonDefault,
         ButtonDownload,
         DropdownSelect,
+
+        TESTCOMP,
     },
     data() {
 
@@ -213,8 +233,8 @@ export default {
             return p;
         },{});
 
-
         return {
+
             isTabOpen : false,
             categoryData ,
             categoryOrder,
@@ -222,6 +242,8 @@ export default {
             selectItem : {},
 
             renderId : '',
+
+            TEMP_VMODEL : 'TEST_vmodel 시작값',
 
             TEMPCOUNT1 : (() => {
                 let count = 45;
@@ -253,6 +275,9 @@ export default {
     },
 
     methods : {
+        TEST_VMODELCHANGE() {
+            this.TEMP_VMODEL = `value${Math.floor(Math.random() * 10 )}`;
+        },
 
         onClickControlTab(bool) {
             this.isTabOpen = bool === undefined ? !this.isTabOpen : bool;

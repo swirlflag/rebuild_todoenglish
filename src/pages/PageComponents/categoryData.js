@@ -59,10 +59,11 @@ const data = [
             '사용' : 'TBD',
         },
         control : {
-            change : (e) => {
-                {e}
-                // console.log(e);
-            }
+            testvalue : '',
+            change : (a,b) => {
+                {a,b}
+                // console.log(a,b);
+            },
         }
     },
 

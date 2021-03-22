@@ -72,7 +72,13 @@ import TextChangeMask from '@/components/layout/TextChangeMask.vue';
 import { iterElement , targetPathDetect} from '@/utils';
 export default {
     name : "DropdownSelect",
+    model: {
+        prop: 'value', // v-model 바인딩 값
+        event: 'change',
+    },
     props : {
+        value : String, // v-model 바인딩 값
+
         placeholder : String,
         name : String,
     },
@@ -80,7 +86,6 @@ export default {
         TextChangeMask,
     },
     data() {
-
         return {
             el_options : [],
             transformStyle : {
@@ -112,6 +117,11 @@ export default {
     },
 
     watch : {
+    // v-model value
+        'value'(){
+            this.selectedOption(this.value);
+        },
+
         'isOpen'(now) {
             this.tl.pause();
             this.tl.clear();
@@ -179,7 +189,13 @@ export default {
 
             this.saveModelData(this.el_options[index],index);
 
-            this.$emit('change' , this.modelData);
+            // this.$emit('change' , this.modelData);
+
+            this.$emit('change' , this.modelData.value , this.modelData);
+
+            // console.log(this.modelData.value);
+
+            // this.$emit()
         },
 
 
@@ -190,7 +206,9 @@ export default {
                 return
             }
 
-            const beforeData = this.modelData;
+            const beforeData = {...this.modelData}
+
+            delete beforeData.before;
 
             if(target){
             // 인자가 있다면 인자로 파악후 그대로 저장
@@ -350,8 +368,10 @@ export default {
     // 다른 영역 클릭시 보정처리할 기능
         this.bindWindowEvent();
 
-        // this.selectedOption('o2');
+        // this.selectedOption('value5');
         // this.selectedOption(1);
+
+        // console.log(this.value);
 
     },
 
