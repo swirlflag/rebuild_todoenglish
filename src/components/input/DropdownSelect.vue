@@ -13,10 +13,10 @@
 -->
 
 <template>
-    <div    class="input--dropdown-select" ref="ref_root" id="root"
+    <div    class="input--dropdown-select" ref="ref_root"
             :class="{'st-open' : isOpen}"
     >
-        <select :name="data_name" ref="ref_select" @change="onChange" id="hey">
+        <select :name="data_name" ref="ref_select" @change="onChange">
             <option value="" v-if="placeholder" class="dropdown-select__placeholder"></option>
             <slot>
 
@@ -34,7 +34,7 @@
                         ref="ref_display"
                         @click="onClickDisplay"
                 >
-                    <TextChangeMask :text="modelData.html" contain/>
+                    <TextChangeMask :text="displayText" contain/>
                 </div>
                 <div class="dropdown-select__dimmed" @click="close"></div>
                 <div    class="dropdown-select__option"
@@ -72,6 +72,9 @@ import TextChangeMask from '@/components/layout/TextChangeMask.vue';
 import { iterElement , targetPathDetect} from '@/utils';
 export default {
     name : "DropdownSelect",
+    components : {
+        TextChangeMask,
+    },
     model: {
         prop: 'modelValue', // modelEvent 바인딩 값
         event: 'modelEvent',
@@ -81,9 +84,6 @@ export default {
 
         placeholder : String,
         name : String,
-    },
-    components : {
-        TextChangeMask,
     },
     data() {
         return {
@@ -108,18 +108,27 @@ export default {
                 index : 0,
                 before : {},
             },
+
+            placeholderData : null,
+
+            ignoreModel : false,
         }
     },
     computed : {
         isDetectOption () {
-            return !!this.el_options.length
+            return !!this.el_options.length;
+        },
+        displayText() {
+            return this.placeholderData || this.modelData.html;
         },
     },
-
     watch : {
     // modelEvent 바인딩 값
         'modelValue'(){
-            this.selectedOption(this.modelValue);
+            if(!this.ignoreModel){
+                this.selectedOption(this.modelValue);
+            }
+            this.ignoreModel = false;
         },
 
         'isOpen'(now) {
@@ -135,6 +144,7 @@ export default {
     },
     methods : {
 
+    // isOpen 변경자
         open() {
             this.isOpen = true;
         },
@@ -159,8 +169,9 @@ export default {
             this.allDatas = makeAllData;
         },
 
-    // 전달받은 인자를 파악해 현재 컴포넌트의 정보를 변경할 준비를 한다 (인자는 index 혹은 value)
+    // 전달받은 인자를 파악해 현재 컴포넌트의 정보를 변경할 준비를 한다 (인자는 index:Number || value:String)
         selectedOption(value) {
+
             if(value === undefined){
                 return;
             }
@@ -169,7 +180,7 @@ export default {
                 return;
             }
 
-            let index = 0;
+            let index = -1;
 
             if(typeof value === 'number'){
                 if(value >= this.el_options.length){
@@ -179,12 +190,17 @@ export default {
             }
 
             if(typeof value === 'string'){
-                iterElement(this.el_options, (el,i) => {
-                    if(el.value === value){
+                for(let i = 0, l = this.el_options.length; i < l; ++i){
+                    if(this.el_options[i].value === value){
                         index = i;
-                        return true;
+                        break;
                     }
-                });
+                }
+            }
+
+            if(index === -1){
+                this.inconsistencyModel();
+                return;
             }
 
             if(this.$refs.ref_select.selectedIndex !== index){
@@ -196,12 +212,9 @@ export default {
             this.eventEmiting();
         },
 
+
     // 인자로 현재 셀렉트 된 것 정리해서 컴포넌트에 저장. (이 변경으로 실제 표현화면 적용)
         setModelData(target,index) {
-
-            if(!this.el_options){
-                return
-            }
 
             const beforeData = {...this.modelData}
 
@@ -215,55 +228,40 @@ export default {
                 before : beforeData,
             }
 
+            this.placeholderData = null;
+
+        },
+
+        inconsistencyModel() {
+            this.placeholderData = this.placeholder || '오류가 발생했습니다';
         },
 
         eventEmiting() {
-            // console.log(this.modelData.value, this.modelValue);
-            if(this.modelData.value !== this.modelValue){
+            this.$emit('change' , this.modelData);
+
+            if((this.modelData.value !== this.modelValue)){
+                this.ignoreModel = true;
                 this.$emit('modelEvent' , this.modelData.value)
-                this.$emit('change' , this.modelData);
             }
         },
 
-
     // 현재 셀렉트 된 것 직접 파악후 컴포넌트에 저장 (이 변경으로 실제 표현화면 적용)
         detectModelData() {
-            const beforeData = {...this.modelData}
+            for(let i = 0, l = this.el_options.length; i < l; ++i){
+                const el = this.el_options[i];
 
-            delete beforeData.before;
+                const isSameModelValue = !!( this.modelValue && el.value === this.modelValue );
+                const isDetectSelected = !!( !this.modelValue && el.selected );
 
-            if(this.modelValue){
-                iterElement(this.el_options, (el,idx) => {
-                    if(el.value  === this.modelValue){
-                        this.modelData = {
-                            target : el,
-                            value : el.value,
-                            html : el.innerHTML,
-                            index : idx ,
-                            before : beforeData,
-                        };
-                        this.setModelData(el, idx);
-                        return true;
-                    }
-                });
-            }else {
-                iterElement(this.el_options, (el,idx) => {
-                    if(el.selected){
-                        this.modelData = {
-                            target : el,
-                            value : el.value,
-                            html : el.innerHTML,
-                            index : idx ,
-                            before : beforeData,
-                        };
+                if(isSameModelValue || isDetectSelected) {
+                    this.setModelData(el,i);
+                    break;
+                }
 
-                        return true;
-                    }
-                });
             }
 
             if(this.modelData.index === 0 && this.placeholder){
-                this.modelData.html = this.placeholder
+                this.placeholderData = this.placeholder;
             }
         },
 
@@ -295,16 +293,17 @@ export default {
 
             const wantHeight = Math.min(this.transformStyle.openHeight, this.transformStyle.maxHeight);
 
-            let overvalue = 0;
-            let openDelay = 0;
+            const isOver = offsetTop + wantHeight > WH - this.transformStyle.paddingValue;
 
-            if(offsetTop + wantHeight > WH - this.transformStyle.padingValue){
-                overvalue = WH - (offsetTop + wantHeight) - this.transformStyle.padingValue;
+            let overValue = 0;
+            let openDelay = 0;
+            if(isOver){
+                overValue = WH - (offsetTop + wantHeight) - this.transformStyle.paddingValue;
                 openDelay = 0.2;
             }
 
             this.tl.to(this.$refs.ref_transform , {
-                y: overvalue,
+                y: overValue,
                 ease: 'power4.out',
                 duration : 0.5,
             },0);
@@ -395,8 +394,6 @@ export default {
         // this.selectedOption('value5');
         // this.selectedOption(1);
 
-        // console.log(this.modelValue);
-
     },
 
     destroyed() {
@@ -427,7 +424,9 @@ export default {
     }
 
     > select {
-        display: none;
+        display: none !important;
+        user-select: none !important;
+        pointer-events: none !important;
     }
 
 }

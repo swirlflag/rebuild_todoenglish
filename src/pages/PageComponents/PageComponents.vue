@@ -121,18 +121,23 @@
                             <div class="comp-view row"
                             >
 
+                                <!-- <DropdownSelect :placeholder="`선택해주세요`"
+                                                @change="selectItem.control.change"
+                                                v-model="TEMP_VMODEL"
+                                > -->
                                 <DropdownSelect :placeholder="`선택해주세요`"
                                                 @change="selectItem.control.change"
                                                 v-model="TEMP_VMODEL"
                                 >
-                                    <option     v-for="(item,idx) in TEMPCOUNT2"
+                                    <option     v-for="(item,idx) in TEMPCOUNT1"
                                                 :key="idx"
                                                 :value="`value${item}`"
+                                                :selected="idx === 2"
                                     >
                                         OPTION {{item}}
                                     </option>
                                 </DropdownSelect>
-                                <DropdownSelect :placeholder="`선택해주세요[표시]`"
+                                <!-- <DropdownSelect :placeholder="`선택해주세요[표시]`"
                                                 @change="selectItem.control.change"
                                 >
                                     <option     v-for="(item,idx) in TEMPCOUNT1"
@@ -141,7 +146,7 @@
                                     >
                                         옵션 {{item}}
                                     </option>
-                                </DropdownSelect>
+                                </DropdownSelect> -->
                                 <!-- <DropdownSelect :placeholder="`${TEMPCOUNT1.length}개 짜리`"
                                                 @change="selectItem.control.change"
                                 >
@@ -151,8 +156,8 @@
                                     >
                                         OPTION {{item}}
                                     </option>
-                                </DropdownSelect>
-                                <DropdownSelect :placeholder="`${TEMPCOUNT3.length}개 짜리`"
+                                </DropdownSelect> -->
+                                <!-- <DropdownSelect :placeholder="`${TEMPCOUNT3.length}개 짜리`"
                                                 @change="selectItem.control.change"
                                 >
                                     <option v-for="item in TEMPCOUNT3"
@@ -256,7 +261,7 @@ export default {
             renderId : '',
 
             // TEMP_VMODEL : 'TEST_vmodel 시작값',
-            TEMP_VMODEL : 'value5',
+            TEMP_VMODEL : 'value3',
 
             TEMPCOUNT1 : (() => {
                 let count = 45;
@@ -290,7 +295,7 @@ export default {
     methods : {
         TEST_VMODELCHANGE() {
 
-            const newValue = `value${Math.floor(Math.random() * 10 )}`;
+            const newValue = `value${Math.floor(Math.random() * this.TEMPCOUNT1.length )}`;
 
             if(newValue === this.TEMP_VMODEL){
                 this.TEST_VMODELCHANGE();

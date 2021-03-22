@@ -184,12 +184,11 @@ export const detectTouchdevice = () => {
     }
 };
 
+
+
 export const iterElement = (els, fn) => {
     for(let i = 0, l = els.length; i < l; ++i){
-        const isBreak = fn(els[i],i,els);
-        if(isBreak){
-            break;
-        }
+        fn(els[i],i,els)
     }
 }
 
