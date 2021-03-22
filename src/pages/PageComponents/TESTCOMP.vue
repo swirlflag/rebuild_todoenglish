@@ -27,9 +27,7 @@ export default {
         onChange() {
             const changeValue = this.$refs.ref_input.value;
             this.$emit('change' , changeValue);
-            // console.log(changeValue);
-            // this.myValue = changeValue;
-            // this.value = changeValue
+
         }
     },
     data() {

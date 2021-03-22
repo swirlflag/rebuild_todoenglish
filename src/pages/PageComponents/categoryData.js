@@ -60,9 +60,9 @@ const data = [
         },
         control : {
             testvalue : '',
-            change : (a,b) => {
-                {a,b}
-                // console.log(a,b);
+            change : (modelData) => {
+                {modelData}
+                // console.log('$emit change : ' , modelData);
             },
         }
     },

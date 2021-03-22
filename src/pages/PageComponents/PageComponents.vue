@@ -5,6 +5,8 @@
             <div id="mylog">
                 <!-- {{selectItem.control.text}} -->
                 <TESTCOMP
+
+                    v-if="0"
                     v-model="TEMP_VMODEL"
                 />
             </div>
@@ -130,6 +132,16 @@
                                         OPTION {{item}}
                                     </option>
                                 </DropdownSelect>
+                                <DropdownSelect :placeholder="`선택해주세요[표시]`"
+                                                @change="selectItem.control.change"
+                                >
+                                    <option     v-for="(item,idx) in TEMPCOUNT1"
+                                                :key="idx"
+                                                :value="`value${item}`"
+                                    >
+                                        옵션 {{item}}
+                                    </option>
+                                </DropdownSelect>
                                 <!-- <DropdownSelect :placeholder="`${TEMPCOUNT1.length}개 짜리`"
                                                 @change="selectItem.control.change"
                                 >
@@ -243,7 +255,8 @@ export default {
 
             renderId : '',
 
-            TEMP_VMODEL : 'TEST_vmodel 시작값',
+            // TEMP_VMODEL : 'TEST_vmodel 시작값',
+            TEMP_VMODEL : 'value5',
 
             TEMPCOUNT1 : (() => {
                 let count = 45;
@@ -276,7 +289,16 @@ export default {
 
     methods : {
         TEST_VMODELCHANGE() {
-            this.TEMP_VMODEL = `value${Math.floor(Math.random() * 10 )}`;
+
+            const newValue = `value${Math.floor(Math.random() * 10 )}`;
+
+            if(newValue === this.TEMP_VMODEL){
+                this.TEST_VMODELCHANGE();
+                return;
+            }
+
+            this.TEMP_VMODEL = newValue;
+
         },
 
         onClickControlTab(bool) {

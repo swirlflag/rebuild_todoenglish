@@ -73,11 +73,11 @@ import { iterElement , targetPathDetect} from '@/utils';
 export default {
     name : "DropdownSelect",
     model: {
-        prop: 'value', // v-model 바인딩 값
-        event: 'change',
+        prop: 'modelValue', // modelEvent 바인딩 값
+        event: 'modelEvent',
     },
     props : {
-        value : String, // v-model 바인딩 값
+        modelValue : String, // modelEvent 바인딩 값
 
         placeholder : String,
         name : String,
@@ -117,9 +117,9 @@ export default {
     },
 
     watch : {
-    // v-model value
-        'value'(){
-            this.selectedOption(this.value);
+    // modelEvent 바인딩 값
+        'modelValue'(){
+            this.selectedOption(this.modelValue);
         },
 
         'isOpen'(now) {
@@ -161,6 +161,10 @@ export default {
 
     // 전달받은 인자를 파악해 현재 컴포넌트의 정보를 변경할 준비를 한다 (인자는 index 혹은 value)
         selectedOption(value) {
+            if(value === undefined){
+                return;
+            }
+
             if(!this.el_options.length){
                 return;
             }
@@ -187,20 +191,13 @@ export default {
                 this.$refs.ref_select.selectedIndex = index;
             }
 
-            this.saveModelData(this.el_options[index],index);
+            this.setModelData(this.el_options[index],index);
 
-            // this.$emit('change' , this.modelData);
-
-            this.$emit('change' , this.modelData.value , this.modelData);
-
-            // console.log(this.modelData.value);
-
-            // this.$emit()
+            this.eventEmiting();
         },
 
-
-    // 현재 셀렉트된 것 파악후 컴포넌트에 저장. (이 변경으로 실제 표현화면 적용)
-        saveModelData(target,index) {
+    // 인자로 현재 셀렉트 된 것 정리해서 컴포넌트에 저장. (이 변경으로 실제 표현화면 적용)
+        setModelData(target,index) {
 
             if(!this.el_options){
                 return
@@ -210,20 +207,48 @@ export default {
 
             delete beforeData.before;
 
-            if(target){
-            // 인자가 있다면 인자로 파악후 그대로 저장
-                this.modelData = {
-                    target : target,
-                    value : target.value,
-                    html : target.innerHTML,
-                    index : index,
-                    before : beforeData,
-                }
+            this.modelData = {
+                target : target,
+                value : target.value,
+                html : target.innerHTML,
+                index : index,
+                before : beforeData,
+            }
+
+        },
+
+        eventEmiting() {
+            // console.log(this.modelData.value, this.modelValue);
+            if(this.modelData.value !== this.modelValue){
+                this.$emit('modelEvent' , this.modelData.value)
+                this.$emit('change' , this.modelData);
+            }
+        },
+
+
+    // 현재 셀렉트 된 것 직접 파악후 컴포넌트에 저장 (이 변경으로 실제 표현화면 적용)
+        detectModelData() {
+            const beforeData = {...this.modelData}
+
+            delete beforeData.before;
+
+            if(this.modelValue){
+                iterElement(this.el_options, (el,idx) => {
+                    if(el.value  === this.modelValue){
+                        this.modelData = {
+                            target : el,
+                            value : el.value,
+                            html : el.innerHTML,
+                            index : idx ,
+                            before : beforeData,
+                        };
+                        this.setModelData(el, idx);
+                        return true;
+                    }
+                });
             }else {
-            // 인자가 없다면 직접 순서를 체크해 저장 (memo: selectedindex로 해보자)
                 iterElement(this.el_options, (el,idx) => {
                     if(el.selected){
-
                         this.modelData = {
                             target : el,
                             value : el.value,
@@ -235,13 +260,11 @@ export default {
                         return true;
                     }
                 });
-
-                if(this.modelData.index === 0 && this.placeholder){
-                    this.modelData.html = this.placeholder
-                }
-
             }
 
+            if(this.modelData.index === 0 && this.placeholder){
+                this.modelData.html = this.placeholder
+            }
         },
 
         onClickDisplay() {
@@ -362,7 +385,8 @@ export default {
     // select, option 엘리먼트들 가져와서 컴포넌트에 저장
         this.fetchElements();
     // 현재 셀렉트된 것 파악후 컴포넌트에 정보 저장. (실제 인터페이스에 들어갈 정보 저장 )
-        this.saveModelData();
+        // this.setModelData();
+        this.detectModelData();
     // 실제 보이는 인터페이스 제작, 모션,이벤트 바인딩
         this.formationElements();
     // 다른 영역 클릭시 보정처리할 기능
@@ -371,7 +395,7 @@ export default {
         // this.selectedOption('value5');
         // this.selectedOption(1);
 
-        // console.log(this.value);
+        // console.log(this.modelValue);
 
     },
 
@@ -530,6 +554,8 @@ export default {
         height: 0;
         display: none !important;
         border: none !important;
+        pointer-events: none !important;
+        user-select: none !important;
     }
 
     @include hover {
