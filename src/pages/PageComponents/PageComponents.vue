@@ -5,7 +5,6 @@
             <div id="mylog">
                 <!-- {{selectItem.control.text}} -->
                 <TESTCOMP
-
                     v-if="0"
                     v-model="TEMP_VMODEL"
                 />
@@ -121,15 +120,12 @@
                             <div class="comp-view row"
                             >
 
-                                <!-- <DropdownSelect :placeholder="`선택해주세요`"
+                                <DropdownSelect
                                                 @change="selectItem.control.change"
                                                 v-model="TEMP_VMODEL"
-                                > -->
-                                <DropdownSelect :placeholder="`선택해주세요`"
-                                                @change="selectItem.control.change"
-                                                v-model="TEMP_VMODEL"
+                                                ref="ref_dropdown"
                                 >
-                                    <option     v-for="(item,idx) in TEMPCOUNT1"
+                                    <option     v-for="(item,idx) in 3"
                                                 :key="idx"
                                                 :value="`value${item}`"
                                                 :selected="idx === 2"
@@ -137,36 +133,6 @@
                                         OPTION {{item}}
                                     </option>
                                 </DropdownSelect>
-                                <!-- <DropdownSelect :placeholder="`선택해주세요[표시]`"
-                                                @change="selectItem.control.change"
-                                >
-                                    <option     v-for="(item,idx) in TEMPCOUNT1"
-                                                :key="idx"
-                                                :value="`value${item}`"
-                                    >
-                                        옵션 {{item}}
-                                    </option>
-                                </DropdownSelect> -->
-                                <!-- <DropdownSelect :placeholder="`${TEMPCOUNT1.length}개 짜리`"
-                                                @change="selectItem.control.change"
-                                >
-                                    <option v-for="item in TEMPCOUNT1"
-                                            :key="item"
-                                            :value="item"
-                                    >
-                                        OPTION {{item}}
-                                    </option>
-                                </DropdownSelect> -->
-                                <!-- <DropdownSelect :placeholder="`${TEMPCOUNT3.length}개 짜리`"
-                                                @change="selectItem.control.change"
-                                >
-                                    <option v-for="item in TEMPCOUNT3"
-                                            :key="item"
-                                            :value="item"
-                                    >
-                                        OPTION {{item}}
-                                    </option>
-                                </DropdownSelect> -->
 
                             </div>
 
@@ -174,11 +140,8 @@
                                 <button @click="TEST_VMODELCHANGE">
                                     랜덤 테스트
                                 </button>
-
                                 <div>
-                                    {{
-                                        TEMP_VMODEL
-                                    }}
+                                    {{TEMP_VMODEL}}
                                 </div>
                             </div>
 
@@ -261,33 +224,8 @@ export default {
             renderId : '',
 
             // TEMP_VMODEL : 'TEST_vmodel 시작값',
-            TEMP_VMODEL : 'value3',
-
-            TEMPCOUNT1 : (() => {
-                let count = 45;
-                let arr = [];
-                for(let i = 1; i <= count; ++i){
-                    arr.push(i);
-                }
-                return arr
-            })(),
-
-            TEMPCOUNT2 : (() => {
-                let count = 12;
-                let arr = [];
-                for(let i = 1; i <= count; ++i){
-                    arr.push(i);
-                }
-                return arr
-            })(),
-            TEMPCOUNT3 : (() => {
-                let count = 4;
-                let arr = [];
-                for(let i = 1; i <= count; ++i){
-                    arr.push(i);
-                }
-                return arr
-            })(),
+            // TEMP_VMODEL : 'value3',
+            TEMP_VMODEL : 'cccc',
 
         }
     },
@@ -295,7 +233,7 @@ export default {
     methods : {
         TEST_VMODELCHANGE() {
 
-            const newValue = `value${Math.floor(Math.random() * this.TEMPCOUNT1.length )}`;
+            const newValue = `value${Math.floor(Math.random() * 10 )}`;
 
             if(newValue === this.TEMP_VMODEL){
                 this.TEST_VMODELCHANGE();
@@ -349,9 +287,13 @@ export default {
 
     },
 
+    updated () {
+        if(this.$refs.ref_dropdown || !window.dropdown){
+            window.dropdown = this.$refs.ref_dropdown;
+        }
+    },
+
     mounted() {
-
-
     }
 }
 </script>
