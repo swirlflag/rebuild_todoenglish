@@ -53,17 +53,42 @@ const data = [
 
     {
         name : '입력/선택 드롭다운',
-        title : '선택 드롭다운 입력창',
-        text : '선택 드롭다운 입력창에 대한 설명',
+        title : '드롭다운 타입 선택도구 (단일선택)',
+        text : '드롭다운 타입 선택도구에 대한 설명 -',
         info : {
-            '사용' : 'TBD',
+            'TBD prop' : 'TBD value',
         },
         control : {
             testvalue : '',
-            change : (modelData) => {
-                {modelData}
-                // console.log('$emit change : ' , modelData);
+            change : (data) => {
+                {data}
             },
+        }
+    },
+    {
+        name : '입력/선택 라디오',
+        title : '라디오 타입 선택도구 (단일선택)',
+        text : '라디오 타입 선택도구에 대한 설명 -',
+        info : {
+            'TBD prop' : 'TBD value',
+        },
+        control : {
+            change : (data) => {
+                console.log(data);
+            }
+        }
+    },
+    {
+        name : '입력/선택 라디오 컬렉션',
+        title : '라디오 타입 선택도구 컬렉션 (단일선택)',
+        text : '라디오 타입 선택도구에 대한 설명 -',
+        info : {
+            '의존' : '선택 라디오',
+        },
+        control : {
+            change : (data) => {
+                console.log(data);
+            }
         }
     },
 

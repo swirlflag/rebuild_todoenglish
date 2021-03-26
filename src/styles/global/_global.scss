@@ -4,6 +4,10 @@ html , body {
     //     overflow-x: hidden;
     // }
     // overflow: overlay;
+    // font-smooth: auto;
+    // font-smooth: never;
+    font-smooth: always;
+
     -webkit-overflow-scrolling: touch !important;
     // 폰트 부드럽게 만드는 속성
     -webkit-font-smoothing: antialiased;
@@ -27,7 +31,8 @@ body {
         line-height: $SIZE_lineheight_middle ;
         word-break: keep-all;
         // font-weight: 300;
-        font-family: 'Spoqa Han Sans', 'Noto Sans KR', 'Malgun Gothic', 'Dotum', sans-serif;
+        font-family: 'Roboto' , 'Noto Sans KR' , 'Apple SD Gothic Neo', 'Malgun Gothic', 'Dotum', sans-serif;
+        // font-family: 'Apple SD Gothic Neo','Malgun Gothic', 'Dotum', sans-serif;
 
         font-size: $SIZE_PC_fontsize_default;
         letter-spacing: $SIZE_letterspacing_default;

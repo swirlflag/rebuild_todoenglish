@@ -3,10 +3,10 @@
         <div id="comp">
 
             <div id="mylog">
-                <!-- {{selectItem.control.text}} -->
+                <!-- {{controls.text}} -->
                 <TESTCOMP
                     v-if="0"
-                    v-model="TEMP_VMODEL"
+                    v-model="SELECT_VMODEL"
                 />
             </div>
             <div id="comp-wrap">
@@ -60,28 +60,28 @@
                         <div v-if="renderId === '버튼/기본'" class="comp-component" >
                             <div class="comp-view">
                                 <ButtonDefault
-                                    :theme="selectItem.control.theme"
+                                    :theme="controls.theme"
                                 >
-                                    {{selectItem.control.text}}
+                                    {{controls.text}}
                                 </ButtonDefault>
                             </div>
                             <div class="comp-control">
                                 <div>
-                                    버튼에 들어갈 텍스트 : <input type="text" v-model="selectItem.control.text" value="">
+                                    버튼에 들어갈 텍스트 : <input type="text" v-model="controls.text" value="">
                                 </div>
                                 <div>
                                     버튼 색상 테마 :
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/기본/색테마" value="" v-model="selectItem.control.theme"><span>default</span>
+                                        <input type="radio" name="버튼/기본/색테마" value="" v-model="controls.theme"><span>default</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/기본/색테마" value="navy" v-model="selectItem.control.theme"><span>navy</span>
+                                        <input type="radio" name="버튼/기본/색테마" value="navy" v-model="controls.theme"><span>navy</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/기본/색테마" value="pink" v-model="selectItem.control.theme"><span>pink</span>
+                                        <input type="radio" name="버튼/기본/색테마" value="pink" v-model="controls.theme"><span>pink</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/기본/색테마" value="green" v-model="selectItem.control.theme"><span>green</span>
+                                        <input type="radio" name="버튼/기본/색테마" value="green" v-model="controls.theme"><span>green</span>
                                     </label>
                                 </div>
                             </div>
@@ -89,62 +89,110 @@
 
                         <div v-if="renderId === '버튼/다운로드'" class="comp-component" >
                             <div class="comp-view">
-                                <ButtonDownload :type="selectItem.control.type" :theme="selectItem.control.theme"/>
+                                <ButtonDownload :type="controls.type" :theme="controls.theme"/>
                             </div>
                             <div class="comp-control">
                                 <div>
                                     다운로드 버튼 타입 :
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/타입" value="apple" v-model="selectItem.control.type"><span>apple</span>
+                                        <input type="radio" name="버튼/다운로드/타입" value="apple" v-model="controls.type"><span>apple</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/타입" value="google" v-model="selectItem.control.type"><span>google</span>
+                                        <input type="radio" name="버튼/다운로드/타입" value="google" v-model="controls.type"><span>google</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/타입" value="mobile" v-model="selectItem.control.type"><span>mobile</span>
+                                        <input type="radio" name="버튼/다운로드/타입" value="mobile" v-model="controls.type"><span>mobile</span>
                                     </label>
                                 </div>
                                 <div>
                                     버튼 색상 테마 :
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/색테마" value="" v-model="selectItem.control.theme"><span>default</span>
+                                        <input type="radio" name="버튼/다운로드/색테마" value="" v-model="controls.theme"><span>default</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/색테마" value="navy" v-model="selectItem.control.theme"><span>navy</span>
+                                        <input type="radio" name="버튼/다운로드/색테마" value="navy" v-model="controls.theme"><span>navy</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
                         <div v-if="renderId === '입력/선택 드롭다운'">
-                            <div class="comp-view row"
-                            >
+                            <div class="comp-view row">
 
-                                <DropdownSelect
-                                                @change="selectItem.control.change"
-                                                v-model="TEMP_VMODEL"
+                                <InputDropdown placeholder="선택해주세요"
+                                                @change="controls.change"
+                                                v-model="SELECT_VMODEL"
                                                 ref="ref_dropdown"
                                 >
-                                    <option     v-for="(item,idx) in 3"
+                                    <option     v-for="(item,idx) in 4"
                                                 :key="idx"
-                                                :value="`value${item}`"
-                                                :selected="idx === 2"
+                                                :value="`select_value_${item}`"
                                     >
-                                        OPTION {{item}}
+                                        value {{item}}
                                     </option>
-                                </DropdownSelect>
+                                </InputDropdown>
+
+                                <InputDropdown placeholder="test placeholder"
+                                                @change="controls.change"
+                                                v-model="SELECT_VMODEL"
+                                                ref="ref_dropdown"
+                                >
+                                    <option     v-for="(item,idx) in 40"
+                                                :key="idx"
+                                                :value="`select_value_${item}`"
+                                    >
+                                        value {{item}}
+                                    </option>
+                                </InputDropdown>
 
                             </div>
 
                             <div class="comp-control">
-                                <button @click="TEST_VMODELCHANGE">
-                                    랜덤 테스트
-                                </button>
                                 <div>
-                                    {{TEMP_VMODEL}}
+                                    <button class="default-button" @click="CHANGE_SELECT_VMODEL">
+                                        랜덤 셀렉트 0 ~ 9
+                                    </button>
+                                </div>
+                                <div>
+                                    셀렉트 값 : <strong>{{ SELECT_VMODEL }}</strong>
                                 </div>
                             </div>
 
+                        </div>
+
+                        <div v-if="renderId === '입력/선택 라디오'">
+
+                            <div class="comp-view row">
+
+                                <InputRadio
+                                    text="value 1"
+                                    name="input-radio"
+                                    value="select_value_1"
+                                    v-model="SELECT_VMODEL"
+                                />
+                                <InputRadio
+                                    text="value 2"
+                                    value="select_value_2"
+                                    name="input-radio"
+                                    v-model="SELECT_VMODEL"
+                                />
+                                <InputRadio
+                                    text="value 10"
+                                    value="select_value_10"
+                                    name="input-radio"
+                                    v-model="SELECT_VMODEL"
+                                />
+
+                            </div>
+
+                            <div class="comp-control">
+                                <div>
+                                   hi..
+                                </div>
+                                <div>
+                                    hi
+                                </div>
+                            </div>
                         </div>
 
                         <template v-if="selectItem.name">
@@ -188,7 +236,8 @@
 import categoryData from './categoryData.js';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
 import ButtonDownload from '@/components/button/ButtonDownload.vue';
-import DropdownSelect from '@/components/input/DropdownSelect.vue';
+import InputDropdown from '@/components/input/InputDropdown.vue';
+import InputRadio from '@/components/input/InputRadio.vue';
 
 import TESTCOMP from './TESTCOMP.vue';
 
@@ -198,7 +247,8 @@ export default {
         // Category,
         ButtonDefault,
         ButtonDownload,
-        DropdownSelect,
+        InputDropdown,
+        InputRadio,
 
         TESTCOMP,
     },
@@ -221,26 +271,26 @@ export default {
 
             selectItem : {},
 
+            controls : {},
+
             renderId : '',
 
-            // TEMP_VMODEL : 'TEST_vmodel 시작값',
-            // TEMP_VMODEL : 'value3',
-            TEMP_VMODEL : 'cccc',
+            SELECT_VMODEL : 'select_value_3',
 
         }
     },
 
     methods : {
-        TEST_VMODELCHANGE() {
+        CHANGE_SELECT_VMODEL() {
 
-            const newValue = `value${Math.floor(Math.random() * 10 )}`;
+            const newValue = `select_value_${Math.floor(Math.random() * 10 )}`;
 
-            if(newValue === this.TEMP_VMODEL){
-                this.TEST_VMODELCHANGE();
+            if(newValue === this.SELECT_VMODEL){
+                this.CHANGE_SELECT_VMODEL();
                 return;
             }
 
-            this.TEMP_VMODEL = newValue;
+            this.SELECT_VMODEL = newValue;
 
         },
 
@@ -270,27 +320,23 @@ export default {
             before && before.classList.remove('st-selected');
             target.classList.add('st-selected');
 
-
             this.selectItem =  null;
 
             const find = this.categoryData.find((c) => c.name === itemName);
 
             this.selectItem = {...find};
-            this.selectItem.control = {...find.control};
+
+            this.controls = {...find.control};
 
             this.renderId = itemName;
 
             this.onClickControlTab(false);
 
-            // console.log(this.selectItem.control);
         },
 
     },
 
     updated () {
-        if(this.$refs.ref_dropdown || !window.dropdown){
-            window.dropdown = this.$refs.ref_dropdown;
-        }
     },
 
     mounted() {

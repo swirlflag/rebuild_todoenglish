@@ -78,12 +78,11 @@
                     <p>토도 리포트 상세 보기</p>
 
                     <div class="study__report__control">
-                        <InputDropdown v-model="TEST_VALUE" @change="TEST_change">
-                            <select placeholder="날짜를 선택하세요">
-                                <option value="200330">2020.03.30</option>
-                                <option value="200430">2020.04.30</option>
-                                <option value="200530">2020.05.30</option>
-                            </select>
+
+                        <InputDropdown placeholder="날짜를 선택하세요">
+                            <option value="200330">2020.03.30</option>
+                            <option value="200430">2020.04.30</option>
+                            <option value="200530">2020.05.30</option>
                         </InputDropdown>
 
                         <ButtonDefault theme="pink">
@@ -191,29 +190,24 @@
 </template>
 
 <script>
-import InputDropdown    from '@/components/input/InputDropdown.vue';
 import ButtonDefault    from '@/components/button/ButtonDefault.vue';
 import TextChangeMask   from '@/components/layout/TextChangeMask.vue';
+import InputDropdown   from '@/components/input/InputDropdown.vue';
 
 export default {
     name : 'mypageStudyInfo',
     components : {
-        InputDropdown ,
         ButtonDefault ,
         TextChangeMask ,
+        InputDropdown,
     },
     data() {
         return {
-            TEST_VALUE : '',
             // TEST_PROFILE_KEY : 'key1',
             TEST_PROFILENAME : '1번 프로필 닉네임',
         }
     },
     watch : {
-        TEST_VALUE(now) {
-            {now}
-            // console.log(now);
-        },
         TEST_PROFILECHANGE() {
 
         },

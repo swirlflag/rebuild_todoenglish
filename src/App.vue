@@ -153,6 +153,7 @@ export const appStore = {
 }
 
 </script>
+<!-- <style src="@/styles/global/_reset.scss" lang="scss"></style> -->
 
 <style scoped lang="scss" >
 #app {

@@ -1,13 +1,45 @@
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
-@import url(//fonts.googleapis.com/css2?family=Caveat&display=swap);
+// @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+// @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Roboto:wght@400;700&display=swap');
+// @import url(//fonts.googleapis.com/css2?family=Caveat&display=swap);
 
-@font-face {font-family: Apple SD Gothic Neo; font-weight: 100; src :local('Apple SD Gothic Neo Thin');}
-@font-face {font-family: Apple SD Gothic Neo; font-weight: 200; src :local('Apple SD Gothic Neo UltraLight');}
-@font-face {font-family: Apple SD Gothic Neo; font-weight: 300; src :local('Apple SD Gothic Neo Light');}
-@font-face {font-family: Apple SD Gothic Neo; font-weight: 400; src :local('Apple SD Gothic Neo Regular');}
-@font-face {font-family: Apple SD Gothic Neo; font-weight: 500; src :local('Apple SD Gothic Neo Medium');}
-@font-face {font-family: Apple SD Gothic Neo; font-weight: 600; src :local('Apple SD Gothic Neo SemiBold');}
-@font-face {font-family: Apple SD Gothic Neo; font-weight: 700; src :local('Apple SD Gothic Neo Bold'); }
-@font-face {font-family: Apple SD Gothic Neo; font-weight: 800; src :local('Apple SD Gothic Neo ExtraBold'); }
-@font-face {font-family: Apple SD Gothic Neo; font-weight: 900; src :local('Apple SD Gothic Neo Heavy'); }
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src:    local('')
+            , url('~@/styles/font/roboto-v20-latin-regular.woff2') format('woff2')
+            , url('~@/styles/font/roboto-v20-latin-regular.woff') format('woff')
+            ;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: bold;
+    font-weight: 700;
+    src:    local('')
+            , url('~@/styles/font/roboto-v20-latin-700.woff2') format('woff2')
+            , url('~@/styles/font/roboto-v20-latin-700.woff') format('woff')
+            ;
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src:    local('')
+            , url('~@/styles/font/noto-sans-kr-v13-latin_korean-regular.woff2') format('woff2')
+            , url('~@/styles/font/noto-sans-kr-v13-latin_korean-regular.woff') format('woff')
+            ;
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: bold;
+    font-weight: 700;
+    src:    local('')
+            , url('~@/styles/font/noto-sans-kr-v13-latin_korean-700.woff2') format('woff2')
+            , url('~@/styles/font/noto-sans-kr-v13-latin_korean-700.woff') format('woff')
+            ;
+}

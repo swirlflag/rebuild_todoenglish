@@ -10,7 +10,7 @@
         </ul>
 
         <div class="auth__signup-marketing-agree">
-            <RadioDefault   text="동의함"
+            <InputRadio     text="동의함"
                             name="marketing-agree"
                             :value="true"
                             v-model="pickValue"
@@ -18,7 +18,7 @@
 
             />
 
-            <RadioDefault   text="동의 하지 않음"
+            <InputRadio     text="동의 하지 않음"
                             name="marketing-agree"
                             :value="false"
                             v-model="pickValue"
@@ -35,12 +35,12 @@
 </template>
 
 <script>
-import RadioDefault     from '@/components/input/RadioDefault.vue';
+import InputRadio     from '@/components/input/InputRadio.vue';
 import ButtonDefault    from '@/components/button/ButtonDefault.vue';
 
 export default {
     components : {
-        RadioDefault,
+        InputRadio,
         ButtonDefault,
     },
     name : 'AuthSignupMarketingAgree',

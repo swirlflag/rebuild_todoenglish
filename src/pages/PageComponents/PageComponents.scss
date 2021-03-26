@@ -43,6 +43,15 @@ label.radio-label {
 
 }
 
+button.default-button {
+    border: 1px solid $tempblue;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    padding:2px 5px;
+    color: $tempblue;
+}
+
 #mylog {
     z-index: 9999;
     position: fixed;
