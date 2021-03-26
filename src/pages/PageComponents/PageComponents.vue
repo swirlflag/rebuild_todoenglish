@@ -48,15 +48,7 @@
 
                     <div id="comp-content-wrap">
 
-                        <div v-if="renderId === '맞는 ID'">
-                            <div class="comp-view">
-                            </div>
-                            <div class="comp-control">
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-
+                    <!-- 버튼/기본 -->
                         <div v-if="renderId === '버튼/기본'" class="comp-component" >
                             <div class="comp-view">
                                 <ButtonDefault
@@ -115,7 +107,10 @@
                                 </div>
                             </div>
                         </div>
+                    <!-- //버튼/기본 -->
 
+
+                    <!-- 입력/선택 드롭다운 -->
                         <div v-if="renderId === '입력/선택 드롭다운'">
                             <div class="comp-view row">
 
@@ -157,31 +152,37 @@
                                     셀렉트 값 : <strong>{{ SELECT_VMODEL }}</strong>
                                 </div>
                             </div>
-
                         </div>
+                <!-- //입력/선택 드롭다운 -->
 
+
+                <!-- 입력/선택 라디오 -->
                         <div v-if="renderId === '입력/선택 라디오'">
 
                             <div class="comp-view row">
 
-                                <InputRadio
-                                    text="value 1"
-                                    name="input-radio"
-                                    value="select_value_1"
-                                    v-model="SELECT_VMODEL"
-                                />
-                                <InputRadio
-                                    text="value 2"
-                                    value="select_value_2"
-                                    name="input-radio"
-                                    v-model="SELECT_VMODEL"
-                                />
-                                <InputRadio
-                                    text="value 10"
-                                    value="select_value_10"
-                                    name="input-radio"
-                                    v-model="SELECT_VMODEL"
-                                />
+                                <InputRadio value="select_value_1"
+                                            v-model="SELECT_VMODEL"
+                                            name="input-radio"
+                                            @change="controls.change"
+                                >
+                                    value 1
+                                </InputRadio>
+
+                                <InputRadio value="select_value_2"
+                                            v-model="SELECT_VMODEL"
+                                            name="input-radio"
+                                >
+                                    value 2
+                                </InputRadio>
+
+                                <InputRadio value="select_value_10"
+                                            v-model="SELECT_VMODEL"
+                                            name="input-radio"
+                                >
+                                    value 10
+                                </InputRadio>
+
 
                             </div>
 
@@ -194,6 +195,48 @@
                                 </div>
                             </div>
                         </div>
+                <!-- //입력/선택 라디오 -->
+
+                <!-- 입력/선택 라디오 컬렉션 -->
+                    <div v-if="renderId === '입력/선택 라디오 컬렉션'">
+                        <div class="comp-view">
+                            <InputRadioCollection
+                                v-model="SELECT_VMODEL"
+                                name="input-radio-collection"
+                                :list="[
+                                    {
+                                        value : 'select_value_1',
+                                        text : 'value 1',
+                                    },
+                                    {
+                                        value : 'select_value_2',
+                                        text : 'value 2',
+                                    },
+                                    {
+                                        value : 'select_value_4',
+                                        text : 'value 4',
+                                    },
+                                ]"
+                            />
+                        </div>
+                        <div class="comp-control">
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                <!-- 입력/선택 라디오 컬렉션 -->
+
+
+                <!-- <div v-if="renderId === '맞는 ID'">
+                    <div class="comp-view">
+                    </div>
+                    <div class="comp-control">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div> -->
+
+
 
                         <template v-if="selectItem.name">
                             <div class="comp-infomation">
@@ -238,6 +281,7 @@ import ButtonDefault from '@/components/button/ButtonDefault.vue';
 import ButtonDownload from '@/components/button/ButtonDownload.vue';
 import InputDropdown from '@/components/input/InputDropdown.vue';
 import InputRadio from '@/components/input/InputRadio.vue';
+import InputRadioCollection from '@/components/input/InputRadioCollection.vue';
 
 import TESTCOMP from './TESTCOMP.vue';
 
@@ -249,6 +293,7 @@ export default {
         ButtonDownload,
         InputDropdown,
         InputRadio,
+        InputRadioCollection,
 
         TESTCOMP,
     },
@@ -281,6 +326,9 @@ export default {
     },
 
     methods : {
+        CONSOLE_EVENT(e) {
+            console.log(e);
+        },
         CHANGE_SELECT_VMODEL() {
 
             const newValue = `select_value_${Math.floor(Math.random() * 10 )}`;

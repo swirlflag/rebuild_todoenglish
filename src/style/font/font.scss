@@ -9,8 +9,8 @@
     font-style: normal;
     font-weight: 400;
     src:    local('')
-            , url('~@/styles/font/roboto-v20-latin-regular.woff2') format('woff2')
-            , url('~@/styles/font/roboto-v20-latin-regular.woff') format('woff')
+            , url('~@/style/font/roboto-v20-latin-regular.woff2') format('woff2')
+            , url('~@/style/font/roboto-v20-latin-regular.woff') format('woff')
             ;
 }
 
@@ -19,8 +19,8 @@
     font-style: bold;
     font-weight: 700;
     src:    local('')
-            , url('~@/styles/font/roboto-v20-latin-700.woff2') format('woff2')
-            , url('~@/styles/font/roboto-v20-latin-700.woff') format('woff')
+            , url('~@/style/font/roboto-v20-latin-700.woff2') format('woff2')
+            , url('~@/style/font/roboto-v20-latin-700.woff') format('woff')
             ;
 }
 
@@ -29,8 +29,8 @@
     font-style: normal;
     font-weight: 400;
     src:    local('')
-            , url('~@/styles/font/noto-sans-kr-v13-latin_korean-regular.woff2') format('woff2')
-            , url('~@/styles/font/noto-sans-kr-v13-latin_korean-regular.woff') format('woff')
+            , url('~@/style/font/noto-sans-kr-v13-latin_korean-regular.woff2') format('woff2')
+            , url('~@/style/font/noto-sans-kr-v13-latin_korean-regular.woff') format('woff')
             ;
 }
 
@@ -39,7 +39,7 @@
     font-style: bold;
     font-weight: 700;
     src:    local('')
-            , url('~@/styles/font/noto-sans-kr-v13-latin_korean-700.woff2') format('woff2')
-            , url('~@/styles/font/noto-sans-kr-v13-latin_korean-700.woff') format('woff')
+            , url('~@/style/font/noto-sans-kr-v13-latin_korean-700.woff2') format('woff2')
+            , url('~@/style/font/noto-sans-kr-v13-latin_korean-700.woff') format('woff')
             ;
 }

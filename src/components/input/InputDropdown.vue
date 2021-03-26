@@ -187,7 +187,7 @@ export default {
 
             const refineIndex = this.refineryIndex(value);
 
-            this.setModelData(refineIndex);
+            this.recordModelData(refineIndex);
 
             if(refineIndex > -1){
                 if(this.$refs.ref_select.selectedIndex !== refineIndex){
@@ -222,7 +222,7 @@ export default {
 
 
     // 인자로 현재 셀렉트 된 것 정리해서 컴포넌트 데이터에 저장 . (이 변경으로 실제 표현화면 적용)
-        setModelData(index) {
+        recordModelData(index) {
 
             const usePlaceholder    = !!this.placeholder;
             const validRange        = index > (usePlaceholder ? 0 : -1) && index < this.allData.length;
@@ -407,7 +407,7 @@ export default {
     },
 
     beforeDestroy() {
-        // this.setModelData(-1);
+        // this.recordModelData(-1);
     },
 
     destroyed() {

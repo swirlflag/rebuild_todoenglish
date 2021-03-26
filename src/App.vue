@@ -61,9 +61,9 @@ import PlateBanner              from '@/plates/PlateBanner/PlateBanner.vue';
 import PlatePage                from '@/plates/PlatePage/PlatePage.vue';
 import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
 
-// import '@/styles/font/font.scss';
-// import '@/styles/global/_reset.css';
-// import '@/styles/global/_global.scss';
+// import '@/style/font/font.scss';
+// import '@/style/global/_reset.css';
+// import '@/style/global/_global.scss';
 
 export default {
     name: 'App',
@@ -153,7 +153,17 @@ export const appStore = {
 }
 
 </script>
-<!-- <style src="@/styles/global/_reset.scss" lang="scss"></style> -->
+<!-- <style src="@/style/global/_reset.scss" lang="scss"></style> -->
+<!--<style src="@/style/font/font.scss" lang="scss"></style>
+<style src="@/style/global/_reset.scss" lang="scss"></style>
+<style src="@/style/global/_variable.scss" lang="scss"></style>
+<style src="@/style/global/_reset_custom.scss" lang="scss"></style>
+<style src="@/style/global/_media.scss" lang="scss"></style>
+<style src="@/style/global/_transition.scss" lang="scss"></style>
+<style src="@/style/global/_global.scss" lang="scss"></style>
+<style src="@/style/global/_icon.scss" lang="scss"></style>
+
+-->
 
 <style scoped lang="scss" >
 #app {
@@ -173,3 +183,4 @@ export const appStore = {
     }
 }
 </style>
+

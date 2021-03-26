@@ -73,8 +73,8 @@ const data = [
             'TBD prop' : 'TBD value',
         },
         control : {
-            change : (data) => {
-                console.log(data);
+            change : (value) => {
+                console.log(value);
             }
         }
     },

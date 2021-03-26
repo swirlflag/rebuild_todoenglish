@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-// var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+{MiniCssExtractPlugin}
+
 
 module.exports = {
     configureWebpack: {
@@ -10,10 +12,26 @@ module.exports = {
                 // 'styles': path.resolve('./src')
             }
         },
-        // loaders : {
-        //     css: ExtractTextPlugin.extract("css"),
-        //     sass: ExtractTextPlugin.extract("scss"),
-        // },
+        module: {
+            rules: [
+                {
+                    // test: /\.(sa|sc|c)ss$/,
+                    test: /\.css$/,
+                    use: [
+                        { loader: 'style-loader', options: { injectType: 'singletonStyleTag' } },
+                        'css-loader', 'sass-loader',
+                    ],
+                },
+                // {
+                //     test: /\.(sa|sc|c)ss$/,
+                //     use: [
+                //         MiniCssExtractPlugin.loader,
+                //         'css-loader',
+                //         'sass-loader',
+                //     ],
+                // },
+            ],
+        },
         plugins : [
             new webpack.DefinePlugin ({
                 'process.env': {
@@ -22,35 +40,81 @@ module.exports = {
                 }
             }),
             // new ExtractTextPlugin("style.css"),
-        ]
+            // new ExtractTextPlugin("style.css"),
+        ],
+
     },
 
-    css: {
-        loaderOptions: {
-            sass: {
-                data: `
-                    @import '@/styles/font/font.scss';
-                    @import "@/styles/global/_reset.scss";
-                    @import "@/styles/global/_variable.scss";
-                    @import "@/styles/global/_reset_custom.scss";
-                    @import "@/styles/global/_media.scss";
-                    @import "@/styles/global/_transition.scss";
-                    @import "@/styles/global/_global.scss";
-                    @import "@/styles/global/_icon.scss";
-                `
-            }
-        }
-    },
 
+// sass-loader 7버전대 에서 작동하는 코드
     // css: {
     //     loaderOptions: {
     //         sass: {
-    //             additionalData: `
-    //                 @import "@/styles/_preload.scss";
+    //             data: `
+    //                 @import '@/style/font/font.scss';
+    //                 @import "@/style/global/_reset.scss";
+    //                 @import "@/style/global/_variable.scss";
+    //                 @import "@/style/global/_reset_custom.scss";
+    //                 @import "@/style/global/_media.scss";
+    //                 @import "@/style/global/_transition.scss";
+    //                 @import "@/style/global/_global.scss";
+    //                 @import "@/style/global/_icon.scss";
     //             `
     //         }
     //     }
     // },
 
+    css: {
+        loaderOptions: {
+            sass: {
+                data: `
+                    @import '@/style/_preload.scss';
+                `
+            }
+        }
+    },
+// sass-loader 7버전대 에서 작동하는 코드
+
+
+
+
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+// css: {
+//     loaderOptions: {
+//         sass: {
+//             additionalData: `
+//                 @import '@/style/font/font.scss';
+//                 @import "@/style/global/_reset.scss";
+//                 @import "@/style/global/_variable.scss";
+//                 @import "@/style/global/_reset_custom.scss";
+//                 @import "@/style/global/_media.scss";
+//                 @import "@/style/global/_transition.scss";
+//                 @import "@/style/global/_global.scss";
+//                 @import "@/style/global/_icon.scss";
+//             `
+//         }
+//     }
+// },
+
+// css: {
+//     loaderOptions: {
+//         sass: {
+//             additionalData: `
+//                 @import "@/style/_preload.scss";
+//             `
+//         }
+//     }
+// },

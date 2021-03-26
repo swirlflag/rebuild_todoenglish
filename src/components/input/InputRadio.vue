@@ -1,22 +1,26 @@
 <!--
-    <InputRadio
-        text="inputText"
-        name="input-radio"
-        value="select_value_1"
-        v-model="modelValue"
-    />
+
+    <InputRadio value="inputValue"
+                v-model="modelValue"
+                name="input-radio"
+    >
+        value text
+    </InputRadio>
 
     MEMO :
-    이 컴포넌트를 단일로 구성해 묶음을 직접 구성할 경우 $emit change시 현재 input의 value만 받을수 있습니다.
+    이 컴포넌트를 단일로 구성해 묶음을 직접 구성한후 $emit('change')호출시 현재 input의 value 정보만 받을수 있습니다.
     index, before와 같은 요소가 필요하다면 InputRadioCollection을 사용해 주세요.
 
 -->
 <template>
-    <label class="default--radio" :class="{'st-checked' : isPick}">
+    <label class="default--radio" :class="{'st-checked' : isSelect}">
         <input type="radio" v-model="valueData" :value="value" :name="name" @change="onChange" ref="ref_radio">
         <span class="radio--icon"></span>
-        <div class="radio--label" v-html="text">
+
+        <div class="radio--label">
+            <slot></slot>
         </div>
+
     </label>
 </template>
 
@@ -26,13 +30,16 @@ export default {
     props : {
         modelValue : null,
 
-        text : String,
         name : {
             type : String,
             required : true
         },
+        value : {
+            type : null,
+            required : true,
+        },
         checked : Boolean,
-        value : null,
+        index : Number,
     },
     model: {
         prop: 'modelValue',
@@ -41,18 +48,17 @@ export default {
     data() {
         return {
             valueData  : this.value,
-            isPick : false,
+            isSelect : false,
         }
     },
     watch : {
-        'modelValue'(now){
-            this.isPick = this.valueData === now;
+        'modelValue'(){
+            this.isSelect = this.valueData === this.modelValue;
         }
     },
     methods : {
         onChange(){
-            console.log(this.valueData);
-            this.$emit('change' , this.valueData);
+            this.$emit('change' , this.valueData , this.index);
             this.$emit('modelEvent' , this.valueData);
         },
     },
@@ -62,10 +68,12 @@ export default {
         }
 
         if(this.$refs.ref_radio.checked){
-            this.isPick = true;
+            this.isSelect = true;
         }
     }
 }
+
+
 </script>
 
 <style scoped lang="scss">
