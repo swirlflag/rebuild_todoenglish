@@ -1,5 +1,7 @@
 <template>
-    <div class="default--radio-collection">
+    <div    class="default--radio-collection"
+            :class="`type--${computedDirection}`"
+    >
 
         <template v-for="(item,idx) in list" >
 
@@ -34,18 +36,17 @@ export default {
             type: Array,
         },
         name : String,
-        direction : String,
+        direction : String, // row, col, vertical, horizontal
     },
     model: {
         prop: 'modelValue',
         event: 'modelEvent'
     },
-    watch: {
-        'data_name'() {
 
-        }
-    },
     data() {
+
+        console.log(this.direction);
+
         return {
             data_name : this.name || Math.random().toString(),
             data_modelValue : this.modelValue || 'test vmodel',
@@ -57,9 +58,28 @@ export default {
             },
         }
     },
+    computed : {
+        computedDirection() {
+            if(this.direction === 'row' || this.direction === 'vertical'){
+                return 'row'
+            }else {
+                return 'col'
+            }
+        }
+    },
+    watch: {
+        'modelValue'() {
+
+        },
+        'data_modelValue'() {
+
+        },
+    },
     methods : {
         onChange(value,index) {
             this.recordModelData(index);
+            this.$emit('change' , this.modelData);
+            this.$emit('modelEvent' , this.modelData.value);
         },
         recordModelData(index) {
             const currentItem = this.list[index];
@@ -75,17 +95,31 @@ export default {
                 index,
             }
 
-            console.log(this.modelData);
-
-            // console.log(currentItem);
         },
     },
     mounted() {
-        console.log(this.list);
+        console.log(this.modelValue);
     },
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
+.default--radio-collection {
+    line-height: $SIZE_lineheight_high3;
+    display :flex;
+    flex-direction: column;
+
+    &.type--row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        > .default--radio {
+            margin: 0 10px;
+        }
+    }
+    &.type--col {
+        flex-direction: column;
+    }
+
+}
 </style>

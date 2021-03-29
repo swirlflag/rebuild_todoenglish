@@ -1,3 +1,7 @@
+import { randomOne } from '@/utils';
+
+const makeArrayLength = (length) => [...new Array(length).keys()];
+
 const data = [
     {
         name : '버튼/기본',
@@ -59,42 +63,35 @@ const data = [
             'TBD prop' : 'TBD value',
         },
         control : {
-            testvalue : '',
-            change : (data) => {
-                {data}
-            },
+            change : (data) => {{data}},
         }
     },
     {
         name : '입력/선택 라디오',
         title : '라디오 타입 선택도구 (단일선택)',
-        text : '라디오 타입 선택도구에 대한 설명 -',
+        text : '라디오 버튼은 최소 2개 이상의 다중 선택지 중에서 하나의 선택을 지원합니다. 1개 이상의 선택과 미선택 옵션은 지원하지 않으며 미선택의 선택지를 구현시엔 "선택하지 않음" 과 같은 항목의 추가로 이루어져야 합니다.',
         info : {
             'TBD prop' : 'TBD value',
         },
         control : {
-            change : (value) => {
-                console.log(value);
-            }
+            value : randomOne('yes' , 'no'),
         }
     },
     {
         name : '입력/선택 라디오 컬렉션',
         title : '라디오 타입 선택도구 컬렉션 (단일선택)',
-        text : '라디오 타입 선택도구에 대한 설명 -',
+        text : '-',
         info : {
-            '의존' : '선택 라디오',
+            '파생' : '선택 라디오',
         },
         control : {
-            change : (data) => {
-                console.log(data);
-            }
+            list : makeArrayLength(10).map((c,i) =>  ({text : `value ${i+1}` , value : `select_value_${i+1}`})),
+            direction : randomOne('row' , 'col'),
         }
     },
 
 
 ];
-
 
 
 export default data;

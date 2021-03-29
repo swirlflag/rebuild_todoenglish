@@ -14,7 +14,7 @@
 -->
 <template>
     <label class="default--radio" :class="{'st-checked' : isSelect}">
-        <input type="radio" v-model="valueData" :value="value" :name="name" @change="onChange" ref="ref_radio">
+        <input type="radio" v-model="value" :value="data_value" :name="name" @change="onChange" ref="ref_radio">
         <span class="radio--icon"></span>
 
         <div class="radio--label">
@@ -38,38 +38,67 @@ export default {
             type : null,
             required : true,
         },
+
         checked : Boolean,
         index : Number,
     },
+
     model: {
         prop: 'modelValue',
         event: 'modelEvent'
     },
+
     data() {
         return {
-            valueData  : this.value,
+            data_value  : this.value,
             isSelect : false,
         }
     },
     watch : {
         'modelValue'(){
-            this.isSelect = this.valueData === this.modelValue;
+            console.log(this.modelValue);
+            // console.log(this.ignoreModel);
+            // if(!this.ignoreModel){
+            //     this.changeCheck();
+            //     // this.select(this.modelValue);
+            // }
+            // this.ignoreModel = false;
         }
     },
     methods : {
         onChange(){
-            this.$emit('change' , this.valueData , this.index);
-            this.$emit('modelEvent' , this.valueData);
+            console.log('on change');
+            // console.log(1);
+            // this.changeCheck();
+        },
+        changeCheck() {
+            this.isSelect = this.data_value === this.modelValue;
+            // this.eventEmiting();
+        },
+        eventEmiting() {
+            this.$emit('change' , this.data_value , this.index);
+            // this.$emit('modelEvent' , this.data_value);
+
+            if((this.modelValue !== this.data_value)){
+                this.ignoreModel = true;
+                this.$emit('modelEvent' , this.data_value)
+            }
         },
     },
     mounted() {
-        if(this.checked){
-            this.$refs.ref_radio.checked = true;
-        }
+        // console.log(this.modelValue , this.data_value);
 
-        if(this.$refs.ref_radio.checked){
+        if(this.checked || this.modelValue === this.data_value){
+            // this.$refs.ref_radio.checked = true;
             this.isSelect = true;
         }
+
+        // if(this.$refs.ref_radio.checked){
+        //     this.isSelect = true;
+        // }
+
+        console.log(this.isSelect);
+
     }
 }
 
@@ -84,7 +113,12 @@ export default {
     transition: color 200ms ease;
 
     input {
-        display: none;
+        // display: none;
+        -webkit-appearance : unset !important;
+        appearance:  unset !important;
+        width: 50px; height: 50px;
+        background : unset !important;
+        opacity: 1;
     }
 
     @include hover {

@@ -6,7 +6,7 @@
                 <!-- {{controls.text}} -->
                 <TESTCOMP
                     v-if="0"
-                    v-model="SELECT_VMODEL"
+                    v-model="VMODEL_SELECTVALUE"
                 />
             </div>
             <div id="comp-wrap">
@@ -116,7 +116,7 @@
 
                                 <InputDropdown placeholder="선택해주세요"
                                                 @change="controls.change"
-                                                v-model="SELECT_VMODEL"
+                                                v-model="VMODEL_SELECTVALUE"
                                                 ref="ref_dropdown"
                                 >
                                     <option     v-for="(item,idx) in 4"
@@ -129,7 +129,7 @@
 
                                 <InputDropdown placeholder="test placeholder"
                                                 @change="controls.change"
-                                                v-model="SELECT_VMODEL"
+                                                v-model="VMODEL_SELECTVALUE"
                                                 ref="ref_dropdown"
                                 >
                                     <option     v-for="(item,idx) in 40"
@@ -144,16 +144,21 @@
 
                             <div class="comp-control">
                                 <div>
-                                    <button class="default-button" @click="CHANGE_SELECT_VMODEL">
-                                        랜덤 셀렉트 0 ~ 9
+                                    <button class="default-button" @click="CHANGE_VMODEL_SELECTVALUE(10)">
+                                        랜덤 셀렉트 바꿔보기 (0 ~ 9)
                                     </button>
                                 </div>
                                 <div>
-                                    셀렉트 값 : <strong>{{ SELECT_VMODEL }}</strong>
+                                    셀렉트 값 : <strong>{{ VMODEL_SELECTVALUE }}</strong>
                                 </div>
                             </div>
                         </div>
                 <!-- //입력/선택 드롭다운 -->
+
+
+
+
+
 
 
                 <!-- 입력/선택 라디오 -->
@@ -161,37 +166,35 @@
 
                             <div class="comp-view row">
 
-                                <InputRadio value="select_value_1"
-                                            v-model="SELECT_VMODEL"
+                                <InputRadio value="yes"
+                                            v-model="controls.value"
                                             name="input-radio"
-                                            @change="controls.change"
+                                            @change="CONSOLE_EVENT"
                                 >
-                                    value 1
+                                    YES!!
                                 </InputRadio>
 
-                                <InputRadio value="select_value_2"
-                                            v-model="SELECT_VMODEL"
+                                <InputRadio value="no"
+                                            v-model="controls.value"
                                             name="input-radio"
                                 >
-                                    value 2
+                                    NO..
                                 </InputRadio>
-
-                                <InputRadio value="select_value_10"
-                                            v-model="SELECT_VMODEL"
-                                            name="input-radio"
-                                >
-                                    value 10
-                                </InputRadio>
-
 
                             </div>
 
                             <div class="comp-control">
                                 <div>
-                                   hi..
+                                   선택 값 : <strong> {{ controls.value }} </strong>
                                 </div>
                                 <div>
-                                    hi
+                                    셀렉트 값 설정해보기 :
+                                    <label class="radio-label">
+                                        <input type="radio" name="입력/선택 라디오/값" value="yes" v-model="controls.value" ><span>yes</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="입력/선택 라디오/값" value="no" v-model="controls.value" ><span>no</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -201,27 +204,20 @@
                     <div v-if="renderId === '입력/선택 라디오 컬렉션'">
                         <div class="comp-view">
                             <InputRadioCollection
-                                v-model="SELECT_VMODEL"
+                                v-model="VMODEL_SELECTVALUE"
                                 name="input-radio-collection"
-                                :list="[
-                                    {
-                                        value : 'select_value_1',
-                                        text : 'value 1',
-                                    },
-                                    {
-                                        value : 'select_value_2',
-                                        text : 'value 2',
-                                    },
-                                    {
-                                        value : 'select_value_4',
-                                        text : 'value 4',
-                                    },
-                                ]"
+                                @change="CONSOLE_EVENT"
+                                :direction="controls.direction"
+                                :list="controls.list"
                             />
                         </div>
                         <div class="comp-control">
-                            <div></div>
-                            <div></div>
+                            <div>셀렉트 값 :  <strong> {{ VMODEL_SELECTVALUE }} </strong></div>
+                            <div>
+                                <button class="default-button" @click="CHANGE_VMODEL_SELECTVALUE(10)">
+                                    랜덤 셀렉트 바꿔보기 (0 ~ 9)
+                                </button>
+                            </div>
                         </div>
                     </div>
                 <!-- 입력/선택 라디오 컬렉션 -->
@@ -240,7 +236,6 @@
 
                         <template v-if="selectItem.name">
                             <div class="comp-infomation">
-
                                 <div class="comp-title">{{selectItem.title}}</div>
                                 <div class="comp-text">{{selectItem.text}}</div>
 
@@ -320,25 +315,31 @@ export default {
 
             renderId : '',
 
-            SELECT_VMODEL : 'select_value_3',
+            VMODEL_SELECTVALUE : 'select_value_3',
 
+        }
+    },
+    watch : {
+        "VMODEL_SELECTVALUE"(){
+            // console.log(this.VMODEL_SELECTVALUE)
         }
     },
 
     methods : {
-        CONSOLE_EVENT(e) {
-            console.log(e);
+        CONSOLE_EVENT(payload) {
+            {payload}
+            // console.log('console evnet : ', payload);
         },
-        CHANGE_SELECT_VMODEL() {
+        CHANGE_VMODEL_SELECTVALUE(limit = 10) {
 
-            const newValue = `select_value_${Math.floor(Math.random() * 10 )}`;
+            const newValue = `select_value_${Math.ceil(Math.random() * limit )}`;
 
-            if(newValue === this.SELECT_VMODEL){
-                this.CHANGE_SELECT_VMODEL();
+            if(newValue === this.VMODEL_SELECTVALUE){
+                this.CHANGE_VMODEL_SELECTVALUE();
                 return;
             }
 
-            this.SELECT_VMODEL = newValue;
+            this.VMODEL_SELECTVALUE = newValue;
 
         },
 
