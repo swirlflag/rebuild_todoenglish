@@ -12,6 +12,8 @@
         최초 mount시 checked 속성이 v-model보다 우선시 됩니다.
         checked가 true이고 v-model이 false라면 실행시 내부 값을 true로 만들고 연동된 v-model값에도 변이를 줍니다.
 
+        v-model은 양방향, :checked를 단방향으로 사용합니다.
+
 -->
 
 <template>
@@ -33,9 +35,9 @@ export default {
     name : 'InputCheckbox',
     props : {
         modelValue : Boolean,
-
         text : [String,Number],
         checked : Boolean,
+        index : Number,
     },
     model: {
         prop: 'modelValue',
@@ -43,8 +45,13 @@ export default {
     },
     watch : {
         'modelValue'(){
-            if(this.modelValue !== this.isCheck){
-                this.modelValue ? this.check() : this.uncheck();
+            if(this.modelValue !== undefined && this.modelValue !== this.isCheck){
+                this.isCheck = this.modelValue;
+            }
+        },
+        'checked'() {
+            if(this.checked !== undefined && this.checked !== this.isCheck){
+                this.isCheck = this.checked;
             }
         },
         'isCheck'() {
@@ -54,7 +61,8 @@ export default {
     components : {
     },
     data () {
-        const isCheck = (this.modelValue === undefined ? false : this.modelValue);
+        let isCheck = (this.modelValue === undefined ? false : this.modelValue);
+
         return {
             isCheck,
         }
@@ -67,7 +75,7 @@ export default {
             this.isCheck = false;
         },
         watchIsCheck() {
-            this.$emit('change' , this.isCheck);
+            this.$emit('change' , this.isCheck , this.index);
             this.$emit('modelEvent' , this.isCheck);
         },
 
@@ -96,6 +104,7 @@ export default {
 }
 .default--checkbox {
     display: flex;
+    align-items: center;
     cursor: pointer;
     transition: color 200ms ease;
 

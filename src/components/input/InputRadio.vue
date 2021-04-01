@@ -34,6 +34,11 @@
 <script>
 export default {
     name : 'InputRadio',
+    model: {
+        prop: 'modelValue',
+        event: 'modelEvent'
+    },
+
     props : {
         modelValue : null,
 
@@ -49,11 +54,6 @@ export default {
         checked : Boolean,
 
         index : Number,
-    },
-
-    model: {
-        prop: 'modelValue',
-        event: 'modelEvent'
     },
 
     data() {

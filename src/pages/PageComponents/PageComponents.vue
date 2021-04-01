@@ -223,7 +223,7 @@
 
                             <div class="comp-control">
                                 <div>
-                                   선택 값 : <strong> {{ controls.value }} </strong>
+                                   셀렉트 값 : <strong> {{ controls.value }} </strong>
                                 </div>
                                 <div>
                                     셀렉트 값 설정해보기 :
@@ -316,21 +316,23 @@
                                 />
                             </div>
                             <div class="comp-control">
-                                <div> 체크 옵저버 : <strong>{{ controls.checks }}</strong></div>
+                                <div>
+                                    체크 옵저버 : <strong>{{ controls.checks }}</strong>
+                                </div>
                                 <div>
                                     체크 값 설정해보기
                                     &nbsp;
                                     <label class="checkbox-label">
                                         <input type="checkbox" v-model="controls.checks[0]">
-                                        <span>SYNC A</span>
+                                        <span>sync A</span>
                                     </label>
                                     <label class="checkbox-label">
                                         <input type="checkbox" v-model="controls.checks[1]">
-                                        <span>SYNC B</span>
+                                        <span>sync B</span>
                                     </label>
                                     <label class="checkbox-label">
                                         <input type="checkbox" v-model="controls.checks[2]">
-                                        <span>SYNC C</span>
+                                        <span>sync C</span>
                                     </label>
                                 </div>
                             </div>
@@ -342,13 +344,32 @@
 
                         <div v-if="renderId === '입력/선택 체크박스 컬렉션'">
                             <div class="comp-view">
-                                <InputCheckboxCollection :list="controls.list"
-                                                    
+                                <InputCheckboxCollection    v-model="controls.list"
+                                                            @change="controls.change"
+                                                            :direction="controls.direction"
+                                                            name="input-checkbox-collection"
+
                                 />
                             </div>
                             <div class="comp-control">
-                                <div></div>
-                                <div></div>
+                                <div>
+                                    체크 옵저버 : <strong>{{ controls.list.map(c => c.checked) }}</strong>
+                                </div>
+                                <div>
+                                    체크 값 설정해보기
+                                    &nbsp;
+                                    <label class="checkbox-label" v-for="(item,idx) in controls.list" :key="idx">
+                                        <input type="checkbox" v-model="item.checked">
+                                        <span>sync {{idx+1}}</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    나열 방향 : {{ controls.direction === 'col' ? '세로' : '가로'}}
+                                    &nbsp;
+                                    <button class="default-button" @click="controls.directionChange(controls)">
+                                        변환
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -541,30 +562,3 @@ export default {
 
 
 <style src="./PageComponents.scss" lang="scss" ></style>
-
-
-<style lang="scss">
-// 컴포넌트 페이지에서는 공용 네비게이션과 footer를 숨겨줍니다.
-.page--components {
-    #plate--navigation ,
-    #plate--footer{
-        opacity: 0 !important;
-        pointer-events: none !important;
-        user-select: none !important;
-        height: 0 !important;
-        overflow:hidden !important;
-        padding: 0 !important;
-        * {
-            pointer-events: none !important;
-            user-select: none !important;
-        }
-    }
-    #plate--page {
-        overflow: hidden !important;
-    }
-    #page--router {
-        overflow: hidden !important;
-    }
-}
-
-</style>

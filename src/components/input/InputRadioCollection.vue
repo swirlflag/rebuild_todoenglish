@@ -30,7 +30,7 @@
 
             <InputRadio     :key="idx"
                             :value="item.value"
-                            :name="name"
+                            :name="data_name"
                             v-model="localVmodel"
                             :index="idx"
             >
@@ -54,7 +54,7 @@ export default {
         modelValue : null,
 
         list : {
-            // required : true,
+            required : true,
             type: Array,
         },
         name : String,
@@ -68,12 +68,13 @@ export default {
     data() {
 
         return {
-            data_name : this.name || Math.random().toString(),
+            data_name : this.name || 'name-radio-' + Math.random().toString().split('.')[1],
 
             modelData: {
                 before  : {},
                 index   : 0,
                 value   : '',
+                allList : [],
             },
 
             localVmodel : this.modelValue || '',
@@ -89,7 +90,7 @@ export default {
             switch (this.direction) {
                 case ('col') :
                 case('vertical') :{
-                    return '';
+                    return 'col';
                 }
                 case ('row') :
                 case ('horizontal') :
@@ -139,6 +140,7 @@ export default {
             const before = {...this.modelData};
 
             delete before.before;
+            delete before.allList;
 
             let value = null;
 
@@ -150,6 +152,7 @@ export default {
                 before,
                 value,
                 index,
+                allList : this.list,
             }
 
         },
@@ -162,9 +165,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+$colGap : 5px;
+$rowGap : 10px;
 .default--radio-collection {
-    line-height: $SIZE_lineheight_high3;
     display :flex;
     flex-direction: column;
 
@@ -172,11 +175,14 @@ export default {
         flex-direction: row;
         flex-wrap: wrap;
         > .default--radio {
-            margin: 0 10px;
+            margin: $colGap $rowGap ;
         }
     }
     &.direction--col {
         flex-direction: column;
+        > .default--radio {
+            margin: $colGap ;
+        }
     }
 
 }

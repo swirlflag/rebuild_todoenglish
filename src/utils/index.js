@@ -198,3 +198,6 @@ export const randomRange = (a,b,toFixed = 0) => +(Math.min(a,b) + Math.random() 
 export const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
 export const detectLastPath = (prefixPath) => VM.$route.path.split(prefixPath)[1] || null;
+
+
+export const deepCopy = (origin) => JSON.parse(JSON.stringify(origin));

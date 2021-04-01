@@ -77,7 +77,7 @@ const data = [
     },
     {
         name : '입력/선택 라디오',
-        title : '선택도구 라디오 타입 (단일선택)',
+        title : '선택도구 라디오 타입 (다중택일)',
         text : '라디오 버튼은 최소 2개 이상의 다중 선택지 중에서 하나의 선택을 지원합니다. 1개 이상으로 선택하거나 미선택 옵션은 지원하지 않으며 미선택의 선택지를 구현시엔 "선택하지 않음" 과 같은 항목의 추가로 이루어져야 합니다.',
         props : {
             '[필수] name' : '(String)',
@@ -100,8 +100,8 @@ const data = [
     },
     {
         name : '입력/선택 라디오 컬렉션',
-        title : '선택도구 라디오 타입 컬렉션 (단일선택)',
-        text : '라디오 컬렉션은 [선택 라디오]의 확장 묶음으로 이루어진 컴포넌트이며 자체적으로 나열 방식을 가집니다. 나열 방향은 가로와 세로로 설정되어 있습니다. 기능은 [선택 라디오]와 동일하며 동시에 체크박스 묶음을 컨트롤 할 수 있습니다. change의 반환으로 단일값이 아닌 여러 정보를 가진 객체를 전달합니다.',
+        title : '선택도구 라디오 타입 컬렉션 (다중택일)',
+        text : '라디오 컬렉션은 [선택 라디오]의 묶음으로 이루어진 확장 컴포넌트이며 자체적으로 나열 규칙을 가집니다. 기능은 [선택 라디오]와 동일하며 동시에 라디오 선택 묶음을 컨트롤 하거나 change의 반환으로 묶음에 대한 전체 정보를 얻을 수 있습니다.',
         props : {
             '[필수] list ' : '[ { text : (String,Number), value : (String,Number) } ]',
             'name' : '(String)',
@@ -110,7 +110,7 @@ const data = [
             'direction' : "'row' , 'col' , 'vertical' , 'horizontal'" ,
         },
         info : {
-            '의존' : '선택 라디오',
+            '개요' : '[선택 라디오]를 확장해 제작하였습니다.',
             'TBD prop' : 'TBD value',
         },
         control : {
@@ -138,8 +138,8 @@ const data = [
         control : {
             checks : [false,false,false],
             change : (v) => { {v}
-            console.component('↓ 선택 체크박스 : @change');
-            console.log(v);
+                console.component('↓ 선택 체크박스 : @change');
+                console.log(v);
             }
         }
     },
@@ -152,23 +152,18 @@ const data = [
         },
         info : {
             'TBD prop' : 'TBD value',
+            '개요' : '[선택 체크박스]를 확장해 제작하였습니다.',
         },
         control : {
             checks : [false,false,false],
-            list : [
-                {
-                    value : 'apple',
-                    text : '애플 코리아',
-                    checked : true,
-                },
-                {
-                    value : 'google',
-                    text : '구글 코리아',
-                },
-            ],
+            list : makeArrayLength(5).map((c,i) =>  ({text : `체크박스 ${i+1}` , value : `checkbox_value_${i+1}`, checked : randomOne(true,false)})),
+            direction : randomOne('row' , 'col'),
+            directionChange : (controls) => {
+                controls.direction = controls.direction === 'row' ? 'col' : 'row';
+            },
             change : (v) => { {v}
-                console.component('↓ 선택 체크박스 컬렉션: @change');
-                console.log(v);
+                console.component('↓ 선택 체크박스 컬렉션 : @change');
+                console.log({...v});
             }
         }
     },
