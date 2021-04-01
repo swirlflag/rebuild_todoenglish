@@ -1,16 +1,38 @@
+<!--
+
+    USE PREVIEW :
+        <InputRadioCollection   v-model="myModelValue"
+                                name="myName"
+                                @change="myChange"
+                                direction="row"
+                                :list="[
+                                    {
+                                        text : 'itemText',
+                                        value : itemValue,
+                                    }
+                                ]"
+        />
+
+    METHODS :
+        ref.select(0)                   // Number : index
+        ref.select(my option')          // String : index
+
+    MEMO :
+
+-->
+
 <template>
     <div    class="default--radio-collection"
-            :class="`type--${computedDirection}`"
+            :class="`direction--${computedDirection}`"
     >
 
         <template v-for="(item,idx) in list" >
 
-            <InputRadio :key="idx"
-                        :value="item.value"
-                        v-model="data_modelValue"
-                        :name="name"
-                        @change="onChange"
-                        :index="idx"
+            <InputRadio     :key="idx"
+                            :value="item.value"
+                            :name="name"
+                            v-model="localVmodel"
+                            :index="idx"
             >
                 {{ item.text }}
             </InputRadio>
@@ -45,49 +67,84 @@ export default {
 
     data() {
 
-        console.log(this.direction);
-
         return {
             data_name : this.name || Math.random().toString(),
-            data_modelValue : this.modelValue || 'test vmodel',
 
             modelData: {
-                before : {},
-                index: 0,
-                value : '',
+                before  : {},
+                index   : 0,
+                value   : '',
             },
+
+            localVmodel : this.modelValue || '',
+
+            listValueMap : this.list.map(c => c.value),
+
+            ignoreModel : false,
+
         }
     },
     computed : {
-        computedDirection() {
-            if(this.direction === 'row' || this.direction === 'vertical'){
-                return 'row'
-            }else {
-                return 'col'
+        computedDirection () {
+            switch (this.direction) {
+                case ('col') :
+                case('vertical') :{
+                    return '';
+                }
+                case ('row') :
+                case ('horizontal') :
+                default : {
+                    return 'row';
+                }
             }
-        }
+        },
     },
     watch: {
         'modelValue'() {
-
+            this.watchModelValue();
         },
-        'data_modelValue'() {
-
+        'localVmodel'() {
+            this.watchVmodel();
         },
     },
     methods : {
-        onChange(value,index) {
-            this.recordModelData(index);
-            this.$emit('change' , this.modelData);
-            this.$emit('modelEvent' , this.modelData.value);
+        watchModelValue() {
+            if(this.localVmodel !== this.modelValue){
+                this.localVmodel = this.modelValue;
+            }
         },
-        recordModelData(index) {
-            const currentItem = this.list[index];
+        watchVmodel() {
+            if(!this.ignoreModel){
+                const index = this.listValueMap.indexOf(this.localVmodel);
+                this.selectLogic(index);
+            }
+            this.ignoreModel = false;
+        },
 
-            const before = this.modelData;
-            const { value } = currentItem;
+        select(index) {
+            this.ignoreModel = true;
+            this.selectLogic(index);
+        },
+
+        selectLogic(index) {
+            this.recordModelData(index);
+
+            this.$emit('change' , this.modelData);
+            if(index > -1 && index < this.list.length){
+                this.$emit('modelEvent' , this.modelData.value);
+            }
+        },
+
+        recordModelData(index) {
+            const before = {...this.modelData};
 
             delete before.before;
+
+            let value = null;
+
+            if(index > -1 && index < this.list.length){
+                value = this.list[index].value;
+            }
 
             this.modelData = {
                 before,
@@ -96,9 +153,10 @@ export default {
             }
 
         },
+
     },
     mounted() {
-        console.log(this.modelValue);
+
     },
 }
 </script>
@@ -110,14 +168,14 @@ export default {
     display :flex;
     flex-direction: column;
 
-    &.type--row {
+    &.direction--row {
         flex-direction: row;
         flex-wrap: wrap;
         > .default--radio {
             margin: 0 10px;
         }
     }
-    &.type--col {
+    &.direction--col {
         flex-direction: column;
     }
 

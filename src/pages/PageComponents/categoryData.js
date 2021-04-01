@@ -57,41 +57,125 @@ const data = [
 
     {
         name : '입력/선택 드롭다운',
-        title : '드롭다운 타입 선택도구 (단일선택)',
+        title : '선택도구 드롭다운 타입 (단일선택)',
         text : '드롭다운 타입 선택도구에 대한 설명 -',
+        props : {
+            '[필수] slot' : '<option value="option value"> option text </option>',
+            'name' : '(String)',
+            'placeholder' : '(String)',
+            'v-model' : '(String ,Number)',
+        },
         info : {
             'TBD prop' : 'TBD value',
         },
         control : {
-            change : (data) => {{data}},
+            change : (v) => {{v}
+                console.component('↓ 선택 드롭다운 : @change');
+                console.log({...v});
+            },
         }
     },
     {
         name : '입력/선택 라디오',
-        title : '라디오 타입 선택도구 (단일선택)',
-        text : '라디오 버튼은 최소 2개 이상의 다중 선택지 중에서 하나의 선택을 지원합니다. 1개 이상의 선택과 미선택 옵션은 지원하지 않으며 미선택의 선택지를 구현시엔 "선택하지 않음" 과 같은 항목의 추가로 이루어져야 합니다.',
+        title : '선택도구 라디오 타입 (단일선택)',
+        text : '라디오 버튼은 최소 2개 이상의 다중 선택지 중에서 하나의 선택을 지원합니다. 1개 이상으로 선택하거나 미선택 옵션은 지원하지 않으며 미선택의 선택지를 구현시엔 "선택하지 않음" 과 같은 항목의 추가로 이루어져야 합니다.',
+        props : {
+            '[필수] name' : '(String)',
+            '[필수] value' : '(String,Number)',
+            '@change' : '(Function)',
+            'v-model' : '(String,Number)',
+            'checked' : '(Boolean)',
+            'index' : '(Number)',
+        },
         info : {
             'TBD prop' : 'TBD value',
         },
         control : {
-            value : randomOne('yes' , 'no'),
+            value : randomOne('yes', 'no' , 'unmatch',),
+            change : (v) => {{v}
+                console.component('↓ 선택 라디오 : @change');
+                console.log(v);
+            },
         }
     },
     {
         name : '입력/선택 라디오 컬렉션',
-        title : '라디오 타입 선택도구 컬렉션 (단일선택)',
-        text : '-',
+        title : '선택도구 라디오 타입 컬렉션 (단일선택)',
+        text : '라디오 컬렉션은 [선택 라디오]의 확장 묶음으로 이루어진 컴포넌트이며 자체적으로 나열 방식을 가집니다. 나열 방향은 가로와 세로로 설정되어 있습니다. 기능은 [선택 라디오]와 동일하며 동시에 체크박스 묶음을 컨트롤 할 수 있습니다. change의 반환으로 단일값이 아닌 여러 정보를 가진 객체를 전달합니다.',
+        props : {
+            '[필수] list ' : '[ { text : (String,Number), value : (String,Number) } ]',
+            'name' : '(String)',
+            'v-model' : '(String,Number)',
+            '@change' : '(Function)',
+            'direction' : "'row' , 'col' , 'vertical' , 'horizontal'" ,
+        },
         info : {
-            '파생' : '선택 라디오',
+            '의존' : '선택 라디오',
+            'TBD prop' : 'TBD value',
         },
         control : {
-            list : makeArrayLength(10).map((c,i) =>  ({text : `value ${i+1}` , value : `select_value_${i+1}`})),
+            list : makeArrayLength(10).map((c,i) =>  ({text : `라디오 ${i+1}` , value : `select_value_${i+1}`})),
             direction : randomOne('row' , 'col'),
+            directionChange : (controls) => {
+                controls.direction = controls.direction === 'row' ? 'col' : 'row';
+            },
+            change : (v) => {{v}
+                console.component('↓ 선택 라디오 컬렉션 : @change');
+                console.log({...v});
+            }
+        }
+    },
+    {
+        name : '입력/선택 체크박스',
+        title : '선택도구 체크박스 타입 (다중선택)',
+        text : '체크박스 설명 - ',
+        props : {
+
+        },
+        info : {
+            'TBD prop' : 'TBD value',
+        },
+        control : {
+            checks : [false,false,false],
+            change : (v) => { {v}
+            console.component('↓ 선택 체크박스 : @change');
+            console.log(v);
+            }
+        }
+    },
+    {
+        name : '입력/선택 체크박스 컬렉션',
+        title : '선택도구 체크박스 타입 컬렉션 (다중선택)',
+        text : '체크박스 설명 - ',
+        props : {
+
+        },
+        info : {
+            'TBD prop' : 'TBD value',
+        },
+        control : {
+            checks : [false,false,false],
+            list : [
+                {
+                    value : 'apple',
+                    text : '애플 코리아',
+                    checked : true,
+                },
+                {
+                    value : 'google',
+                    text : '구글 코리아',
+                },
+            ],
+            change : (v) => { {v}
+                console.component('↓ 선택 체크박스 컬렉션: @change');
+                console.log(v);
+            }
         }
     },
 
 
 ];
+
 
 
 export default data;

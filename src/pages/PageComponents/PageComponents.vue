@@ -48,6 +48,12 @@
 
                     <div id="comp-content-wrap">
 
+
+
+
+
+
+
                     <!-- 버튼/기본 -->
                         <div v-if="renderId === '버튼/기본'" class="comp-component" >
                             <div class="comp-view">
@@ -110,11 +116,17 @@
                     <!-- //버튼/기본 -->
 
 
+
+
+
+
+
+
                     <!-- 입력/선택 드롭다운 -->
                         <div v-if="renderId === '입력/선택 드롭다운'">
                             <div class="comp-view row">
 
-                                <InputDropdown placeholder="선택해주세요"
+                                <InputDropdown  placeholder="선택해주세요"
                                                 @change="controls.change"
                                                 v-model="VMODEL_SELECTVALUE"
                                                 ref="ref_dropdown"
@@ -127,7 +139,7 @@
                                     </option>
                                 </InputDropdown>
 
-                                <InputDropdown placeholder="test placeholder"
+                                <InputDropdown  placeholder="test placeholder"
                                                 @change="controls.change"
                                                 v-model="VMODEL_SELECTVALUE"
                                                 ref="ref_dropdown"
@@ -144,16 +156,17 @@
 
                             <div class="comp-control">
                                 <div>
-                                    <button class="default-button" @click="CHANGE_VMODEL_SELECTVALUE(10)">
-                                        랜덤 셀렉트 바꿔보기 (0 ~ 9)
-                                    </button>
-                                </div>
-                                <div>
                                     셀렉트 값 : <strong>{{ VMODEL_SELECTVALUE }}</strong>
+                                    &nbsp;
+                                    <button class="default-button" @click="CHANGE_VMODEL_SELECTVALUE(6)">
+                                        무작위변경 (1~6)
+                                    </button>
                                 </div>
                             </div>
                         </div>
                 <!-- //입력/선택 드롭다운 -->
+
+
 
 
 
@@ -166,10 +179,10 @@
 
                             <div class="comp-view row">
 
-                                <InputRadio value="yes"
+                                <!-- <InputRadio value="yes"
                                             v-model="controls.value"
                                             name="input-radio"
-                                            @change="CONSOLE_EVENT"
+                                            @change="controls.change"
                                 >
                                     YES!!
                                 </InputRadio>
@@ -177,8 +190,33 @@
                                 <InputRadio value="no"
                                             v-model="controls.value"
                                             name="input-radio"
+                                            @change="controls.change"
                                 >
                                     NO..
+                                </InputRadio>
+
+                                <InputRadio value="no2"
+                                            v-model="controls.value"
+                                            name="input-radio"
+                                            @change="controls.change"
+                                >
+                                    NO2..
+                                </InputRadio> -->
+
+                                <InputRadio value="yes"
+                                            name="input-radio"
+                                            @change="controls.change"
+                                            v-model="controls.value"
+                                >
+                                    yes
+                                </InputRadio>
+
+                                <InputRadio value="no"
+                                            name="input-radio"
+                                            @change="controls.change"
+                                            v-model="controls.value"
+                                >
+                                    no
                                 </InputRadio>
 
                             </div>
@@ -195,49 +233,146 @@
                                     <label class="radio-label">
                                         <input type="radio" name="입력/선택 라디오/값" value="no" v-model="controls.value" ><span>no</span>
                                     </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="입력/선택 라디오/값" value="unmatch" v-model="controls.value" ><span>unmatch</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
                 <!-- //입력/선택 라디오 -->
 
-                <!-- 입력/선택 라디오 컬렉션 -->
-                    <div v-if="renderId === '입력/선택 라디오 컬렉션'">
-                        <div class="comp-view">
-                            <InputRadioCollection
-                                v-model="VMODEL_SELECTVALUE"
-                                name="input-radio-collection"
-                                @change="CONSOLE_EVENT"
-                                :direction="controls.direction"
-                                :list="controls.list"
-                            />
-                        </div>
-                        <div class="comp-control">
-                            <div>셀렉트 값 :  <strong> {{ VMODEL_SELECTVALUE }} </strong></div>
-                            <div>
-                                <button class="default-button" @click="CHANGE_VMODEL_SELECTVALUE(10)">
-                                    랜덤 셀렉트 바꿔보기 (0 ~ 9)
-                                </button>
+
+
+
+
+
+
+
+
+
+                    <!-- 입력/선택 라디오 컬렉션 -->
+                        <div v-if="renderId === '입력/선택 라디오 컬렉션'">
+                            <div class="comp-view">
+
+                                <!-- <InputRadioCollection -->
+                                <InputRadioCollection   v-model="VMODEL_SELECTVALUE"
+                                                        name="input-radio-collection"
+                                                        @change="controls.change"
+                                                        :direction="controls.direction"
+                                                        :list="controls.list"
+                                />
+
+                            </div>
+                            <div class="comp-control">
+                                <div>
+                                    셀렉트 값 :  <strong> {{ VMODEL_SELECTVALUE }} </strong>
+                                    &nbsp;
+                                    <button class="default-button" @click="CHANGE_VMODEL_SELECTVALUE(10)">
+                                        무작위변경 (1~10)
+                                    </button>
+                                </div>
+                                <div>
+                                    나열 방향 : {{ controls.direction === 'col' ? '세로' : '가로'}}
+                                    &nbsp;
+                                    <button class="default-button" @click="controls.directionChange(controls)">
+                                        변환
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <!-- 입력/선택 라디오 컬렉션 -->
+                    <!-- 입력/선택 라디오 컬렉션 -->
 
 
-                <!-- <div v-if="renderId === '맞는 ID'">
-                    <div class="comp-view">
-                    </div>
-                    <div class="comp-control">
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div> -->
 
+
+
+
+
+
+
+                    <!--  입력/선택 체크박스 -->
+                        <div v-if="renderId === '입력/선택 체크박스'">
+                            <div class="comp-view row">
+                                <InputCheckbox
+                                    v-model="controls.checks[0]"
+                                    @change="controls.change"
+                                    checked
+                                    text="체크박스 A"
+                                />
+                                <InputCheckbox
+                                    v-model="controls.checks[0]"
+                                    @change="controls.change"
+                                    text="체크박스 A"
+                                />
+                                <InputCheckbox
+                                    v-model="controls.checks[1]"
+                                    @change="controls.change"
+                                    text="체크박스 B"
+                                />
+                                <InputCheckbox
+                                    v-model="controls.checks[2]"
+                                    @change="controls.change"
+                                    text="체크박스 C"
+                                />
+                            </div>
+                            <div class="comp-control">
+                                <div> 체크 옵저버 : <strong>{{ controls.checks }}</strong></div>
+                                <div>
+                                    체크 값 설정해보기
+                                    &nbsp;
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" v-model="controls.checks[0]">
+                                        <span>SYNC A</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" v-model="controls.checks[1]">
+                                        <span>SYNC B</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" v-model="controls.checks[2]">
+                                        <span>SYNC C</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    <!--  입력/선택 체크박스 -->
+
+
+
+
+                        <div v-if="renderId === '입력/선택 체크박스 컬렉션'">
+                            <div class="comp-view">
+                                <InputCheckboxCollection :list="controls.list"
+                                                    
+                                />
+                            </div>
+                            <div class="comp-control">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+                        <!-- <div v-if="renderId === '맞는 ID'">
+                            <div class="comp-view">
+                            </div>
+                            <div class="comp-control">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div> -->
 
 
                         <template v-if="selectItem.name">
                             <div class="comp-infomation">
                                 <div class="comp-title">{{selectItem.title}}</div>
                                 <div class="comp-text">{{selectItem.text}}</div>
+
+                                <ul class="comp-propslist" v-if="selectItem.props">
+                                   <li v-for="([c,v],idx) in Object.entries(selectItem.props)" :key="idx">
+                                        <div class="comp-propslist-key">{{c}}</div>
+                                        <div class="comp-propslist-value">{{v}}</div>
+                                   </li>
+                                </ul>
 
                                 <ul class="comp-infovalue" v-if="selectItem.info" >
                                     <!-- <p>기본 설정 시트<p> -->
@@ -277,6 +412,8 @@ import ButtonDownload from '@/components/button/ButtonDownload.vue';
 import InputDropdown from '@/components/input/InputDropdown.vue';
 import InputRadio from '@/components/input/InputRadio.vue';
 import InputRadioCollection from '@/components/input/InputRadioCollection.vue';
+import InputCheckbox from '@/components/input/InputCheckbox.vue';
+import InputCheckboxCollection from '@/components/input/InputCheckboxCollection.vue';
 
 import TESTCOMP from './TESTCOMP.vue';
 
@@ -289,6 +426,8 @@ export default {
         InputDropdown,
         InputRadio,
         InputRadioCollection,
+        InputCheckbox,
+        InputCheckboxCollection,
 
         TESTCOMP,
     },
@@ -326,20 +465,23 @@ export default {
     },
 
     methods : {
+        TEST_ONCHANGE(e) {
+            console.log(e);
+        },
         CONSOLE_EVENT(payload) {
             {payload}
             // console.log('console evnet : ', payload);
         },
-        CHANGE_VMODEL_SELECTVALUE(limit = 10) {
+        CHANGE_VMODEL_SELECTVALUE(limit) {
+            limit === undefined && (limit = 10);
 
-            const newValue = `select_value_${Math.ceil(Math.random() * limit )}`;
+            const newValue = `select_value_${Math.ceil(Math.random() * limit)}`;
 
             if(newValue === this.VMODEL_SELECTVALUE){
-                this.CHANGE_VMODEL_SELECTVALUE();
-                return;
+                this.CHANGE_VMODEL_SELECTVALUE(limit);
+            }else {
+                this.VMODEL_SELECTVALUE = newValue;
             }
-
-            this.VMODEL_SELECTVALUE = newValue;
 
         },
 
@@ -384,11 +526,15 @@ export default {
         },
 
     },
+    created() {
+        this.CHANGE_VMODEL_SELECTVALUE(3);
+    },
 
     updated () {
     },
 
     mounted() {
+
     }
 }
 </script>

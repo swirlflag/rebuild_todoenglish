@@ -1,11 +1,26 @@
+<!--
+    USE PREVIEW :
+        <InputCheckbox      text="myText"
+                            v-model="modelValue"
+        />
+
+    METHODS :
+        ref.check();
+        ref.uncheck();
+
+    MEMO :
+        최초 mount시 checked 속성이 v-model보다 우선시 됩니다.
+        checked가 true이고 v-model이 false라면 실행시 내부 값을 true로 만들고 연동된 v-model값에도 변이를 줍니다.
+
+-->
+
 <template>
 
     <label class="default--checkbox" :class="{'st-checked' : isCheck}">
-        <input type="checkbox" v-model="isCheck" @change="onChange">
+        <input type="checkbox" v-model="isCheck">
 
-        <div class="checkbox--icon">
+        <span class="checkbox--icon"></span>
 
-        </div>
         <div class="checkbox--label">
             {{ text }}
         </div>
@@ -15,27 +30,57 @@
 
 <script>
 export default {
-    name : 'CheckboxDeafult',
+    name : 'InputCheckbox',
     props : {
-        text    : String,
-        checked : null,
+        modelValue : Boolean,
+
+        text : [String,Number],
+        checked : Boolean,
     },
     model: {
-        prop: 'checked',
-        event: 'change'
+        prop: 'modelValue',
+        event: 'modelEvent'
+    },
+    watch : {
+        'modelValue'(){
+            if(this.modelValue !== this.isCheck){
+                this.modelValue ? this.check() : this.uncheck();
+            }
+        },
+        'isCheck'() {
+            this.watchIsCheck();
+        },
     },
     components : {
     },
     data () {
+        const isCheck = (this.modelValue === undefined ? false : this.modelValue);
         return {
-            isCheck : !!this.checked || false ,
+            isCheck,
         }
     },
     methods : {
-        onChange() {
-            this.$emit('change' , this.isCheck)
+        check() {
+            this.isCheck = true;
         },
-    }
+        uncheck() {
+            this.isCheck = false;
+        },
+        watchIsCheck() {
+            this.$emit('change' , this.isCheck);
+            this.$emit('modelEvent' , this.isCheck);
+        },
+
+        detectChecked() {
+            if(this.checked){
+                this.check();
+            }
+        },
+    },
+
+    created () {
+        this.detectChecked();
+    },
 
 }
 </script>
@@ -66,11 +111,12 @@ export default {
     box-sizing: border-box;
     border: 2px solid $COLOR_linegray;
     background-color: #F5F5F7;
-    margin-right: 20px;
+    margin-right: 10px;
 
     position: relative;
     box-sizing: border-box;
     overflow: hidden;
+    display: inline-block;
     transition:  background-color 200ms $EASE_outCubic, border 200ms ease;
 
     .st-checked & {

@@ -17,9 +17,7 @@ input[type=text]{
 
 label.radio-label {
 
-    + .radio-label {
-        margin-left: 10px;
-    }
+    margin: 0 6px;
     cursor: pointer;
 
     input[type=radio] {
@@ -27,7 +25,6 @@ label.radio-label {
     }
 
     input[type=radio] + span{
-        border: 1px solid #000;
         position: relative;
         display: inline-block;
         background-color: #fff;
@@ -43,6 +40,37 @@ label.radio-label {
 
 }
 
+label.checkbox-label {
+    cursor: pointer;
+    margin: 0 6px;
+
+    input[type=checkbox] {
+        display: none;
+    }
+    input[type=checkbox] + span{
+        display: inline-flex;
+        align-items: center;
+    }
+    input[type=checkbox] + span::before{
+        content: 'o';
+        line-height: 1em;
+        color : transparent;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 14px; height: 14px;
+        background-color: #fff;
+        border: 2px solid $tempblue;
+        border-radius: 4px;
+        margin-right: 2px;
+    }
+    input[type=checkbox]:checked + span::before{
+        color: #fff;
+        background-color: tempblue_a(0.8);
+    }
+}
+
 button.default-button {
     border: 1px solid $tempblue;
     border-radius: 5px;
@@ -50,6 +78,7 @@ button.default-button {
     background-color: #fff;
     padding:2px 5px;
     color: $tempblue;
+    margin: 0 6px;
 }
 
 #mylog {
@@ -380,7 +409,8 @@ $categorypadding : 10px;
     color: $tempblue;
 
     > div {
-        display: block;
+        display: flex;
+        align-items: center;
         + div {
             margin-top: 10px;
         }
@@ -428,11 +458,11 @@ $categorypadding : 10px;
     }
 
     .comp-title {
-        font-size: 42px;
+        font-size: 30px;
         font-weight: bold;
 
         @include phone {
-            font-size: 28px;
+            font-size: 26px;
         }
     }
 
@@ -454,20 +484,18 @@ $categorypadding : 10px;
     text-align: center;
     // transform: translateY(-50%);
 }
-.comp-infovalue {
-    border: 1px solid $tempblue;
+.comp-propslist {
+    background-color: tempblue_a(0.6);
     padding: 20px;
     border-radius: 6px;
+    letter-spacing: 0.05em;
+    color: #fff;
     @include phone {
         padding: 8px;
     }
-    p {
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
+
     li {
-        letter-spacing: 0.05em;
-        border-top: 1px solid tempblue_a(0.25);
+        border-top: 1px solid rgba(255,255,255,0.5);
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -476,11 +504,54 @@ $categorypadding : 10px;
         &:nth-of-type(1) {
             border-top: none;
         }
+        @include phone {
+            flex-direction: column;
+        }
+        .comp-propslist-key {
+            padding-right: 30px;
+            box-sizing: border-box;
+            display: inline-block;
+            font-weight: 800;
+            width: 34%;
+            min-width: 34%;
+        }
+        .comp-infovalue-value{
+            width: 66%
+        }
 
         > div {
-            width: 50%;
+            @include phone {
+                width: 100%;
+                min-width: 100%;
+            }
+        }
+    }
+}
+
+.comp-infovalue {
+    border: 1px solid $tempblue;
+    padding: 20px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+    @include phone {
+        padding: 8px;
+    }
+    li {
+        border-top: 1px solid tempblue_a(0.25);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding: 3px 0 ;
+        word-break: keep-all;
+        @include phone {
+            flex-direction: column;
+        }
+        &:nth-of-type(1) {
+            border-top: none;
         }
         .comp-infovalue-key {
+            width: 34%;
+            min-width: 34%;
             padding-right: 30px;
             box-sizing: border-box;
             // min-width : 100px;
@@ -489,6 +560,14 @@ $categorypadding : 10px;
             font-weight: 800;
         }
         .comp-infovalue-value{
+            width: 66%
+        }
+
+        > div {
+            @include phone {
+                width: 100%;
+                min-width: 100%;
+            }
         }
 
     }

@@ -1,20 +1,27 @@
 <!--
 
-    <InputRadio value="inputValue"
-                v-model="modelValue"
-                name="input-radio"
-    >
-        value text
-    </InputRadio>
+    USE PREVIEW :
+        <InputRadio value="myValue"
+                    name="myName"
+                    @change="myChange"
+                    v-model="myModelValue"  ||  checked
+        >
+            myText
+        </InputRadio>
+
+    METHODS :
+        ref.check()
 
     MEMO :
-    이 컴포넌트를 단일로 구성해 묶음을 직접 구성한후 $emit('change')호출시 현재 input의 value 정보만 받을수 있습니다.
-    index, before와 같은 요소가 필요하다면 InputRadioCollection을 사용해 주세요.
+        이 컴포넌트를 단일로 구성해 묶음을 직접 구성한후 $emit('change')호출시 현재 input의 value 정보만 받을수 있습니다.
+        나열한 라디오들의 index, before와 같은 요소가 필요하다면 InputRadioCollection을 사용해 주세요.
 
 -->
 <template>
-    <label class="default--radio" :class="{'st-checked' : isSelect}">
-        <input type="radio" v-model="value" :value="data_value" :name="name" @change="onChange" ref="ref_radio">
+    <label  class="default--radio"
+            :class="{'st-checked' : isChecked}"
+    >
+        <input type="radio" :value="value" :name="name" ref="ref_radio" @change="onChange" :data-checked="isChecked" @click="onClick">
         <span class="radio--icon"></span>
 
         <div class="radio--label">
@@ -40,6 +47,7 @@ export default {
         },
 
         checked : Boolean,
+
         index : Number,
     },
 
@@ -50,55 +58,114 @@ export default {
 
     data() {
         return {
-            data_value  : this.value,
-            isSelect : false,
+            isChecked : false,
+            syncObserver : null,
+
+            ignoreModel : false,
+            ignoreChange : false,
         }
     },
     watch : {
         'modelValue'(){
-            console.log(this.modelValue);
-            // console.log(this.ignoreModel);
-            // if(!this.ignoreModel){
-            //     this.changeCheck();
-            //     // this.select(this.modelValue);
-            // }
-            // this.ignoreModel = false;
-        }
+            this.watchModelValue();
+        },
+        'checked'() {
+            this.watchChecked();
+        },
+
+    },
+    computed : {
+
     },
     methods : {
-        onChange(){
-            console.log('on change');
-            // console.log(1);
-            // this.changeCheck();
-        },
-        changeCheck() {
-            this.isSelect = this.data_value === this.modelValue;
-            // this.eventEmiting();
-        },
-        eventEmiting() {
-            this.$emit('change' , this.data_value , this.index);
-            // this.$emit('modelEvent' , this.data_value);
 
-            if((this.modelValue !== this.data_value)){
-                this.ignoreModel = true;
-                this.$emit('modelEvent' , this.data_value)
+        check() {
+            this.detectSiblingBeforeUnselect();
+            this.isChecked = true;
+            this.emitEvent();
+        },
+        uncheck() {
+            this.isChecked = false;
+        },
+
+        watchModelValue() {
+            if(!this.ignoreModel){
+                if(this.value === this.modelValue){
+                    this.check();
+                }else {
+                    this.uncheck();
+                }
+            }
+            this.ignoreModel = false;
+        },
+
+        watchChecked() {
+            if(this.checked){
+                this.check();
             }
         },
-    },
-    mounted() {
-        // console.log(this.modelValue , this.data_value);
 
-        if(this.checked || this.modelValue === this.data_value){
-            // this.$refs.ref_radio.checked = true;
-            this.isSelect = true;
+        onClick() {
+            if(this.isChecked){
+                return
+            }
+
+            this.check();
+            this.ignoreChange = true;
+        },
+
+        onChange() {
+            if(this.ignoreChange){
+                this.ignoreChange = false;
+                return;
+            }
+
+            this.check();
+        },
+
+        emitEvent() {
+            this.ignoreModel = true;
+            this.$emit('change' , this.value , this.index);
+            this.$emit('modelEvent' , this.value);
+        },
+
+    // 같은 name으로 묶여있고, 직전에 선택되어있던 항목의 data-checked를 해제해주는 기능
+        detectSiblingBeforeUnselect() {
+            const before = document.querySelector(`input[type=radio][name=${this.name}][data-checked=true]`);
+            if(before){
+                before.dataset.checked = false;
+            }
+        },
+
+    // data-checked 가 false가 될때 반응해 컴포넌트 내의 isChecked를 동기화 시켜주는 옵저버
+        bindSyncObserver() {
+            this.$refs.ref_radio.dataset.checked = this.isChecked;
+
+            this.syncObserver = new MutationObserver((mutations) => {
+                mutations.forEach(({ target, attributeName }) => {
+                    if(attributeName === 'data-checked'){
+                        this.isChecked = target.dataset.checked === 'true';
+                    }
+                });
+            });
+
+            this.syncObserver.observe(this.$refs.ref_radio, { attributes: true });
+        },
+
+    },
+
+    mounted() {
+
+        if(this.checked || this.modelValue === this.value){
+            // this.ignoreModel = true;
+            this.isChecked = true;
         }
 
-        // if(this.$refs.ref_radio.checked){
-        //     this.isSelect = true;
-        // }
+        this.bindSyncObserver();
 
-        console.log(this.isSelect);
-
+    },
+    beforeDestroy() {
+        this.syncObserver.disconnect();
     }
 }
 
@@ -113,12 +180,7 @@ export default {
     transition: color 200ms ease;
 
     input {
-        // display: none;
-        -webkit-appearance : unset !important;
-        appearance:  unset !important;
-        width: 50px; height: 50px;
-        background : unset !important;
-        opacity: 1;
+        display: none;
     }
 
     @include hover {

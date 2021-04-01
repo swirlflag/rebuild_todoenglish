@@ -1,16 +1,27 @@
 <!--
-    <InputDropdown      placeholder="옵션을 골라주세요"
-                        @change="changeFunction"
-                        v-model="modelValue"  (options의 selected보다 우선)
-    >
-        <option     v-for="(item,idx) in list"
-                    :key="idx"
-                    :value="item"
-                    :selected="idx === myIndex"  (v-model 우선)
+    USE PREVIEW
+        <InputDropdown      placeholder="옵션을 골라주세요"
+                            @change="changeFunction"
+                            v-model="modelValue"
         >
-            {{ item }}
-        </option>
-    </InputDropdown>
+            <option     v-for="(item,idx) in list"
+                        :key="idx"
+                        :value="item"
+                        :selected="idx === myIndex"
+            >
+                {{ item }}
+            </option>
+        </InputDropdown>
+
+    METHODS :
+        ref.open()
+        ref.close()
+        ref.select(0)               // Number : index
+        ref.select('my option')     // String : value
+
+    MEMO :
+        최초 mount시 컴포넌트의 v-model이 option태그의 selected보다 우선시 됩니다.
+
 -->
 
 <template>
@@ -193,7 +204,7 @@ export default {
                 if(this.$refs.ref_select.selectedIndex !== refineIndex){
                     this.$refs.ref_select.selectedIndex = refineIndex;
                 }
-                this.eventEmiting();
+                this.emitEvent();
             }
 
         },
@@ -241,14 +252,21 @@ export default {
 
         },
 
-        eventEmiting() {
-            this.$emit('change' , this.modelData);
+        // emitEvent() {
+        //     this.$emit('change' , this.modelData);
 
-            if((this.modelData.value !== this.modelValue)){
-                this.ignoreModel = true;
-                this.$emit('modelEvent' , this.modelData.value)
-            }
+        //     if((this.modelData.value !== this.modelValue)){
+        //         this.ignoreModel = true;
+        //         this.$emit('modelEvent' , this.modelData.value)
+        //     }
+        // },
+
+        emitEvent() {
+            this.ignoreModel = true;
+            this.$emit('change' , this.modelData);
+            this.$emit('modelEvent' , this.modelData.value)
         },
+
 
     // 현재 셀렉트 된 것 직접 파악후 컴포넌트에 저장 (마운트시 사용) (이 변경으로 실제 표현화면 적용)
         detectModelData() {
