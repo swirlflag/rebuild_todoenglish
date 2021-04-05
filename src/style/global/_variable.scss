@@ -54,13 +54,13 @@ $SIZE_letterspacing_shorter     : -0.09em;
 $SIZE_PC_footerMargin : 160px;
 
 $COLOR_navy_1           : rgba(52,45,81,1);
-@function COLOR_navy_1($a) {
-    @return rgba(52,45,81, $a);
-}
+@function COLOR_navy_1($a) {@return rgba(52,45,81, $a);}
 $COLOR_navy_2           : rgba(55,44,119,1);
 $COLOR_violet_1         : rgba(152,87,219,1);
 $COLOR_mint_1           : rgba(21,171,153,1);
+@function COLOR_mint_1($a) {@return rgba(21,171,153, $a);}
 $COLOR_pink_1           : rgba(247,65,156,1);
+@function COLOR_pink_1($a) {@return rgba(247,65,156, $a);}
 $COLOR_orange_1         : rgba(229,128,27,1);
 $COLOR_blue_1           : rgba(29,139,207,1);
 

@@ -2,7 +2,7 @@
     <div class="auth__find-password">
 
         <form id="form-find-password" @submit.prevent>
-            <InputDefault   placeholder="이메일"
+            <InputText   placeholder="이메일"
                             id="form-find-password__id"
                             ref="ref_id"
                             type="email"
@@ -62,7 +62,7 @@ const API_trySignup = (id) => {
 import { randomOne }  from '@/utils';
 import AlertFlashText       from '@/components/layout/AlertFlashText.vue';
 import ButtonDefault        from '@/components/button/ButtonDefault.vue';
-import InputDefault         from '@/components/input/InputDefault.vue';
+import InputText         from '@/components/input/InputText.vue';
 import SpinnerColordotsWave from '@/components/spinner/SpinnerColordotsWave.vue';
 
 
@@ -70,7 +70,7 @@ export default {
     components : {
         AlertFlashText,
         ButtonDefault ,
-        InputDefault,
+        InputText,
         SpinnerColordotsWave,
     },
     data() {

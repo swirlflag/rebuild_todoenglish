@@ -168,9 +168,52 @@ const data = [
         }
     },
 
+    {
+        name : '입력/입력 텍스트',
+        title : '입력 텍스트 ',
+        text : '입력 테스트에 대한 설명 ',
+        // props : {
+
+        // },
+        info : {
+            'TBD prop' : 'TBD value',
+            // '개요' : '[선택 체크박스]를 확장해 제작하였습니다.',
+        },
+        control : {
+            value: `random_start_${Math.ceil(Math.random()*100)}`,
+            change : (v) => { {v}
+                console.component('↓ 입력 텍스트 : @change');
+                console.log({...v});
+            }
+        }
+    },
+
+    {
+        name : '입력/입력 이메일',
+        title : '입력 이메일 ',
+        text : '입력 이메일에 대한 설명 ',
+        // props : {
+
+        // },
+        info : {
+            'TBD prop' : 'TBD value',
+            // '개요' : '[선택 체크박스]를 확장해 제작하였습니다.',
+        },
+        control : {
+            value: `mail@naver.com`,
+            change : (v) => { {v}
+                console.component('↓ 입력 이메일 : @change');
+                console.log({...v});
+            }
+        }
+    },
 
 ];
 
 
+data.map(c => {
+    c.info && (c.info = {});
+    c.props && (c.props = {});
+})
 
 export default data;

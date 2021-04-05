@@ -131,15 +131,18 @@ export default {
         },
 
         modifyTarget(index, willCheck) {
+
+
+            console.log('modify');
             if(index === undefined){
                 return
             }
 
-            const currentCheck = this.renderList[index].checked;
+            // const currentCheck = this.renderList[index].checked;
 
-            if(currentCheck === willCheck) {
-                return;
-            }
+            // if(currentCheck === willCheck) {
+            //     return;
+            // }
 
             this.renderList[index].checked = willCheck;
 

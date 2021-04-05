@@ -1,6 +1,6 @@
 <template>
     <div class="auth__signout-success">
-        <p>임시로만든~ 로그아웃 완료화면~언제다만드냐..</p>
+        <p>로그아웃 완료화면 --</p>
 
         <ButtonDefault @click="closeAuth">
             닫으세용~

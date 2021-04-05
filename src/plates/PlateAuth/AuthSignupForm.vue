@@ -4,7 +4,7 @@
 
         <form id="form-signup" @submit.prevent>
 
-            <InputDefault   type="email"
+            <InputText   type="email"
                             placeholder="이메일"
                             id="form-signup__id"
                             ref="ref_id"
@@ -13,7 +13,7 @@
                             @change="onInputEmail"
             />
 
-            <InputDefault   type="password"
+            <InputText   type="password"
                             placeholder="비밀번호"
                             id="form-signup__password"
                             ref="ref_password"
@@ -22,7 +22,7 @@
                             @change="onInputPassword"
             />
 
-            <InputDefault   type="password"
+            <InputText   type="password"
                             placeholder="비밀번호 확인"
                             id="form-signup__password-match"
                             ref="ref_passwordMatch"
@@ -81,7 +81,7 @@ const API_trySignup = (signData = {id: '' , password : ''}) => {
 }
 {API_trySignup}
 import { randomOne} from '@/utils';
-import InputDefault         from '@/components/input/InputDefault.vue';
+import InputText         from '@/components/input/InputText.vue';
 import ButtonDefault        from '@/components/button/ButtonDefault.vue';
 import SpinnerColordotsWave from '@/components/spinner/SpinnerColordotsWave.vue';
 import AlertFlashText       from '@/components/layout/AlertFlashText.vue';
@@ -89,7 +89,7 @@ import AlertFlashText       from '@/components/layout/AlertFlashText.vue';
 export default {
     name: 'AuthSignup',
     components : {
-        InputDefault ,
+        InputText ,
         ButtonDefault ,
         SpinnerColordotsWave ,
         AlertFlashText

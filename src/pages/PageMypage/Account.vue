@@ -140,7 +140,7 @@
 
                             <form class="account__coupon__form" @submit.prevent="tryRegisterCoupon">
                                 <div class="account__coupon__input">
-                                    <InputDefault placeholder="플레이스홀더체크"/>
+                                    <InputText placeholder="플레이스홀더체크"/>
                                 </div>
                                 <div class="account__coupon__submit">
                                     <ButtonDefault
@@ -218,13 +218,13 @@
 </template>
 
 <script>
-import InputDefault     from '@/components/input/InputDefault.vue';
+import InputText     from '@/components/input/InputText.vue';
 import ButtonDefault    from '@/components/button/ButtonDefault.vue';
 
 export default {
     name : 'mypageStudyInfo',
     components : {
-        InputDefault,
+        InputText,
         ButtonDefault,
     },
     methods : {

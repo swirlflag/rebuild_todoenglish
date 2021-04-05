@@ -373,6 +373,44 @@
                             </div>
                         </div>
 
+
+                        <div v-if="renderId === '입력/입력 텍스트'">
+                            <div class="comp-view">
+                                <InputText      v-model="controls.value"
+                                                placeholder="v-model 방식"
+                                                @change="controls.change"
+                                                style="max-width: 500px"
+                                />
+                                <br>
+                                <!-- <InputText      :value="controls.text"
+                                                placeholder=":value 방식"
+                                                @change="controls.change"
+                                                style="max-width: 500px"
+                                /> -->
+                            </div>
+                            <div class="comp-control">
+                                <div>입력 값 : <strong>{{controls.value}}</strong></div>
+                                <div><input type="text" v-model="controls.value" value=""></div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div v-if="renderId === '입력/입력 이메일'">
+                            <div class="comp-view">
+                                <InputTextEmail :value="controls.value"
+                                                placeholder="v-model 방식"
+                                                @change="controls.change"
+                                />
+                                <br>
+                            </div>
+                            <div class="comp-control">
+                                <div>입력 값 : <strong>{{controls.value}}</strong></div>
+                                <div><input type="text" v-model="controls.value" value=""></div>
+                            </div>
+                        </div>
+
                         <!-- <div v-if="renderId === '맞는 ID'">
                             <div class="comp-view">
                             </div>
@@ -435,6 +473,8 @@ import InputRadio from '@/components/input/InputRadio.vue';
 import InputRadioCollection from '@/components/input/InputRadioCollection.vue';
 import InputCheckbox from '@/components/input/InputCheckbox.vue';
 import InputCheckboxCollection from '@/components/input/InputCheckboxCollection.vue';
+import InputText from '@/components/input/InputText.vue';
+import InputTextEmail from '@/components/input/InputTextEmail.vue';
 
 import TESTCOMP from './TESTCOMP.vue';
 
@@ -449,6 +489,8 @@ export default {
         InputRadioCollection,
         InputCheckbox,
         InputCheckboxCollection,
+        InputText,
+        InputTextEmail,
 
         TESTCOMP,
     },

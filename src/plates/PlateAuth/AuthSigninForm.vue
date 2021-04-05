@@ -4,7 +4,7 @@
 
         <form id="form-signin" ref="ref_form" @submit.prevent>
 
-            <InputDefault   type="email"
+            <InputText   type="email"
                             placeholder="이메일"
                             id="form-signin__id"
                             ref="ref_id"
@@ -13,7 +13,7 @@
                             @change="onInputEmail"
             />
 
-            <InputDefault   type="password"
+            <InputText   type="password"
                             placeholder="비밀번호"
                             id="form-signin__password"
                             ref="ref_password"
@@ -100,7 +100,7 @@ const API_tryLogin = (signData = {emailId: '' , password : ''}) => {
 }
 
 import { randomOne} from '@/utils';
-import InputDefault             from '@/components/input/InputDefault.vue';
+import InputText             from '@/components/input/InputText.vue';
 import ButtonDefault            from '@/components/button/ButtonDefault.vue';
 import SpinnerColordotsWave     from '@/components/spinner/SpinnerColordotsWave.vue';
 import AlertFlashText           from '@/components/layout/AlertFlashText.vue';
@@ -111,7 +111,7 @@ export default {
         nowPhase : String,
     },
     components : {
-        InputDefault ,
+        InputText ,
         ButtonDefault ,
         SpinnerColordotsWave,
         AlertFlashText,
@@ -160,9 +160,10 @@ export default {
 
     },
     methods : {
-        focusTarget(target) {
-            if(this.$store.state.is_touchDevice){ return }
-            target.focus();
+        focusTarget(target) { {target}
+            // if(this.$store.state.is_touchDevice){ return }
+            // // console.log(target);
+            // target && target.focus();
         },
         focusEmail() {
             this.focusTarget(this.$refs.ref_id.$refs.ref_input);
