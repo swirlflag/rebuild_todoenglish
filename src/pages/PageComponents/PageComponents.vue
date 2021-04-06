@@ -164,7 +164,6 @@
                                 <InputDropdown  placeholder="선택해주세요"
                                                 @change="controls.onChange"
                                                 v-model="VMODEL_SELECTVALUE"
-                                                ref="ref_dropdown"
                                 >
                                     <option     v-for="(item,idx) in 4"
                                                 :key="idx"
@@ -177,7 +176,6 @@
                                 <InputDropdown  placeholder="test placeholder"
                                                 @change="controls.onChange"
                                                 v-model="VMODEL_SELECTVALUE"
-                                                ref="ref_dropdown"
                                 >
                                     <option     v-for="(item,idx) in 40"
                                                 :key="idx"
@@ -309,7 +307,7 @@
                                 <div>
                                     나열 방향 : {{ controls.direction === 'col' ? '세로' : '가로'}}
                                     &nbsp;
-                                    <button class="default-button" @click="controls.directionChange(controls)">
+                                    <button class="default-button" @click="controls.direction = controls.direction === 'row' ? 'col' : 'row'">
                                         변환
                                     </button>
                                 </div>
@@ -404,7 +402,7 @@
                                 <div>
                                     나열 방향 : {{ controls.direction === 'col' ? '세로' : '가로'}}
                                     &nbsp;
-                                    <button class="default-button" @click="controls.directionChange(controls)">
+                                    <button class="default-button" @click="controls.direction = controls.direction === 'row' ? 'col' : 'row'">
                                         변환
                                     </button>
                                 </div>

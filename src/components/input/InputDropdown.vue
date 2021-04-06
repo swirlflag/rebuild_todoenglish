@@ -145,26 +145,42 @@ export default {
         },
     },
     watch : {
-    // modelEvent 바인딩 값 (v-model 값 변경으로 인한 감지)
         'modelValue'(){
+            this.watchModelValue();
+        },
+        'isOpen'() {
+            this.watchIsOpen();
+        },
+        'modelData'() {
+            this.watchModelData();
+        },
+    },
+    methods : {
+        watchModelValue(){
             if(!this.ignoreModel){
                 this.select(this.modelValue);
             }
             this.ignoreModel = false;
         },
-
-        'isOpen'(now) {
+        watchIsOpen() {
             this.tl.pause();
             this.tl.clear();
-            if(now){
+            if(this.isOpen){
                 this.openAction();
             }else {
                 this.closeAction();
             }
             this.tl.play();
-        }
-    },
-    methods : {
+        },
+        watchModelData() {
+            if(this.modelData.index > -1){
+                this.$emit('change' , this.modelData);
+                if(this.modelData.value !== this.modelValue){
+                    this.ignoreModel = true;
+                    this.$emit('modelEvent' , this.modelData.value)
+                }
+            }
+        },
 
     // isOpen 변경자
         open() { this.isOpen = true; },
@@ -204,7 +220,6 @@ export default {
                 if(this.$refs.ref_select.selectedIndex !== refineIndex){
                     this.$refs.ref_select.selectedIndex = refineIndex;
                 }
-                this.emitEvent();
             }
 
         },
@@ -234,7 +249,6 @@ export default {
 
     // 인자로 현재 셀렉트 된 것 정리해서 컴포넌트 데이터에 저장 . (이 변경으로 실제 표현화면 적용)
         recordModelData(index) {
-
             const usePlaceholder    = !!this.placeholder;
             const validRange        = index > (usePlaceholder ? 0 : -1) && index < this.allData.length;
 
@@ -242,29 +256,18 @@ export default {
             const el_option         =   validRange ? this.el_options[index] : null;
             const value             =   validRange ? data.value             : null;
             const html              =   validRange ? data.html              : null;
-            const before            =   {...this.modelData};
 
+            const before            =   {...this.modelData};
             delete before.before;
 
-            this.modelData = { el_option , value ,html, index , before };
+            const recordModelData = {
+                el_option, value, html , before ,index
+            };
+
+            this.modelData = recordModelData;
 
             this.isShowPlaceholder = !validRange;
 
-        },
-
-        // emitEvent() {
-        //     this.$emit('change' , this.modelData);
-
-        //     if((this.modelData.value !== this.modelValue)){
-        //         this.ignoreModel = true;
-        //         this.$emit('modelEvent' , this.modelData.value)
-        //     }
-        // },
-
-        emitEvent() {
-            this.ignoreModel = true;
-            this.$emit('change' , this.modelData);
-            this.$emit('modelEvent' , this.modelData.value)
         },
 
 

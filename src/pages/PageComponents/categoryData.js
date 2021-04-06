@@ -92,7 +92,7 @@ const data = [
         },
         control : {
             onChange : (v) => {{v}
-                console.component('↓ 선택 드롭다운 : @change');
+                // console.component('↓ 선택 드롭다운 : @change');
                 console.log({...v});
             },
         }
@@ -138,9 +138,6 @@ const data = [
         control : {
             list : makeArrayLength(10).map((c,i) =>  ({text : `라디오 ${i+1}` , value : `select_value_${i+1}`})),
             direction : randomOne('row' , 'col'),
-            directiononChange : (controls) => {
-                controls.direction = controls.direction === 'row' ? 'col' : 'row';
-            },
             onChange : (v) => {{v}
                 console.component('↓ 선택 라디오 컬렉션 : @change');
                 console.log({...v});
