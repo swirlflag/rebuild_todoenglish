@@ -197,6 +197,50 @@ export const randomRange = (a,b,toFixed = 0) => +(Math.min(a,b) + Math.random() 
 
 export const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
+export const validatePassword = (password) => {
+
+    let result = {valid : false , errorState : null};
+
+    const minLength = 6;
+    const maxLength = 20;
+
+    const engRegExp = /[A-Za-z]/;
+    const numRegExp = /[0-9]/;
+    const spaceRegExp = /\s/g;
+
+// 1: 비밀번호가 6자 이상 20자 이하가 아닐때
+    if(password.length < minLength || password.length > maxLength){
+        result.errorState = 1;
+        return result;
+    }
+
+// 2: 영문, 숫자가 없을때
+    if(!engRegExp.test(password) || !numRegExp.test(password)){
+        result.errorState = 2;
+        return result;
+    }
+
+// 3 : 공백 등 허용 가능한 문자셋을 이탈할떄
+    if(spaceRegExp.test(password)){
+        result.errorState = 3;
+        return result;
+    }
+    for (let i = 0; i < password.length; ++i) {
+        const code = password.charCodeAt(i);
+        if (code < 32 || code > 255) {
+            result.errorState = 3;
+            return result;
+        }
+    }
+
+    result.valid = true;
+
+    return result;
+
+};
+
+
+
 export const detectLastPath = (prefixPath) => VM.$route.path.split(prefixPath)[1] || null;
 
 

@@ -747,7 +747,7 @@ export const authStore = {
 <style lang="scss">
 .auth__content .auth__contain,
 .auth__content .button--default,
-.auth__content .input--default {
+.auth__content .input--text {
     max-width : 360px;
     position: relative;
     width: 100%;

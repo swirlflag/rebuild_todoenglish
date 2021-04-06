@@ -84,7 +84,21 @@
                                 </div>
                             </div>
                         </div>
+                    <!-- 버튼/기본 -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- 버튼/다운로드 -->
                         <div v-if="renderId === '버튼/다운로드'" class="comp-component" >
                             <div class="comp-view">
                                 <ButtonDownload :type="controls.type" :theme="controls.theme"/>
@@ -113,7 +127,28 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- //버튼/기본 -->
+                    <!-- 버튼/다운로드 -->
+
+
+
+
+
+
+
+
+
+                    <!-- 버튼/일반 링크 -->
+                        <div v-if="renderId === '버튼/일반 링크'" class="comp-component" >
+                            <div class="comp-view">
+                                <ButtonUnderMask :text="'hi..'"/>
+                            </div>
+                            <div class="comp-control">
+                                <div>dma</div>
+                            </div>
+                        </div>
+                    <!-- 버튼/일반 링크 -->
+
+
 
 
 
@@ -127,7 +162,7 @@
                             <div class="comp-view row">
 
                                 <InputDropdown  placeholder="선택해주세요"
-                                                @change="controls.change"
+                                                @change="controls.onChange"
                                                 v-model="VMODEL_SELECTVALUE"
                                                 ref="ref_dropdown"
                                 >
@@ -140,7 +175,7 @@
                                 </InputDropdown>
 
                                 <InputDropdown  placeholder="test placeholder"
-                                                @change="controls.change"
+                                                @change="controls.onChange"
                                                 v-model="VMODEL_SELECTVALUE"
                                                 ref="ref_dropdown"
                                 >
@@ -156,7 +191,7 @@
 
                             <div class="comp-control">
                                 <div>
-                                    셀렉트 값 : <strong>{{ VMODEL_SELECTVALUE }}</strong>
+                                    연결 값 : <strong>{{ VMODEL_SELECTVALUE }}</strong>
                                     &nbsp;
                                     <button class="default-button" @click="CHANGE_VMODEL_SELECTVALUE(6)">
                                         무작위변경 (1~6)
@@ -182,7 +217,7 @@
                                 <!-- <InputRadio value="yes"
                                             v-model="controls.value"
                                             name="input-radio"
-                                            @change="controls.change"
+                                            @change="controls.onChange"
                                 >
                                     YES!!
                                 </InputRadio>
@@ -190,7 +225,7 @@
                                 <InputRadio value="no"
                                             v-model="controls.value"
                                             name="input-radio"
-                                            @change="controls.change"
+                                            @change="controls.onChange"
                                 >
                                     NO..
                                 </InputRadio>
@@ -198,14 +233,14 @@
                                 <InputRadio value="no2"
                                             v-model="controls.value"
                                             name="input-radio"
-                                            @change="controls.change"
+                                            @change="controls.onChange"
                                 >
                                     NO2..
                                 </InputRadio> -->
 
                                 <InputRadio value="yes"
                                             name="input-radio"
-                                            @change="controls.change"
+                                            @change="controls.onChange"
                                             v-model="controls.value"
                                 >
                                     yes
@@ -213,7 +248,7 @@
 
                                 <InputRadio value="no"
                                             name="input-radio"
-                                            @change="controls.change"
+                                            @change="controls.onChange"
                                             v-model="controls.value"
                                 >
                                     no
@@ -223,10 +258,10 @@
 
                             <div class="comp-control">
                                 <div>
-                                   셀렉트 값 : <strong> {{ controls.value }} </strong>
+                                   연결 값 : <strong> {{ controls.value }} </strong>
                                 </div>
                                 <div>
-                                    셀렉트 값 설정해보기 :
+                                    연결 값 설정해보기 :
                                     <label class="radio-label">
                                         <input type="radio" name="입력/선택 라디오/값" value="yes" v-model="controls.value" ><span>yes</span>
                                     </label>
@@ -257,7 +292,7 @@
                                 <!-- <InputRadioCollection -->
                                 <InputRadioCollection   v-model="VMODEL_SELECTVALUE"
                                                         name="input-radio-collection"
-                                                        @change="controls.change"
+                                                        @change="controls.onChange"
                                                         :direction="controls.direction"
                                                         :list="controls.list"
                                 />
@@ -265,7 +300,7 @@
                             </div>
                             <div class="comp-control">
                                 <div>
-                                    셀렉트 값 :  <strong> {{ VMODEL_SELECTVALUE }} </strong>
+                                    연결 값 :  <strong> {{ VMODEL_SELECTVALUE }} </strong>
                                     &nbsp;
                                     <button class="default-button" @click="CHANGE_VMODEL_SELECTVALUE(10)">
                                         무작위변경 (1~10)
@@ -295,23 +330,23 @@
                             <div class="comp-view row">
                                 <InputCheckbox
                                     v-model="controls.checks[0]"
-                                    @change="controls.change"
+                                    @change="controls.onChange"
                                     checked
                                     text="체크박스 A"
                                 />
                                 <InputCheckbox
                                     v-model="controls.checks[0]"
-                                    @change="controls.change"
+                                    @change="controls.onChange"
                                     text="체크박스 A"
                                 />
                                 <InputCheckbox
                                     v-model="controls.checks[1]"
-                                    @change="controls.change"
+                                    @change="controls.onChange"
                                     text="체크박스 B"
                                 />
                                 <InputCheckbox
                                     v-model="controls.checks[2]"
-                                    @change="controls.change"
+                                    @change="controls.onChange"
                                     text="체크박스 C"
                                 />
                             </div>
@@ -342,10 +377,13 @@
 
 
 
+
+
+                    <!--  입력/선택 체크박스 컬렉션 -->
                         <div v-if="renderId === '입력/선택 체크박스 컬렉션'">
                             <div class="comp-view">
                                 <InputCheckboxCollection    v-model="controls.list"
-                                                            @change="controls.change"
+                                                            @change="controls.onChange"
                                                             :direction="controls.direction"
                                                             name="input-checkbox-collection"
 
@@ -372,44 +410,184 @@
                                 </div>
                             </div>
                         </div>
+                    <!--  입력/선택 체크박스 컬렉션 -->
 
 
+
+
+
+
+                    <!--  입력/입력 텍스트 -->
                         <div v-if="renderId === '입력/입력 텍스트'">
                             <div class="comp-view">
-                                <InputText      v-model="controls.value"
-                                                placeholder="v-model 방식"
-                                                @change="controls.change"
-                                                style="max-width: 500px"
+                                <InputText      style="max-width: 500px"
+                                                placeholder="텍스트 - v-model 방식"
+                                                v-model="controls.value"
+                                                :mark="controls.mark"
+                                                :focus="controls.focus"
+                                                @change="controls.onChange"
+                                                @focus="() => {
+                                                    controls.mark = false;
+                                                    controls.onFocus();
+                                                }"
+                                                @blur="() => {
+                                                    controls.focus = false;
+                                                    controls.onBlur();
+                                                }"
                                 />
                                 <br>
-                                <!-- <InputText      :value="controls.text"
-                                                placeholder=":value 방식"
-                                                @change="controls.change"
+                                <InputText      placeholder="텍스트 - :value 방식"
                                                 style="max-width: 500px"
-                                /> -->
+                                                :value="controls.value"
+                                                @change="controls.onChange"
+                                                @focus="controls.onFocus"
+                                                @blur="controls.onBlur"
+                                />
                             </div>
                             <div class="comp-control">
-                                <div>입력 값 : <strong>{{controls.value}}</strong></div>
-                                <div><input type="text" v-model="controls.value" value=""></div>
+                                <div>
+                                    연결 값 : <strong>{{controls.value}}</strong>
+                                </div>
+                                <div>
+                                    <input type="text" v-model="controls.value" value="">
+                                </div>
+                                <div>
+                                    1번 mark : <strong>{{controls.mark}}</strong>
+                                    <button class="default-button" @click="controls.mark = !controls.mark" v-if="!controls.mark">전환</button>
+                                </div>
+                                <div>
+                                    1번 focus : <strong>{{controls.focus}}</strong>
+                                    <button class="default-button" @click="controls.focus = !controls.focus" v-if="!controls.focus">전환</button>
+                                </div>
                             </div>
                         </div>
+                    <!--  입력/입력 텍스트 -->
 
 
 
 
+
+
+
+                    <!--  입력/입력 이메일 -->
                         <div v-if="renderId === '입력/입력 이메일'">
                             <div class="comp-view">
-                                <InputTextEmail :value="controls.value"
-                                                placeholder="v-model 방식"
-                                                @change="controls.change"
+                                <InputTextEmail style="max-width: 500px"
+                                                placeholder="이메일 - v-model 방식"
+                                                v-model="controls.value"
+                                                :mark="controls.mark"
+                                                :focus="controls.focus"
+
+                                                @change="(payload) => {
+                                                    controls.onChange(payload);
+                                                    controls.valid = payload.valid;
+                                                }"
+                                                @focus="() => {
+                                                    controls.mark = false;
+                                                    controls.onFocus();
+                                                }"
+                                                @blur="() => {
+                                                    controls.focus = false;
+                                                    controls.onBlur();
+                                                }"
                                 />
                                 <br>
+                                <InputTextEmail style="max-width: 500px"
+                                                placeholder="이메일 - :value 방식"
+                                                :value="controls.value"
+                                                @change="controls.onChange"
+                                                @focus="controls.onFocus"
+                                                @blur="controls.onBlur"
+                                />
                             </div>
                             <div class="comp-control">
-                                <div>입력 값 : <strong>{{controls.value}}</strong></div>
+                                <div>연결 값 : <strong>{{controls.value}}</strong></div>
                                 <div><input type="text" v-model="controls.value" value=""></div>
+                                <div>이메일 형식 검증 : {{ controls.valid }}</div>
+                                <div>
+                                    1번 mark : <strong>{{controls.mark}}</strong>
+                                    <button class="default-button" @click="controls.mark = !controls.mark" v-if="!controls.mark">전환</button>
+                                </div>
+                                <div>
+                                    1번 focus : <strong>{{controls.focus}}</strong>
+                                    <button class="default-button" @click="controls.focus = !controls.focus" v-if="!controls.focus">전환</button>
+                                </div>
                             </div>
                         </div>
+                    <!--  입력/입력 이메일 -->
+
+
+
+
+
+
+
+                    <!--  입력/입력 비밀번호 -->
+                        <div v-if="renderId === '입력/입력 비밀번호'">
+                            <div class="comp-view">
+                                <InputTextPassword  :value="controls.value"
+                                                    placeholder="비밀번호 - v-model 방식"
+                                                    style="max-width:500px"
+                                                    :mark="controls.mark"
+                                                    :focus="controls.focus"
+                                                    @change="(v) => {
+                                                        controls.valid = v.valid;
+                                                        controls.error = v.errorState;
+                                                        controls.onChange(v);
+                                                    }"
+                                                    @focus="() => {
+                                                        controls.mark = false;
+                                                        controls.onFocus();
+                                                    }"
+                                                    @blur="() => {
+                                                        controls.focus = false;
+                                                        controls.onBlur();
+                                                    }"
+
+                                />
+                                <br>
+                                <InputTextPassword  :value="controls.value"
+                                                    placeholder="비밀번호 - :value 방식"
+                                                    style="max-width:500px"
+                                                    @change="(v) => {
+                                                        controls.valid = v.valid;
+                                                        controls.error = v.errorState;
+                                                        controls.onChange(v);
+                                                    }"
+                                                    @focus="controls.onFocus"
+                                                    @blur="controls.onBlur"
+                                />
+                            </div>
+                            <div class="comp-control">
+                                <div>
+                                    입력 값 : {{controls.value}}
+                                </div>
+                                <div><input type="text" v-model="controls.value" value=""></div>
+
+                                <div>
+                                    비밀번호 사용 가능 여부 : {{controls.valid}}
+                                </div>
+
+                                <div v-if="controls.error">
+                                    사용 불가능 상태 : {{ controls.error }}
+                                </div>
+                                <div>
+                                    1번 mark : <strong>{{controls.mark}}</strong>
+                                    <button class="default-button" @click="controls.mark = !controls.mark" v-if="!controls.mark">전환</button>
+                                </div>
+                                <div>
+                                    1번 focus : <strong>{{controls.focus}}</strong>
+                                    <button class="default-button" @click="controls.focus = !controls.focus" v-if="!controls.focus">전환</button>
+                                </div>
+                            </div>
+                        </div>
+                    <!--  입력/입력 비밀번호 -->
+
+
+
+
+
+
 
                         <!-- <div v-if="renderId === '맞는 ID'">
                             <div class="comp-view">
@@ -419,6 +597,12 @@
                                 <div></div>
                             </div>
                         </div> -->
+
+
+
+
+
+
 
 
                         <template v-if="selectItem.name">
@@ -468,6 +652,7 @@
 import categoryData from './categoryData.js';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
 import ButtonDownload from '@/components/button/ButtonDownload.vue';
+import ButtonUnderMask from '@/components/button/ButtonUnderMask.vue';
 import InputDropdown from '@/components/input/InputDropdown.vue';
 import InputRadio from '@/components/input/InputRadio.vue';
 import InputRadioCollection from '@/components/input/InputRadioCollection.vue';
@@ -475,15 +660,18 @@ import InputCheckbox from '@/components/input/InputCheckbox.vue';
 import InputCheckboxCollection from '@/components/input/InputCheckboxCollection.vue';
 import InputText from '@/components/input/InputText.vue';
 import InputTextEmail from '@/components/input/InputTextEmail.vue';
+import InputTextPassword from '@/components/input/InputTextPassword.vue';
 
 import TESTCOMP from './TESTCOMP.vue';
 
 export default {
     name : 'PageComponents',
     components : {
-        // Category,
+    // Category,
         ButtonDefault,
         ButtonDownload,
+        ButtonUnderMask,
+
         InputDropdown,
         InputRadio,
         InputRadioCollection,
@@ -491,6 +679,7 @@ export default {
         InputCheckboxCollection,
         InputText,
         InputTextEmail,
+        InputTextPassword,
 
         TESTCOMP,
     },

@@ -7,7 +7,7 @@
 -->
 
 <template>
-    <div    class="input--default" :class="{'st-focus' : isFocus , 'st-mark' : mark}"
+    <div    class="input--text" :class="{'st-focus' : isFocus , 'st-mark' : mark}"
             :style="propStyle"
 
     >
@@ -23,8 +23,9 @@
                     :placeholder="placeholder"
                     v-model="modelData.value"
                     @keydown="keydown"
-                    @focus="() => {isFocus = true}"
-                    @blur="() => {isFocus = false}"
+                    @focus="onFocus"
+                    @blur="onBlur"
+                    ref="ref_input"
             />
 
         </div>
@@ -41,12 +42,11 @@ export default {
     props : {
         modelValue : [String,Number],
         value : [String,Number],
-
         type : String,
         placeholder : String,
 
         mark : Boolean,
-        // style : [String,Object]
+        focus : Boolean,
     },
     model : {
         prop : 'modelValue',
@@ -68,18 +68,36 @@ export default {
         }
     },
     watch : {
+        "focus" (){
+            if(this.focus){
+                this.$refs.ref_input.focus();
+            }else {
+                this.$refs.ref_input.blur();
+            }
+        },
         "value"() {
             this.watchValue();
         },
         "modelValue"() {
             this.watchModelValue();
         },
-        "modelData"(){
-            this.watchModelData();
+        "modelData":{
+            deep : true,
+            handler() {
+                this.watchModelData();
+            },
         },
     },
     methods : {
-        keydown(e) {
+        onFocus() {
+            this.isFocus = true;
+            this.$emit('focus' , this.modelData);
+        },
+        onBlur() {
+            this.isFocus = false;
+            this.$emit('blur' , this.modelData);
+        },
+        keydown(e) {{e}
             setTimeout(() => {this.recordModelData(e.target.value)},0);
         },
         watchValue () {
@@ -89,18 +107,19 @@ export default {
             this.recordModelData(this.modelValue);
         },
         recordModelData(value) {
-            const recordData = {...this.modelData};
-            if(this.modelData.value !== value){
-                recordData.value = value;
+            if(this.modelData.value === value){
+                return;
             }
+
+            const recordData = {...this.modelData};
+            recordData.value = value;
+
             this.modelData = recordData;
         },
 
         watchModelData() {
             this.$emit('change' , this.modelData);
-            if(this.modelValue !== this.modelData.value){
-                this.$emit('modelEvent' , this.modelData.value);
-            }
+            this.$emit('modelEvent' , this.modelData.value);
         },
     },
 }
@@ -114,7 +133,7 @@ $MO_padding     : 16px;
 $PC_radius      : 8px;
 $MO_radius      : 8px;
 
-.input--default {
+.input--text {
     display: inline-block;
     position: relative;
     box-sizing: border-box;
@@ -223,7 +242,7 @@ $MO_radius      : 8px;
             0% {
                 box-shadow: 0 0 0 0px $COLOR_mint_1;
             }
-            30% {
+            90% {
                 box-shadow: 0 0 0px 11px COLOR_mint_1(0);
             }
         }
@@ -231,7 +250,7 @@ $MO_radius      : 8px;
             border: 2px solid $COLOR_mint_1;
             transform : scale(1) ;
             transition : border-color 180ms ease , transform 500ms $EASE_outCubic;
-            animation: waveFocus 4s $EASE_outExpo infinite 1s;
+            animation: waveFocus 2.5s $EASE_outExpo infinite 1s;
         }
 
     }

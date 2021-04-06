@@ -105,30 +105,29 @@ export default {
 
             if(this.$store.state.$user.is_login){
 
-                this.$store.dispatch('showModalAlert' , {
-                    message : '로그아웃 합니다',
-                    actionClose : () => {
+                this.$store.dispatch('showModalConfirm' , {
+                    message : '확인을 누르면 로그아웃 합니다',
+                    actionTrue : () => {
                         this.$store.dispatch('signOut');
                     }
                 })
             }else {
 
                 const random = `test_random${Math.round(Math.random()* 100)}`;
-                this.$store.dispatch('showModalAlert' , {
-                    title : '',
+                this.$store.dispatch('showModalConfirm' , {
+                    title : '한방에 로그인하기',
                     message : `
-                        이렇게 로그인합니다.
-                        <br>
+                        확인을 누르면 이렇게 로그인합니다.
                         <br> emailId : ${random}@gmail.com
                         <br> username : ${random}
                     `,
-                    close : () => {
+                    actionTrue : () => {
                         this.$store.dispatch('signIn' , {
                             emailId : `${random}@gmail.com`,
                             username : `${random}`,
                             accountId : "ACCOUNT_TEST",
                         });
-                    }
+                    },
                 });
             }
         },

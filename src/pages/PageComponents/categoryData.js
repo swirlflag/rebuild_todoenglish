@@ -45,15 +45,37 @@ const data = [
     },
 
     {
-        name : '텍스트/제목',
-        title : '프로젝트의 제목용 텍스트',
+        name : '버튼/일반 링크',
+        title : '일반적인 링크 버튼',
         text : '-',
-        info : {
-        },
         control : {
-
         }
     },
+
+    {
+        name : '텍스트/Display 01',
+        title : 'Display 01',
+        text : '-',
+
+    },
+    {
+        name : '텍스트/Display 02',
+        title : 'Display 02',
+        text : '-',
+
+    },
+    {
+        name : '텍스트/Title 01',
+        title : 'Title 01',
+        text : '-',
+    },
+    {
+        name : '텍스트/Paragraph 01',
+        title : 'Paragraph 01',
+        text : '-',
+    },
+
+
 
     {
         name : '입력/선택 드롭다운',
@@ -69,7 +91,7 @@ const data = [
             'TBD prop' : 'TBD value',
         },
         control : {
-            change : (v) => {{v}
+            onChange : (v) => {{v}
                 console.component('↓ 선택 드롭다운 : @change');
                 console.log({...v});
             },
@@ -92,7 +114,7 @@ const data = [
         },
         control : {
             value : randomOne('yes', 'no' , 'unmatch',),
-            change : (v) => {{v}
+            onChange : (v) => {{v}
                 console.component('↓ 선택 라디오 : @change');
                 console.log(v);
             },
@@ -116,10 +138,10 @@ const data = [
         control : {
             list : makeArrayLength(10).map((c,i) =>  ({text : `라디오 ${i+1}` , value : `select_value_${i+1}`})),
             direction : randomOne('row' , 'col'),
-            directionChange : (controls) => {
+            directiononChange : (controls) => {
                 controls.direction = controls.direction === 'row' ? 'col' : 'row';
             },
-            change : (v) => {{v}
+            onChange : (v) => {{v}
                 console.component('↓ 선택 라디오 컬렉션 : @change');
                 console.log({...v});
             }
@@ -137,7 +159,7 @@ const data = [
         },
         control : {
             checks : [false,false,false],
-            change : (v) => { {v}
+            onChange : (v) => { {v}
                 console.component('↓ 선택 체크박스 : @change');
                 console.log(v);
             }
@@ -158,10 +180,10 @@ const data = [
             checks : [false,false,false],
             list : makeArrayLength(5).map((c,i) =>  ({text : `체크박스 ${i+1}` , value : `checkbox_value_${i+1}`, checked : randomOne(true,false)})),
             direction : randomOne('row' , 'col'),
-            directionChange : (controls) => {
+            directiononChange : (controls) => {
                 controls.direction = controls.direction === 'row' ? 'col' : 'row';
             },
-            change : (v) => { {v}
+            onChange : (v) => { {v}
                 console.component('↓ 선택 체크박스 컬렉션 : @change');
                 console.log({...v});
             }
@@ -177,13 +199,20 @@ const data = [
         // },
         info : {
             'TBD prop' : 'TBD value',
-            // '개요' : '[선택 체크박스]를 확장해 제작하였습니다.',
         },
         control : {
-            value: `random_start_${Math.ceil(Math.random()*100)}`,
-            change : (v) => { {v}
+            value: `random_text_${Math.ceil(Math.random()*100)}`,
+            mark : false,
+            focus : false,
+            onChange : (v) => { {v}
                 console.component('↓ 입력 텍스트 : @change');
                 console.log({...v});
+            },
+            onFocus : () => {
+                console.component('입력 텍스트 : @focus');
+            },
+            onBlur : () => {
+                console.component('입력 텍스트 : @blur');
             }
         }
     },
@@ -197,16 +226,73 @@ const data = [
         // },
         info : {
             'TBD prop' : 'TBD value',
-            // '개요' : '[선택 체크박스]를 확장해 제작하였습니다.',
         },
         control : {
-            value: `mail@naver.com`,
-            change : (v) => { {v}
+            value: `default@naver.com`,
+            valid : true,
+            mark : false,
+            focus : false,
+            onChange : (v) => { {v}
                 console.component('↓ 입력 이메일 : @change');
                 console.log({...v});
+            },
+            onFocus : () => {
+                console.component('입력 이메일 : @focus');
+            },
+            onBlur : () => {
+                console.component('입력 이메일 : @blur');
             }
         }
     },
+
+// InputTextPassword
+    {
+        name : '입력/입력 비밀번호',
+        title : '입력 비밀번호 ',
+        text : '입력 비밀번호에 대한 설명 ',
+        // props : {
+
+        // },
+        info : {
+            'TBD prop' : 'TBD value',
+        },
+        control : {
+            value: `default_password`,
+            valid : true,
+            error : 0,
+            mark : false,
+            focus : false,
+            onChange : (v) => { {v}
+                console.component('↓ 입력 비밀번호 : @change');
+                console.log({...v});
+            },
+            onFocus : () => {
+                console.component('입력 비밀번호 : @focus');
+            },
+            onBlur : () => {
+                console.component('입력 비밀번호 : @blur');
+            }
+        }
+    },
+
+    {
+        name : '스피너/-',
+        title : 'title ',
+        text : 'text ',
+        control : {
+
+        }
+    },
+
+    {
+        name : '레이아웃/-',
+        title : 'title ',
+        text : 'text ',
+        control : {
+
+        }
+    },
+
 
 ];
 
