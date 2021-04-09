@@ -25,15 +25,8 @@ export default {
         }
     },
     methods : {
-        actionScroll() {
-            console.log('hey');
-        },
-        bindScroll() {
-            window.addEventListener('scroll' , this.actionScroll);
-        },
-        unbindScroll() {
-            window.removeEventListener('scroll' , this.actionScroll);
-        },
+
+
         bindObserver() {
 
             const options = {
@@ -57,11 +50,17 @@ export default {
                         // console.log('위에서 막 사라짐 = fixed로');
                         // const rect = this.$refs.ref_target.getBoundingClientRect();
                         // console.log(rect);
-                        const osHeight = this.$refs.ref_target.offsetHeight;
-                        const osWidth = this.$refs.ref_target.offsetWidth;
-                        this.$refs.ref_flag.style.height = osHeight + 'px';
-                        this.$refs.ref_flag.style.width = osWidth + 'px';
+
+                        this.targetRect = {
+                            width : this.$refs.ref_target.offsetWidth,
+                            height : this.$refs.ref_target.offsetHeight,
+                        }
+
+                        this.$refs.ref_flag.style.height = this.targetRect.height + 'px';
+                        this.$refs.ref_flag.style.width = this.targetRect.width + 'px';
                         this.isFixed = true;
+
+                        this.$store.dispatch('addStickStack', )
                     }
                     if(beforeY < point && currentY >= point){
                         // console.log('아래에서 위로 올라옴 = static으로');
@@ -82,15 +81,9 @@ export default {
     },
 
     mounted () {
-        // this.targetRect = this.$refs.ref_target.getBoundingClientRect();
-
-        this.bindScroll();
         this.bindObserver();
-
     },
-    beforeDestroy() {
-        this.unbindScroll();
-    }
+
 
 }
 
@@ -118,11 +111,14 @@ export const stickyStackStore = {
         },
     },
     actions : {
-        stickyStack({commit} , target) { {commit}
-            console.log(target);
+        addStickyStack({commit} , target) { {commit}
 
+            console.log(target);
             // commit('STICKY_ENTER' , target);
         },
+        removeStickyStack() {
+
+        }
     }
 
 }
