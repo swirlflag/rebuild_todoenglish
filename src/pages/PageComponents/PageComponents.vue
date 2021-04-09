@@ -629,9 +629,24 @@
 
                         <div v-if="renderId === '레이아웃/sticky stack'">
                             <div class="comp-view">
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                <StickyStack>
+                                    ho
+                                    <br>
+                                    hello
+                                    <br>
+                                    hey~
+                                </StickyStack>
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                <!-- <StickyStack>
+                                    ho
+                                </StickyStack>
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                                 <StickyStack>
                                     ho
                                 </StickyStack>
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
                             </div>
                             <div class="comp-control">
                                 <div></div>
