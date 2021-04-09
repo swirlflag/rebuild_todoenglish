@@ -32,23 +32,23 @@
 
                         <ul class="explain-benefit__list">
                             <li class="explain-benefit__item">
-                                <span class="icon icon--todoenglish"></span>
+                                <i class="icon--todoenglish"></i>
                                 <p><strong>토도영어&nbsp;</strong><br class="visible-overphone">콘텐츠 무제한 이용</p>
                             </li>
                             <li class="explain-benefit__item">
-                                <span class="icon icon--report"></span>
+                                <i class="icon--report"></i>
                                 <p><strong>토도 리포트&nbsp;</strong><br class="visible-overphone">매주 발송</p>
                             </li>
                             <li class="explain-benefit__item">
-                                <span class="icon icon--write-paper"></span>
+                                <i class="icon--write-paper"></i>
                                 <p>복습 <strong>워크시트&nbsp;</strong><br class="visible-overphone">매달 발송</p>
                             </li>
                             <li class="explain-benefit__item">
-                                <span class="icon icon--hihello"></span>
+                                <i class="icon--hihello"></i>
                                 <p><strong>화상 튜터링&nbsp;</strong><br class="visible-overphone">2회 무료 체험권</p>
                             </li>
                             <li class="explain-benefit__item">
-                                <span class="icon icon--celebrate"></span>
+                                <i class="icon--celebrate"></i>
                                 <p>가입 축하<br class="visible-overphone"><strong>&nbsp;웰컴 패키지&nbsp;</strong>제공</p>
                             </li>
                         </ul>
@@ -60,7 +60,7 @@
                 <div class="area__inner">
                     <div class="showing__content">
                         <div class="showing__subtitle">
-                            <span class="icon icon--todoenglish-school"></span>
+                            <i class="icon--todoenglish-school"></i>
                             토도영어
                         </div>
                         <h3 class="showing__title">
@@ -94,7 +94,7 @@
                 <div class="area__inner">
                     <div class="showing__content">
                         <div class="showing__subtitle">
-                            <span class="icon icon--calendar"></span>
+                            <i class="icon--calendar"></i>
                             토도 리포트
                         </div>
                         <h3 class="showing__title">
@@ -125,7 +125,7 @@
                 <div class="area__inner">
                     <div class="showing__content">
                         <div class="showing__subtitle">
-                            <span class="icon icon--calendar"></span>
+                            <i class="icon--calendar"></i>
                             워크시트
                         </div>
                         <h3 class="showing__title">
@@ -160,7 +160,7 @@
                 <div class="area__inner">
                     <div class="showing__content">
                         <div class="showing__subtitle">
-                            <span class="icon icon--calendar"></span>
+                            <i class="icon--calendar"></i>
                             <span>토도라이브</span>
                         </div>
                         <h3 class="showing__title">
@@ -183,7 +183,7 @@
                         </p>
                         <a href="#" class="showing__link">
                             토도라이브 자세히보기
-                            <span class="icon icon--arrow"></span>
+                            <i class="icon--arrow"></i>
                         </a>
                     </div>
 
@@ -201,7 +201,7 @@
                 <div class="area__inner">
                     <div class="showing__content">
                         <div class="showing__subtitle">
-                            <span class="icon icon--calendar"></span>
+                            <i class="icon--calendar"></i>
                             가입축하 웰컴팩
                         </div>
                         <h3 class="showing__title">
@@ -307,28 +307,28 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">콘텐츠 이용</th>
-                                    <td><span class="icon icon--checked"></span></td>
-                                    <td><span class="icon icon--checked"></span></td>
+                                    <td><i class="icon--checked"></i></td>
+                                    <td><i class="icon--checked"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">토도 리포트</th>
-                                    <td><span class="icon icon--checked"></span></td>
-                                    <td><span class="icon icon--checked"></span></td>
+                                    <td><i class="icon--checked"></i></td>
+                                    <td><i class="icon--checked"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">복습 워크시트</th>
-                                    <td><span class="icon icon--checked"></span></td>
-                                    <td><span class="icon icon--checked"></span></td>
+                                    <td><i class="icon--checked"></i></td>
+                                    <td><i class="icon--checked"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">토도라이브</th>
-                                    <td><span class="icon icon--none-checked"></span></td>
-                                    <td><span class="icon icon--checked"></span></td>
+                                    <td><i class="icon--none-checked"></i></td>
+                                    <td><i class="icon--checked"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">웰컴팩</th>
-                                    <td><span class="icon icon--none-checked"></span></td>
-                                    <td><span class="icon icon--checked"></span></td>
+                                    <td><i class="icon--none-checked"></i></td>
+                                    <td><i class="icon--checked"></i></td>
                                 </tr>
 
                                 <tr>

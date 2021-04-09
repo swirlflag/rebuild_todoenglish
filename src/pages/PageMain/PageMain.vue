@@ -54,7 +54,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--redflag"></span>
+                        <i class="icon--redflag"></i>
                     </div>
                     <h3 class="showing__title">
                         게임처럼
@@ -87,7 +87,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--talking"></span>
+                        <i class="icon--talking"></i>
                     </div>
                     <h3 class="showing__title">
                         문지르고, 움직이고
@@ -130,7 +130,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--alphabet"></span>
+                        <i class="icon--alphabet"></i>
                     </div>
                     <h3 class="showing__title">
                         반복 학습임을 잊게하는 액티비티
@@ -153,7 +153,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--movieslate"></span>
+                        <i class="icon--movieslate"></i>
                     </div>
                     <h3 class="showing__title">
                         영미 문화와 일상을 체험
@@ -192,9 +192,9 @@
                         <div class="interview__position">Head of Product, enuma Korea</div>
                     </div>
                     <div class="interview__showvideo">
-                        <span class="icon icon--playbutton c-yellow"></span>
+                        <i class="icon--playbutton c-yellow"></i>
                         <span style="color: #ff0">인터뷰 영상 보기</span>
-                        <span class="icon icon--arrow c-yellow"></span>
+                        <i class="icon--arrow c-yellow"></i>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--uppergraph"></span>
+                        <i class="icon--uppergraph"></i>
                     </div>
                     <h3 class="showing__title">
                         한눈에 파악하는
@@ -230,7 +230,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--talkwow"></span>
+                        <i class="icon--talkwow"></i>
                     </div>
                     <h3 class="showing__title">
                         매일 받아보는
@@ -256,7 +256,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--waypoint"></span>
+                        <i class="icon--waypoint"></i>
                     </div>
                     <h3 class="showing__title">
                         학습관리가 쉬워지는
@@ -295,9 +295,9 @@
                         <div class="interview__position">Head of Business, enuma Korea</div>
                     </div>
                     <div class="interview__showvideo">
-                        <span class="icon icon--playbutton c-cyan"></span>
+                        <i class="icon--playbutton c-cyan"></i>
                         <span style="color: #56D5E2">인터뷰 영상 보기</span>
-                        <span class="icon icon--arrow c-cyan"></span>
+                        <i class="icon--arrow c-cyan"></i>
                     </div>
                 </div>
             </div>
@@ -320,7 +320,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--todoenglish-school"></span>
+                        <i class="icon--todoenglish-school"></i>
                     </div>
                     <h3 class="showing__title">
                         미국 킨더 - 초등 2학년(G2)
@@ -348,7 +348,7 @@
                     </p>
                     <a href="#" class="showing__link">
                         커리큘럼 자세히보기
-                        <span class="icon icon--arrow"></span>
+                        <i class="icon--arrow"></i>
                     </a>
                 </div>
 
@@ -364,7 +364,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--use-tablet"></span>
+                        <i class="icon--use-tablet"></i>
                     </div>
                     <h3 class="showing__title">
                         시험이라고 느끼지 못하는
@@ -400,7 +400,7 @@
             <div class="area__inner">
                 <div class="showing__content">
                     <div class="showing__subtitle">
-                        <span class="icon icon--calendar"></span>
+                        <i class="icon--calendar"></i>
                     </div>
                     <h3 class="showing__title">
                         2년여간의
@@ -458,9 +458,9 @@
                         <div class="interview__position">Head of Learning, enuma US</div>
                     </div>
                     <div class="interview__showvideo">
-                        <span class="icon icon--playbutton c-green"></span>
+                        <i class="icon--playbutton c-green"></i>
                         <span style="color: #008F7E">인터뷰 영상 보기</span>
-                        <span class="icon icon--arrow c-green"></span>
+                        <i class="icon--arrow c-green"></i>
                     </div>
                 </div>
             </div>

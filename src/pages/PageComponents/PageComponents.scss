@@ -26,8 +26,8 @@ $outerPadding : 16px;
         overflow: hidden !important;
     }
 
-    .default--checkbox-collection ,
-    .default--radio-collection {
+    .input--checkbox-collection ,
+    .input--radio-collection {
         border: 2px dashed $tempblue !important;
     }
 }
@@ -195,7 +195,7 @@ button.default-button {
     width: 240px;
     flex-basis: content;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
     min-height: 100%;
 

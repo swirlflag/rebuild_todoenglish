@@ -68,7 +68,6 @@
 
 
         <div id="test__open"
-            
             @mousedown="grab"
             @mouseup="drop"
             @mousemove="drag"
@@ -222,6 +221,13 @@ export default {
             const y = localStorage.getItem('TESTMENUY');
             target.style.left = x + 'px';
             target.style.top = y + 'px';
+
+            if(y > window.innerHeight - target.offsetHeight){
+                target.style.top  = window.innerHeight - target.offsetHeight + 'px';
+            }
+            if(x > window.innerWidth - target.offsetWidth){
+                target.style.left  = window.innerWidth - target.offsetWidth + 'px';
+            }
         }
 
     },

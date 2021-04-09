@@ -1,90 +1,91 @@
-// [class^=icon] {
-.icon {
+i[class^=icon] {
     display: inline-block;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
     width: 10px; height: 10px;
+}
+i.icon {
 
-    &.icon--account {
+    &--account {
         width: 25px; height: 30px;
         background-image: url('~@/assets/icon/icon_account_person.svg');
         &.c-white {background-image: url('~@/assets/icon/icon_account_person_white.svg')}
     }
-    &.icon--dropdown-arrow {
+    &--dropdown-arrow {
         background-image: url('~@/assets/icon/icon_dropdown_arrow.svg');
         &.c-white {background-image: url('~@/assets/icon/icon_dropdown_arrow_white.svg')}
     }
-    &.icon--signout-arrow {
+    &--signout-arrow {
         background-image: url('~@/assets/icon/icon_signout_arrow.svg');
         // &.c-white {background-image: url('~@/assets/icon/icon_signout_arrow_white.svg')}
     }
 
-    &.icon--alphabet {
+    &--alphabet {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_alphabet.svg');
     }
-    &.icon--movieslate {
+    &--movieslate {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_movieslate.svg');
     }
-    &.icon--talkwow {
+    &--talkwow {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_talkwow.svg');
     }
-    &.icon--waypoint {
+    &--waypoint {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_waypoint.svg');
     }
-    &.icon--uppergraph {
+    &--uppergraph {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_uppergraph.svg');
     }
-    &.icon--todoenglish-school {
+    &--todoenglish-school {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_todoenglish_school.svg');
     }
-    &.icon--use-tablet {
+    &--use-tablet {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_use_tablet.svg');
     }
-    &.icon--calendar {
+    &--calendar {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_calendar.svg');
     }
-    &.icon--redflag {
+    &--redflag {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_redflag.svg');
     }
-    &.icon--talking {
+    &--talking {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_talking.svg');
     }
-    &.icon--todo-logo {
+    &--todo-logo {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_todologo.svg');
     }
-    &.icon--todoenglish {
+    &--todoenglish {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_todoenglish.svg');
     }
-    &.icon--report {
+    &--report {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_report.svg');
     }
-    &.icon--write-paper {
+    &--write-paper {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_writepaper.svg');
     }
-    &.icon--hihello {
+    &--hihello {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_hihello.svg');
     }
-    &.icon--celebrate {
+    &--celebrate {
         width: 60px; height: 60px;
         background-image: url('~@/assets/icon/icon_badge_celebrate.svg');
     }
-    &.icon--arrow {
+    &--arrow {
         width: 19px; height: 19px;
         background-image: url('~@/assets/icon/icon_arrow_purple.svg');
         &.c-cyan    {background-image: url('~@/assets/icon/icon_arrow_cyan.svg');}
@@ -92,7 +93,7 @@
         &.c-green   {background-image: url('~@/assets/icon/icon_arrow_green.svg');}
     }
 
-    &.icon--linearrow {
+    &--linearrow {
         width:22px; height: 22px;
         position: relative;
 
@@ -119,7 +120,7 @@
 
     }
 
-    &.icon--arrow-simple {
+    &--arrow-simple {
         width: 20px; height: 20px;
         background-size: 200%;
         overflow: hidden;
@@ -139,7 +140,7 @@
 
     }
 
-    &.icon--playbutton {
+    &--playbutton {
         width: 38px; height: 38px;
         background-image: url('~@/assets/icon/icon_playbutton_cyan.svg');
         &.c-cyan    {background-image: url('~@/assets/icon/icon_playbutton_cyan.svg');}
@@ -147,11 +148,11 @@
         &.c-green   {background-image: url('~@/assets/icon/icon_playbutton_green.svg');}
     }
 
-    &.icon--checked {
+    &--checked {
         width: 26px; height: 26px;
         background-image: url('~@/assets/icon/icon_checked_pink.svg');
     }
-    &.icon--none-checked{
+    &--none-checked{
         width: 26px; height: 26px;
         background-image: url('~@/assets/icon/icon_checked_none.svg');
     }
@@ -160,45 +161,45 @@
 
 
 
-    &.icon--google{
+    &--google{
         width: 29px; height: 29px;
         background-image: url('~@/assets/icon/icon_google.svg');
     }
 
-    &.icon--kakaobubble {
+    &--kakaobubble {
         width: 28px; height: 26px;
         background-image: url('~@/assets/icon/icon_kakaobubble.svg');
     }
 
 
-    &.icon--rect-kakao {
+    &--rect-kakao {
         width: 28px; height: 28px;
         background-image: url('~@/assets/icon/icon_rect_kakao.svg');
     }
-    &.icon--rect-google {
+    &--rect-google {
         width: 28px; height: 28px;
         background-image: url('~@/assets/icon/icon_rect_google.svg');
     }
 
 
-    &.icon--mail {
+    &--mail {
         width: 20px; height: 20px;
         background-image: url('~@/assets/icon/icon_mail.svg');
     }
 
 
-    &.icon--logoschool {
+    &--logoschool {
         width: 20px; height: 20px;
         background-image: url('~@/assets/logo/logo_school.svg');
         &.c-white { background-image: url('~@/assets/logo/logo_school_white.svg');}
     }
 
 
-    &.icon--key {
+    &--key {
         width: 26px; height: 14px;
         background-image: url('~@/assets/icon/icon_key.svg');
     }
-    &.icon--lock {
+    &--lock {
         width: 17px ; height: 20px;
         background-image: url('~@/assets/icon/icon_lock.svg');
     }

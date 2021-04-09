@@ -3,11 +3,11 @@
     <ButtonDefault :class="typeClassName" @click="$emit('click')">
 
         <template v-if="type === 'kakao'">
-            <span class="icon icon--kakaobubble"></span>
+            <i class="icon--kakaobubble"></i>
         </template>
 
         <template v-if="type === 'google'">
-            <span class="icon icon--google"></span>
+            <i class="icon--google"></i>
         </template>
 
         {{ buttonText }}
@@ -60,7 +60,7 @@ export default {
 
 <style scoped lang="scss">
 .button--default {
-    .icon {
+    i {
         position: absolute;
         top : 50%; transform:translateY(-50%);
         left: 21px;

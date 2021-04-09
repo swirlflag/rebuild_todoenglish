@@ -7,10 +7,9 @@
                                             checked : true,
                                         }
                                     ]"
-                                    @change="myChange"
                                     name="myName"
                                     direction="row"
-                                    name="input-checkbox-collection"
+                                    @change="myChange"
 
         />
 
@@ -18,24 +17,25 @@
 
     MEMO :
         props list와 v-model로 받는 모양은 완전히 같으며 둘중 하나만 설정하면 됩니다.
+        @change로 받는 인자는 v-model,list의 형태와 같은 객체를 받습니다.
 
 -->
 
 <template>
-    <div     class="default--checkbox-collection"
+    <div     class="input--checkbox-collection"
             :class="`direction--${computedDirection}`"
 
     >
-        <template v-for="(item,idx) in renderList">
+        <template v-for="(item,idx) in allList">
 
-            <InputCheckbox
-                :key="`${idx}-${item.text}`"
-                :text="item.text"
-                v-model="renderList[idx].checked"
-                @change="onInputChange"
-                :index="idx"
-                :name="data_name"
+            <InputCheckbox  :key="`${idx}-${item.text}`"
+                            :text="item.text"
+                            :index="idx"
+                            :name="data_name"
+                            v-model="allList[idx].checked"
+                            @change="onInputChange"
             />
+
         </template>
 
     </div>
@@ -64,10 +64,10 @@ export default {
         return {
             data_name : this.name || 'name-radio-' + Math.random().toString().split('.')[1],
 
-            renderList      : [],
+            allList      : [],
 
             modelData : {
-                renderList : [],
+                allList : [],
                 index : 0,
                 checked : false,
                 value : '',
@@ -94,34 +94,38 @@ export default {
         },
     },
     watch : {
-        modelValue : {
+        "modelValue" : {
             deep : true,
             handler() {
                 this.ignoreModel = true;
-                this.renderList = deepCopy(this.modelValue);
+                this.allList = deepCopy(this.modelValue);
             }
         },
-        list : {
+        "list" : {
             deep : true,
             handler() {
                 this.ignoreModel = true;
-                this.renderList = deepCopy(this.list);
+                this.allList = deepCopy(this.list);
             }
         },
 
-        renderList : {
+        "allList" : {
             deep : true,
             handler() {
                 if(!this.ignoreModel){
-                    this.$emit('modelEvent' , this.renderList);
+                    this.$emit('modelEvent' , this.allList);
                 }
                 this.ignoreModel = false;
             },
         },
+
+        "modelData"() {
+            this.$emit('change' , this.modelData);
+        },
     },
     methods : {
         toggle(index) {
-            this.modifyTarget(index);
+            this.modifyTarget(index, !this.allList[index].checked);
         },
         check(index) {
             this.modifyTarget(index,true);
@@ -132,45 +136,41 @@ export default {
 
         modifyTarget(index, willCheck) {
 
-
-            console.log('modify');
             if(index === undefined){
                 return
             }
 
-            // const currentCheck = this.renderList[index].checked;
+            if(this.allList[index].checked === willCheck){
+                return
+            }
 
-            // if(currentCheck === willCheck) {
-            //     return;
-            // }
+            this.allList[index].checked = willCheck;
 
-            this.renderList[index].checked = willCheck;
-
-            const current = this.renderList[index];
+            const current = this.allList[index];
 
             this.modelData = {
-                renderList : [...this.renderList],
+                allList : [...this.allList],
                 index : index,
                 checked : willCheck,
                 value : current.value,
                 text : current.text,
             };
 
-            this.$emit('change' , this.modelData);
         },
 
-        onInputChange(isChecked,index) {
-            this.modifyTarget(index,isChecked);
+        onInputChange(payload) {
+            const { value , index } = payload;
+            this.modifyTarget(index,value);
         },
 
-        createrenderList() {
+        createAllList() {
             const list = this.modelValue || this.list || null;
-            this.renderList = deepCopy(list)
+            this.allList = deepCopy(list);
         },
     },
 
     created() {
-        this.createrenderList();
+        this.createAllList();
     },
 
     mounted () {
@@ -184,7 +184,7 @@ export default {
 $colGap : 5px;
 $rowGap : 10px;
 
-.default--checkbox-collection {
+.input--checkbox-collection {
     // line-height: 1em;
     display :flex;
     flex-direction: column;
@@ -192,12 +192,12 @@ $rowGap : 10px;
     &.direction--row {
         flex-direction: row;
         flex-wrap: wrap;
-        > .default--checkbox {
+        > .input--checkbox {
             margin: $colGap $rowGap;
         }
     }
     &.direction--col {
-        > .default--checkbox {
+        > .input--checkbox {
             margin: $colGap  0;
         }
         flex-direction: column;

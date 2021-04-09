@@ -3,11 +3,7 @@
         <div id="comp">
 
             <div id="mylog">
-                <!-- {{controls.text}} -->
-                <TESTCOMP
-                    v-if="0"
-                    v-model="VMODEL_SELECTVALUE"
-                />
+
             </div>
             <div id="comp-wrap">
                 <!-- <div id="comp-not-mobile">
@@ -140,13 +136,53 @@
                     <!-- 버튼/일반 링크 -->
                         <div v-if="renderId === '버튼/일반 링크'" class="comp-component" >
                             <div class="comp-view">
-                                <ButtonUnderMask :text="'hi..'"/>
+                                <div>
+                                    Lorem ipsum dolor sit amet,
+                                    <ButtonUndermask    :underline="controls.underline"
+                                                        :theme="controls.theme"
+                                                        :to="controls.switchLink ? controls.to : null"
+                                                        :href="controls.switchLink ? null : controls.href"
+
+                                    >
+                                        {{ controls.text }}
+                                    </ButtonUndermask>
+                                    dignissim eu tincidunt eget, efficitur eu urna.
+                                </div>
+
                             </div>
                             <div class="comp-control">
-                                <div>dma</div>
+                                <div>
+                                    예시로 들어갈 텍스트 : <input type="text" v-model="controls.text" value="">
+                                </div>
+                                <div>
+                                    <label class="radio-label">
+                                        <input type="radio" name="버튼/일반 링크/색테마" value="" v-model="controls.theme"><span>default or auto</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="버튼/일반 링크/색테마" value="navy" v-model="controls.theme"><span>navy</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="버튼/일반 링크/색테마" value="pink" v-model="controls.theme"><span>pink</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="버튼/일반 링크/색테마" value="mint" v-model="controls.theme"><span>mint</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    밑줄 사용 : <button class="default-button" @click="controls.underline = !controls.underline">{{controls.underline}}</button>
+                                </div>
+                                <div v-if="controls.switchLink">
+                                    이동 라우터 : <input type="text" v-model="controls.to" value="">
+                                    <button class="default-button" @click="controls.switchLink = !controls.switchLink">링크</button>
+                                </div>
+                                <div v-else>
+                                    이동 링크 : <input type="text" v-model="controls.href" value="">
+                                    <button class="default-button" @click="controls.switchLink = !controls.switchLink">라우터</button>
+                                </div>
                             </div>
                         </div>
                     <!-- 버튼/일반 링크 -->
+
 
 
 
@@ -207,71 +243,77 @@
 
 
 
-                <!-- 입력/선택 라디오 -->
-                        <div v-if="renderId === '입력/선택 라디오'">
 
-                            <div class="comp-view row">
-
-                                <!-- <InputRadio value="yes"
-                                            v-model="controls.value"
-                                            name="input-radio"
-                                            @change="controls.onChange"
-                                >
-                                    YES!!
-                                </InputRadio>
-
-                                <InputRadio value="no"
-                                            v-model="controls.value"
-                                            name="input-radio"
-                                            @change="controls.onChange"
-                                >
-                                    NO..
-                                </InputRadio>
-
-                                <InputRadio value="no2"
-                                            v-model="controls.value"
-                                            name="input-radio"
-                                            @change="controls.onChange"
-                                >
-                                    NO2..
-                                </InputRadio> -->
-
-                                <InputRadio value="yes"
-                                            name="input-radio"
-                                            @change="controls.onChange"
-                                            v-model="controls.value"
-                                >
-                                    yes
-                                </InputRadio>
-
-                                <InputRadio value="no"
-                                            name="input-radio"
-                                            @change="controls.onChange"
-                                            v-model="controls.value"
-                                >
-                                    no
-                                </InputRadio>
-
+                <!-- 입력/토글 스위치 -->
+                    <div v-if="renderId === '입력/토글 스위치'">
+                        <div class="comp-view">
+                            <InputToggleSwitch  v-model="controls.value"
+                                                @change="controls.onChange"
+                            />
+                        </div>
+                        <div class="comp-control">
+                            <div>
+                                연결 값 : <strong>{{ controls.value }}</strong>
                             </div>
-
-                            <div class="comp-control">
-                                <div>
-                                   연결 값 : <strong> {{ controls.value }} </strong>
-                                </div>
-                                <div>
-                                    연결 값 설정해보기 :
-                                    <label class="radio-label">
-                                        <input type="radio" name="입력/선택 라디오/값" value="yes" v-model="controls.value" ><span>yes</span>
-                                    </label>
-                                    <label class="radio-label">
-                                        <input type="radio" name="입력/선택 라디오/값" value="no" v-model="controls.value" ><span>no</span>
-                                    </label>
-                                    <label class="radio-label">
-                                        <input type="radio" name="입력/선택 라디오/값" value="unmatch" v-model="controls.value" ><span>unmatch</span>
-                                    </label>
-                                </div>
+                            <div>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" v-model="controls.value">
+                                    <span>SYNC</span>
+                                </label>
                             </div>
                         </div>
+                    </div>
+                <!-- 입력/토글 스위치 -->
+
+
+
+
+
+
+
+
+
+                <!-- 입력/선택 라디오 -->
+                    <div v-if="renderId === '입력/선택 라디오'">
+
+                        <div class="comp-view row">
+
+                            <InputRadio value="yes"
+                                        name="input-radio"
+                                        @change="controls.onChange"
+                                        v-model="controls.value"
+                            >
+                                yes
+                            </InputRadio>
+
+                            <InputRadio value="no"
+                                        name="input-radio"
+                                        @change="controls.onChange"
+                                        v-model="controls.value"
+                            >
+                                no
+                            </InputRadio>
+
+                        </div>
+
+                        <div class="comp-control">
+                            <div>
+                                연결 값 : <strong> {{ controls.value }} </strong>
+                            </div>
+                            <div>
+                                연결 값 설정해보기 :
+                                <label class="radio-label">
+                                    <input type="radio" name="입력/선택 라디오/값" value="yes" v-model="controls.value" ><span>yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="입력/선택 라디오/값" value="no" v-model="controls.value" ><span>no</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="입력/선택 라디오/값" value="unmatch" v-model="controls.value" ><span>unmatch</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 <!-- //입력/선택 라디오 -->
 
 
@@ -523,9 +565,9 @@
                     <!--  입력/입력 비밀번호 -->
                         <div v-if="renderId === '입력/입력 비밀번호'">
                             <div class="comp-view">
-                                <InputTextPassword  :value="controls.value"
-                                                    placeholder="비밀번호 - v-model 방식"
+                                <InputTextPassword  placeholder="비밀번호 - v-model 방식"
                                                     style="max-width:500px"
+                                                    v-model="controls.value"
                                                     :mark="controls.mark"
                                                     :focus="controls.focus"
                                                     @change="(v) => {
@@ -544,9 +586,9 @@
 
                                 />
                                 <br>
-                                <InputTextPassword  :value="controls.value"
-                                                    placeholder="비밀번호 - :value 방식"
+                                <InputTextPassword  placeholder="비밀번호 - :value 방식"
                                                     style="max-width:500px"
+                                                    :value="controls.value"
                                                     @change="(v) => {
                                                         controls.valid = v.valid;
                                                         controls.error = v.errorState;
@@ -584,6 +626,18 @@
 
 
 
+
+                        <div v-if="renderId === '레이아웃/sticky stack'">
+                            <div class="comp-view">
+                                <StickyStack>
+                                    ho
+                                </StickyStack>
+                            </div>
+                            <div class="comp-control">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
 
 
 
@@ -650,8 +704,9 @@
 import categoryData from './categoryData.js';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
 import ButtonDownload from '@/components/button/ButtonDownload.vue';
-import ButtonUnderMask from '@/components/button/ButtonUnderMask.vue';
+import ButtonUndermask from '@/components/button/ButtonUndermask.vue';
 import InputDropdown from '@/components/input/InputDropdown.vue';
+import InputToggleSwitch from '@/components/input/InputToggleSwitch.vue';
 import InputRadio from '@/components/input/InputRadio.vue';
 import InputRadioCollection from '@/components/input/InputRadioCollection.vue';
 import InputCheckbox from '@/components/input/InputCheckbox.vue';
@@ -659,8 +714,8 @@ import InputCheckboxCollection from '@/components/input/InputCheckboxCollection.
 import InputText from '@/components/input/InputText.vue';
 import InputTextEmail from '@/components/input/InputTextEmail.vue';
 import InputTextPassword from '@/components/input/InputTextPassword.vue';
+import StickyStack from '@/components/layout/StickyStack.vue';
 
-import TESTCOMP from './TESTCOMP.vue';
 
 export default {
     name : 'PageComponents',
@@ -668,18 +723,20 @@ export default {
     // Category,
         ButtonDefault,
         ButtonDownload,
-        ButtonUnderMask,
+        ButtonUndermask,
 
         InputDropdown,
         InputRadio,
         InputRadioCollection,
+        InputToggleSwitch,
         InputCheckbox,
         InputCheckboxCollection,
         InputText,
         InputTextEmail,
         InputTextPassword,
 
-        TESTCOMP,
+        StickyStack,
+
     },
     data() {
 
@@ -781,6 +838,7 @@ export default {
     },
 
     updated () {
+        
     },
 
     mounted() {

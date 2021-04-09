@@ -28,7 +28,7 @@
                 <div class="nav-gnb__account">
                     <div class="nav-gnb__user">
                         <div class="nav-gnb__link--user">
-                            <span class="icon icon--account" :class="{'c-white' : whiteCondition}"></span>
+                            <i class="icon--account" :class="{'c-white' : whiteCondition}"></i>
                             <div class="nav-gnb__account__parents" >
                                 <router-link v-if="$user.is_login" to="/mypage" exact class="style-gnb-link hover-underline color-white"> Parents </router-link>
                                 <span v-else @click.prevent="TEST_OPENAUTH" class="style-gnb-link hover-underline color-white"> Sign in </span>
@@ -40,7 +40,7 @@
                         <button class="nav-gnb__openinfo-button"
                                 @click="toggleAccountInfo"
                         >
-                            <span   class="icon icon--dropdown-arrow"
+                            <span   class="icon--dropdown-arrow"
                                     :class="{'c-white' : whiteCondition}"
                             >
                             </span>
@@ -53,7 +53,7 @@
                             ref="ref_accountInfo"
                     >
                         <div class="nav-gnb__account-email">{{ $user.username }}</div>
-                        <span class="icon icon--signout-arrow"></span>
+                        <i class="icon--signout-arrow"></i>
                         <a href="#" class="nav-gnb__signout style-gnb-link hover-underline" @click.prevent="TEST_OPENAUTH">Sign Out</a>
                     </div>
 
@@ -260,7 +260,7 @@ $SIZE_MO_linkDistance : 15px;
                     , box-shadow 500ms ease
                     ;
     }
-    .icon {
+    i {
         transition : background-image 300ms ease ;
     }
 }

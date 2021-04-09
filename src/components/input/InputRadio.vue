@@ -18,7 +18,7 @@
 
 -->
 <template>
-    <label  class="default--radio"
+    <label  class="input--radio"
             :class="{'st-checked' : isChecked}"
     >
         <input type="radio" :value="value" :name="name" ref="ref_radio" @change="onChange" :data-checked="isChecked" @click="onClick">
@@ -63,6 +63,11 @@ export default {
 
             ignoreModel : false,
             ignoreChange : false,
+
+            modelData : {
+                value : this.value,
+                index : 0,
+            },
         }
     },
     watch : {
@@ -173,7 +178,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.default--radio {
+.input--radio {
     display: flex;
     align-items: center;
     cursor: pointer;

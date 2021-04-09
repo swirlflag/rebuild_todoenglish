@@ -22,7 +22,7 @@
 -->
 
 <template>
-    <div    class="default--radio-collection"
+    <div    class="input--radio-collection"
             :class="`direction--${computedDirection}`"
     >
 
@@ -167,20 +167,20 @@ export default {
 <style lang="scss" scoped>
 $colGap : 5px;
 $rowGap : 10px;
-.default--radio-collection {
+.input--radio-collection {
     display :flex;
     flex-direction: column;
 
     &.direction--row {
         flex-direction: row;
         flex-wrap: wrap;
-        > .default--radio {
+        > .input--radio {
             margin: $colGap $rowGap ;
         }
     }
     &.direction--col {
         flex-direction: column;
-        > .default--radio {
+        > .input--radio {
             margin: $colGap ;
         }
     }

@@ -6,7 +6,7 @@
             <h1 class="header__title" ref="ref_title">
                 {{ title }}
                 <span class="header__openbutton" ref="ref_toggle" @click="toggle">
-                    <span class="icon icon--arrow-simple" :class="`type-${isOpen ? 'top' : 'bottom'}`"></span>
+                    <i class="icon--arrow-simple" :class="`type-${isOpen ? 'top' : 'bottom'}`"></i>
                 </span>
             </h1>
 

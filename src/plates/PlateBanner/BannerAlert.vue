@@ -5,7 +5,7 @@
                 <template v-for="(item,idx) in alertList">
                     <div class="banner__item" :key="idx" :class="`${idx}`">
                         <div class="banner__icon">
-                            <span class="icon icon--mail"></span>
+                            <i class="icon--mail"></i>
                         </div>
                         <div class="banner__messege">
                             {{item.message}}

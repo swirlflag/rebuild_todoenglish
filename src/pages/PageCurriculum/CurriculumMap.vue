@@ -39,7 +39,7 @@
 
             <ul class="dot-list precaution">
                 <li>
-                    <span class="icon--curriculum-dot level--3"></span>표시는 심화 과정 입니다.
+                    <i class="icon--curriculum-dot level--3"></i>표시는 심화 과정 입니다.
                 </li>
                 <li>
                     {{lastLevel}}레벨 이후의 레벨은 계속 업데이트 됩니다.

@@ -10,7 +10,7 @@
 
                 <div class="gnb__concise__wrap">
                     <router-link to="/" class="gnb__logo">
-                        <span class="icon icon--logoschool c-white"></span>
+                        <i class="icon--logoschool c-white"></i>
                         <span class="typo--todoenglish"></span>
                     </router-link>
 
@@ -82,7 +82,7 @@
                         </ul>
                         <div class="gnb__user">
                             <span class="gnb__user__dot"></span>
-                            <span class="icon icon--account c-white"></span>
+                            <i class="icon--account c-white"></i>
                         </div>
                         <button class="gnb__menu" @click="toggleMenu">
                             <div class="gnb__menu__icon">
@@ -101,7 +101,7 @@
         <div class="gnb__panel" ref="ref_panel">
             <!-- <div class="gnb__concise" ref="ref_concise">
                 <router-link to="/" class="gnb__logo">
-                    <span class="icon icon--logoschool c-white"></span>
+                    <i class="icon--logoschool c-white"></i>
                     <span class="typo--todoenglish"></span>
                 </router-link>
 
@@ -132,7 +132,7 @@
                     </ul>
                     <div class="gnb__user">
                         <span class="gnb__user__dot"></span>
-                        <span class="icon icon--account c-white"></span>
+                        <i class="icon--account c-white"></i>
                     </div>
                     <button class="gnb__menu" @click="toggleMenu">
                         <div class="gnb__menu__icon">
@@ -174,7 +174,7 @@
 
                         <div    class="gnb__private__title"
                         >
-                            <span class="icon icon--lock"></span>
+                            <i class="icon--lock"></i>
                             {{
                                 isLogin ? `${$store.state.$user.username}님, 안녕하세요!` : '로그인이 필요합니다'
                             }}
@@ -195,7 +195,7 @@
                                 @click="openAuthPanel"
                             >
                                 <button class="gnb__private__item__target">
-                                    <span class="icon icon--key"></span>
+                                    <i class="icon--key"></i>
                                     <span class="gnb__private__name">
                                         {{ isLogin ? '로그아웃' : '로그인' }}
                                     </span>
@@ -941,7 +941,7 @@ $navh : 68px;
             }
         }
 
-        .icon {
+        i {
             margin-right: 14px;
         }
 

@@ -18,8 +18,8 @@
 
 <template>
 
-    <label class="default--checkbox" :class="{'st-checked' : isCheck}">
-        <input type="checkbox" v-model="isCheck">
+    <label class="input--checkbox" :class="{'st-checked' : modelData.value}">
+        <input type="checkbox" v-model="modelData.value">
 
         <span class="checkbox--icon"></span>
 
@@ -45,38 +45,42 @@ export default {
     },
     watch : {
         'modelValue'(){
-            if(this.modelValue !== undefined && this.modelValue !== this.isCheck){
-                this.isCheck = this.modelValue;
+            if(this.modelValue !== undefined && this.modelValue !== this.modelData.value){
+                this.modelData.value = this.modelValue;
             }
         },
         'checked'() {
-            if(this.checked !== undefined && this.checked !== this.isCheck){
-                this.isCheck = this.checked;
+            if(this.checked !== undefined && this.checked !== this.modelData.value){
+                this.modelData.value = this.checked;
             }
         },
-        'isCheck'() {
-            this.watchIsCheck();
-        },
+        'modelData.value'(){
+            this.watchModelData();
+        }
     },
     components : {
     },
     data () {
-        let isCheck = (this.modelValue === undefined ? false : this.modelValue);
+        const value = (this.modelValue === undefined ? false : this.modelValue);
 
         return {
-            isCheck,
+            modelData : {
+                value,
+                index : this.index,
+            },
         }
     },
     methods : {
         check() {
-            this.isCheck = true;
+            this.modelData.value = true;
         },
         uncheck() {
-            this.isCheck = false;
+            this.modelData.value = false;
         },
-        watchIsCheck() {
-            this.$emit('change' , this.isCheck , this.index);
-            this.$emit('modelEvent' , this.isCheck);
+
+        watchModelData() {
+            this.$emit('change' , this.modelData);
+            this.$emit('modelEvent' , this.modelData.value);
         },
 
         detectChecked() {
@@ -102,7 +106,7 @@ export default {
         transform: scaleX(1)
     }
 }
-.default--checkbox {
+.input--checkbox {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -156,7 +160,7 @@ export default {
 
 }
 
-.default--checkbox{
+.input--checkbox{
    @include hover {
 
        color: $COLOR_pink_1;

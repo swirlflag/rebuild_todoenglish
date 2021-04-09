@@ -167,7 +167,7 @@
 
                     <div class="study__trophy__pagination">
                         <button class="study__trophy__prev">
-                            <span class="icon icon--linearrow type-left"></span>
+                            <i class="icon--linearrow type-left"></i>
                         </button>
                         <ul class="study__trophy__pagination__items">
                             <li>1</li>
@@ -175,7 +175,7 @@
                             <li>3</li>
                         </ul>
                         <button class="study__trophy__prev">
-                            <span class="icon icon--linearrow type-right"></span>
+                            <i class="icon--linearrow type-right"></i>
                         </button>
                     </div>
 

@@ -49,8 +49,15 @@ const data = [
         title : '일반적인 링크 버튼',
         text : '-',
         control : {
+            theme: 'pink',
+            text : 'Global Learning Xprize',
+            to : '/curriculum',
+            href : 'https://www.xprize.org/prizes/global-learning',
+            switchLink : false,
+            underline : true,
         }
     },
+
 
     {
         name : '텍스트/Display 01',
@@ -97,6 +104,20 @@ const data = [
             },
         }
     },
+
+    {
+        name : '입력/토글 스위치',
+        title : 'on/off 형태의 토글 스위치 버튼',
+        text : '-',
+        control : {
+            value : false,
+            onChange: (v) => { {v}
+                console.log({...v});
+            }
+        }
+    },
+
+
     {
         name : '입력/선택 라디오',
         title : '선택도구 라디오 타입 (다중택일)',
@@ -158,7 +179,7 @@ const data = [
             checks : [false,false,false],
             onChange : (v) => { {v}
                 console.component('↓ 선택 체크박스 : @change');
-                console.log(v);
+                console.log({...v});
             }
         }
     },
@@ -175,7 +196,7 @@ const data = [
         },
         control : {
             checks : [false,false,false],
-            list : makeArrayLength(5).map((c,i) =>  ({text : `체크박스 ${i+1}` , value : `checkbox_value_${i+1}`, checked : randomOne(true,false)})),
+            list : makeArrayLength(5).map((c,i) =>  ({text : `체크박스 ${i+1}` , value : `checkbox_value_${i+1}`, checked : randomOne(true,false) , required : randomOne(true, false)})),
             direction : randomOne('row' , 'col'),
             directiononChange : (controls) => {
                 controls.direction = controls.direction === 'row' ? 'col' : 'row';
@@ -282,7 +303,7 @@ const data = [
     },
 
     {
-        name : '레이아웃/-',
+        name : '레이아웃/sticky stack',
         title : 'title ',
         text : 'text ',
         control : {

@@ -11,6 +11,7 @@ import { navStore           } from '@/plates/PlateNavigation/PlateNavigation.vue
 import { modalStore         } from '@/plates/PlateInform/PlateInform.vue';
 import { authStore          } from '@/plates/PlateAuth/PlateAuth.vue';
 import { bannerStore        } from '@/plates/PlateBanner/PlateBanner.vue';
+import { stickyStackStore   } from '@/components/layout/StickyStack.vue';
 
 Vue.use(Vuex);
 
@@ -24,6 +25,7 @@ const storeInfo = combineStore(
     authStore,
     userStore,
     bannerStore,
+    stickyStackStore,
 );
 
 const store = new Vuex.Store(storeInfo)

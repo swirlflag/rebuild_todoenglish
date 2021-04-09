@@ -18,7 +18,7 @@
                         </div>
                         <div class="valueboard__value">
                             <div class="thumb-text">
-                                <span class="icon icon--rect-kakao"></span>
+                                <i class="icon--rect-kakao"></i>
                                 <span>seunghyun@enuma.com</span>
                             </div>
                         </div>
@@ -43,12 +43,12 @@
                         </div>
                         <div class="account__connect valueboard__value">
                             <div class="thumb-text">
-                                <span class="icon icon--mail"></span>
+                                <i class="icon--mail"></i>
                                 <span>이메일</span>
                                 <span class="hover-link theme-pink type-underline"><span>인증하기</span></span>
                             </div>
                             <div class="thumb-text">
-                                <span class="icon icon--rect-kakao"></span>
+                                <i class="icon--rect-kakao"></i>
                                 <span>카카오 계정</span>
                                 <span class="hover-link theme-pink type-underline"><span>인증하기</span></span>
                             </div>
@@ -318,7 +318,7 @@ export default {
 .account__basic {
 
     .account__connect {
-        .icon {
+        i {
             width: 20px; height: 20px;
         }
     }
