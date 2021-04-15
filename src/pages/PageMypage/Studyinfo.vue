@@ -191,7 +191,7 @@
 
 <script>
 import ButtonDefault    from '@/components/button/ButtonDefault.vue';
-import TextChangeMask   from '@/components/layout/TextChangeMask.vue';
+import TextChangeMask   from '@/components/display/TextChangeMask.vue';
 import InputDropdown   from '@/components/input/InputDropdown.vue';
 
 export default {

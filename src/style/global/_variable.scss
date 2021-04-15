@@ -35,7 +35,7 @@ $SIZE_MO_contentWidth           : 560px;
 $SIZE_PC_innerPadding           : 35px;
 // $SIZE_MO_innerPadding           : calc(1px + 3vw);
 // $SIZE_MO_innerPadding           : calc(3px + 2.8vw);
-$SIZE_MO_innerPadding           : 10px;
+$SIZE_MO_innerPadding           : 12px;
 
 $SIZE_lineheight_high3          : 2;
 $SIZE_lineheight_high2          : 1.8;
@@ -71,6 +71,9 @@ $COLOR_lightgray_2      : rgba(245,245,247,1);
 $COLOR_gray             : rgba(151,151,151,1);
 $COLOR_linegray         : rgba(52,45,81,0.15);
 
+$COLOR_overlaywhite     : rgba(255,255,255,0.4);
+$COLOR_overlayblack     : rgba(0,0,0,0.4);
+
 $COLOR_kakaoBrown       : rgba(60,30,30,1);
 $COLOR_kakaoYellow      : rgba(250,225,0,1);
 
@@ -79,3 +82,120 @@ $COLOR_laterBlue        : rgba(0, 119, 255, 0.877);
 // $SIZE_PC_gnbHeight : 114px;
 $SIZE_PC_gnbHeight : 68px;
 $SIZE_MO_gnbHeight : 64px;
+
+
+
+
+
+
+@mixin TEXT_DISPLAY_L {
+    font-size: 108px;
+    line-height: 1.22em;
+    font-weight: 300;
+    @include phone {
+        font-size: 88px;
+    }
+}
+
+@mixin TEXT_DISPLAY_M {
+    font-size: 88px;
+    line-height: 1.22em;
+    font-weight: 300;
+    @include phone {
+        font-size: 72px;
+    }
+}
+@mixin TEXT_DISPLAY_S {
+    font-size: 56px;
+    line-height: 1.22em;
+    font-weight: 300;
+    @include phone {
+        font-size: 44px;
+    }
+}
+@mixin TEXT_DISPLAY_XS {
+    font-size: 40px;
+    line-height: 1.22em;
+    font-weight: 300;
+    @include phone {
+        font-size: 32px;
+    }
+}
+
+@mixin TEXT_HEADING_L {
+    font-size: 60px;
+    line-height: 1.25em;
+    font-weight: 400;
+    @include phone {
+        font-size: 48px;
+    }
+}
+
+@mixin TEXT_HEADING_M {
+    font-size: 44px;
+    line-height: 1.25em;
+    font-weight: 400;
+    @include phone {
+        font-size: 36px;
+    }
+}
+
+@mixin TEXT_HEADING_S {
+    font-size: 36px;
+    line-height: 1.25em;
+    font-weight: 400;
+    @include phone {
+        font-size: 28px;
+    }
+}
+
+@mixin TEXT_HEADING_XS {
+    font-size: 32px;
+    line-height: 1.25em;
+    font-weight: 400;
+    @include phone {
+        font-size: 24px;
+    }
+}
+
+@mixin TEXT_SUBTITLE_L {
+    line-height: 1.4em;
+    font-weight: 700;
+    font-size: 28px;
+    @include phone {
+        font-size: 20px;
+    }
+}
+@mixin TEXT_SUBTITLE_M {
+    line-height: 1.4em;
+    font-weight: 700;
+    font-size: 24px;
+    @include phone {
+        font-size: 16px;
+    }
+}
+@mixin TEXT_SUBTITLE_S {
+    line-height: 1.4em;
+    font-weight: 700;
+    font-size: 24px;
+    @include phone {
+        font-size: 14px;
+    }
+}
+
+@mixin TEXT_BUTTON_M {
+    line-height: 1.4em;
+    font-weight: 700;
+    font-size: 28px;
+    @include phone {
+        font-size: 20px;
+    }
+}
+@mixin TEXT_BUTTON_S {
+    line-height: 1.4em;
+    font-weight: 700;
+    font-size: 24px;
+    @include phone {
+        font-size: 14px;
+    }
+}

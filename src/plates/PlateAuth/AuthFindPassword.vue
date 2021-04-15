@@ -60,7 +60,7 @@ const API_trySignup = (id) => {
 {API_trySignup}
 
 import { randomOne }  from '@/utils';
-import AlertFlashText       from '@/components/layout/AlertFlashText.vue';
+import AlertFlashText       from '@/components/display/AlertFlashText.vue';
 import ButtonDefault        from '@/components/button/ButtonDefault.vue';
 import InputText         from '@/components/input/InputText.vue';
 import SpinnerColordotsWave from '@/components/spinner/SpinnerColordotsWave.vue';

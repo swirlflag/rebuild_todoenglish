@@ -1,16 +1,16 @@
 <template>
     <ModalBox   type="confirm"
-                :isShow="$inform.is_confirmActive"
+                v-if="$modal.is_activeConfirm"
     >
-        <div class="alert__title" v-html="$inform.confirmTitle"></div>
-        <div class="alert__message" v-html="$inform.confirmMessage"></div>
-        <div class="alert__button">
+        <div class="confirm__title" v-html="$modal.confirmTitle"></div>
+        <div class="confirm__message" v-html="$modal.confirmMessage"></div>
+        <div class="confirm__button">
             <ButtonDefault @click="actionClose(1)" theme="green">
-                {{ $inform.confirmFalseButtonText }}
+                {{ $modal.confirmFalseButtonText }}
             </ButtonDefault>
             &nbsp;
             <ButtonDefault @click="actionClose(2)" theme="pink">
-                {{ $inform.confirmTrueButtonText }}
+                {{ $modal.confirmTrueButtonText }}
             </ButtonDefault>
         </div>
     </ModalBox>
@@ -28,8 +28,8 @@ export default {
         ButtonDefault,
     },
     computed : {
-        $inform() {
-            return this.$store.state.$inform;
+        $modal() {
+            return this.$store.state.$modal;
         }
     },
     methods  : {
@@ -41,13 +41,12 @@ export default {
         const payload = {
             type: 'confirm',
             action : () => {
-                if(this.$inform.is_confirmActive){
+                if(this.$modal.is_activeConfirm){
                     this.actionClose(0);
-                    console.log('dimmed confirm');
                 }
             }
         }
-        this.$store.commit('MODAL_addDimmedClickAction',payload);
+        this.$store.commit('MODAL_addDimmedClickAction', payload);
     },
 }
 
@@ -60,7 +59,7 @@ const idleConfirmState = {
 
 export const modalConfirmStore = {
     state : {
-        is_confirmActive            : false ,
+        is_activeConfirm            : false ,
         confirmTitle                : idleConfirmState.title,
         confirmMessage              : idleConfirmState.message,
         confirmTrueButtonText       : idleConfirmState.buttonTextTrue,
@@ -72,37 +71,37 @@ export const modalConfirmStore = {
     },
     mutations : {
         MODAL_showConfirm(state) {
-            state.$inform.is_confirmActive = true;
+            state.$modal.is_activeConfirm = true;
         },
         MODAL_hideConfirm(state) {
-            state.$inform.is_confirmActive = false;
+            state.$modal.is_activeConfirm = false;
         },
         MODAL_changeConfirmTitle(state, title = '') {
-            state.$inform.confirmTitle = title;
+            state.$modal.confirmTitle = title;
         },
         MODAL_changeConfirmMessage(state, message = '') {
-            state.$inform.confirmMessage = message;
+            state.$modal.confirmMessage = message;
         },
         MODAL_changeConfirmTrueButtonText(state,buttonText = '') {
-            state.$inform.confirmTrueButtonText = buttonText;
+            state.$modal.confirmTrueButtonText = buttonText;
         },
         MODAL_changeConfirmFalseButtonText(state,buttonText = '') {
-            state.$inform.confirmFalseButtonText = buttonText;
+            state.$modal.confirmFalseButtonText = buttonText;
         },
         MODAL_registConfirmClose (state, action = () => {}) {
-            state.$inform.on_confirmClose = action;
+            state.$modal.on_confirmClose = action;
         },
         MODAL_registConfirmTrue (state , action = () => {}) {
-            state.$inform.on_confirmTrue = action;
+            state.$modal.on_confirmTrue = action;
         },
         MODAL_registConfirmFalse (state , action = () => {}) {
-            state.$inform.on_confirmFalse = action;
+            state.$modal.on_confirmFalse = action;
         },
     },
     actions : {
-        showModalConfirm({state,commit, dispatch}, payload = {}) {
+        openModalConfirm({state,commit, dispatch}, payload = {}) {
 
-            if(state.$inform.is_active){
+            if(state.$modal.is_active){
                 console.dev('ERC_MD1 : 지금은 중복 호출 자체를 막아두었습니다.');
                 return;
             }
@@ -133,13 +132,13 @@ export const modalConfirmStore = {
             dispatch('disableModal');
             commit('MODAL_hideConfirm');
 
-            state.$inform.on_confirmClose();
+            state.$modal.on_confirmClose();
 
             if(result === 1){
-                state.$inform.on_confirmFalse();
+                state.$modal.on_confirmFalse();
             }
             if(result === 2){
-                state.$inform.on_confirmTrue();
+                state.$modal.on_confirmTrue();
             }
 
             commit('MODAL_registConfirmClose' , () => {});
@@ -153,16 +152,31 @@ export const modalConfirmStore = {
 </script>
 
 <style lang="scss" scoped>
-.alert__title {
+.modal__box {
+    > * {
+        margin-top: 30px;
+        &:nth-child(1) {
+            margin-top: 0;
+        }
+    }
+}
+.confirm__title {
     // font-size: 26px;
     font-size: 20px;
     font-weight: 700;
 }
-.alert__message {
+.confirm__message {
     line-height: $SIZE_lineheight_high1;
 }
-.alert__check {
+.confirm__button {
+    display: inline-block;
+    // display: flex;
 
+    > button + button{
+        @include phone {
+            margin-top: 10px;
+        }
+    }
 }
 
 </style>

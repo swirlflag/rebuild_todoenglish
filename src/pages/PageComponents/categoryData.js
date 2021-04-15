@@ -1,4 +1,7 @@
 import { randomOne } from '@/utils';
+import { VM } from '@/main.js';
+
+{randomOne,VM}
 
 const makeArrayLength = (length) => [...new Array(length).keys()];
 
@@ -60,26 +63,15 @@ const data = [
 
 
     {
-        name : '텍스트/Display 01',
-        title : 'Display 01',
+        name : '텍스트/범주',
+        title : 'Display',
         text : '-',
-
     },
     {
-        name : '텍스트/Display 02',
+        name : '텍스트/리스트',
         title : 'Display 02',
         text : '-',
 
-    },
-    {
-        name : '텍스트/Title 01',
-        title : 'Title 01',
-        text : '-',
-    },
-    {
-        name : '텍스트/Paragraph 01',
-        title : 'Paragraph 01',
-        text : '-',
     },
 
 
@@ -99,7 +91,7 @@ const data = [
         },
         control : {
             onChange : (v) => {{v}
-                // console.component('↓ 선택 드롭다운 : @change');
+                console.component('↓ 선택 드롭다운 : @change');
                 console.log({...v});
             },
         }
@@ -108,10 +100,11 @@ const data = [
     {
         name : '입력/토글 스위치',
         title : 'on/off 형태의 토글 스위치 버튼',
-        text : '-',
+        text : '토글 스위치 버튼은 on/off값을 변경하며 조작시 바로 기능에 영향을 끼칩니다.',
         control : {
             value : false,
             onChange: (v) => { {v}
+                console.component('↓ 토글 스위치 : @change');
                 console.log({...v});
             }
         }
@@ -311,6 +304,76 @@ const data = [
         }
     },
 
+    {
+        name : '레이아웃/레이어 컨텐츠',
+        title : '레이어 컨텐츠 제목',
+        text : '레이어 컨텐츠 텍스트',
+        control : {
+            isShow : false,
+            isShowList : false,
+        }
+    },
+
+
+    {
+        name : '모달/Alert',
+        title : 'Alert title',
+        text : 'Alert text',
+        control : {
+            payload : {
+                title : 'TITLE' ,
+                message : 'MESSAGE' ,
+                buttonText : 'OK',
+            },
+            call(payload) {
+                if(!payload){return}
+                const { title , message, buttonText } = payload;
+                VM.$store.dispatch('openModalAlert' , {
+                    title,
+                    message ,
+                    buttonText,
+                    actionClose : () => {
+                        console.component('모달 Alert : actionClose');
+                    }
+                })
+            }
+        }
+    },
+    {
+        name : '모달/Confirm',
+        title : 'Confirm title',
+        text : 'Confirm text',
+        control : {
+            payload : {
+                title : 'TITLE' ,
+                message : 'MESSAGE' ,
+                buttonTrueText : 'OK',
+                buttonFalseText : 'CANCEL',
+            },
+            call(payload) {
+                if(!payload){return}
+                const { title , message, buttonTrueText , buttonFalseText } = payload;
+                VM.$store.dispatch('openModalConfirm' , {
+                    title,
+                    message ,
+                    buttonTrueText,
+                    buttonFalseText,
+                    actionClose : () => {console.component('모달 Confirm : actionClose');},
+                    actionTrue : () => {console.component('모달 Confirm : actionTrue');},
+                    actionFalse : () => {console.component('모달 Confirm : actionFalse');},
+                })
+            }
+        }
+    },
+
+    {
+        name: '모달/Bottom Sheet',
+        title : '',
+        text : '',
+        control : {
+
+        },
+    }
 
 ];
 

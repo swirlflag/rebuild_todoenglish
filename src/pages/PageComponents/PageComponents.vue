@@ -187,6 +187,74 @@
 
 
 
+                    <!-- 텍스트/범주 -->
+                    <div v-if="renderId === '텍스트/범주'">
+                        <div class="comp-view ">
+                            <div class="show-child-tempblue">
+
+                                <input type="text" class="text--display-l texttype-input" value="Display L" placeholder="Display L">
+                                <input type="text" class="text--display-m texttype-input" value="Display M" placeholder="Display M">
+                                <input type="text" class="text--display-s texttype-input" value="Display S" placeholder="Display S">
+                                <input type="text" class="text--display-xs texttype-input" value="Display XS" placeholder="Display XS">
+
+                                <input type="text" class="text--heading-l texttype-input" value="Heading L" placeholder="Heading L">
+                                <input type="text" class="text--heading-m texttype-input" value="Heading M" placeholder="Heading M">
+                                <input type="text" class="text--heading-s texttype-input" value="Heading S" placeholder="Heading S">
+                                <input type="text" class="text--heading-xs texttype-input" value="Heading XS" placeholder="Heading XS">
+
+                                <input type="text" class="text--subtitle-l texttype-input" value="Subtitle L" placeholder="Subtitle L">
+                                <input type="text" class="text--subtitle-m texttype-input" value="Subtitle M" placeholder="Subtitle M">
+                                <input type="text" class="text--subtitle-s texttype-input" value="Subtitle S" placeholder="Subtitle S">
+
+                                <input type="text" class="text--button-m texttype-input" value="Button M" placeholder="Button M">
+                                <input type="text" class="text--button-s texttype-input" value="Button S" placeholder="Button S">
+
+                            </div>
+                        </div>
+                        <div class="comp-control">
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <!-- 텍스트/범주 -->
+
+
+
+
+
+
+
+
+                    <!-- 텍스트/리스트 -->
+                    <div v-if="renderId === '텍스트/리스트'">
+                        <div class="comp-view ">
+                            <ul class="list--dot">
+                                <li>tristique lectus</li>
+                                <li>Praesent sodales</li>
+                                <li>Proin augue</li>
+                                <li>Nam vel consectetu</li>
+                                <li>Integer accumsan vel leo at aliquet. Nullam consectetur magna et tortor </li>
+                                <li>tempus. Class aptent taciti sociosqu ad litora torquent per conubia</li>
+                                <li>enatis nunc suscipit vitae. Nulla quis neque hendrerit, condimentum ex sit amet, faucibus eros. Mauris dictum lacus a rutrum pharetra. Cras gravida commodo metus id mattis. Praesent tempus ac ex quis mollis. Nam vel consectetur ligula. Nulla pellentesque gravida est, non commodo sem. Sed ante urna, blandit non augue ac, fringilla interdum augue. Praesent faucibus a velit id cursus. Sed fermentum, turpis non ultrices maximus, nulla magna vehicula justo, blandit bibendum tellus nibh vitae orci. In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt orci velit, vitae dapibus orci dictum ac. Aenean dapibus dignissim bibendum. Phasellus sed augue pharetra, bibendum lorem vel, fac</li>
+                            </ul>
+
+                            <ul class="list--asterisk">
+                                <li>tristique lectus</li>
+                                <li>Praesent sodales</li>
+                                <li>Proin augue</li>
+                                <li>Nam vel consectetu</li>
+                                <li>Integer accumsan vel leo at aliquet. Nullam consectetur magna et tortor </li>
+                                <li>tempus. Class aptent taciti sociosqu ad litora torquent per conubia</li>
+                                <li>enatis nunc suscipit vitae. Nulla quis neque hendrerit, condimentum ex sit amet, faucibus eros. Mauris dictum lacus a rutrum pharetra. Cras gravida commodo metus id mattis. Praesent tempus ac ex quis mollis. Nam vel consectetur ligula. Nulla pellentesque gravida est, non commodo sem. Sed ante urna, blandit non augue ac, fringilla interdum augue. Praesent faucibus a velit id cursus. Sed fermentum, turpis non ultrices maximus, nulla magna vehicula justo, blandit bibendum tellus nibh vitae orci. In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt orci velit, vitae dapibus orci dictum ac. Aenean dapibus dignissim bibendum. Phasellus sed augue pharetra, bibendum lorem vel, fac</li>
+                            </ul>
+                        </div>
+                        <div class="comp-control">
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <!-- 텍스트/리스트 -->
+
 
 
 
@@ -335,6 +403,7 @@
                                                         @change="controls.onChange"
                                                         :direction="controls.direction"
                                                         :list="controls.list"
+                                                        class="show-tempblue"
                                 />
 
                             </div>
@@ -426,6 +495,7 @@
                                                             @change="controls.onChange"
                                                             :direction="controls.direction"
                                                             name="input-checkbox-collection"
+                                                            class="show-tempblue"
 
                                 />
                             </div>
@@ -450,7 +520,7 @@
                                 </div>
                             </div>
                         </div>
-                    <!--  입력/선택 체크박스 컬렉션 -->
+                    <!--  입력/선택 체크박스 컬렉션 --> 
 
 
 
@@ -627,6 +697,10 @@
 
 
 
+
+
+
+                    <!-- 레이아웃/sticky stack -->
                         <div v-if="renderId === '레이아웃/sticky stack'">
                             <div class="comp-view">
                                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -653,6 +727,133 @@
                                 <div></div>
                             </div>
                         </div>
+                    <!-- 레이아웃/sticky stack -->
+
+
+
+
+
+
+
+
+
+                    <!-- 모달/Alert -->
+                        <div v-if="renderId === '모달/Alert'">
+                            <div class="comp-control">
+                                <div>
+                                    Title : <input type="text" v-model="controls.payload.title">
+                                </div>
+                                <div>
+                                    Message : <input type="text" v-model="controls.payload.message">
+                                </div>
+                                <div>
+                                    ButtonText : <input type="text" v-model="controls.payload.buttonText">
+                                </div>
+                                <div>
+                                    <button class="default-button" @click="controls.call(controls.payload)">
+                                        호출하기
+                                    </button>
+                                </div>
+                                <div>
+                                    현재 호출 상태 : {{ $store.state.$modal.is_activeAlert }}
+                                </div>
+                            </div>
+                        </div>
+                    <!-- 모달/Alert -->
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- 모달/Confirm -->
+                        <div v-if="renderId === '모달/Confirm'">
+                            <div class="comp-control">
+                                <div>
+                                    Title : <input type="text" v-model="controls.payload.title">
+                                </div>
+                                <div>
+                                    Message : <input type="text" v-model="controls.payload.message">
+                                </div>
+                                <div>
+                                    ButtonTrueText : <input type="text" v-model="controls.payload.buttonTrueText">
+                                </div>
+                                <div>
+                                    ButtonFalseText : <input type="text" v-model="controls.payload.buttonFalseText">
+                                </div>
+                                <div>
+                                    <button class="default-button" @click="controls.call(controls.payload)">
+                                        호출하기
+                                    </button>
+                                </div>
+                                <div>
+                                    현재 호출 상태 : {{ $store.state.$modal.is_activeConfirm }}
+                                </div>
+                            </div>
+                        </div>
+                    <!-- 모달/Confirm -->
+
+
+
+
+
+
+
+                        <div v-if="renderId === '모달/Bottom Sheet'">
+                            <div class="comp-view">
+
+                                bottom sheet
+                            </div>
+                            <div class="comp-control">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+
+
+                        <div v-if="renderId === '레이아웃/레이어 컨텐츠'">
+                            <div class="comp-view">
+                                아래의 호출하기 버튼으로 레이어 컨텐츠를 불러옵니다.
+
+                                <LayerContent   title="카카오 이벤트?"
+                                                v-model="controls.isShow"
+
+                                >
+                                    <KakaoEvent :isShowList="controls.isShowList"/>
+                                </LayerContent>
+
+                            </div>
+                            <div class="comp-control">
+                                <div>
+                                    <button class="default-button" @click="controls.isShow = !controls.isShow">
+                                        호출하기
+                                    </button>
+                                </div>
+
+                                <div>
+                                    현재 호출 상태 : {{ controls.isShow }}
+                                </div>
+
+                                <div>
+
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" v-model="controls.isShowList">
+                                        <span>스크롤 리스트 더미 만들기</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
 
 
 
@@ -664,6 +865,9 @@
                                 <div></div>
                             </div>
                         </div> -->
+
+
+
 
 
 
@@ -729,7 +933,10 @@ import InputCheckboxCollection from '@/components/input/InputCheckboxCollection.
 import InputText from '@/components/input/InputText.vue';
 import InputTextEmail from '@/components/input/InputTextEmail.vue';
 import InputTextPassword from '@/components/input/InputTextPassword.vue';
-import StickyStack from '@/components/layout/StickyStack.vue';
+import StickyStack from '@/components/display/StickyStack.vue';
+
+import LayerContent from '@/components/display/LayerContent.vue';
+import KakaoEvent from '@/components/layout/KakaoEvent.vue';
 
 
 export default {
@@ -751,6 +958,9 @@ export default {
         InputTextPassword,
 
         StickyStack,
+
+        LayerContent,
+        KakaoEvent,
 
     },
     data() {
@@ -853,7 +1063,7 @@ export default {
     },
 
     updated () {
-        
+
     },
 
     mounted() {
@@ -863,4 +1073,4 @@ export default {
 </script>
 
 
-<style src="./PageComponents.scss" lang="scss" ></style>
+<style src="./PageComponents.scss" lang="scss"></style>

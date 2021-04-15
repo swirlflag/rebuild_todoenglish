@@ -13,7 +13,7 @@
                 <h2 class="layout__escape">text 1</h2>
                     <h2>text 222</h2>
 
-                    <ul class="dot-list">
+                    <ul class="list--dot">
                         <li class="precaution">안녕하세요</li>
                         <li>안녕하세요</li>
                         <li>안녕하세요</li>

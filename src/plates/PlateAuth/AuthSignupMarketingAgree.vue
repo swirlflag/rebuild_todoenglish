@@ -3,7 +3,7 @@
 
         <p>다양한 정보와 소식을 이메일로 받아보겠습니다.</p>
 
-        <ul class="dot-list">
+        <ul class="list--dot">
             <li>자녀의 학습 리포트</li>
             <li>토도수학 활용 정보</li>
             <li>토도 제품 할인 소식 등</li>

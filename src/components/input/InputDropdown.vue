@@ -81,7 +81,7 @@
 
 <script>
 
-import TextChangeMask from '@/components/layout/TextChangeMask.vue';
+import TextChangeMask from '@/components/display/TextChangeMask.vue';
 import { targetPathDetect } from '@/utils';
 
 export default {
@@ -362,7 +362,7 @@ export default {
         },
     // 내장 select태그에 직접 바인딩 되어있는 함수. 컴포넌트 바깥에선 select태그를 조절
         onChange() {
-            this.select(this.$refs.ref_select.selectedIndex);
+            // this.select(this.$refs.ref_select.selectedIndex);
         },
 
     // 현재 상태에서 원하는 변형 값들을 계산해서 보관

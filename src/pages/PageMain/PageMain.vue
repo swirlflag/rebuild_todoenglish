@@ -327,7 +327,7 @@
                         <br>통합 커리큘럼
                     </h3>
                     <p class="showing__description">
-                        <ul class="dot-list">
+                        <ul class="list--dot">
                             <li>
                                 미국 공통교과 기준, 킨더(유치원) - G2(초2) 수준의 통합 커리큘럼을
                                 <br>
@@ -407,7 +407,7 @@
                         <br>풍부한 학습 콘텐츠
                     </h3>
                     <p class="showing__description">
-                        <ul class="dot-list">
+                        <ul class="list--dot">
                             <li>
                                 2000개 이상의 학습 액티비티
                             </li>
@@ -487,7 +487,7 @@
                 </div>
 
                 <p class="main-footer__precaution">
-                    <ul class="dot-list">
+                    <ul class="list--dot">
                         <li>
                             회원가입을 하시고 앱을 설치하시면 토도영어 앱의 모든 콘텐츠 이용이 가능합니다.
                         </li>

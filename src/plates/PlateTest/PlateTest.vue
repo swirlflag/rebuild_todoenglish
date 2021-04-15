@@ -104,7 +104,7 @@ export default {
 
             if(this.$store.state.$user.is_login){
 
-                this.$store.dispatch('showModalConfirm' , {
+                this.$store.dispatch('openModalConfirm' , {
                     message : '확인을 누르면 로그아웃 합니다',
                     actionTrue : () => {
                         this.$store.dispatch('signOut');
@@ -113,7 +113,7 @@ export default {
             }else {
 
                 const random = `test_random${Math.round(Math.random()* 100)}`;
-                this.$store.dispatch('showModalConfirm' , {
+                this.$store.dispatch('openModalConfirm' , {
                     title : '한방에 로그인하기',
                     message : `
                         확인을 누르면 이렇게 로그인합니다.
@@ -147,13 +147,13 @@ export default {
                     console.log('test alert close');
                 }
             };
-            this.$store.dispatch('showModalAlert' , payload);
+            this.$store.dispatch('openModalAlert' , payload);
         },
         TEST_openAlert2(){
             const payload = {
                 message : '비밀번호 변경을 위한 이메일을 발송하였습니다.<br/>메일함을 확인해주세요. (TEST)',
             };
-            this.$store.dispatch('showModalAlert' , payload);
+            this.$store.dispatch('openModalAlert' , payload);
         },
         TEST_openConfirm1() {
             const payload = {
@@ -164,7 +164,7 @@ export default {
                     }
                 },
             };
-            this.$store.dispatch('showModalConfirm' ,payload);
+            this.$store.dispatch('openModalConfirm' ,payload);
         },
         TEST_addBanner() {
             this.$store.dispatch('addBannerAlert' , 'hello' + Math.floor(Math.random() * 1000));

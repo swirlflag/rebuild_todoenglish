@@ -20,7 +20,7 @@
              v-if="1"
         />
 
-        <PlateInform
+        <PlateModal
             v-if="1"
         />
 
@@ -53,7 +53,7 @@
 import PlateTest                from '@/plates/PlateTest/PlateTest.vue';
 import PlateSetting             from '@/plates/PlateSetting/PlateSetting.vue';
 import PlateLoading             from '@/plates/PlateLoading/PlateLoading.vue';
-import PlateInform              from '@/plates/PlateInform/PlateInform.vue';
+import PlateModal              from '@/plates/PlateModal/PlateModal.vue';
 import PlateAuth                from '@/plates/PlateAuth/PlateAuth.vue';
 import PlateTransitionCover     from '@/plates/PlateTransitionCover/PlateTransitionCover.vue';
 import PlateNavigation          from '@/plates/PlateNavigation/PlateNavigation.vue';
@@ -68,7 +68,7 @@ import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
 export default {
     name: 'App',
     components: {
-        PlateSetting, PlateLoading, PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateInform ,PlateAuth ,PlateBanner
+        PlateSetting, PlateLoading, PlateTransitionCover , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth ,PlateBanner
     },
     data() {
         return {

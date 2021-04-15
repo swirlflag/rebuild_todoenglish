@@ -69,7 +69,7 @@
                             토도영어
                         </h3>
                         <p class="showing__description">
-                            <ul class="dot-list">
+                            <ul class="list--dot">
                                 <li>
                                     12개의 레벨, 600일의 데일리 코스, 200여 개의 게임과 비디오와
                                     <br class="visible-overphone">
@@ -101,7 +101,7 @@
                             부모님께 보고 드리는 토도 리포트
                         </h3>
                         <p class="showing__description">
-                            <ul class="dot-list">
+                            <ul class="list--dot">
                                 <li>
                                     매주 간편하게 카톡으로 받아보는 우리 아이 토도 리포트
                                 </li>
@@ -134,7 +134,7 @@
                             키우는 워크시트
                         </h3>
                         <p class="showing__description">
-                            <ul class="dot-list">
+                            <ul class="list--dot">
                                 <li>
                                     종이 위 반복 학습은 진짜 내 것으로 만드는 과정이에요.
                                 </li>
@@ -169,7 +169,7 @@
                             2회 체험권
                         </h3>
                         <p class="showing__description">
-                            <ul class="dot-list">
+                            <ul class="list--dot">
                                 <li>
                                     검증된 전문 영어 코치의 그룹 화상 세션
                                 </li>
@@ -212,7 +212,7 @@
                             웰컴팩 증정
                         </h3>
                         <p class="showing__description">
-                            <ul class="dot-list">
+                            <ul class="list--dot">
                                 <li>
                                     매달 받는 워크시트를 보관할 수 있는 바인더
                                 </li>
@@ -242,7 +242,7 @@
                             부모 페이지에서만 구매 가능합니다.
                         </h3>
 
-                        <ul class="subscribe-notice__precaution dot-list precaution">
+                        <ul class="subscribe-notice__precaution list--dot precaution">
                             <li>
                                 월 정기 구독 상품은 토도영어 앱 설치 후
                                 <!-- <br class="visible-phone"> -->

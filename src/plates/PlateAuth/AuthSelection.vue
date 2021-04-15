@@ -37,7 +37,7 @@ export default {
         TEST_onetouchLogin() {
             this.$store.dispatch('closeAuthPanel');
             const random = `random${Math.round(Math.random()* 100)}`;
-            this.$store.dispatch('showModalAlert' , {
+            this.$store.dispatch('openModalAlert' , {
                 title : '',
                 message : `
                     이렇게 로그인합니다.

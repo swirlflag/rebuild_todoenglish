@@ -37,7 +37,7 @@
             </div>
 
 
-            <ul class="dot-list precaution">
+            <ul class="list--dot precaution">
                 <li>
                     <i class="icon--curriculum-dot level--3"></i>표시는 심화 과정 입니다.
                 </li>

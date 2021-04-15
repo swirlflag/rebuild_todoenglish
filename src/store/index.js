@@ -8,10 +8,10 @@ import userStore        from './userStore.js';
 import { appStore           } from '@/App.vue';
 import { transitionStore    } from '@/plates/PlateTransitionCover/PlateTransitionCover.vue';
 import { navStore           } from '@/plates/PlateNavigation/PlateNavigation.vue';
-import { modalStore         } from '@/plates/PlateInform/PlateInform.vue';
+import { modalStore         } from '@/plates/PlateModal/PlateModal.vue';
 import { authStore          } from '@/plates/PlateAuth/PlateAuth.vue';
 import { bannerStore        } from '@/plates/PlateBanner/PlateBanner.vue';
-import { stickyStackStore   } from '@/components/layout/StickyStack.vue';
+import { stickyStackStore   } from '@/components/display/StickyStack.vue';
 
 Vue.use(Vuex);
 

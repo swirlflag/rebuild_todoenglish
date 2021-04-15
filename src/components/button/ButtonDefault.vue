@@ -1,6 +1,5 @@
 <template>
-    <button     class="button--default"
-                :class="`${isPressButton ? ' st-press' :''}${theme ? ` theme-${theme}` : ''}${isHover ? ' st-hover' : ''}${disable ? ' st-disable': ''}${isFocus ? ' st-focus' :''}`"
+    <button     :class="classNames"
                 ref="ref_root"
                 tabindex="0"
 
@@ -102,6 +101,11 @@ export default {
             stateAnimate : {
                 isRun : false
             },
+        }
+    },
+    computed : {
+        classNames() {
+            return `button--default${this.isPressButton ? ' st-press' :''}${this.theme ? ` theme-${this.theme}` : ''}${this.isHover ? ' st-hover' : ''}${this.disable ? ' st-disable': ''}${this.isFocus ? ' st-focus' :''}`
         }
     },
     methods : {

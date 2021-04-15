@@ -1,12 +1,12 @@
 <template>
     <ModalBox   type="alert"
-                :isShow="$inform.is_alertActive"
+                v-if="$modal.is_activeAlert"
     >
-        <div class="alert__title" v-html="$inform.alertTitle"></div>
-        <div class="alert__message" v-html="$inform.alertMessage"></div>
+        <div class="alert__title" v-html="$modal.alertTitle"></div>
+        <div class="alert__message" v-html="$modal.alertMessage"></div>
         <div class="alert__button">
             <ButtonDefault @click="close" theme="pink">
-                {{ $inform.alertButtonText }}
+                {{ $modal.alertButtonText }}
             </ButtonDefault>
         </div>
     </ModalBox>
@@ -24,8 +24,8 @@ export default {
         ButtonDefault,
     },
     computed : {
-        $inform() {
-            return this.$store.state.$inform;
+        $modal() {
+            return this.$store.state.$modal;
         }
     },
     methods  : {
@@ -37,9 +37,8 @@ export default {
         const payload = {
             type : 'alert',
             action : () => {
-                if(this.$inform.is_alertActive){
+                if(this.$modal.is_activeAlert){
                     this.close();
-                    console.log('dimmed alert');
                 }
             },
         }
@@ -53,39 +52,41 @@ const idleAlertState = {
     buttonText  : '확인',
 };
 
+
+
 export const modalAlertStore = {
     state : {
-        is_alertActive         : false ,
-        alertTitle             : idleAlertState.title,
-        alertMessage           : idleAlertState.message ,
-        alertButtonText        : idleAlertState.buttonText ,
+        is_activeAlert          : false ,
+        alertTitle              : idleAlertState.title,
+        alertMessage            : idleAlertState.message ,
+        alertButtonText         : idleAlertState.buttonText ,
 
-        on_alertClose       : () => {},
+        on_alertClose           : () => {},
     },
     mutations : {
         MODAL_showAlert(state) {
-            state.$inform.is_alertActive = true;
+            state.$modal.is_activeAlert = true;
         },
         MODAL_hideAlert(state) {
-            state.$inform.is_alertActive = false;
+            state.$modal.is_activeAlert = false;
         },
         MODAL_changeAlertTitle(state, title = '') {
-            state.$inform.alertTitle = title;
+            state.$modal.alertTitle = title;
         },
         MODAL_changeAlertMessage(state, message = '') {
-            state.$inform.alertMessage = message;
+            state.$modal.alertMessage = message;
         },
         MODAL_changealertButtonText(state,buttonText = '') {
-            state.$inform.alertButtonText = buttonText;
+            state.$modal.alertButtonText = buttonText;
         },
         MODAL_registAlertClose (state, action = () => {}) {
-            state.$inform.on_alertClose = action;
+            state.$modal.on_alertClose = action;
         },
     },
     actions : {
-        showModalAlert({state,commit, dispatch}, payload = {}) {
+        openModalAlert({state,commit, dispatch}, payload = {}) {
 
-            if(state.$inform.is_active){
+            if(state.$modal.is_active){
                 console.dev('ERC_MD1 : 지금은 중복 호출 자체를 막아두었습니다.');
                 return;
             }
@@ -113,7 +114,7 @@ export const modalAlertStore = {
         closeModalAlert({state,commit, dispatch}) {
             dispatch('disableModal');
             commit('MODAL_hideAlert');
-            state.$inform.on_alertClose();
+            state.$modal.on_alertClose();
             commit('MODAL_registAlertClose' , () => {});
         },
 
@@ -123,6 +124,15 @@ export const modalAlertStore = {
 </script>
 
 <style lang="scss" scoped>
+.modal__box {
+    > * {
+        margin-top: 30px;
+        &:nth-child(1) {
+            margin-top: 0;
+        }
+    }
+}
+
 .alert__title {
     // font-size: 26px;
     font-size: 20px;

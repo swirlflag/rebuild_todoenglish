@@ -18,8 +18,8 @@
 
 <template>
 
-    <label class="input--checkbox" :class="{'st-checked' : modelData.value}">
-        <input type="checkbox" v-model="modelData.value">
+    <label class="input--checkbox" :class="{'st-checked' : modelData.checked}">
+        <input type="checkbox" v-model="modelData.checked">
 
         <span class="checkbox--icon"></span>
 
@@ -35,8 +35,9 @@ export default {
     name : 'InputCheckbox',
     props : {
         modelValue : Boolean,
-        text : [String,Number],
         checked : Boolean,
+
+        text : [String,Number],
         index : Number,
     },
     model: {
@@ -45,53 +46,55 @@ export default {
     },
     watch : {
         'modelValue'(){
-            if(this.modelValue !== undefined && this.modelValue !== this.modelData.value){
-                this.modelData.value = this.modelValue;
-            }
+            this.watchModelValue();
         },
         'checked'() {
-            if(this.checked !== undefined && this.checked !== this.modelData.value){
-                this.modelData.value = this.checked;
-            }
+            this.watchChecked();
         },
-        'modelData.value'(){
-            this.watchModelData();
+        'modelData.checked'(){
+            this.watchModelDataChecked();
         }
     },
-    components : {
-    },
     data () {
-        const value = (this.modelValue === undefined ? false : this.modelValue);
+        const checked = this.modelValue === undefined ? false : this.modelValue;
+        const index = this.index === undefined ? null : this.index;
 
         return {
             modelData : {
-                value,
-                index : this.index,
+                checked,
+                index,
             },
         }
     },
     methods : {
-        check() {
-            this.modelData.value = true;
-        },
-        uncheck() {
-            this.modelData.value = false;
-        },
-
-        watchModelData() {
-            this.$emit('change' , this.modelData);
-            this.$emit('modelEvent' , this.modelData.value);
-        },
-
-        detectChecked() {
-            if(this.checked){
-                this.check();
+        watchModelValue() {
+            if(this.modelValue !== this.modelData.checked){
+                this.modelData.checked = this.modelValue;
             }
         },
+        watchChecked() {
+            if(this.checked !== this.modelData.checked){
+                this.modelData.checked = this.checked;
+            }
+        },
+        watchModelDataChecked() {
+            this.$emit('change' , this.modelData);
+            this.$emit('modelEvent' , this.modelData.checked);
+        },
+
+        check() {
+            this.modelData.checked = true;
+        },
+        uncheck() {
+            this.modelData.checked = false;
+        },
+
     },
 
     created () {
-        this.detectChecked();
+        if(this.checked){
+            this.check();
+        }
     },
 
 }

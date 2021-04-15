@@ -66,6 +66,15 @@ $STANDARD_mobileMin : 769px;
     }
 }
 
+@mixin hideScrollbar {
+    &::-webkit-scrollbar {
+        opacity: 0;
+        // display: none;
+        visibility: hidden;
+        width: 0; height: 0;
+    }
+}
+
 :export {
     mobileSize :$STANDARD_mobile
 }

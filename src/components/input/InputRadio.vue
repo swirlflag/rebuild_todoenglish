@@ -21,7 +21,14 @@
     <label  class="input--radio"
             :class="{'st-checked' : isChecked}"
     >
-        <input type="radio" :value="value" :name="name" ref="ref_radio" @change="onChange" :data-checked="isChecked" @click="onClick">
+        <input  type="radio"
+                ref="ref_radio"
+                :data-checked="isChecked"
+                :value="value"
+                :name="name"
+                @change="onChange"
+                @click="onClick"
+        >
         <span class="radio--icon"></span>
 
         <div class="radio--label">
@@ -46,6 +53,7 @@ export default {
             type : String,
             required : true
         },
+
         value : {
             type : null,
             required : true,
@@ -120,12 +128,13 @@ export default {
         },
 
         onChange() {
-            if(this.ignoreChange){
-                this.ignoreChange = false;
-                return;
-            }
+            // console.log(1);
+            // if(this.ignoreChange){
+            //     this.ignoreChange = false;
+            //     return;
+            // }
 
-            this.check();
+            // this.check();
         },
 
         emitEvent() {

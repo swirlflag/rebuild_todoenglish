@@ -1,8 +1,22 @@
+<!--
+    USE PREVIEW
+        <InputToggleSwitch  v-model="controls.value"
+                            @change="controls.onChange"
+        />
+
+    METHODS
+        ref.check();
+        ref.uncheck();
+        ref.toggle();
+
+    MEMO :
+-->
+
 <template>
     <label class="input--toggle-switch"
-            :class="{'st-checked' : modelData.value}"
+            :class="{'st-checked' : modelData.checked}"
     >
-        <input type="checkbox" v-model="modelData.value" @change="onChange">
+        <input type="checkbox" v-model="modelData.checked">
         <span class="input--toggle-switch__plate">
             <span class="input--toggle-switch__point"></span>
         </span>
@@ -18,19 +32,21 @@ export default {
     },
     props : {
         modelValue : Boolean,
-        value : Boolean,
+        checked : Boolean,
     },
     data() {
         return {
-            // isChecked : false,
             modelData : {
-                value : false
+                checked : false
             }
         }
     },
     watch : {
         "modelValue"() {
             this.watchModelValue();
+        },
+        "checked"() {
+            this.watchChecked();
         },
         "modelData" :{
             deep : true,
@@ -41,16 +57,24 @@ export default {
     },
     methods : {
         watchModelValue() {
-            this.modelData.value = this.modelValue;
+            this.modelData.checked = this.modelValue;
+        },
+        watchChecked() {
+            this.modelData.checked = this.checked;
         },
         watchModelData() {
             this.$emit('change' , this.modelData)
-            this.$emit('modelEvent' , this.modelData.value);
+            this.$emit('modelEvent' , this.modelData.checked);
         },
-
-        onChange() {
-            console.log(this.modelData.value);
+        check() {
+            this.modelData.checked = true;
         },
+        uncheck() {
+            this.modelData.checked = false;
+        },
+        toggle() {
+            this.modelData.checked = !this.modelData.checked;
+        }
     }
 
 }
@@ -70,17 +94,34 @@ $shadow : $size*0.1;
     box-sizing: border-box;
     border-radius: $radius;
     cursor: pointer;
+    background-color: rgb(194, 194, 194);
+
+    @include hover {
+        .input--toggle-switch__point {
+            // background: $COLOR_mint_1;
+        }
+    }
+
+    &.st-checked {
+        background-color: $COLOR_mint_1;
+
+        .input--toggle-switch__point {
+            transform:translate3d($size*0.76,0,0);
+            box-shadow: -$shadow $shadow #{$shadow*0.5} 0px rgba(0,0,0,0.2);
+        }
+    }
 
     > input[type=checkbox] {
         display: none;
         pointer-events: none;
     }
+
     .input--toggle-switch__plate  {
         display: inline-block;
         position: relative;
         width: 100%; height: 100%;
         width: $size * 1.76; height: $size;
-        background-color: rgb(194, 194, 194);
+        background-color: inherit;
         transition: background-color 300ms ease;
         box-shadow: inset 0 $shadow $shadow 0 rgba(0,0,0,0.15);
         overflow: hidden;
@@ -98,9 +139,7 @@ $shadow : $size*0.1;
             border: 1px solid #fff;
             box-sizing: border-box;
 
-            box-shadow: $shadow $shadow #{$shadow*0.5} 0px rgba(0,0,0,0.2)
-
-            ;
+            box-shadow: $shadow $shadow #{$shadow*0.5} 0px rgba(0,0,0,0.2);
             transition: transform 300ms $EASE_outCubic, box-shadow 300ms ease ,background-color 250ms ease;
 
             background: linear-gradient(144deg, rgba(240,240,240,1) 0%, rgba(240,240,240,1) 37%, rgba(255,255,255,1) 100%);
@@ -108,21 +147,6 @@ $shadow : $size*0.1;
         }
     }
 
-    @include hover {
-        .input--toggle-switch__point {
-            // background: $COLOR_mint_1;
-        }
-    }
-
-    &.st-checked {
-        .input--toggle-switch__plate  {
-            background-color: $COLOR_mint_1;
-        }
-        .input--toggle-switch__point {
-            transform:translate3d($size*0.76,0,0);
-            box-shadow: -$shadow $shadow #{$shadow*0.5} 0px rgba(0,0,0,0.2);
-        }
-    }
 }
 
 

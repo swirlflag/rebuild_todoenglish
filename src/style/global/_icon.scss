@@ -4,6 +4,7 @@ i[class^=icon] {
     background-size: contain;
     background-position: center center;
     width: 10px; height: 10px;
+    vertical-align: top;
 }
 i.icon {
 
@@ -202,6 +203,14 @@ i.icon {
     &--lock {
         width: 17px ; height: 20px;
         background-image: url('~@/assets/icon/icon_lock.svg');
+    }
+
+    &--cancel {
+        width: 32px; height: 32px;
+        background-image: url('~@/assets/icon/icon_cancel.svg');
+        .c-white {
+            background-image: url('~@/assets/icon/icon_cancel_white.svg');
+        }
     }
 
 

@@ -12,7 +12,7 @@
                 <p>
                     토도영어의 커리큘럼은, Global Learning Xprize 대회 우승을 통해 세계 최고의 성과를 증명한 Enuma의 디지털 학습 방법론을 바탕으로 자체 개발되었습니다.
                 </p>
-                <ul class="dot-list precaution">
+                <ul class="list--dot precaution">
                     <li>
                         <a href="#" class="hover-link type-underline">
                             <span>Global Learning Xprize</span>
@@ -50,8 +50,8 @@
 
 <script>
 
-import CommonHeader         from '@/components/layout/CommonHeader.vue';
-import TextChangeMask       from '@/components/layout/TextChangeMask.vue';
+import CommonHeader         from '@/components/display/CommonHeader.vue';
+import TextChangeMask       from '@/components/display/TextChangeMask.vue';
 import CurriculumMap        from './CurriculumMap.vue';
 import CurriculumObjectives from './CurriculumObjectives.vue';
 

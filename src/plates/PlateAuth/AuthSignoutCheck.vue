@@ -32,7 +32,7 @@
 
 import ButtonDefault        from '@/components/button/ButtonDefault.vue';
 import SpinnerColordotsWave from '@/components/spinner/SpinnerColordotsWave.vue';
-import AlertFlashText       from '@/components/layout/AlertFlashText.vue';
+import AlertFlashText       from '@/components/display/AlertFlashText.vue';
 
 export default {
     components : {

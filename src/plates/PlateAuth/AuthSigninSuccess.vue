@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import TextChangeMask from '@/components/layout/TextChangeMask.vue';
+import TextChangeMask from '@/components/display/TextChangeMask.vue';
 export default {
     name : 'AuthSuccess',
     components : {

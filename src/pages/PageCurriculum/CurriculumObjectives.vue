@@ -26,7 +26,7 @@
                 </table>
             </div>
 
-            <ul class="dot-list precaution">
+            <ul class="list--dot precaution">
                 <li>
                     {{lastLevel}}레벨 이후의 레벨은 계속 업데이트됩니다.
                 </li>

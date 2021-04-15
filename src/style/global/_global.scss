@@ -321,42 +321,7 @@ body {
 
 }
 
-.precaution {
-    // line-height: $SIZE_lineheight_high1;
-    // font-size: 14px;
-    // margin-top: 18px;
-    @include hardSelect {
-        color: $COLOR_gray;
-    }
-}
 
-.dot-list {
-    display: inline-block;
-    li {
-        list-style: auto;
-        position: relative;
-        display: flex;
-        align-items: top;
-        &+li {
-            margin-top: 8px;
-            @include phone {
-                margin-top: 5px;
-            }
-        }
-        &::before {
-            content: '•';
-            display: inline-block;
-            position: relative;
-            margin-right: 0.15em;
-            font-size: 1.2em;
-            top: -0.025em;
-        }
-    }
-
-    &.precaution {
-        li + li {margin-top: 3px;}
-    }
-}
 
 .hover-link{
     position: relative;
@@ -583,3 +548,60 @@ body {
         }
     }
 }
+
+.precaution {
+    // line-height: $SIZE_lineheight_high1;
+    // font-size: 14px;
+    // margin-top: 18px;
+    @include hardSelect {
+        color: $COLOR_gray;
+    }
+}
+
+[class^=list--] {
+
+    display: inline-block;
+    li {
+        list-style: auto;
+        position: relative;
+        display: flex;
+        align-items: top;
+        &+li {
+            margin-top: 8px;
+            @include phone {
+                margin-top: 5px;
+            }
+        }
+        &::before {
+            display: inline-block;
+            position: relative;
+            margin-right: calc(1px + 0.18em);
+        }
+    }
+
+    &.list--dot li::before {
+        content: '•';
+        font-size: 1.2em;
+        top: -0.025em;
+    }
+    &.list--asterisk li::before {
+        content: '*';
+        top: 0.08em;
+        font-size: 1.1em;
+    }
+
+}
+
+.text--display-l { @include TEXT_DISPLAY_L(); }
+.text--display-m { @include TEXT_DISPLAY_M(); }
+.text--display-s { @include TEXT_DISPLAY_S(); }
+.text--display-xs { @include TEXT_DISPLAY_XS(); }
+.text--heading-l { @include TEXT_HEADING_L(); }
+.text--heading-m { @include TEXT_HEADING_M(); }
+.text--heading-s { @include TEXT_HEADING_S(); }
+.text--heading-xs { @include TEXT_HEADING_XS(); }
+.text--subtitle-l { @include TEXT_SUBTITLE_L(); }
+.text--subtitle-m { @include TEXT_SUBTITLE_M(); }
+.text--subtitle-s { @include TEXT_SUBTITLE_S(); }
+.text--button-m { @include TEXT_BUTTON_M(); }
+.text--button-s { @include TEXT_BUTTON_S(); }

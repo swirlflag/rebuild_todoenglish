@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import CommonHeader from '@/components/layout/CommonHeader.vue';
+import CommonHeader from '@/components/display/CommonHeader.vue';
 import Account      from './Account.vue';
 import Studyinfo    from './Studyinfo.vue';
 

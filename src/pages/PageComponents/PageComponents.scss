@@ -26,11 +26,14 @@ $outerPadding : 16px;
         overflow: hidden !important;
     }
 
-    .input--checkbox-collection ,
-    .input--radio-collection {
+    .show-tempblue ,
+    .show-child-tempblue > * {
+        box-sizing: border-box;
         border: 2px dashed $tempblue !important;
     }
+
 }
+
 
 
 
@@ -44,6 +47,16 @@ input[type=text]{
     outline: none;
     background-color: #fff;
 }
+input.texttype-input {
+    padding: 0;
+    display: inline-block;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color :unset;
+    white-space: nowrap;
+}
+
 
 
 label.radio-label {
@@ -417,6 +430,9 @@ $categorypadding : 10px;
     background-image : url('~@/assets/temp/grid.svg');
     background-color : tempblue_a(0.05);
     background-size : 2%;
+    @include phone {
+        padding: 10px;
+    }
 
     &.row  {
         flex-direction: row;

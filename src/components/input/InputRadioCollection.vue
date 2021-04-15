@@ -77,7 +77,7 @@ export default {
                 allList : [],
             },
 
-            localVmodel : this.modelValue || '',
+            localVmodel : this.modelValue || this.list || '',
 
             listValueMap : this.list.map(c => c.value),
 

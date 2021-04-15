@@ -159,8 +159,8 @@ export default {
         },
 
         onInputChange(payload) {
-            const { value , index } = payload;
-            this.modifyTarget(index,value);
+            const { checked , index } = payload;
+            this.modifyTarget(index,checked);
         },
 
         createAllList() {

@@ -104,7 +104,7 @@
 
 <script>
 import gsap from 'gsap';
-import TextChangeMask               from '@/components/layout/TextChangeMask.vue';
+import TextChangeMask               from '@/components/display/TextChangeMask.vue';
 
 import AuthSelection                from './AuthSelection.vue';
 import AuthExternal                 from './AuthExternal.vue';
