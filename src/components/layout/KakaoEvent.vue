@@ -50,6 +50,7 @@ export default {
     },
     methods :{
         simpleAnimate(){
+            {gsap}
 
             gsap.from(this.$refs.ref_icon , {
                 scale : 0.3,
@@ -87,6 +88,7 @@ $padding : 30px;
         width: 100px; height: 100px;
         margin: 0 auto;
         display: block;
+        will-change: transform ,opacity;
     }
 
     .test-title {
@@ -94,6 +96,7 @@ $padding : 30px;
         font-weight: bold;
         text-align: center;
         white-space: nowrap;
+        will-change: letter-spacing ,opacity;
     }
 
     p {

@@ -377,6 +377,9 @@ const data = [
             payload : {
                 title : 'TITLE' ,
                 message : 'MESSAGE' ,
+                actionClose() {
+                    console.log('action close !');
+                },
             },
             call(payload) {
                 VM.$store.dispatch('openDialog' , payload);

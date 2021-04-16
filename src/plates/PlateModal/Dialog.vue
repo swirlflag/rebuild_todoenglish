@@ -1,20 +1,30 @@
 <template>
-    <div id="modal-dialog" v-if="is_showDialog">
+    <transition name="modal-dialog" :duration="600">
+        <div    id="modal-dialog"
+                v-if="isOpen"
 
-        <transition-group  name="modal-dialog" :duration="2000">
-            <template v-for="item in $modal.dialogList">
-                <div class="dialog__box" :key="item.id">
-                    {{item.id}}
-                    <button @click="close(item.id)">삭제</button>
-                </div>
-            </template>
-        </transition-group>
 
-    </div>
+        >
+            <div class="dialog__box" >
+
+                <!-- {{ dialogList[0] }} -->
+
+                {{ dialogData.title }}
+                <br>
+                {{ dialogData.message }}
+<br>
+                <button @click="close">
+                    닫기
+                </button>
+
+            </div>
+
+        </div>
+    </transition>
+
 </template>
 
 <script>
-import { mapGetters } from  'vuex';
 
 export default {
     name : 'Dialog',
@@ -27,39 +37,59 @@ export default {
         }
     },
     computed : {
-        '$modal'() {
-            return this.$store.state.$modal
+        dialogData() {
+            return this.$store.state.$modal.dialogData;
         },
-        ...mapGetters([
-            'is_showDialog',
-        ]),
+        isOpen() {
+            return this.$store.state.$modal.is_openDialog;
+        }
+    },
+    watch : {
+        "dialogData"() {
+            this.watchDialogData();
+        }
     },
     methods : {
-        close(id) {
-            this.$store.commit('MODAL_removeDialogList' , id);
+        watchDialogData() {
+
+        },
+        close() {
+            this.$store.dispatch('closeDialog');
         },
     },
     created() {
 
-    }
+    },
+    mounted() {
+
+    },
+
 }
 
-const defaultItemState = {
-    type : 'alert',
-    title : '알림',
-    message : '',
-    buttonConfirmText : '확인',
-    buttonCancelText : '취소',
-    actionClose     : () => {},
-    actionConfirm   : () => {},
-    actionCancel    : () => {},
 
+
+
+
+
+
+
+const defaultDialogData = {
+    type                : 'alert',
+    title               : '알림',
+    message             : '',
+    buttonConfirmText   : '확인',
+    buttonCancelText    : '취소',
+    actionClose         : null,
+    actionConfirm       : null,
+    actionCancel        : null,
 };
 
 export const dialogStore = {
     state : {
-        dialogList : [],
-        dialogIssuingIdCount : 0,
+        is_openDialog : false,
+        dialogData : {...defaultDialogData},
+
+        // dialogIssuingIdCount : 0,
     },
     getters : {
         is_showDialog(state) {
@@ -68,40 +98,29 @@ export const dialogStore = {
     },
     mutations : {
 
-        MODAL_addDialogList(state, payload) {
-            const id = ++state.$modal.dialogIssuingIdCount;
-
-            const item = {
-                ...payload,
-                id,
-            };
-
-            state.$modal.dialogList.push(item);
+        MODAL_openDialog(state) {
+            state.$modal.is_openDialog = true;
         },
-        MODAL_removeDialogList(state, id) {
-            if(!state.$modal.dialogList.length){
-                return
-            }
-
-            let index = 0;
-
-            if(id !== undefined){
-                for(let i = 0, l = state.$modal.dialogList.length; i < l; ++i){
-                    const item = state.$modal.dialogList[i];
-                    if(id === item.id){
-                        index = i;
-                        break;
-                    }
-                }
-            }
-
-            state.$modal.dialogList.splice(index, 1);
+        MODAL_closeDialog(state) {
+            state.$modal.is_openDialog = false;
+        },
+        MODAL_recordDialogData(state,payload) {
+            state.$modal.dialogData = payload;
+        },
+        MODAL_resetActions(state) {
+            state.$modal.dialogData.actionClose     = null;
+            state.$modal.dialogData.actionConfirm   = null;
+            state.$modal.dialogData.actionCancel    = null;
         },
     },
     actions : {
         openDialog(context,option) {
 
-            let payload = {...defaultItemState};
+            if(context.state.$modal.is_openDialog){
+                return;
+            }
+
+            let payload = {...defaultDialogData};
 
             if(typeof option === 'string'){
                 payload.message = option;
@@ -109,16 +128,32 @@ export const dialogStore = {
                 payload = {
                     ...payload,
                     ...option,
-                }
+                };
             }else {
                 return;
             }
 
-            context.commit('MODAL_addDialogList', payload);
+            context.commit('MODAL_recordDialogData', payload);
+            context.commit('MODAL_openDialog');
         },
 
-        closeDialog(context,id) {
-            context.commit('MODAL_removeDialogList', id);
+        closeDialog(context) {
+
+            const { is_openDialog , dialogData } = context.state.$modal;
+
+            if(!is_openDialog){
+                return;
+            }
+
+            context.commit('MODAL_closeDialog');
+
+            const { actionClose, actionConfirm ,actionCancel } = dialogData;
+
+            actionClose     && actionClose();
+            actionConfirm   && actionConfirm();
+            actionCancel    && actionCancel();
+
+            context.commit('MODAL_resetActions');
         },
     },
 };
@@ -127,22 +162,48 @@ export const dialogStore = {
 </script>
 
 <style scoped lang="scss">
+
 #modal-dialog {
+
     pointer-events: all;
     position: absolute;
-    top: 50%; left: 50%;
-    display: flex;
-    flex-direction: column;
     z-index: 1020;
     transform: translate3d(-50%,-50%,0);
-    background: rgba(200,0,0,0.5);
+    top: 50%; left: 50%;
+    // border: 1px solid #d3d;
+    // background: rgba(200,0,0,0.5);
+
+    display: inline-block;
+
 }
+
+
+
 .dialog__box {
-    padding: 10px;
+
+    position: relative;
+    padding: 10px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 4px rgba(0,0,0,0.2);
-    background: dodgerblue;
+    border: 2px solid dodgerblue;
+    background: #fff;
     font-weight: bold;
-    color: #fff;
+    color: dodgerblue;
+
+    transition: transform 500ms ease , opacity 500ms ease;
+    opacity: 1;
+
+    .modal-dialog-enter &{
+        transition: transform 700ms $EASE_outExpo , opacity 300ms ease;
+        opacity: 0;
+        transform : translateY(30px);
+    }
+    .modal-dialog-leave-to &{
+        transition: transform 300ms $EASE_inOutCubic , opacity 200ms ease;
+        opacity: 0;
+        transform : translateY(-30px);
+    }
+
 }
+
 </style>

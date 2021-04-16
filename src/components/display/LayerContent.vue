@@ -219,6 +219,7 @@ $mobileCloseHeight : 60px;
         align-items: center;
         box-shadow: 0 3px 4px rgba(0,0,0,0.1);
         transition: transform 600ms $EASE_outExpo 400ms;
+        will-change: transform;
     }
 
     .layer-content-enter & ,
