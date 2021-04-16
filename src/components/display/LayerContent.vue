@@ -1,6 +1,6 @@
 <template>
-    <transition name="layer-content"
-                :duration="700"
+    <transition     name="layer-content"
+                    :duration="700"
     >
         <div    class="layer-content"
                 v-if="this.modelData.isShow"
@@ -47,11 +47,12 @@ export default {
         isShow : Boolean,
 
         title : String,
+        hash : String,
     },
     data() {
         return {
             modelData : {
-                isShow : this.modelValue
+                isShow : false,
             }
         }
     },
@@ -62,26 +63,54 @@ export default {
         'isShow'() {
             this.watchIsShow();
         },
-        'modelData.isShow' () {
+        'modelData.isShow'() {
             this.watchModelData();
+        },
+        '$route.hash'(){
+            this.watchHash();
         },
     },
     methods : {
+        watchHash() {
+            if(this.$route.hash ===  `#${this.hash}` && !this.modelData.isShow){
+                this.open();
+                this.ignoreHash = true;
+                return;
+            }
+
+            if(this.$route.hash !== `#${this.hash}` && this.modelData.isShow){
+                this.close();
+                this.ignoreHash = true;
+                return;
+            }
+        },
         watchModelValue() {
-            this.modelData.isShow = this.modelValue;
+            this.modelValue ? this.open() : this.close();
         },
         watchIsShow(){
-            this.modelData.isShow = this.isShow;
+            this.isShow ? this.open() : this.close();
         },
         watchModelData() {
+            if(!this.ignoreHash && this.hash){
+                const hash = this.modelData.isShow ? `#${this.hash}` : null;
+                this.$router.push({hash});
+            }
+            this.ignoreHash = false;
+
             this.$emit('modelEvent', this.modelData.isShow);
         },
+
         open(){
             this.modelData.isShow = true;
         },
         close() {
             this.modelData.isShow = false;
         }
+
+    },
+
+    mounted() {
+        this.watchHash();
     }
 }
 </script>
@@ -118,7 +147,7 @@ $mobileCloseHeight : 60px;
     width: 100%; height: 100%;
     background-color: $COLOR_overlayblack;
     z-index: 1;
-    transition: opacity 450ms ease;
+    transition: opacity 700ms ease;
     .layer-content-enter & ,
     .layer-content-leave-to &{
         opacity: 0;
@@ -267,6 +296,7 @@ $mobileCloseHeight : 60px;
     @include phone {
         background-color : #fff;
         padding: 0;
+        margin-top: $mobileCloseHeight;
         transition: transform 750ms $EASE_outExpo;
     }
 
@@ -291,6 +321,7 @@ $mobileCloseHeight : 60px;
 
 
 .layer-content__box {
+
     pointer-events: all;
     position: relative;
     overflow: hidden;
@@ -300,6 +331,9 @@ $mobileCloseHeight : 60px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 
     @include phone {
+        // margin-top: $mobileCloseHeight;
+        // padding-top: 60px;
+        // border: 1px solid #000;
         border-radius: 0;
         height: auto;
         box-shadow: none;

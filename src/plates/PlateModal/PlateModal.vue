@@ -15,8 +15,10 @@
         />
 
         <ModalBottomsheet
-
+            v-if="0"
         />
+
+        <Dialog/>
 
         <div    id="modal__dimmed"
                 :class="{'st-show' : $modal.is_dimmedActive}"
@@ -34,6 +36,8 @@ import ModalAlert       , { modalAlertStore }       from './ModalAlert.vue';
 import ModalConfirm     , { modalConfirmStore }     from './ModalConfirm.vue';
 import ModalBottomsheet , { modalBottomsheetStore } from "./ModalBottomsheet.vue";
 
+import Dialog , { dialogStore } from './Dialog.vue';
+
 
 export default {
     name : "PlateModal",
@@ -41,6 +45,8 @@ export default {
         ModalAlert,
         ModalConfirm,
         ModalBottomsheet,
+
+        Dialog,
     },
     computed : {
         ...mapState(['$modal'])
@@ -70,6 +76,8 @@ export const modalStore = {
     modalAlertStore,
     modalConfirmStore,
     modalBottomsheetStore,
+
+    dialogStore,
 
     state : {
 

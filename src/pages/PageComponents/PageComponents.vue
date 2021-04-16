@@ -700,8 +700,8 @@
 
 
 
-                    <!-- 레이아웃/sticky stack -->
-                        <div v-if="renderId === '레이아웃/sticky stack'">
+                    <!-- 디스플레이/sticky stack -->
+                        <div v-if="renderId === '디스플레이/sticky stack'">
                             <div class="comp-view">
                                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -727,7 +727,7 @@
                                 <div></div>
                             </div>
                         </div>
-                    <!-- 레이아웃/sticky stack -->
+                    <!-- 디스플레이/sticky stack -->
 
 
 
@@ -803,26 +803,42 @@
 
 
 
-
-                        <div v-if="renderId === '모달/Bottom Sheet'">
-                            <div class="comp-view">
-
-                                bottom sheet
-                            </div>
+                    <!-- 모달/Dialog -->
+                        <div v-if="renderId === '모달/Dialog'">
                             <div class="comp-control">
-                                <div></div>
+                                <div>
+                                    <button class="default-button" @click="controls.call(controls.payload)">
+                                        호출하기
+                                    </button>
+                                </div>
                                 <div></div>
                             </div>
                         </div>
+                    <!-- 모달/Dialog -->
 
 
 
-                        <div v-if="renderId === '레이아웃/레이어 컨텐츠'">
+
+
+
+
+
+
+                     <!-- 디스플레이/레이어 컨텐츠 -->
+                        <div v-if="renderId === '디스플레이/레이어 컨텐츠'">
                             <div class="comp-view">
-                                아래의 호출하기 버튼으로 레이어 컨텐츠를 불러옵니다.
 
-                                <LayerContent   title="카카오 이벤트?"
+                                <div class="show-tempblue">
+                                    <strong>레이어 컨텐츠 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 레이어 컨텐츠를 호출해주세요.</strong>
+                                </div>
+                                <br>
+                                <div class="show-tempblue">
+                                    <KakaoEvent class=""/>
+                                </div>
+
+                                <LayerContent   :title="controls.mobileTitle"
                                                 v-model="controls.isShow"
+                                                :hash="controls.useHash ? controls.hash : null"
 
                                 >
                                     <KakaoEvent :isShowList="controls.isShowList"/>
@@ -835,20 +851,32 @@
                                         호출하기
                                     </button>
                                 </div>
-
                                 <div>
                                     현재 호출 상태 : {{ controls.isShow }}
                                 </div>
-
                                 <div>
-
                                     <label class="checkbox-label">
                                         <input type="checkbox" v-model="controls.isShowList">
                                         <span>스크롤 리스트 더미 만들기</span>
                                     </label>
                                 </div>
+                                <div>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" v-model="controls.useHash">
+                                        <span>해시 사용</span>
+                                    </label>
+                                    &nbsp;
+                                    <input type="text" v-if="controls.useHash" v-model="controls.hash">
+                                </div>
+
+                                <div class="visible-phone">
+                                    타이틀(모바일 전용)
+                                    &nbsp;
+                                    <input type="text" v-model="controls.mobileTitle">
+                                </div>
                             </div>
                         </div>
+                    <!-- 디스플레이/레이어 컨텐츠 -->
 
 
 
@@ -865,6 +893,22 @@
                                 <div></div>
                             </div>
                         </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

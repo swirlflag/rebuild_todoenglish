@@ -568,18 +568,20 @@ export const authStore = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 13px 5px rgba(0,0,0,0.2);
     transform : translateY(100%);
     will-change: transform;
     // transition: transform 400ms $EASE_inOutCubic 10ms;
+    transition: box-shadow 500ms ease;
+    box-shadow: none;
 
     @include phone {
         padding : $SIZE_MO_innerPadding;
     }
 
     .st-open & {
-        // transform : translate3d(0,0,0);
+        transform : translate3d(0,0,0);
         // transition: transform 700ms $EASE_outExpo 70ms;
+        box-shadow: 0 0 13px 5px rgba(0,0,0,0.2);
     }
 
 }

@@ -1,5 +1,5 @@
 <template>
-    <ModalBox   type="confirm"
+    <ModalBoxFrame   type="confirm"
                 v-if="$modal.is_activeConfirm"
     >
         <div class="confirm__title" v-html="$modal.confirmTitle"></div>
@@ -13,18 +13,18 @@
                 {{ $modal.confirmTrueButtonText }}
             </ButtonDefault>
         </div>
-    </ModalBox>
+    </ModalBoxFrame>
 </template>
 
 <script>
 
-import ModalBox from './ModalBox.vue';
+import ModalBoxFrame from './ModalBoxFrame.vue';
 import ButtonDefault from '@/components/button/ButtonDefault.vue'
 
 export default {
     name : 'ModalConfirm',
     components : {
-        ModalBox,
+        ModalBoxFrame,
         ButtonDefault,
     },
     computed : {

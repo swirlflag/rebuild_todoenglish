@@ -296,7 +296,7 @@ const data = [
     },
 
     {
-        name : '레이아웃/sticky stack',
+        name : '디스플레이/sticky stack',
         title : 'title ',
         text : 'text ',
         control : {
@@ -305,12 +305,15 @@ const data = [
     },
 
     {
-        name : '레이아웃/레이어 컨텐츠',
+        name : '디스플레이/레이어 컨텐츠',
         title : '레이어 컨텐츠 제목',
         text : '레이어 컨텐츠 텍스트',
         control : {
             isShow : false,
             isShowList : false,
+            hash : 'kakao',
+            useHash : false,
+            mobileTitle : '카카오 이벤트?',
         }
     },
 
@@ -367,11 +370,17 @@ const data = [
     },
 
     {
-        name: '모달/Bottom Sheet',
-        title : '',
-        text : '',
+        name : '모달/Dialog',
+        title : 'Dialog title',
+        text : 'Dialog text',
         control : {
-
+            payload : {
+                title : 'TITLE' ,
+                message : 'MESSAGE' ,
+            },
+            call(payload) {
+                VM.$store.dispatch('openDialog' , payload);
+            }
         },
     }
 

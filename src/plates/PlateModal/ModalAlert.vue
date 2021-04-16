@@ -1,5 +1,5 @@
 <template>
-    <ModalBox   type="alert"
+    <ModalBoxFrame   type="alert"
                 v-if="$modal.is_activeAlert"
     >
         <div class="alert__title" v-html="$modal.alertTitle"></div>
@@ -9,18 +9,18 @@
                 {{ $modal.alertButtonText }}
             </ButtonDefault>
         </div>
-    </ModalBox>
+    </ModalBoxFrame>
 </template>
 
 <script>
 
-import ModalBox from './ModalBox.vue';
+import ModalBoxFrame from './ModalBoxFrame.vue';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
 
 export default {
     name : 'ModalAlert',
     components : {
-        ModalBox,
+        ModalBoxFrame,
         ButtonDefault,
     },
     computed : {

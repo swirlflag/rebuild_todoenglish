@@ -13,7 +13,7 @@ export default {
     props : {
         type : String,
     },
-    name : 'ModalBox',
+    name : 'ModalBoxFrame',
 
 }
 </script>
