@@ -139,6 +139,7 @@ $MO_radius      : 8px;
     box-sizing: border-box;
     width: 100%;
     line-height: inherit;
+    text-align: left;
     @include hardSelect {
         letter-spacing: $SIZE_letterspacing_low;
     }

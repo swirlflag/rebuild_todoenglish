@@ -8,17 +8,19 @@
 -->
     <div id="plate--modal" >
 
-        <ModalAlert
-        />
+    <!-- 삭제 예정-->
+        <ModalAlert/>
+    <!-- 삭제 예정-->
 
-        <ModalConfirm
-        />
+    <!-- 삭제 예정-->
+        <ModalConfirm/>
+    <!-- 삭제 예정-->
+
+        <Dialog/>
 
         <ModalBottomsheet
             v-if="0"
         />
-
-        <Dialog/>
 
         <div    id="modal__dimmed"
                 :class="{'st-show' : $modal.is_dimmedActive}"
@@ -59,7 +61,6 @@ export default {
             if(!this.$modal.is_modalActive){
                 return;
             }
-
             if(this.$modal.modalType){
                 this.$modal.clickDimmedActions[this.$modal.modalType]();
             }else {
@@ -114,7 +115,7 @@ export const modalStore = {
         },
         MODAL_addDimmedClickAction(state, payload) {
             if(typeof payload === 'function'){
-                state.$modal.clickDimmedActions.unkowns.push(payload);
+                state.$modal.clickDimmedActions.unknowns.push(payload);
             }
             if(typeof payload === 'object'){
                 const { type , action } = payload;

@@ -317,11 +317,10 @@ const data = [
         }
     },
 
-
     {
-        name : '모달/Alert',
+        name : '모달/(구)Alert',
         title : 'Alert title',
-        text : 'Alert text',
+        text : '다이얼로그로 통합 예정.',
         control : {
             payload : {
                 title : 'TITLE' ,
@@ -343,15 +342,16 @@ const data = [
         }
     },
     {
-        name : '모달/Confirm',
+        name : '모달/(구)Confirm',
         title : 'Confirm title',
-        text : 'Confirm text',
+        text : '다이얼로그로 통합 예정.',
         control : {
             payload : {
                 title : 'TITLE' ,
                 message : 'MESSAGE' ,
                 buttonTrueText : 'OK',
                 buttonFalseText : 'CANCEL',
+                type: 'alert',
             },
             call(payload) {
                 if(!payload){return}
@@ -370,20 +370,39 @@ const data = [
     },
 
     {
-        name : '모달/Dialog',
-        title : 'Dialog title',
-        text : 'Dialog text',
+        name : '모달/다이얼로그',
+        title : '다이얼로그 title',
+        text : '다이얼로그 text',
         control : {
             payload : {
-                title : 'TITLE' ,
-                message : 'MESSAGE' ,
-                actionClose() {
-                    console.log('action close !');
+                title : '알림' ,
+                message : '다이얼로그 메세지 내용입니다.' ,
+                buttonCancelText : '취소',
+                buttonConfirmText : '확인',
+                type: 'alert',
+                promptValue : 'pre prompt value',
+                promptPlaceholder : 'prompt placeholder',
+                actionResult : (result) =>  {
+                    console.component('모달 다이얼로그 : actionResult');
+                    console.log('result : ' ,  result);
                 },
             },
-            call(payload) {
+            call(payload) { {payload}
                 VM.$store.dispatch('openDialog' , payload);
             }
+        },
+    },
+    {
+        name : '모달/바텀 시트',
+        title : '바텀 시트 title',
+        text : '바텀 시트 text',
+        control : {
+            payload : {
+
+            },
+            // call(payload) {
+            //     VM.$store.dispatch('openDialog' , payload);
+            // }
         },
     }
 

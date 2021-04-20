@@ -1,3 +1,18 @@
+<!--
+RADIO
+    <label class="radio-label">
+        <input type="radio" name="버튼/일반 링크/색테마" value="" v-model="controls.theme"><span>default or auto</span>
+    </label>
+
+TEXT INPUT
+    <input type="text" v-model="controls.text" value="">
+
+CHECKBOX
+    <label class="checkbox-label">
+        <input type="checkbox" v-model="controls.value">
+        <span>SYNC</span>
+    </label>
+-->
 <template>
     <div>
         <div id="comp">
@@ -737,8 +752,8 @@
 
 
 
-                    <!-- 모달/Alert -->
-                        <div v-if="renderId === '모달/Alert'">
+                    <!-- 모달/(구)Alert -->
+                        <div v-if="renderId === '모달/(구)Alert'">
                             <div class="comp-control">
                                 <div>
                                     Title : <input type="text" v-model="controls.payload.title">
@@ -759,7 +774,7 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- 모달/Alert -->
+                    <!-- 모달/(구)Alert -->
 
 
 
@@ -771,8 +786,8 @@
 
 
 
-                    <!-- 모달/Confirm -->
-                        <div v-if="renderId === '모달/Confirm'">
+                    <!-- 모달/(구)Confirm -->
+                        <div v-if="renderId === '모달/(구)Confirm'">
                             <div class="comp-control">
                                 <div>
                                     Title : <input type="text" v-model="controls.payload.title">
@@ -796,7 +811,7 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- 모달/Confirm -->
+                    <!-- 모달/(구)Confirm -->
 
 
 
@@ -805,18 +820,50 @@
 
 
 
-                    <!-- 모달/Dialog -->
-                        <div v-if="renderId === '모달/Dialog'">
+                    <!-- 모달/다이얼로그 -->
+                        <div v-if="renderId === '모달/다이얼로그'">
                             <div class="comp-control">
                                 <div>
                                     <button class="default-button" @click="controls.call(controls.payload)">
                                         호출하기
                                     </button>
                                 </div>
-                                <div></div>
+                                <div>
+                                    타입 :
+                                    <label class="radio-label">
+                                        <input type="radio" name="모달/다이얼로그/type" value="alert" v-model="controls.payload.type"><span>alert</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="모달/다이얼로그/type" value="confirm" v-model="controls.payload.type"><span>confirm</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="모달/다이얼로그/type" value="prompt" v-model="controls.payload.type"><span>prompt</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="모달/다이얼로그/type" value="wait" v-model="controls.payload.type"><span>wait</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    타이틀 : <input type="text" v-model="controls.payload.title">
+                                </div>
+                                <div>
+                                    메세지 : <input type="text" v-model="controls.payload.message">
+                                </div>
+                                <div>
+                                    Confirm 버튼 텍스트 : <input type="text" v-model="controls.payload.buttonConfirmText">
+                                </div>
+                                <div>
+                                    Cancel 버튼 텍스트 : <input type="text" v-model="controls.payload.buttonCancelText">
+                                </div>
+                                <div>
+                                    prompt pre-value : <input type="text" v-model="controls.payload.promptValue">
+                                </div>
+                                <div>
+                                    prompt placeholder : <input type="text" v-model="controls.payload.promptPlaceholder">
+                                </div>
                             </div>
                         </div>
-                    <!-- 모달/Dialog -->
+                    <!-- 모달/다이얼로그 -->
 
 
 
