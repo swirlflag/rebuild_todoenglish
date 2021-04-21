@@ -239,7 +239,7 @@ export default {
         min-width : 160px;
         box-sizing: border-box;
         text-align: center;
-        background-color: $COLOR_offWhite;
+        background-color: $COLOR_offwhite;
     }
 
     > input:checked + span {
@@ -376,7 +376,7 @@ export default {
             display: inline-block;
             width: 1px;
             height: 100%;
-            background-color: $COLOR_offWhite;
+            background-color: $COLOR_offwhite;
             @include phone {
                 left: -10px;
             }

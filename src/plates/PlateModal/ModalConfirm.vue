@@ -46,7 +46,7 @@ export default {
                 }
             }
         }
-        this.$store.commit('MODAL_addDimmedClickAction', payload);
+        this.$store.dispatch('registDimmedClick', payload);
     },
 }
 

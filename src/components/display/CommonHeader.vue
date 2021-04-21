@@ -40,9 +40,6 @@
 
 <script>
 
-
-import gsap from 'gsap';
-
 export default {
     props : {
         breadcrumb : Array,
@@ -73,7 +70,6 @@ export default {
             this.isOpen = false;
         },
         animateUnderline() {
-            {gsap}
             setTimeout(() => {
                 const target = this.$refs.ref_links.querySelector('a.router-link-active');
 

@@ -560,7 +560,7 @@ $SIZE_MO_linkDistance : 15px;
             border-radius: 8px;
             background-color: #fff;
             margin-top: 8px;
-            border: solid 1px $COLOR_offWhite;
+            border: solid 1px $COLOR_offwhite;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
             opacity: 0;
             pointer-events: none;
@@ -590,7 +590,7 @@ $SIZE_MO_linkDistance : 15px;
         .nav-gnb__account-email {
             padding-right: 74px;
             margin-right: 20px;
-            border-right: 1px solid $COLOR_offWhite;
+            border-right: 1px solid $COLOR_offwhite;
             @include phone {
                 display: none;
             }

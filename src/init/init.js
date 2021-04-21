@@ -9,6 +9,8 @@ import {
     detectTouchdevice ,
 } from '@/utils';
 
+import SwiperCore, { Navigation, Pagination } from 'swiper/core';
+SwiperCore.use([Navigation, Pagination]);
 
 // axios.defaults.baseURL = process.env.PROTOCOL + process.env.URLAPI;
 
@@ -46,6 +48,7 @@ const bindScreenData = (Vue) => {
     });
 }
 
+
 export default {
     install(Vue) {
         if(store.state.is_dev){
@@ -55,6 +58,7 @@ export default {
         Vue.use(Fragment.Plugin);
 
         Vue.prototype.gsap = gsap;
+        Vue.prototype.swiper = SwiperCore;
 
         bindScreenData(Vue);
 

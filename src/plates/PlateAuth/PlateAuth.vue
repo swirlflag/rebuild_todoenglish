@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import gsap from 'gsap';
+
 import TextChangeMask               from '@/components/display/TextChangeMask.vue';
 
 import AuthSelection                from './AuthSelection.vue';
@@ -263,7 +263,7 @@ export default {
         },
 
         openAuthMotion() {
-            const tween = gsap.to(this.$refs.ref_box , {
+            const tween = this.gsap.to(this.$refs.ref_box , {
                 y : "0%",
                 ease        : 'power4.out',
                 duration    : 0.7,
@@ -278,7 +278,7 @@ export default {
             this.onMountedMotion();
         },
         closeAuthMotion() {
-            gsap.to(this.$refs.ref_box , {
+            this.gsap.to(this.$refs.ref_box , {
                 y : '100%',
                 ease        : 'power2.inOut',
                 duration    : 0.4,
@@ -338,7 +338,7 @@ export default {
                 return;
             }
 
-            gsap.fromTo(el_content, 0.6, {
+            this.gsap.fromTo(el_content, 0.6, {
                 height  : el_leave.offsetHeight,
                 // width   : el_leave.offsetWidth,
             },{
@@ -358,7 +358,7 @@ export default {
                     this.$refs.ref_text,
                 ];
 
-                const tl = new gsap.timeline();
+                const tl = new this.gsap.timeline();
 
                 let isKill = false;
 

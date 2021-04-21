@@ -1,6 +1,13 @@
 <template>
     <div>
 
+        <BottomSheet    v-model="isShowBottomSheet"
+                        title="리뷰 페이지의 바텀시트?"
+
+        >
+            <TESTListSelect @select="isShowBottomSheet = false"/>
+        </BottomSheet>
+
         <br>
         <br>
         <br>
@@ -23,11 +30,13 @@
                     <p class="prefix--asterisk">주의사항!</p>
                     <p class="prefix--dot">middle dot</p>
 
-                    <ButtonDefault theme="pink"
+                    <ButtonDefault theme="green"
+                                    @click="isShowBottomSheet = true"
 
                     >
-                        123
-                </ButtonDefault>
+                        바텀시트 테스트
+                    </ButtonDefault>
+
             </div>
 
         </div>
@@ -38,10 +47,20 @@
 <script>
 
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
+import BottomSheet from  '@/components/frame/BottomSheet.vue';
+import TESTListSelect from '@/components/form/TESTListSelect.vue';
+
 export default {
     name : 'PageReview',
     components : {
         ButtonDefault,
+        BottomSheet,
+        TESTListSelect,
+    },
+    data() {
+        return {
+            isShowBottomSheet : true,
+        }
     },
     mounted() {
         // console.log('mounted : PageReview.vue');

@@ -72,7 +72,7 @@
             @mouseup="drop"
             @mousemove="drag"
         >
-            {{isOpen ? 'close' : 'open'}}
+            {{isOpen ? 'close' : 'TEST'}}
         </div>
 
 
@@ -261,7 +261,8 @@ export default {
         padding : 10px !important;
         border: 1px solid rgb(0, 255, 0) !important;
         transform :translate(-100%,-50%) !important;
-        top: 50% !important; left: 0 !important;
+        top: 50% !important; left: -1px !important;
+        transition: transform 200ms ease;
 
         &.st-open {
             border: 1px solid rgb(0, 255, 0) !important;

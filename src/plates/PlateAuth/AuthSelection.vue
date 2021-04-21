@@ -23,10 +23,8 @@
 </template>
 
 <script>
-import gsap from 'gsap';
 import ButtonSignin from '@/components/button/ButtonSignin.vue';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
-{gsap}
 
 export default {
     name : 'AuthSelection',

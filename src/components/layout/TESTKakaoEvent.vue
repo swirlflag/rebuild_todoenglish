@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import gsap from 'gsap';
+
 export default {
     props: {
         isShowList : Boolean,
@@ -50,9 +50,8 @@ export default {
     },
     methods :{
         simpleAnimate(){
-            {gsap}
 
-            gsap.from(this.$refs.ref_icon , {
+            this.gsap.from(this.$refs.ref_icon , {
                 scale : 0.3,
                 opacity : 0,
                 ease : 'back.out',
@@ -60,7 +59,7 @@ export default {
                 delay : 0.4,
             })
 
-            gsap.from(this.$refs.ref_title, {
+            this.gsap.from(this.$refs.ref_title, {
                 letterSpacing : '0.5em',
                 opacity : 0,
                 ease : 'power4.out',
@@ -83,6 +82,8 @@ $padding : 30px;
     color: $COLOR_kakaoBrown;
     display: flex;
     flex-direction: column;
+    // white-space: nowrap;
+    width: 100%;
 
     .icon--rect-kakao {
         width: 100px; height: 100px;

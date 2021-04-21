@@ -258,9 +258,6 @@
 
 <script>
 
-import gsap from 'gsap';
-
-
 export default {
     data() {
         return {
@@ -297,7 +294,7 @@ export default {
                 ],
             },
 
-            navTL : new gsap.timeline(),
+            navTL : new this.gsap.timeline(),
 
             publicList  : null,
             privateList : null,

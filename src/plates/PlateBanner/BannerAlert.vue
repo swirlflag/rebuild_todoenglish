@@ -33,8 +33,6 @@ const temp = [
 
 {temp}
 
-import gsap from 'gsap';
-
 export default {
     data() {
         return {
@@ -83,7 +81,7 @@ export default {
 
             // const itemHeight = items[0].offsetHeight;
 
-            gsap.to(items , {
+            this.gsap.to(items , {
                 y : (idx,item) => {
                     return item.offsetHeight * idx;
                 },
@@ -93,7 +91,7 @@ export default {
 
         },
         removeBanner(index) {
-            {gsap}
+            {this.gsap}
             this.$store.commit('BANNER_removeAlert',index);
             // const list = this.$refs.ref_list;
 
@@ -101,7 +99,7 @@ export default {
 
             // // console.log(item);
 
-            // const tl = new gsap.timeline();
+            // const tl = new this.gsap.timeline();
 
             // // console.log(tl);
 

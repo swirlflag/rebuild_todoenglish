@@ -1,3 +1,28 @@
+<!--
+    USE
+    1. String. 간단한 메세지형. alert 타입으로 고정됩니다.
+
+        this.$store.dispath('openDialog' , '쿠폰 등록이 완료되었습니다.');
+
+    2. Object. 타입 설정 및 상세설정형. 필요한 설정만 입력이 가능합니다. 타입을 미입하면 alert으로 설정됩니다.
+    타입리스트 : alert, confirm, prompt , wait
+
+        const payload = {
+            type : 'confirm'
+            title : '주의사항',
+            messsage : '이것을 주의해주세요!',
+            buttonConfirmText : '확인',
+            buttonCancelText : '취소',
+            promptValue : 'prompt 사전 입력 값',
+            promptPlaceholder : 'prompt placeholder',
+            actionResult : (result) => {
+                console.log('타입에 따라 적절한 ' + result + ' 를 얻을수 있습니다.)
+            }
+        }
+        this.$store.dispath('openDialog' , payload);
+
+-->
+
 <template>
     <transition name="modal-dialog" :duration="600">
         <div    id="modal-dialog"
@@ -7,8 +32,6 @@
 
         >
             <div class="dialog__box" >
-
-                <!-- {{ dialogList[0] }} -->
 
                 <div class="dialog__source"></div>
 
@@ -160,6 +183,7 @@ export default {
             action : () => {this.isOpen && this.close()},
         };
         this.$store.commit('MODAL_addDimmedClickAction', payload);
+        this.$store.dispatch('registDimmedClick', payload);
     },
     mounted() {
 
@@ -193,7 +217,8 @@ const defaultDialogData = {
         message             : 'prompt 기본 메세지 입니다.',
         buttonConfirmText   : '완료',
         buttonCancelText    : '취소',
-        promptValue           : '',
+        promptValue         : '',
+        promptPlaceholder   : '',
     },
     wait : {
         title               : '잠시 기다려 주세요',
@@ -361,13 +386,13 @@ $boxRadius : 16px;
         font-size: $SIZE_PC_fontsize_strong ;
         font-weight: 700;
     }
-
     .dialog__message {
         margin-top: $tempPadding;
         font-weight: 400;
     }
     .dialog__input {
         margin-top: $tempPadding;
+        font-weight: 400;
     }
     .dialog__spinner {
         display: flex;
@@ -390,7 +415,6 @@ $boxRadius : 16px;
                 top: 0; left: 0;
                 width: 100%; height: 100%;
                 box-sizing: border-box;
-
             }
             &::before {
                 border: 4px solid $COLOR_pink_1;

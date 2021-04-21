@@ -873,24 +873,24 @@ CHECKBOX
 
 
 
-                     <!-- 디스플레이/레이어 컨텐츠 -->
-                        <div v-if="renderId === '디스플레이/레이어 컨텐츠'">
+                     <!-- 프레임/레이어 컨텐츠 -->
+                        <div v-if="renderId === '프레임/레이어 컨텐츠'">
                             <div class="comp-view">
 
                                 <div class="show-tempblue">
                                     <strong>레이어 컨텐츠 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 레이어 컨텐츠를 호출해주세요.</strong>
                                 </div>
                                 <br>
-                                <div class="show-tempblue">
-                                    <KakaoEvent class=""/>
+                                <div class="show-tempblue" style="width:100%">
+                                    <TESTKakaoEvent class=""/>
                                 </div>
 
-                                <LayerContent   :title="controls.mobileTitle"
-                                                v-model="controls.isShow"
+                                <LayerContent   v-model="controls.isShow"
+                                                :title="controls.mobileTitle"
                                                 :hash="controls.useHash ? controls.hash : null"
 
                                 >
-                                    <KakaoEvent :isShowList="controls.isShowList"/>
+                                    <TESTKakaoEvent :isShowList="controls.isShowList"/>
                                 </LayerContent>
 
                             </div>
@@ -925,7 +925,65 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!-- 디스플레이/레이어 컨텐츠 -->
+                    <!-- 프레임/레이어 컨텐츠 -->
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- 프레임/바텀 시트 -->
+                        <div v-if="renderId === '프레임/바텀 시트'">
+                            <div class="comp-view">
+                                <div class="show-tempblue">
+                                    <strong>바텀 시트 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 바텀 시트를 호출해주세요.</strong>
+                                </div>
+                                <br>
+
+                                <div class="show-tempblue" style="width:100%">
+                                    <TESTListSelect     v-if="controls.sampleType === 'list'"/>
+                                    <TESTColorSelect    v-if="controls.sampleType === 'color'"/>
+                                </div>
+
+                                <BottomSheet    v-model="controls.isShow"
+                                                title="타이틀을 선택해 주세요"
+                                >
+                                    <TESTListSelect     v-if="controls.sampleType === 'list'"
+                                                        :index="controls.selectIndex"
+                                                        @select="(data) => {controls.selectItem = data.value; controls.selectIndex= data.index;controls.isShow = false}"
+                                    />
+
+                                    <TESTColorSelect    v-if="controls.sampleType === 'color'"
+
+                                    />
+
+                                </BottomSheet>
+                            </div>
+                            <div class="comp-control">
+                                <div>
+                                    <button class="default-button" @click="controls.isShow = !controls.isShow">
+                                        호출하기
+                                    </button>
+                                </div>
+                                <div>현재 선택 값 : {{ controls.selectItem }}</div>
+                                <div>
+                                    <label class="radio-label">
+                                        <input type="radio" name="프레임/바텀 시트/샘플타입" value="list" v-model="controls.sampleType"><span>list</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="프레임/바텀 시트/샘플타입" value="color" v-model="controls.sampleType"><span>color</span>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    <!-- 프레임/바텀 시트 -->
 
 
 
@@ -1028,8 +1086,12 @@ import InputTextEmail from '@/components/input/InputTextEmail.vue';
 import InputTextPassword from '@/components/input/InputTextPassword.vue';
 import StickyStack from '@/components/display/StickyStack.vue';
 
-import LayerContent from '@/components/display/LayerContent.vue';
-import KakaoEvent from '@/components/layout/KakaoEvent.vue';
+import LayerContent from '@/components/frame/LayerContent.vue';
+import TESTKakaoEvent from '@/components/layout/TESTKakaoEvent.vue';
+
+import BottomSheet from '@/components/frame/BottomSheet.vue';
+import TESTListSelect from '@/components/form/TESTListSelect.vue';
+import TESTColorSelect from '@/components/form/TESTColorSelect.vue';
 
 
 export default {
@@ -1053,7 +1115,10 @@ export default {
         StickyStack,
 
         LayerContent,
-        KakaoEvent,
+        TESTKakaoEvent,
+        BottomSheet,
+        TESTListSelect,
+        TESTColorSelect,
 
     },
     data() {

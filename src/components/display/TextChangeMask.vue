@@ -27,8 +27,6 @@
 
 <script>
 
-import gsap from 'gsap';
-
 export default {
     props: {
         text        : null, // Number , String
@@ -96,7 +94,7 @@ export default {
                 const startWidth    = target.offsetWidth;
                 // const startHeight   = target.offsetHeight;
 
-                gsap.set(fly, {css : {width : this.contain ? 'auto' : null}});
+                this.gsap.set(fly, {css : {width : this.contain ? 'auto' : null}});
 
                 const ofs = {
                     before : {
@@ -111,9 +109,9 @@ export default {
 
                 const maxWidth = Math.max(startWidth, ofs.before.width, ofs.after.width);
 
-                gsap.set(target , {css : {width : maxWidth}});
+                this.gsap.set(target , {css : {width : maxWidth}});
 
-                gsap.fromTo(target, {
+                this.gsap.fromTo(target, {
                     height  : ofs.before.height,
                 }, {
                     height  : ofs.after.height,
@@ -123,7 +121,7 @@ export default {
                     clearProps : 'all',
                 });
 
-                gsap.to(fly, {
+                this.gsap.to(fly, {
                     y : -ofs.before.height,
                     ease: 'power3.out',
                     duration,
@@ -135,7 +133,7 @@ export default {
                     },
                     onComplete : () => {
                         this.isAnimate = false;
-                        gsap.set(this.$refs.ref_target , {css : {
+                        this.gsap.set(this.$refs.ref_target , {css : {
                             width : null
                         }});
                         this.remainderAnimate();

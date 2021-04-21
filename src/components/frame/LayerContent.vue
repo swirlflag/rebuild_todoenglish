@@ -190,6 +190,7 @@ $mobileCloseHeight : 60px;
 
     @include phone {
         height: 100%;
+        flex-direction: column;
     }
 }
 
@@ -214,12 +215,14 @@ $mobileCloseHeight : 60px;
         width: 100%;
         z-index: 3;
         height: $mobileCloseHeight;
+        flex : 0 0 $mobileCloseHeight;
         background-color: #fff;
         display: flex;
         align-items: center;
         box-shadow: 0 3px 4px rgba(0,0,0,0.1);
-        transition: transform 600ms $EASE_outExpo 400ms;
+        transition: transform 600ms $EASE_outExpo 150ms;
         will-change: transform;
+        position: relative;
     }
 
     .layer-content-enter & ,
@@ -297,8 +300,11 @@ $mobileCloseHeight : 60px;
     @include phone {
         background-color : #fff;
         padding: 0;
-        margin-top: $mobileCloseHeight;
+        // margin-top: $mobileCloseHeight;
+        margin-top: 0;
         transition: transform 750ms $EASE_outExpo;
+        padding-bottom: $mobileCloseHeight;
+        min-height: 100%;
     }
 
     .layer-content-enter & ,

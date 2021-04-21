@@ -305,7 +305,7 @@ const data = [
     },
 
     {
-        name : '디스플레이/레이어 컨텐츠',
+        name : '프레임/레이어 컨텐츠',
         title : '레이어 컨텐츠 제목',
         text : '레이어 컨텐츠 텍스트',
         control : {
@@ -316,6 +316,21 @@ const data = [
             mobileTitle : '카카오 이벤트?',
         }
     },
+
+    {
+        name : '프레임/바텀 시트',
+        title : '바텀 시트 제목',
+        text : '바텀 시트 텍스트',
+        control : {
+            isShow : false,
+            title : '타이틀을 선택해 주세요',
+            sampleType : 'list',
+
+            selectItem : '',
+            selectIndex : randomOne(1,2,3,4,5),
+        }
+    },
+
 
     {
         name : '모달/(구)Alert',

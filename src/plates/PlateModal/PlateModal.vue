@@ -1,11 +1,15 @@
-<template>
 <!--
-    MEMO :
-    PlateModal 에선, 가로, 세로 100% 인 #modal 이라는 레이어에서
-    전역 성격으로 적절한 모달 윈도우들(레이어 팝업, 풀 디스플레이 팝업)을 배치합니다.
-    #modal 자체는 기본적으로 윈도우(100%,100%)의 크기를 가지며 position : fixed입니다.
-    #modal 이하의 컴포넌트들을 자유롭게 수정 확장할수 있습니다.
+    MEMO
+        PlateModal 에선, 가로, 세로 100% 인 #modal 이라는 레이어에서
+        전역 성격으로 적절한 모달 윈도우들(레이어 팝업, 풀 디스플레이 팝업)을 배치합니다.
+        #modal 자체는 기본적으로 윈도우(100%,100%)의 크기를 가지며 position : fixed입니다.
+        #modal 이하의 컴포넌트들을 자유롭게 수정 확장할수 있습니다.
+
+        dimmed의 z-index 는 1000이므로 하위 요소들은 그 이상으로 설정해주세요.
+        dimmed를 제외한 항목들은 자체적으로 v-if를 지니게 해 문서 순수성을 높혀주세요!
 -->
+<template>
+
     <div id="plate--modal" >
 
     <!-- 삭제 예정-->
@@ -16,11 +20,8 @@
         <ModalConfirm/>
     <!-- 삭제 예정-->
 
-        <Dialog/>
+        <Dialog />
 
-        <ModalBottomsheet
-            v-if="0"
-        />
 
         <div    id="modal__dimmed"
                 :class="{'st-show' : $modal.is_dimmedActive}"
@@ -32,26 +33,25 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 
 import ModalAlert       , { modalAlertStore }       from './ModalAlert.vue';
 import ModalConfirm     , { modalConfirmStore }     from './ModalConfirm.vue';
-import ModalBottomsheet , { modalBottomsheetStore } from "./ModalBottomsheet.vue";
 
 import Dialog , { dialogStore } from './Dialog.vue';
-
 
 export default {
     name : "PlateModal",
     components: {
         ModalAlert,
         ModalConfirm,
-        ModalBottomsheet,
+
 
         Dialog,
     },
     computed : {
-        ...mapState(['$modal'])
+        $modal() {
+            return this.$store.state.$modal;
+        }
     },
     methods : {
         clickModalDimmed() {
@@ -76,8 +76,6 @@ export const modalStore = {
     name : '$modal',
     modalAlertStore,
     modalConfirmStore,
-    modalBottomsheetStore,
-
     dialogStore,
 
     state : {
@@ -147,6 +145,10 @@ export const modalStore = {
             if(state.$modal.use_openModalWithLockScroll){
                 commit('SCROLL_unlock');
             }
+        },
+
+        registDimmedClick({commit}, payload) {
+            commit('MODAL_addDimmedClickAction',payload);
         },
 
     },

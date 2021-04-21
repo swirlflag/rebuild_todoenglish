@@ -16,6 +16,7 @@
     "dotenv": "^8.2.0",
     "gsap": "^3.5.1",
     "sass": "^1.26.10",
+    "swiper": "^6.5.7",
     "universal-analytics": "^0.4.23",
     "vue": "^2.6.11",
     "vue-cookies": "^1.7.4",
