@@ -1,7 +1,8 @@
 <template>
     <transition name="bottom-sheet" :duration="700">
-        <div class="bottom-sheet"
-                v-if="this.modelData.isShow"
+        <div    v-if="this.modelData.isShow"
+                class="bottom-sheet"
+                :class="{'st-sizebreak' : sizebreak}"
         >
             <div    class="bottom-sheet__dimmed"
                     @click="close"
@@ -9,7 +10,7 @@
             </div>
 
             <div class="bottom-sheet__wrap">
-                <div class="bottom-sheet__header">
+                <div class="bottom-sheet__header" v-if="!headerless">
                     <p class="bottom-sheet__title">
                         {{ title }}
                     </p>
@@ -20,7 +21,9 @@
                     </button>
 
                 </div>
-                <div class="bottom-sheet__box">
+                <div    class="bottom-sheet__box"
+
+                >
                     <slot></slot>
                 </div>
             </div>
@@ -41,6 +44,9 @@ export default {
         isShow : Boolean,
 
         title : String,
+
+        headerless : Boolean,
+        sizebreak : Boolean,
     },
     data() {
         const isShow = this.modelValue || this.isShow;
@@ -149,6 +155,10 @@ $tempPadding : 30px;
     transform : translate3d(0,0,0);
     transition : transform 700ms $EASE_outExpo;
 
+    .st-sizebreak & {
+        margin: 0;
+    }
+
     @include phone {
         margin: 0;
         width: 100%;
@@ -212,6 +222,12 @@ $tempPadding : 30px;
     min-width : 360px;
     max-width : 720px;
     max-height: 50vh;
+
+    .st-sizebreak & {
+        min-width: 100% !important;
+        max-height: 100% !important;
+        max-width: unset !important;
+    }
 
     @include phone {
         width: 100%;

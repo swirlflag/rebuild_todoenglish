@@ -43,11 +43,9 @@ export default {
                 'The Last of Us',
                 'Horizon: Zero Dawn',
                 'Monster Hunter World',
-                'Dishonored 2',
                 'Death Stranding',
                 'Dark Souls 3',
                 'Detroit: Become Human',
-                "Assassin's Creed Odyssey",
                 "Ghost of Tsushima",
                 "Grand Theft Auto 5",
                 "Red Dead Redemption 2",
@@ -55,11 +53,7 @@ export default {
                 "Celeste",
                 "Hades",
                 "Hollow Knight",
-                "Splatoon 2",
                 "Stardew Valley",
-                "Super Mario Odyssey",
-                "Super Smash Bros. Ultimate",
-                "Tetris",
                 "The Legend of Zelda: Breath of the Wild",
             ],
 
@@ -90,6 +84,7 @@ export default {
 <style lang="scss" scoped>
 
 .bottom-sheet {
+
     .list-select__list {
         margin-top: 30px;
     }
@@ -109,6 +104,7 @@ export default {
 .list-select {
     word-break: break-all;
     color: #000;
+    background-color: #fff;
 }
 
 .list-select__list {
@@ -138,6 +134,7 @@ export default {
             color: #fff;
             background-color: $COLOR_pink_1;
             border-color: $COLOR_pink_1;
+
         }
     }
 

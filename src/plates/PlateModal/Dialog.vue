@@ -385,6 +385,9 @@ $boxRadius : 16px;
     .dialog__title {
         font-size: $SIZE_PC_fontsize_strong ;
         font-weight: 700;
+        @include phone {
+            font-size: $SIZE_MO_fontsize_strong ;
+        }
     }
     .dialog__message {
         margin-top: $tempPadding;
@@ -461,6 +464,10 @@ $boxRadius : 16px;
         word-break: break-all;
         transition: color 300ms ease , background-color 120ms ease;
 
+        @include phone {
+            font-size: $SIZE_MO_fontsize_strong ;
+        }
+
         + button {
             border-left: 1px solid COLOR_navy_2(0.15);
         }
@@ -479,6 +486,7 @@ $boxRadius : 16px;
                 background-color: COLOR_navy_2(1);
             }
         }
+
     }
 }
 

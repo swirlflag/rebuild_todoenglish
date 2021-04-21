@@ -17,9 +17,10 @@ CHECKBOX
     <div>
         <div id="comp">
 
-            <div id="mylog">
+            <div id="mylog" v-if="0">
 
             </div>
+
             <div id="comp-wrap">
                 <!-- <div id="comp-not-mobile">
                     모바일에선 안보여줄거임
@@ -952,7 +953,9 @@ CHECKBOX
                                 </div>
 
                                 <BottomSheet    v-model="controls.isShow"
-                                                title="타이틀을 선택해 주세요"
+                                                :headerless="false"
+                                                :sizebreak="false"
+                                                :title="controls.sampleType === 'list' ? '타이틀을 선택해 주세요' : controls.sampleType === 'color' ? '원하는 색을 골라주세요' : null"
                                 >
                                     <TESTListSelect     v-if="controls.sampleType === 'list'"
                                                         :index="controls.selectIndex"
@@ -960,7 +963,8 @@ CHECKBOX
                                     />
 
                                     <TESTColorSelect    v-if="controls.sampleType === 'color'"
-
+                                                        :index="controls.selectIndex"
+                                                        @select="(data) => {controls.selectItem = data.value; controls.selectIndex= data.index;controls.isShow = false}"
                                     />
 
                                 </BottomSheet>
@@ -973,6 +977,7 @@ CHECKBOX
                                 </div>
                                 <div>현재 선택 값 : {{ controls.selectItem }}</div>
                                 <div>
+                                    샘플 내부 레이아웃 :
                                     <label class="radio-label">
                                         <input type="radio" name="프레임/바텀 시트/샘플타입" value="list" v-model="controls.sampleType"><span>list</span>
                                     </label>

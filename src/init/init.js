@@ -1,6 +1,7 @@
 import store from '@/store/index.js';
 import Fragment from 'vue-fragment';
 import gsap from 'gsap';
+import 'swiper/swiper.scss';
 
 import {
     detectBrowser ,

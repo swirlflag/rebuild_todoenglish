@@ -160,8 +160,7 @@ export const modalStore = {
 
 #plate--modal {
     z-index: 1020;
-    min-height: 100vh;
-    min-width: 100vw;
+    width: 100%;
     height: 100%;
     top: 0; left: 0;
     position: fixed;

@@ -149,7 +149,7 @@ $mobileCloseHeight : 60px;
     z-index: 1;
     transition: opacity 700ms ease;
     .layer-content-enter & ,
-    .layer-content-leave-to &{
+    .layer-content-leave-to & {
         opacity: 0;
     }
 }

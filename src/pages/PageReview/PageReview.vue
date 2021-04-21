@@ -2,10 +2,10 @@
     <div>
 
         <BottomSheet    v-model="isShowBottomSheet"
-                        title="리뷰 페이지의 바텀시트?"
+                        title="일반페이지 바텀시트 테스트"
 
         >
-            <TESTListSelect @select="isShowBottomSheet = false"/>
+            <TESTListSelect @select="isShowBottomSheet = false" v-if="0"/>
         </BottomSheet>
 
         <br>
@@ -18,24 +18,24 @@
 
             <div class="layout">
                 <h2 class="layout__escape">text 1</h2>
-                    <h2>text 222</h2>
+                <h2>text 222</h2>
 
-                    <ul class="list--dot">
-                        <li class="precaution">안녕하세요</li>
-                        <li>안녕하세요</li>
-                        <li>안녕하세요</li>
-                        <li>안녕하세요</li>
-                    </ul>
-                    <p class="precaution">안녕하세요</p>
-                    <p class="prefix--asterisk">주의사항!</p>
-                    <p class="prefix--dot">middle dot</p>
+                <ul class="list--dot">
+                    <li class="precaution">안녕하세요</li>
+                    <li>안녕하세요</li>
+                    <li>안녕하세요</li>
+                    <li>안녕하세요</li>
+                </ul>
+                <p class="precaution">안녕하세요</p>
+                <p class="prefix--asterisk">주의사항!</p>
+                <p class="prefix--dot">middle dot</p>
 
-                    <ButtonDefault theme="green"
-                                    @click="isShowBottomSheet = true"
+                <ButtonDefault theme="green"
+                                @click="isShowBottomSheet = true"
 
-                    >
-                        바텀시트 테스트
-                    </ButtonDefault>
+                >
+                    바텀시트 테스트
+                </ButtonDefault>
 
             </div>
 

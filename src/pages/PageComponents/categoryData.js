@@ -407,19 +407,6 @@ const data = [
             }
         },
     },
-    {
-        name : '모달/바텀 시트',
-        title : '바텀 시트 title',
-        text : '바텀 시트 text',
-        control : {
-            payload : {
-
-            },
-            // call(payload) {
-            //     VM.$store.dispatch('openDialog' , payload);
-            // }
-        },
-    }
 
 ];
 
