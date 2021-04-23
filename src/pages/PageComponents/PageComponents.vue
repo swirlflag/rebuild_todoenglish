@@ -841,7 +841,6 @@ CHECKBOX
 
                                 <BottomSheet    v-model="controls.isShow"
                                                 :headerless="false"
-                                                :sizebreak="false"
                                                 :title="controls.sampleType === 'list' ? '타이틀을 선택해 주세요' : controls.sampleType === 'color' ? '원하는 색을 골라주세요' : null"
                                 >
                                     <TESTListSelect     v-if="controls.sampleType === 'list'"
@@ -870,6 +869,7 @@ CHECKBOX
                                         <input type="radio" name="프레임/바텀 시트/샘플타입" value="color" v-model="controls.sampleType"><span>color</span>
                                     </label>
                                 </div>
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
                             </div>
                         </div>
