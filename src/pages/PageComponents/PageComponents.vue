@@ -753,6 +753,136 @@ CHECKBOX
 
 
 
+
+
+
+                     <!-- 프레임/레이어 컨텐츠 -->
+                        <div v-if="renderId === '프레임/레이어 컨텐츠'">
+                            <div class="comp-view">
+
+                                <div class="show-tempblue">
+                                    <strong>레이어 컨텐츠 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 레이어 컨텐츠를 호출해주세요.</strong>
+                                </div>
+                                <br>
+                                <div class="show-tempblue" style="width:100%">
+                                    <TESTKakaoEvent class=""/>
+                                </div>
+
+                                <LayerContent   v-model="controls.isShow"
+                                                :title="controls.mobileTitle"
+                                                :hash="controls.useHash ? controls.hash : null"
+
+                                >
+                                    <TESTKakaoEvent :isShowList="controls.isShowList"/>
+                                </LayerContent>
+
+                            </div>
+                            <div class="comp-control">
+                                <div>
+                                    <button class="default-button" @click="controls.isShow = !controls.isShow">
+                                        호출하기
+                                    </button>
+                                </div>
+                                <div>
+                                    현재 호출 상태 : {{ controls.isShow }}
+                                </div>
+                                <div>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" v-model="controls.isShowList">
+                                        <span>스크롤 리스트 더미 만들기</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" v-model="controls.useHash">
+                                        <span>해시 사용</span>
+                                    </label>
+                                    &nbsp;
+                                    <input type="text" v-if="controls.useHash" v-model="controls.hash">
+                                </div>
+
+                                <div class="visible-phone">
+                                    타이틀(모바일 전용)
+                                    &nbsp;
+                                    <input type="text" v-model="controls.mobileTitle">
+                                </div>
+                            </div>
+                        </div>
+                    <!-- 프레임/레이어 컨텐츠 -->
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- 프레임/바텀 시트 -->
+                        <div v-if="renderId === '프레임/바텀 시트'">
+                            <div class="comp-view">
+                                <div class="show-tempblue">
+                                    <strong>바텀 시트 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 바텀 시트를 호출해주세요.</strong>
+                                </div>
+                                <br>
+
+
+                                <div class="show-tempblue" style="width:100%">
+                                    <TESTListSelect     v-if="controls.sampleType === 'list'"/>
+                                    <TESTColorSelect    v-if="controls.sampleType === 'color'"/>
+                                </div>
+
+                                <button class="default-button" @click="controls.isShow = !controls.isShow">
+                                    호출하기
+                                </button>
+
+                                <BottomSheet    v-model="controls.isShow"
+                                                :headerless="false"
+                                                :sizebreak="false"
+                                                :title="controls.sampleType === 'list' ? '타이틀을 선택해 주세요' : controls.sampleType === 'color' ? '원하는 색을 골라주세요' : null"
+                                >
+                                    <TESTListSelect     v-if="controls.sampleType === 'list'"
+                                                        :index="controls.selectIndex"
+                                                        @select="(data) => {controls.selectItem = data.value; controls.selectIndex= data.index;controls.isShow = false}"
+                                    />
+
+                                    <TESTColorSelect    v-if="controls.sampleType === 'color'"
+                                                        :index="controls.selectIndex"
+                                                        @select="(data) => {controls.selectItem = data.value; controls.selectIndex= data.index;controls.isShow = false}"
+                                    />
+
+                                </BottomSheet>
+                            </div>
+                            <div class="comp-control">
+                                <div>
+
+                                </div>
+                                <div>현재 선택 값 : {{ controls.selectItem }}</div>
+                                <div>
+                                    샘플 내부 레이아웃 :
+                                    <label class="radio-label">
+                                        <input type="radio" name="프레임/바텀 시트/샘플타입" value="list" v-model="controls.sampleType"><span>list</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="프레임/바텀 시트/샘플타입" value="color" v-model="controls.sampleType"><span>color</span>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    <!-- 프레임/바텀 시트 -->
+
+
+
+
+
+
+
+
+
                     <!-- 모달/(구)Alert -->
                         <div v-if="renderId === '모달/(구)Alert'">
                             <div class="comp-control">
@@ -874,59 +1004,25 @@ CHECKBOX
 
 
 
-                     <!-- 프레임/레이어 컨텐츠 -->
-                        <div v-if="renderId === '프레임/레이어 컨텐츠'">
-                            <div class="comp-view">
 
-                                <div class="show-tempblue">
-                                    <strong>레이어 컨텐츠 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 레이어 컨텐츠를 호출해주세요.</strong>
-                                </div>
-                                <br>
-                                <div class="show-tempblue" style="width:100%">
-                                    <TESTKakaoEvent class=""/>
-                                </div>
 
-                                <LayerContent   v-model="controls.isShow"
-                                                :title="controls.mobileTitle"
-                                                :hash="controls.useHash ? controls.hash : null"
 
-                                >
-                                    <TESTKakaoEvent :isShowList="controls.isShowList"/>
-                                </LayerContent>
 
-                            </div>
+
+
+                    <!-- 모달/인증 -->
+                         <div v-if="renderId === '모달/인증'">
+
                             <div class="comp-control">
                                 <div>
-                                    <button class="default-button" @click="controls.isShow = !controls.isShow">
+                                    <button class="default-button" @click="controls.call">
                                         호출하기
                                     </button>
                                 </div>
-                                <div>
-                                    현재 호출 상태 : {{ controls.isShow }}
-                                </div>
-                                <div>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" v-model="controls.isShowList">
-                                        <span>스크롤 리스트 더미 만들기</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" v-model="controls.useHash">
-                                        <span>해시 사용</span>
-                                    </label>
-                                    &nbsp;
-                                    <input type="text" v-if="controls.useHash" v-model="controls.hash">
-                                </div>
-
-                                <div class="visible-phone">
-                                    타이틀(모바일 전용)
-                                    &nbsp;
-                                    <input type="text" v-model="controls.mobileTitle">
-                                </div>
+                                <div></div>
                             </div>
                         </div>
-                    <!-- 프레임/레이어 컨텐츠 -->
+                    <!-- 모달/인증 -->
 
 
 
@@ -936,59 +1032,6 @@ CHECKBOX
 
 
 
-
-
-
-                    <!-- 프레임/바텀 시트 -->
-                        <div v-if="renderId === '프레임/바텀 시트'">
-                            <div class="comp-view">
-                                <div class="show-tempblue">
-                                    <strong>바텀 시트 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 바텀 시트를 호출해주세요.</strong>
-                                </div>
-                                <br>
-
-                                <div class="show-tempblue" style="width:100%">
-                                    <TESTListSelect     v-if="controls.sampleType === 'list'"/>
-                                    <TESTColorSelect    v-if="controls.sampleType === 'color'"/>
-                                </div>
-
-                                <BottomSheet    v-model="controls.isShow"
-                                                :headerless="false"
-                                                :sizebreak="false"
-                                                :title="controls.sampleType === 'list' ? '타이틀을 선택해 주세요' : controls.sampleType === 'color' ? '원하는 색을 골라주세요' : null"
-                                >
-                                    <TESTListSelect     v-if="controls.sampleType === 'list'"
-                                                        :index="controls.selectIndex"
-                                                        @select="(data) => {controls.selectItem = data.value; controls.selectIndex= data.index;controls.isShow = false}"
-                                    />
-
-                                    <TESTColorSelect    v-if="controls.sampleType === 'color'"
-                                                        :index="controls.selectIndex"
-                                                        @select="(data) => {controls.selectItem = data.value; controls.selectIndex= data.index;controls.isShow = false}"
-                                    />
-
-                                </BottomSheet>
-                            </div>
-                            <div class="comp-control">
-                                <div>
-                                    <button class="default-button" @click="controls.isShow = !controls.isShow">
-                                        호출하기
-                                    </button>
-                                </div>
-                                <div>현재 선택 값 : {{ controls.selectItem }}</div>
-                                <div>
-                                    샘플 내부 레이아웃 :
-                                    <label class="radio-label">
-                                        <input type="radio" name="프레임/바텀 시트/샘플타입" value="list" v-model="controls.sampleType"><span>list</span>
-                                    </label>
-                                    <label class="radio-label">
-                                        <input type="radio" name="프레임/바텀 시트/샘플타입" value="color" v-model="controls.sampleType"><span>color</span>
-                                    </label>
-                                </div>
-
-                            </div>
-                        </div>
-                    <!-- 프레임/바텀 시트 -->
 
 
 

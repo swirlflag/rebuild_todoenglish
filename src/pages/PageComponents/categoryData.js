@@ -387,7 +387,7 @@ const data = [
     {
         name : '모달/다이얼로그',
         title : '다이얼로그 title',
-        text : '다이얼로그 text',
+        text    : '다이얼로그 text',
         control : {
             payload : {
                 title : '알림' ,
@@ -408,12 +408,25 @@ const data = [
         },
     },
 
+    {
+        name : '모달/인증',
+        title : '인증 title',
+        text : '인증 text',
+
+        control : {
+            call() {
+                VM.$store.dispatch('openAuthPanel');
+            },
+        },
+
+    },
+
 ];
 
 
 data.map(c => {
     c.info && (c.info = {});
     c.props && (c.props = {});
-})
+});
 
 export default data;

@@ -120,10 +120,11 @@ $tempPadding : 30px;
     z-index: 1020;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+
     &.bottom-sheet-leave-to{
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
         pointer-events: none;
     }
 }
@@ -214,6 +215,8 @@ $tempPadding : 30px;
     @include hideScrollbar;
 
     height: 100%;
+
+    border: 1px solid #000;
 
     overflow-x : hidden;
     overflow-y: scroll;

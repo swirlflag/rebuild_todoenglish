@@ -203,6 +203,7 @@ $mobileCloseHeight : 60px;
     box-sizing: border-box;
     transition: opacity 300ms ease 400ms, transform 300ms $EASE_outCubic 400ms;
     transform : translate3d(0,0,0);
+
     opacity: 1;
     z-index: 10;
     display: flex;
@@ -217,6 +218,7 @@ $mobileCloseHeight : 60px;
         height: $mobileCloseHeight;
         flex : 0 0 $mobileCloseHeight;
         background-color: #fff;
+        // background-color: rgba(255,255,255,0.9 );
         display: flex;
         align-items: center;
         box-shadow: 0 3px 4px rgba(0,0,0,0.1);
@@ -298,7 +300,7 @@ $mobileCloseHeight : 60px;
     @include hideScrollbar;
 
     @include phone {
-        background-color : #fff;
+        background-color: #fff;
         padding: 0;
         // margin-top: $mobileCloseHeight;
         margin-top: 0;

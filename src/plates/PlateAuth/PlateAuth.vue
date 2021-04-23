@@ -1,105 +1,115 @@
 <template>
-    <div id="plate--auth" ref="ref_root" :class="{'st-open' : $store.state.$auth.is_open}" >
 
-        <div class="auth__dimmed" @click="closeAuthTrigger"></div>
+    <transition name="plate--auth" >
+        <div    id="plate--auth"
+                ref="ref_root"
+                v-if="isOpen"
+                :class="{'st-open' : isOpen}"
+        >
 
-        <div class="auth__box" v-if="phaseDataMap[nowPhase]" ref="ref_box" >
+            <div class="auth__dimmed" @click="closeAuthTrigger"></div>
 
-            <div class="auth__close" @click="closeAuthTrigger">
-                <span></span>
-            </div>
+            <div    class="auth__box"
+                    v-if="phaseDataMap[nowPhase]"
+                    ref="ref_box"
+            >
 
-            <h2 class="auth__title" ref="ref_title">
-                <TextChangeMask :text="phaseDataMap[nowPhase].title" />
-            </h2>
+                <div class="auth__close" @click="closeAuthTrigger">
+                    <span></span>
+                </div>
 
-            <p class="auth__text" ref="ref_text">
-                <TextChangeMask :text="phaseDataMap[nowPhase].text" :delay="350"/>
-            </p>
+                <h2 class="auth__title" ref="ref_title">
+                    <TextChangeMask :text="phaseDataMap[nowPhase].title" />
+                </h2>
 
-            <div class="auth__controller" :class="{'st-show' : isShowHistoryButton}">
-                <button class="auth__history-back hover-link"
-                        @click="onClickHistoryButton"
-                >
-                    <span>이전 단계로</span>
-                </button>
-            </div>
+                <p class="auth__text" ref="ref_text">
+                    <TextChangeMask :text="phaseDataMap[nowPhase].text" :delay="350"/>
+                </p>
 
-            <div class="auth__content" ref="ref_content">
-                <transition-group   name="auth-content"
-                                    @before-enter="onBeforeEnterTransition"
-                                    @enter="onEnterTransition"
-                                    @after-enter="onAfterEnterTransition"
-                >
+                <div class="auth__controller" :class="{'st-show' : isShowHistoryButton}">
+                    <button class="auth__history-back hover-link"
+                            @click="onClickHistoryButton"
+                    >
+                        <span>이전 단계로</span>
+                    </button>
+                </div>
 
-                <!-- 로그인 방식 분류 -->
-                    <AuthSelection  v-if="nowPhase === 'selectType'" :key="nowPhase"
-                                    @change-phase="changePhase"
-                    />
+                <div class="auth__content" ref="ref_content">
+                    <transition-group   name="auth-content"
+                                        @before-enter="onBeforeEnterTransition"
+                                        @enter="onEnterTransition"
+                                        @after-enter="onAfterEnterTransition"
+                    >
 
-                <!-- 외부 로그인 시도 . (카카오, 구글) -->
-                    <AuthExternal   v-if="nowPhase === 'signinKakao' || nowPhase === 'signinGoogle'" :key="nowPhase"
-                                    :nowPhase="nowPhase"
-                                    @change-phase="changePhase"
-                    />
+                    <!-- 로그인 방식 분류 -->
+                        <AuthSelection  v-if="nowPhase === 'selectType'" :key="nowPhase"
+                                        @change-phase="changePhase"
+                        />
 
-                <!-- 자체 이메일 로그인 입력 폼 -->
-                    <AuthSigninForm     v-if="nowPhase === 'signinForm'" :key="nowPhase"
+                    <!-- 외부 로그인 시도 . (카카오, 구글) -->
+                        <AuthExternal   v-if="nowPhase === 'signinKakao' || nowPhase === 'signinGoogle'" :key="nowPhase"
                                         :nowPhase="nowPhase"
                                         @change-phase="changePhase"
-                    />
+                        />
 
-                <!-- 회원가입에 필요한 동의 체크 -->
-                    <AuthSignupConsent  v-if="nowPhase === 'signupConsent'" :key="nowPhase"
+                    <!-- 자체 이메일 로그인 입력 폼 -->
+                        <AuthSigninForm     v-if="nowPhase === 'signinForm'" :key="nowPhase"
+                                            :nowPhase="nowPhase"
+                                            @change-phase="changePhase"
+                        />
+
+                    <!-- 회원가입에 필요한 동의 체크 -->
+                        <AuthSignupConsent  v-if="nowPhase === 'signupConsent'" :key="nowPhase"
+                                            @change-phase="changePhase"
+                        />
+
+                    <!-- 회원가입을 위한 아이디,비밀번호 입력 폼 -->
+                        <AuthSignupForm  v-if="nowPhase === 'signupEmailForm'" :key="nowPhase"
                                         @change-phase="changePhase"
-                    />
+                        />
 
-                <!-- 회원가입을 위한 아이디,비밀번호 입력 폼 -->
-                    <AuthSignupForm  v-if="nowPhase === 'signupEmailForm'" :key="nowPhase"
-                                     @change-phase="changePhase"
-                    />
+                    <!-- 회원가입 완료후 마케팅 동의-->
+                        <AuthSignupMarketingAgree   v-if="nowPhase === 'signupMarketingAgree'" :key="nowPhase"
+                                                    @change-phase="changePhase"
+                        />
 
-                <!-- 회원가입 완료후 마케팅 동의-->
-                    <AuthSignupMarketingAgree   v-if="nowPhase === 'signupMarketingAgree'" :key="nowPhase"
-                                                @change-phase="changePhase"
-                    />
+                    <!-- 로그인 완료 -> 인증 종료 -->
+                        <AuthSigninSuccess  v-if="nowPhase === 'signinSuccess'" :key="nowPhase"
+                                            @change-phase="changePhase"
+                                            @reset-history="resetHistory"
+                        />
 
-                <!-- 로그인 완료 -> 인증 종료 -->
-                    <AuthSigninSuccess  v-if="nowPhase === 'signinSuccess'" :key="nowPhase"
-                                        @change-phase="changePhase"
-                                        @reset-history="resetHistory"
-                    />
+                    <!-- 회원가입 완료 -->
+                        <AuthSignupSuccess  v-if="nowPhase === 'signupSuccess'" :key="nowPhase"
+                                            @change-phase="changePhase"
+                                            @reset-history="resetHistory"
+                        />
 
-                <!-- 회원가입 완료 -->
-                    <AuthSignupSuccess  v-if="nowPhase === 'signupSuccess'" :key="nowPhase"
-                                        @change-phase="changePhase"
-                                        @reset-history="resetHistory"
-                    />
+                    <!-- 비밀번호 찾기를 위한 이메일 입력 폼 -->
+                        <AuthFindPassword   v-if="nowPhase === 'findPassword'" :key="nowPhase"
+                                            @change-phase="changePhase"
+                        />
 
-                <!-- 비밀번호 찾기를 위한 이메일 입력 폼 -->
-                    <AuthFindPassword   v-if="nowPhase === 'findPassword'" :key="nowPhase"
-                                        @change-phase="changePhase"
-                    />
+                    <!-- 비밀번호 찾기 이메일 전송 완료 -->
+                        <AuthFindPasswordSuccess    v-if="nowPhase === 'findPasswordSuccess'" :key="nowPhase"
+                                                    @change-phase="changePhase"
+                        />
 
-                <!-- 비밀번호 찾기 이메일 전송 완료 -->
-                    <AuthFindPasswordSuccess    v-if="nowPhase === 'findPasswordSuccess'" :key="nowPhase"
-                                                @change-phase="changePhase"
-                    />
+                    <!-- 로그아웃 확인창 -->
+                        <AuthSignoutCheck   v-if="nowPhase === 'signoutCheck'" :key="nowPhase"
+                                            @change-phase="changePhase"
+                        />
 
-                <!-- 로그아웃 확인창 -->
-                    <AuthSignoutCheck   v-if="nowPhase === 'signoutCheck'" :key="nowPhase"
-                                        @change-phase="changePhase"
-                    />
+                    <!-- 로그아웃 완료! -->
+                        <AuthSignoutSuccess  v-if="nowPhase === 'signoutSuccess'" :key="nowPhase"
+                        />
 
-                <!-- 로그아웃 완료! -->
-                    <AuthSignoutSuccess  v-if="nowPhase === 'signoutSuccess'" :key="nowPhase"
-                    />
+                    </transition-group>
+                </div>
 
-                </transition-group>
             </div>
-
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -147,6 +157,15 @@ export default {
     },
 
     computed : {
+        $auth() {
+            return this.$store.state.$auth;
+        },
+        isOpen() {
+            return this.$auth.is_open;
+        },
+        isLogin() {
+            return this.$auth.is_login;
+        },
         phaseDataMap() {
             return ({
             // 로그인 타입 선택
@@ -228,7 +247,7 @@ export default {
     },
 
     watch : {
-        "$store.state.$auth.is_open"(now) {
+        "isOpen"(now) {
             this.isOpenAuth = now;
             if(now){
                 this.openAuth();
@@ -236,7 +255,7 @@ export default {
                 this.closeAuth();
             }
         },
-        "$store.state.$user.is_login"(now) {
+        "isLogin"(now) {
             if(this.isOpenAuth){
                 return;
             }
@@ -263,19 +282,25 @@ export default {
         },
 
         openAuthMotion() {
-            const tween = this.gsap.to(this.$refs.ref_box , {
-                y : "0%",
-                ease        : 'power4.out',
-                duration    : 0.7,
-                delay       : 0.1,
-                onUpdate    : () => {
-                    if(!this.isOpenAuth){
-                        tween.kill();
-                    }
-                }
-            });
 
-            this.onMountedMotion();
+            const tl = new this.gsap.timeline();
+
+            setTimeout(() => {
+                tl.to(this.$refs.ref_box , {
+                    yPercent    : 0,
+                    ease        : 'power4.out',
+                    duration    : 0.7,
+                    delay       : 0.1,
+                    onUpdate    : () => {
+                        if(!this.isOpenAuth){
+                            tl.kill();
+                        }
+                    }
+                });
+
+                this.onMountedMotion();
+            },0)
+
         },
         closeAuthMotion() {
             this.gsap.to(this.$refs.ref_box , {
@@ -296,7 +321,7 @@ export default {
         resetHistory() {
             this.phaseHistory = [];
         },
-        changePhaseToBase(isLogin = this.$store.state.$user.is_login) {
+        changePhaseToBase(isLogin = this.isLogin) {
             this.resetHistory();
 
             if(isLogin){
@@ -537,12 +562,17 @@ export const authStore = {
     align-items: center;
     flex-direction: column;
     @include phone {
-        padding : $SIZE_MO_innerPadding;
+        // padding : $SIZE_MO_innerPadding;
+        padding: 0;
+        padding-top: $SIZE_MO_innerPadding;
     }
 
-    transition:  transform 1s ease ;
+    // transition:  transform 1s ease ;
 
     pointer-events: none;
+
+    // opacity: 0.4123;
+
     &.st-open {
         pointer-events: all;
     }
