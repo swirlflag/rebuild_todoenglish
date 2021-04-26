@@ -36,6 +36,8 @@
 
 <script>
 
+import { targetPathDetect } from '@/utils';
+
 export default {
     name : "BottomSheet",
     model : {
@@ -59,125 +61,157 @@ export default {
             beforeObserve : true,
 
             prevSibling : null,
+
+            gap : 10,
+
             modelData : {
                 isShow,
                 trigger : this.target,
-            }
+            },
+
+            position : {
+                x :0,
+                y : 0,
+                overX : false,
+                overY : false,
+            },
+
+            tl : new this.gsap.timeline(),
+        }
+    },
+    computed : {
+        isMobile() {
+            return this.$screen.isMobileSize;
         }
     },
     watch : {
         'modelValue'() {
-            this.watchModelValue();
+            this.modelData.isShow = this.modelValue;
         },
         'isShow'() {
-            this.watchIsShow();
+            this.modelData.isShow = this.isShow;
         },
         'modelData.isShow'() {
             this.watchModelData();
         },
     },
     methods : {
-        watchModelValue() {
-            this.modelValue ? this.open() : this.close();
-        },
-        watchIsShow(){
-            this.isShow ? this.open() : this.close();
-        },
-        watchModelData() {
-            this.calcPosition();
-            this.$emit('modelEvent', this.modelData.isShow);
-
-        },
-
         open(){
             this.modelData.isShow = true;
         },
         close() {
             this.modelData.isShow = false;
         },
+        watchModelData() {
+            this.calcPosition();
+            this.$emit('modelEvent', this.modelData.isShow);
+
+            if(!this.isMobile && this.modelData.isShow){
+                this.bindPcEvents();
+            }else {
+                this.unbindPcEvents();
+            }
+        },
 
         calcPosition() {
-            if(this.$screen.isMobileSize || !this.modelData.isShow){
-                return
+            if(this.isMobile || !this.modelData.isShow){
+                return;
             }
 
-            setTimeout(() => {
+            const trigger = this.modelData.trigger;
+            const rect = trigger.getBoundingClientRect();
+            const screen = this.$screen;
+            const isOutside =   rect.y + rect.height < 0
+                            ||  rect.x + rect.width < 0
+                            ||  rect.y > screen.height
+                            ||  rect.x > screen.width;
+
+            if(isOutside){
+                this.close();
+                return;
+            }
+
+            if(!this.$refs.ref_wrap){
+
+                setTimeout(() => {
+                    const wrap = this.$refs.ref_wrap;
+
+                    const overX = wrap.offsetWidth > screen.width - rect.x;
+                    const overY = wrap.offsetHeight > screen.height - rect.y - rect.height;
+
+                    this.position = {
+                        x : rect.x - (overX ? wrap.offsetWidth - rect.width : 0),
+                        y : rect.y - (overY ? wrap.offsetHeight + rect.height + this.gap : -this.gap) + rect.height,
+                    };
+
+                    wrap.style.left = this.position.x + 'px';
+                    wrap.style.top  = this.position.y + 'px';
+
+                },0);
+
+            }else {
                 const wrap = this.$refs.ref_wrap;
-                const trigger = this.modelData.trigger;
 
-                const screen = this.$screen;
+                let willX = rect.x - this.position.x;
+                let willY = rect.y - this.position.y + rect.height + this.gap;
 
-                {wrap, trigger}
-
-                const triggerRect = trigger.getBoundingClientRect();
-
-                // console.log(triggerRect);
-
-                // if(triggerRect.top){
-
-                // }
-
-                const triggerMargin = {
-                    left : triggerRect.x,
-                    right : screen.width - (triggerRect.x + triggerRect.width),
+                if(wrap.offsetWidth > screen.width - rect.x){
+                    willX -= wrap.offsetWidth - trigger.offsetWidth
                 }
 
-                console.log(triggerMargin);
-
-                // const centerX = scrren.width - 
-
-                // console.log(triggerMargin);
-
-                if(triggerMargin.left > triggerMargin.right){
-                    wrap.style.left = (triggerRect.left - wrap.offsetWidth )+ 'px';
-                }else {
-                    wrap.style.left = triggerRect.left + triggerRect.width + 'px';
+                if(wrap.offsetHeight > screen.height - rect.y - rect.height - this.gap){
+                    willY -= wrap.offsetHeight + trigger.offsetHeight + this.gap*2
                 }
 
-                // wrap.style.top = triggerRect.y + 'px';
+                this.tl.clear();
 
+                this.tl.to(wrap, {
+                    x : willX ,
+                    y : willY ,
+                    ease : 'power2.out',
+                    duration : 0.4,
+                })
 
-            },0);
+                // wrap.style.transform = `translate3d(${willX}px,${willY}px,0)`;
+
+            }
 
         },
 
-        setObserver() {
+        detectPath(e) {
+            const isPathClick = targetPathDetect(e,this.$refs.ref_wrap , this.modelData.trigger);
 
-            if(this.trigger){
-                this.modelData.trigger = this.target;
-            }else {
-                this.modelData.trigger = this.$refs.ref_root.previousSibling;
+            if(!isPathClick){
+                this.close();
             }
+        },
 
-            const options = {
-                rootMargin: '0px',
-                threshold: [1.0, 0.5,0.2]
-            }
-
-
-            const io = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    console.log(io,entry);
-                    if (entry.intersectionRatio > 0) {
-                        // entry.target.classList.add('tada');
-                        entry.target.innerText = '123';
-                    }
-                    else {
-                        entry.target.innerText = 'hoooooooo';
-                        // entry.target.classList.remove('tada');
-                    }
-                })
-            })
-
-
-            io.observe(this.modelData.trigger , options);
-
-            this.beforeObserve = false;
+        bindPcEvents() {
+            setTimeout(() => {
+                window.addEventListener('scroll' , this.calcPosition);
+                window.addEventListener('resize' , this.close);
+                window.addEventListener('mousedown' , this.detectPath);
+            },0)
+        },
+        unbindPcEvents() {
+            window.removeEventListener('scroll' , this.calcPosition);
+            window.removeEventListener('resize' , this.close);
+            window.removeEventListener('mousedown' , this.detectPath)
         },
 
     },
     mounted() {
-        this.setObserver();
+        if(this.trigger){
+            this.modelData.trigger = this.target;
+        }else {
+            this.modelData.trigger = this.$refs.ref_root.previousSibling;
+        }
+
+        this.beforeObserve = false;
+    },
+
+    beforeDestroyed() {
+        this.unbindPcEvents();
     },
 }
 
@@ -188,12 +222,16 @@ $tempPadding : 30px;
 
 .bottom-sheet {
     position: fixed;
+    // position: absolute;
     width: 100% !important; height: 100% !important;
+    // width: 100vw; height: 100vh;
+
     top: 0; left: 0;
     z-index: 1020;
     box-sizing: border-box;
     display: flex;
     align-items: flex-start;
+    // border: 3px solid #3d3;
 
     @include overPhone {
         pointer-events: none;
@@ -247,47 +285,52 @@ $tempPadding : 30px;
     background-color: #fff;
     box-shadow: 0 0 8px rgba(0,0,0,0.2);
 
-    // border-radius: 14px 14px 0 0 ;
+    border-radius: 14px;
     overflow: hidden;
     transform : translate3d(0,0,0);
 
-    border:2px dashed #d3d;
     box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
     position: relative;
     pointer-events: all;
+    will-change: transform;
 
     @include overPhone {
         max-width : 520px;
         max-height: 520px;
 
-        transition : transform 700ms $EASE_outExpo ,opacity 400ms ease;
-        .bottom-sheet-enter &{
+        .bottom-sheet-enter & {
             opacity: 0;
-            transform : translate3d(0,-30px,0) scale(0.9);
+            transform : translate3d(0,30px,0);
+        }
+        .bottom-sheet-enter-to &{
             transition : transform 700ms $EASE_outExpo , opacity 400ms ease;
         }
         .bottom-sheet-leave-to &{
             opacity: 0;
-            transform : translate3d(0,30px,0) scale(0.9);
-            transition : transform 300ms $EASE_inCubic, opacity 300ms ease;
+            pointer-events: none;
+            transition : opacity 250ms ease;
         }
     }
 
     @include phone {
+        border-radius: 14px 14px 0 0 ;
         margin: 0;
         width: 100%;
         max-height: 77%;
-        transition : transform 700ms $EASE_outExpo;
+        top: 0 !important; left: 0 !important;
+        transform : translate3d(0,0,0) !important;
 
         .bottom-sheet-enter &{
-            transform : translate3d(0,101%,0);
+            transform : translate3d(0,101%,0) !important;
+        }
+        .bottom-sheet-enter-to &{
             transition : transform 700ms $EASE_outExpo;
         }
         .bottom-sheet-leave-to &{
-            transform : translate3d(0,101%,0);
+            transform : translate3d(0,101%,0) !important;
             transition : transform 420ms $EASE_inOutCubic;
         }
     }
@@ -336,8 +379,6 @@ $tempPadding : 30px;
     @include hideScrollbar;
 
     height: 100%;
-
-    // border: 1px solid #000;
 
     overflow-x : hidden;
     overflow-y: scroll;

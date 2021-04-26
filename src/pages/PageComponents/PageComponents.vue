@@ -824,6 +824,7 @@ CHECKBOX
                     <!-- 프레임/바텀 시트 -->
                         <div v-if="renderId === '프레임/바텀 시트'">
                             <div class="comp-view">
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                                 <div class="show-tempblue">
                                     <strong>바텀 시트 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 바텀 시트를 호출해주세요.</strong>
                                 </div>

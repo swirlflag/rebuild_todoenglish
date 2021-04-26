@@ -6,7 +6,7 @@ $outerPadding : 16px;
 
 // 컴포넌트 페이지에서는 공용 네비게이션과 footer를 숨겨줍니다.
 .page--components {
-    #plate--navigation ,
+    #plate--navigation,
     #plate--footer{
         opacity: 0 !important;
         pointer-events: none !important;
@@ -20,10 +20,10 @@ $outerPadding : 16px;
         }
     }
     #plate--page {
-        overflow: hidden !important;
+        // overflow: hidden !important;
     }
     #page--router {
-        overflow: hidden !important;
+        // overflow: hidden !important;
     }
 
     .show-tempblue ,
@@ -138,21 +138,7 @@ button.default-button {
     line-height: 1.4em;
     // display: none;
 }
-::-webkit-scrollbar {
-    width: 4px;
-    position: absolute;
-}
 
-::-webkit-scrollbar-thumb {
-    background-clip: padding-box;
-    background-color: $tempblue;
-    box-sizing: border-box;
-}
-
-::-webkit-scrollbar-track {
-    background-color: rgb(211, 233, 255);
-    background-color: transparent;
-}
 #comp {
     // margin: 50px !important;
     // border: 1px solid #d3d;
@@ -163,9 +149,10 @@ button.default-button {
     // position: fixed;
     // position: absolute;
     top: 0; left: 0;
-    width: 100vw; height: 100vh;
+    width: 100vw;
+    height: auto;
     @include phone {
-        height: 100%;
+        // height: 100%;
     }
 
 }
@@ -209,7 +196,10 @@ button.default-button {
     flex-basis: content;
     box-sizing: border-box;
     overflow: auto;
+
     position: relative;
+    position: fixed;
+
     min-height: 100%;
 
     z-index: 10;
@@ -289,11 +279,6 @@ button.default-button {
         transform : translateX(-101%);
         background-color: tempblue_a(0.6);
 
-        &::-webkit-scrollbar,
-        &::-webkit-scrollbar-thumb,
-        &::-webkit-scrollbar-track {
-            display: none;
-        }
         .st-opentab & {
             transform : translateX(0);
         }
@@ -366,25 +351,23 @@ $categorypadding : 10px;
 #comp-content {
     flex-grow: 1;
     // width: auto;
-    height: 100%;
+    // height: 100%;
+    height: auto;
     width: 100%;
 
     position: relative;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    // overflow-y: scroll;
+    // overflow-x: hidden;
     padding-top: $outerPadding;
     padding-bottom: $outerPadding;
     box-sizing: border-box;
-
-    &::-webkit-scrollbar,
-    &::-webkit-scrollbar-thumb,
-    &::-webkit-scrollbar-track {
-        display: none;
-    }
+    // margin-left: 245px;
+    padding-left: 245px;
 
     @include phone {
         padding: 0;
         // margin-top: 50px;
+        margin-left: 0;
     }
 
     #comp-content-wrap {

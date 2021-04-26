@@ -125,17 +125,10 @@ export default {
 }
 </script>
 <style lang="scss">
-
 body {
-    &::-webkit-scrollbar {
-        opacity: 0;
-        display: none;
-        visibility: hidden;
-        width: 0;
-    }
-    &::-webkit-scrollbar-thumb {}
-    &::-webkit-scrollbar-track {}
+    @include hideScrollbar;
 }
+
 </style>
 
 

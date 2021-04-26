@@ -1,18 +1,18 @@
 import { VM } from '@/main.js';
 
-export const targetPathDetect = (e,target) => {
+export const targetPathDetect = (e,...targets) => {
 
     const path = e.composedPath ? e.composedPath() : e.path;
 
-    let result = false;
-    for(let i = 0, l = path.length; i < l; ++i){
-        if(target === path[i]){
-            result = true;
-            break;
+    for(let i = 0, il = path.length; i < il; ++i){
+        for(let j = 0 , jl = targets.length; j < jl; ++j ){
+            if(targets[j] === path[i]){
+                return true;
+            }
         }
     }
 
-    return result;
+    return false;
 
 }
 

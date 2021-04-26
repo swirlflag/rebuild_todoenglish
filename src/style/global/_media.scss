@@ -73,6 +73,9 @@ $STANDARD_mobileMin : 769px;
         visibility: hidden;
         width: 0; height: 0;
     }
+    &::-webkit-scrollbar-thumb {}
+    &::-webkit-scrollbar-track {}
+
 }
 
 :export {
