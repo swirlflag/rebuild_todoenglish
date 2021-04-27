@@ -318,14 +318,15 @@ const data = [
     },
 
     {
-        name : '프레임/바텀 시트',
-        title : '바텀 시트 제목',
-        text : '바텀 시트 텍스트',
+        name : '프레임/플로트 시트',
+        title : '플로트 시트 제목',
+        text : '플로트 시트 텍스트',
         control : {
             isShow : false,
             title : '타이틀을 선택해 주세요',
             sampleType : 'list',
-
+            headerless : false,
+            showScroll : false,
             selectItem : '',
             selectIndex : randomOne(1,2,3,4,5),
         }
@@ -385,6 +386,7 @@ const data = [
     },
 
     {
+        unique : true,
         name : '모달/다이얼로그',
         title : '다이얼로그 title',
         text    : '다이얼로그 text',
@@ -409,6 +411,7 @@ const data = [
     },
 
     {
+        unique : true,
         name : '모달/인증',
         title : '인증 title',
         text : '인증 text',

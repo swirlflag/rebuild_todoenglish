@@ -32,30 +32,37 @@ export default {
     },
     props : {
         index : Number,
+        isShort : Boolean,
     },
     data() {
 
         const index = this.index !== undefined ? this.index : -1;
 
+        let tempList = [
+            'The Last of Us',
+            'Horizon: Zero Dawn',
+            'Monster Hunter World',
+            'Death Stranding',
+            'Dark Souls 3',
+            'Detroit: Become Human',
+            "Ghost of Tsushima",
+            "Grand Theft Auto 5",
+            "Red Dead Redemption 2",
+            "Animal Crossing: New Horizons",
+            "Celeste",
+            "Hades",
+            "Hollow Knight",
+            "Stardew Valley",
+            "The Legend of Zelda: Breath of the Wild",
+        ];
+
+        if(this.isShort){
+            tempList = tempList.splice(0,3);
+        }
+
         return {
 
-            tempList : [
-                'The Last of Us',
-                'Horizon: Zero Dawn',
-                'Monster Hunter World',
-                'Death Stranding',
-                'Dark Souls 3',
-                'Detroit: Become Human',
-                "Ghost of Tsushima",
-                "Grand Theft Auto 5",
-                "Red Dead Redemption 2",
-                "Animal Crossing: New Horizons",
-                "Celeste",
-                "Hades",
-                "Hollow Knight",
-                "Stardew Valley",
-                "The Legend of Zelda: Breath of the Wild",
-            ],
+            tempList,
 
             modelData : {
                 value : '',

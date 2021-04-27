@@ -1,12 +1,12 @@
 <template>
     <div>
 
-        <BottomSheet    v-model="isShowBottomSheet"
+        <FloatSheet    v-model="isShowFloatSheet"
                         title="일반페이지 바텀시트 테스트"
 
         >
-            <TESTListSelect @select="isShowBottomSheet = false" v-if="0"/>
-        </BottomSheet>
+            <TESTListSelect @select="isShowFloatSheet = false" v-if="0"/>
+        </FloatSheet>
 
         <br>
         <br>
@@ -31,7 +31,7 @@
                 <p class="prefix--dot">middle dot</p>
 
                 <ButtonDefault theme="green"
-                                @click="isShowBottomSheet = true"
+                                @click="isShowFloatSheet = true"
 
                 >
                     바텀시트 테스트
@@ -47,19 +47,19 @@
 <script>
 
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
-import BottomSheet from  '@/components/frame/BottomSheet.vue';
-import TESTListSelect from '@/components/form/TESTListSelect.vue';
+import FloatSheet from  '@/components/frame/FloatSheet.vue';
+import TESTListSelect from '@/components/testcomp/TESTListSelect.vue';
 
 export default {
     name : 'PageReview',
     components : {
         ButtonDefault,
-        BottomSheet,
+        FloatSheet,
         TESTListSelect,
     },
     data() {
         return {
-            isShowBottomSheet : true,
+            isShowFloatSheet : true,
         }
     },
     mounted() {

@@ -45,8 +45,13 @@ CHECKBOX
                                 </div>
                                 <div class="tab__list">
                                     <template v-for="(item, idx) in items">
-                                        <div :key="idx" class="tab__item" :data-id="item" @click="onClickItem(item)">
-                                            {{item.split('/')[1]}}
+                                        <div :key="idx" class="tab__item" :data-id="item.name" @click="onClickItem(item.name)">
+                                            {{item.name.split('/')[1]}} 
+
+                                            <span class="tab__item-unique" v-if="item.unique">
+                                                unique
+                                            </span>
+
                                         </div>
                                     </template>
                                 </div>
@@ -821,27 +826,31 @@ CHECKBOX
 
 
 
-                    <!-- 프레임/바텀 시트 -->
-                        <div v-if="renderId === '프레임/바텀 시트'">
+                    <!-- 프레임/플로트 시트 -->
+                        <div v-if="renderId === '프레임/플로트 시트'">
                             <div class="comp-view">
-                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                <template v-if="controls.showScroll">
+                                    <div style="height:100vh"></div>
+                                </template>
+
                                 <div class="show-tempblue">
-                                    <strong>바텀 시트 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 바텀 시트를 호출해주세요.</strong>
+                                    <strong>플로트 시트 표시 예시용 레이아웃. 아래의 호출하기 버튼으로 플로트 시트를 호출해주세요.</strong>
                                 </div>
                                 <br>
 
-
                                 <div class="show-tempblue" style="width:100%">
-                                    <TESTListSelect     v-if="controls.sampleType === 'list'"/>
+                                    <TESTListSelect     v-if="controls.sampleType === 'list'" isShort/>
                                     <TESTColorSelect    v-if="controls.sampleType === 'color'"/>
                                 </div>
+
+                                <br>
 
                                 <button class="default-button" @click="controls.isShow = !controls.isShow">
                                     호출하기
                                 </button>
 
-                                <BottomSheet    v-model="controls.isShow"
-                                                :headerless="false"
+                                <FloatSheet    v-model="controls.isShow"
+                                                :headerless="controls.headerless"
                                                 :title="controls.sampleType === 'list' ? '타이틀을 선택해 주세요' : controls.sampleType === 'color' ? '원하는 색을 골라주세요' : null"
                                 >
                                     <TESTListSelect     v-if="controls.sampleType === 'list'"
@@ -854,27 +863,40 @@ CHECKBOX
                                                         @select="(data) => {controls.selectItem = data.value; controls.selectIndex= data.index;controls.isShow = false}"
                                     />
 
-                                </BottomSheet>
-                            </div>
-                            <div class="comp-control">
-                                <div>
+                                </FloatSheet>
 
-                                </div>
+                                <template v-if="controls.showScroll">
+                                    <div style="height:100vh"></div>
+                                </template>
+                            </div>
+
+                            <div class="comp-control">
                                 <div>현재 선택 값 : {{ controls.selectItem }}</div>
                                 <div>
                                     샘플 내부 레이아웃 :
                                     <label class="radio-label">
-                                        <input type="radio" name="프레임/바텀 시트/샘플타입" value="list" v-model="controls.sampleType"><span>list</span>
+                                        <input type="radio" name="프레임/플로트 시트/샘플타입" value="list" v-model="controls.sampleType"><span>list</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="프레임/바텀 시트/샘플타입" value="color" v-model="controls.sampleType"><span>color</span>
+                                        <input type="radio" name="프레임/플로트 시트/샘플타입" value="color" v-model="controls.sampleType"><span>color</span>
                                     </label>
                                 </div>
-                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                <div>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" v-model="controls.headerless">
+                                        <span>headerless</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" v-model="controls.showScroll">
+                                        <span>스크롤 생성</span>
+                                    </label>
+                                </div>
 
                             </div>
                         </div>
-                    <!-- 프레임/바텀 시트 -->
+                    <!-- 프레임/플로트 시트 -->
 
 
 
@@ -1136,11 +1158,11 @@ import InputTextPassword from '@/components/input/InputTextPassword.vue';
 import StickyStack from '@/components/display/StickyStack.vue';
 
 import LayerContent from '@/components/frame/LayerContent.vue';
-import TESTKakaoEvent from '@/components/layout/TESTKakaoEvent.vue';
+import TESTKakaoEvent from '@/components/testcomp/TESTKakaoEvent.vue';
 
-import BottomSheet from '@/components/frame/BottomSheet.vue';
-import TESTListSelect from '@/components/form/TESTListSelect.vue';
-import TESTColorSelect from '@/components/form/TESTColorSelect.vue';
+import FloatSheet from '@/components/frame/FloatSheet.vue';
+import TESTListSelect from '@/components/testcomp/TESTListSelect.vue';
+import TESTColorSelect from '@/components/testcomp/TESTColorSelect.vue';
 
 
 export default {
@@ -1165,7 +1187,7 @@ export default {
 
         LayerContent,
         TESTKakaoEvent,
-        BottomSheet,
+        FloatSheet,
         TESTListSelect,
         TESTColorSelect,
 
@@ -1177,9 +1199,14 @@ export default {
             if(!p[categoryName]){
                 p[categoryName] = [];
             }
-            p[categoryName].push(c.name);
+            p[categoryName].push({
+                name : c.name,
+                unique : c.unique,
+            });
             return p;
         },{});
+
+        console.log(categoryOrder);
 
         return {
 

@@ -7,7 +7,7 @@
         <div class="tab__list">
             <template v-for="(item, idx) in category.items">
                 <div :key="idx" class="tab__item" @click="onClickItem(item)">
-                    {{ item.name }}
+                    {{ item.name }}hey
                 </div>
             </template>
         </div>

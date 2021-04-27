@@ -160,11 +160,14 @@ export default {
         $auth() {
             return this.$store.state.$auth;
         },
+        $user() {
+            return this.$store.state.$user;
+        },
         isOpen() {
             return this.$auth.is_open;
         },
         isLogin() {
-            return this.$auth.is_login;
+            return this.$user.is_login;
         },
         phaseDataMap() {
             return ({
@@ -271,8 +274,13 @@ export default {
                 this.changePhase('selectType')
             }
         },
-        openAuthTrigger() {this.$store.dispatch('openAuthPanel');},
-        closeAuthTrigger() {this.$store.dispatch('closeAuthPanel');},
+
+        openAuthTrigger() {
+            this.$store.dispatch('openAuthPanel');
+        },
+        closeAuthTrigger() {
+            this.$store.dispatch('closeAuthPanel');
+        },
 
         openAuth() {
             this.openAuthMotion();
@@ -297,7 +305,6 @@ export default {
                         }
                     }
                 });
-
                 this.onMountedMotion();
             },0)
 
@@ -321,10 +328,11 @@ export default {
         resetHistory() {
             this.phaseHistory = [];
         },
-        changePhaseToBase(isLogin = this.isLogin) {
+        changePhaseToBase() {
+
             this.resetHistory();
 
-            if(isLogin){
+            if(this.isLogin){
                 this.changePhase('signoutCheck');
             }else {
                 this.changePhase('selectType');
@@ -605,7 +613,12 @@ export const authStore = {
     box-shadow: none;
 
     @include phone {
+        // border: 3px solid #d3d;
+        align-items: flex-start;
+        justify-content: flex-start;
         padding : $SIZE_MO_innerPadding;
+        padding-top: 50px;
+        max-height: 100%;
     }
 
     .st-open & {
@@ -694,6 +707,9 @@ export const authStore = {
     @include phone {
         width: 100%;
         font-size: $SIZE_MO_fontsize_title;
+        font-size: $SIZE_MO_fontsize_large;
+        font-weight: 700;
+        text-align: left;
         // padding: 0 $SIZE_MO_innerPadding;
     }
 
@@ -715,8 +731,9 @@ export const authStore = {
 
     @include phone {
         margin-top: 13px;
+        text-align: left;
         font-size: $SIZE_MO_fontsize_default;
-        padding: 0 $SIZE_MO_innerPadding;
+        // padding: 0 $SIZE_MO_innerPadding;
     }
 
     > .mask-text {
@@ -746,6 +763,7 @@ export const authStore = {
 .auth__controller {
     position: absolute;
     bottom: 100px;
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -755,8 +773,10 @@ export const authStore = {
     transition: opacity 200ms ease, transform 400ms $EASE_outCubic;
     text-align: center;
     pointer-events: none;
+    padding: $SIZE_MO_innerPadding;
 
     @include phone {
+        justify-content: flex-start;
         bottom: 20px;
     }
 

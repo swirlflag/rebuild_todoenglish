@@ -39,7 +39,7 @@
 import { targetPathDetect } from '@/utils';
 
 export default {
-    name : "BottomSheet",
+    name : "FloatSheet",
     model : {
         prop : 'modelValue',
         event : 'modelEvent',
