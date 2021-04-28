@@ -2,7 +2,7 @@
 <template>
     <div    id="nav-scrollbar"
             ref="ref_root"
-            :class="{'st-grab' : isGrab , 'st-hover' : isHover}"
+            :class="{'st-grab' : isGrab , 'st-hover' : isHover , 'st-none' : isNoneScroll}"
             @mouseenter="onMouseenterRoot"
             @mouseleave="onMouseleaveRoot"
     >
@@ -26,6 +26,7 @@ export default {
         return {
             isGrab : false,
             isHover : false,
+            isNoneScroll : false,
 
             grabStartRatio : 0,
 
@@ -35,6 +36,11 @@ export default {
             SY : 0,
             WH : 0,
             FH : 0,
+        }
+    },
+    watch : {
+        '$route.path'() {
+            this.calcScrollState();
         }
     },
 
@@ -64,13 +70,15 @@ export default {
             this.$store.commit('APP_freeze');
         },
 
-        onScrollWindow() {
+        calcScrollState() {
             this.calcSizing();
 
             const scrollBarHeight = this.$refs.ref_root.offsetHeight;
 
             const thumbY            = scrollBarHeight * ((1/this.FH) * this.SY);
             const thumbHeight       = this.WH * (this.WH/this.FH) ;
+
+            this.isNoneScroll       = thumbHeight >= this.WH;
 
             this.$refs.ref_thumb.style.transform   = `translate3d(0,${thumbY}px,0)`;
             this.$refs.ref_thumb.style.height      = `${thumbHeight}px`;
@@ -104,19 +112,19 @@ export default {
             this.isScrollBindFinish = true;
             this.scrollingElement   = document.scrollingElement;
 
-            window.addEventListener('scroll' , this.onScrollWindow);
+            window.addEventListener('scroll' , this.calcScrollState);
             window.addEventListener('mousemove' , this.onMouseMoveWindow);
             window.addEventListener('mouseup' , this.onMouseUpWindow);
-            this.onScrollWindow();
         },
         unbindScrollBarEvnet() {
-            window.removeEventListener('scroll' , this.onScrollWindow);
+            window.removeEventListener('scroll' , this.calcScrollState);
             window.removeEventListener('mousemove' , this.onMouseMoveWindow);
             window.removeEventListener('mouseup' , this.onMouseUpWindow);
         },
 
     },
     mounted() {
+        this.calcScrollState();
         this.bindScrollBarEvent();
     },
     destroyed(){
@@ -146,6 +154,12 @@ $min : 8px;
     box-sizing: border-box;
     width: #{$max + ($outGap*2)};
 
+    transition: opacity 300ms ease;
+
+    &.st-none {
+        opacity: 0;
+        pointer-events: none;
+    }
     .device--mobile & {
         display: none;
     }
@@ -161,7 +175,7 @@ $min : 8px;
     display: inline-block;
     box-sizing: border-box;
     transform-origin: top;
-    transition: transform 350ms $EASE_outCubic;
+    transition: transform 750ms $EASE_outExpo;
 
     .st-grab &{
         transition: none !important;

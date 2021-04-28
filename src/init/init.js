@@ -33,20 +33,19 @@ if(localStorage.userData){
 
 // console.log(process.env.NODE_ENV === 'development');
 
-const bindScreenData = (Vue) => {
-    Vue.prototype.$screen = Vue.observable({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        isMobileSize : window.innerWidth <= store.state.standard_mobileSize,
-    });
+const watchScreenData = (Vue) => {
 
-    window.addEventListener('resize', () => {
-        Vue.prototype.$screen = {
+    const record = () => {
+        Vue.prototype.$screen = Vue.observable({
             width: window.innerWidth,
             height: window.innerHeight,
             isMobileSize : window.innerWidth <= store.state.standard_mobileSize,
-        }
-    });
+        });
+    };
+
+    record();
+
+    window.addEventListener('resize', record);
 }
 
 
@@ -61,7 +60,7 @@ export default {
         Vue.prototype.gsap = gsap;
         Vue.prototype.swiper = SwiperCore;
 
-        bindScreenData(Vue);
+        watchScreenData(Vue);
 
     }
 }

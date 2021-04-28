@@ -71,7 +71,7 @@ export default {
     },
 
     mounted() {
-        console.log(this.$refs.ref_point);
+        // console.log(this.$refs.ref_point);
     }
 }
 </script>
