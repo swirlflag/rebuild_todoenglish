@@ -1,8 +1,10 @@
 <template>
-    <div>
 
-        찾으시는 페이지가 없습니다 page 404 ~~띄우는화면~
+    <div class="temp404">
+         
+        page404 화면 제작하기
     </div>
+
 </template>
 
 <script>
@@ -11,6 +13,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.temp404 {
+    height: 200px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background-color: dodgerblue;
+    padding-top: 200px;
+}
 </style>

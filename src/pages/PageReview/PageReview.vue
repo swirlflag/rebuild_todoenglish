@@ -1,11 +1,12 @@
 <template>
     <div>
 
-        <FloatSheet    v-model="isShowFloatSheet"
+        <FloatSheet     v-model="isShowFloatSheet"
+                        :point="$refs.ref_point"
                         title="일반페이지 바텀시트 테스트"
 
         >
-            <TESTListSelect @select="isShowFloatSheet = false" v-if="0"/>
+            <TESTListSelect @select="isShowFloatSheet = false" />
         </FloatSheet>
 
         <br>
@@ -30,11 +31,13 @@
                 <p class="prefix--asterisk">주의사항!</p>
                 <p class="prefix--dot">middle dot</p>
 
-                <ButtonDefault theme="green"
-                                @click="isShowFloatSheet = true"
+                <ButtonDefault theme="green">
+                    NOTHING
+                </ButtonDefault>
+                <br>
 
-                >
-                    바텀시트 테스트
+                <ButtonDefault theme="pink" @click="isShowFloatSheet = true" ref="ref_point">
+                    OPEN !
                 </ButtonDefault>
 
             </div>
@@ -59,11 +62,16 @@ export default {
     },
     data() {
         return {
-            isShowFloatSheet : true,
+            isShowFloatSheet : false,
+            pointElement : null,
         }
     },
+    methods : {
+
+    },
+
     mounted() {
-        // console.log('mounted : PageReview.vue');
+        console.log(this.$refs.ref_point);
     }
 }
 </script>

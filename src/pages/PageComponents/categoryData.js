@@ -300,9 +300,20 @@ const data = [
         title : 'title ',
         text : 'text ',
         control : {
-
+            
         }
     },
+
+    {
+        name : '디스플레이/마스크 텍스트',
+        title : 'title',
+        text : 'text ',
+        control : {
+            text : 'default text',
+            inputText : 'default text',
+        }
+    },
+
 
     {
         name : '프레임/레이어 컨텐츠',

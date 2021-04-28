@@ -1,30 +1,30 @@
 <template>
-    <transition name="bottom-sheet" :duration="700">
+    <transition name="float-sheet" :duration="700">
         <div    v-if="this.modelData.isShow || beforeObserve"
-                class="bottom-sheet"
+                class="float-sheet"
                 :class="{'st-beforeobserve' : beforeObserve}"
                 ref="ref_root"
         >
-            <div    class="bottom-sheet__dimmed"
+            <div    class="float-sheet__dimmed"
                     @click="close"
             >
             </div>
 
-            <div    class="bottom-sheet__wrap"
+            <div    class="float-sheet__wrap"
                     ref="ref_wrap"
             >
-                <div class="bottom-sheet__header" v-if="!headerless">
-                    <p class="bottom-sheet__title">
+                <div class="float-sheet__header" v-if="!headerless">
+                    <p class="float-sheet__title">
                         {{ title }}
                     </p>
-                    <button class="bottom-sheet__close"
+                    <button class="float-sheet__close"
                             @click="close"
                     >
                         <i class="icon--cancel"></i>
                     </button>
 
                 </div>
-                <div    class="bottom-sheet__box"
+                <div    class="float-sheet__box"
 
                 >
                     <slot></slot>
@@ -51,7 +51,7 @@ export default {
         title : String,
 
         headerless : Boolean,
-        target : null,
+        point : null,
     },
     data() {
         const isShow = this.modelValue || this.isShow;
@@ -66,7 +66,7 @@ export default {
 
             modelData : {
                 isShow,
-                trigger : this.target,
+                point : this.target,
             },
 
             position : {
@@ -85,23 +85,30 @@ export default {
         }
     },
     watch : {
+        'point'(){
+            this.registPoint();
+        },
         'modelValue'() {
-            this.modelData.isShow = this.modelValue;
+            this.control(this.modelValue)
         },
         'isShow'() {
-            this.modelData.isShow = this.isShow;
+            this.control(this.isShow);
         },
         'modelData.isShow'() {
             this.watchModelData();
         },
     },
     methods : {
+        control(bool){
+            bool ? this.open() : this.close();
+        },
         open(){
             this.modelData.isShow = true;
         },
         close() {
             this.modelData.isShow = false;
         },
+
         watchModelData() {
             this.calcPosition();
             this.$emit('modelEvent', this.modelData.isShow);
@@ -113,13 +120,25 @@ export default {
             }
         },
 
+        registPoint(){
+            if(this.point){
+                if(this.point._isVue){
+                    this.modelData.point = this.point.$el;
+                }else {
+                    this.modelData.point = this.point;
+                }
+            }else {
+                this.modelData.point = this.$refs.ref_root.previousSibling;
+            }
+        },
+
         calcPosition() {
             if(this.isMobile || !this.modelData.isShow){
                 return;
             }
 
-            const trigger = this.modelData.trigger;
-            const rect = trigger.getBoundingClientRect();
+            const point = this.modelData.point;
+            const rect = point.getBoundingClientRect();
             const screen = this.$screen;
             const isOutside =   rect.y + rect.height < 0
                             ||  rect.x + rect.width < 0
@@ -156,11 +175,11 @@ export default {
                 let willY = rect.y - this.position.y + rect.height + this.gap;
 
                 if(wrap.offsetWidth > screen.width - rect.x){
-                    willX -= wrap.offsetWidth - trigger.offsetWidth
+                    willX -= wrap.offsetWidth - point.offsetWidth
                 }
 
                 if(wrap.offsetHeight > screen.height - rect.y - rect.height - this.gap){
-                    willY -= wrap.offsetHeight + trigger.offsetHeight + this.gap*2
+                    willY -= wrap.offsetHeight + point.offsetHeight + this.gap*2
                 }
 
                 this.tl.clear();
@@ -179,7 +198,7 @@ export default {
         },
 
         detectPath(e) {
-            const isPathClick = targetPathDetect(e,this.$refs.ref_wrap , this.modelData.trigger);
+            const isPathClick = targetPathDetect(e,this.$refs.ref_wrap , this.modelData.point);
 
             if(!isPathClick){
                 this.close();
@@ -201,13 +220,13 @@ export default {
 
     },
     mounted() {
-        if(this.trigger){
-            this.modelData.trigger = this.target;
-        }else {
-            this.modelData.trigger = this.$refs.ref_root.previousSibling;
-        }
 
+        this.registPoint();
         this.beforeObserve = false;
+
+        
+
+
     },
 
     beforeDestroyed() {
@@ -220,17 +239,19 @@ export default {
 <style lang="scss" scoped>
 $tempPadding : 30px;
 
-.bottom-sheet {
-    position: fixed;
+.float-sheet {
+    position: fixed !important;
     // position: absolute;
     width: 100% !important; height: 100% !important;
+    max-width: unset !important; min-width : unset !important;
+    max-width: unset !important; min-width : unset !important;
     // width: 100vw; height: 100vh;
 
-    top: 0; left: 0;
+    top: 0 !important; left: 0 !important;
     z-index: 1020;
     box-sizing: border-box;
-    display: flex;
-    align-items: flex-start;
+    display: flex !important;
+    align-items: flex-start !important;
     // border: 3px solid #3d3;
 
     @include overPhone {
@@ -243,7 +264,7 @@ $tempPadding : 30px;
         justify-content: flex-end;
     }
 
-    &.bottom-sheet-leave-to{
+    &.float-sheet-leave-to{
         pointer-events: none;
     }
 
@@ -257,7 +278,7 @@ $tempPadding : 30px;
     }
 }
 
-.bottom-sheet__dimmed {
+.float-sheet__dimmed {
     width: 100%; height: 100%;
     position: absolute;
     box-sizing: border-box;
@@ -271,13 +292,13 @@ $tempPadding : 30px;
         background: rgba(255,0,255,0.4);
         display: none;
     }
-    .bottom-sheet-enter & ,
-    .bottom-sheet-leave-to &{
+    .float-sheet-enter & ,
+    .float-sheet-leave-to &{
         opacity: 0;
     }
 }
 
-.bottom-sheet__wrap {
+.float-sheet__wrap {
     // max-height: 60vh;
     // margin: 50px;
     margin-bottom: 0;
@@ -301,14 +322,14 @@ $tempPadding : 30px;
         max-width : 520px;
         max-height: 520px;
 
-        .bottom-sheet-enter & {
+        .float-sheet-enter & {
             opacity: 0;
             transform : translate3d(0,30px,0);
         }
-        .bottom-sheet-enter-to &{
+        .float-sheet-enter-to &{
             transition : transform 700ms $EASE_outExpo , opacity 400ms ease;
         }
-        .bottom-sheet-leave-to &{
+        .float-sheet-leave-to &{
             opacity: 0;
             pointer-events: none;
             transition : opacity 250ms ease;
@@ -323,13 +344,13 @@ $tempPadding : 30px;
         top: 0 !important; left: 0 !important;
         transform : translate3d(0,0,0) !important;
 
-        .bottom-sheet-enter &{
+        .float-sheet-enter &{
             transform : translate3d(0,101%,0) !important;
         }
-        .bottom-sheet-enter-to &{
+        .float-sheet-enter-to &{
             transition : transform 700ms $EASE_outExpo;
         }
-        .bottom-sheet-leave-to &{
+        .float-sheet-leave-to &{
             transform : translate3d(0,101%,0) !important;
             transition : transform 420ms $EASE_inOutCubic;
         }
@@ -337,7 +358,7 @@ $tempPadding : 30px;
 
 }
 
-.bottom-sheet__header {
+.float-sheet__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -355,7 +376,7 @@ $tempPadding : 30px;
         padding-right: $SIZE_MO_innerPadding;
     }
 
-    .bottom-sheet__title {
+    .float-sheet__title {
         color: #000;
         font-weight: 700;
         font-size: $SIZE_PC_fontsize_strong;
@@ -363,7 +384,7 @@ $tempPadding : 30px;
             font-size: $SIZE_MO_fontsize_strong;
         }
     }
-    .bottom-sheet__close {
+    .float-sheet__close {
         margin-left: 20px;
         display: inline-flex;
         justify-self: center;
@@ -375,7 +396,7 @@ $tempPadding : 30px;
 
 }
 
-.bottom-sheet__box {
+.float-sheet__box {
     @include hideScrollbar;
 
     height: 100%;
@@ -391,7 +412,7 @@ $tempPadding : 30px;
 
 }
 
-// .bottom-sheet__wrap {
+// .float-sheet__wrap {
 //     z-index: 2;
 //     display: flex;
 //     flex-direction: column;
@@ -405,7 +426,7 @@ $tempPadding : 30px;
 //     box-shadow: 0 0px 12px rgba(0,0,0,0.2);
 // }
 
-// .bottom-sheet__header{
+// .float-sheet__header{
 //     display: flex;
 //     padding: $tempPadding $tempPadding;
 //     text-align: center;
@@ -415,12 +436,12 @@ $tempPadding : 30px;
 //     box-sizing: border-box;
 //     background-color: #fff;
 
-//     .bottom-sheet__title {
+//     .float-sheet__title {
 //         // font-size: $SIZE_PC_fontsize_large ;
 //         font-size: $SIZE_PC_fontsize_strong ;
 //         font-weight: 700;
 //     }
-//     .bottom-sheet__close {
+//     .float-sheet__close {
 //         display: inline-block;
 //         margin-left: auto;
 //         box-sizing: border-box;
@@ -430,7 +451,7 @@ $tempPadding : 30px;
 //     }
 // }
 
-// .bottom-sheet__box {
+// .float-sheet__box {
 //     vertical-align: top;
 //     overflow-y: scroll;
 //     @include hideScrollbar;

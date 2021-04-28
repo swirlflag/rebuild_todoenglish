@@ -529,13 +529,15 @@ body {
         display: inline-block;
         width: 100%;
         max-width: $SIZE_PC_contentWidth;
-        padding: 0 $SIZE_PC_innerPadding;
+        // padding: 0 $SIZE_PC_innerPadding;
+        margin: 0 $SIZE_PC_innerPadding;
         box-sizing: border-box;
         // margin: 0 auto;
 
         @include phone {
             max-width: $SIZE_MO_contentWidth;
-            padding : 0 $SIZE_MO_innerPadding;
+            // padding : 0 $SIZE_MO_innerPadding;
+            margin : 0 $SIZE_MO_innerPadding;
         }
 
         &.layout__escape {

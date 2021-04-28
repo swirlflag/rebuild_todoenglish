@@ -97,7 +97,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bottom-sheet {
+.float-sheet {
     .test-color-select{
 
         .swiper-container {

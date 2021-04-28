@@ -56,20 +56,22 @@ const routes =  [
         component : () => import('@/pages/PageMypage/PageMypage.vue'),
     },
 
-// 404 not found
-    {
-        path : '/404',
-        alias : '*',
-        name : '404',
-        component : () => import('@/pages/Page404/Page404.vue'),
-    },
-
 // 컴포넌트 정리
     {
         path : '/components',
         name : 'components',
         component : () => import('@/pages/PageComponents/PageComponents.vue'),
     },
+
+// 404 not found
+    {
+        path : '/404',
+        // redirect : '/404',
+        alias : '/*',
+        name : '404',
+        component : () => import('@/pages/Page404/Page404.vue'),
+    },
+
 
 ];
 

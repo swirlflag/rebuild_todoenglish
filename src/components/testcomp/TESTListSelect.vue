@@ -90,7 +90,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.bottom-sheet {
+.float-sheet {
 
     .list-select__list {
         margin-top: 30px;

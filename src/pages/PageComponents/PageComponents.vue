@@ -213,7 +213,7 @@ CHECKBOX
                         <div class="comp-view ">
                             <div class="show-child-tempblue">
 
-                                <input type="text" class="text--display-l texttype-input" value="Display L" placeholder="Display L">
+                                <input type="text" class="text--displayㄴ-l texttype-input" value="Display L" placeholder="Display L">
                                 <input type="text" class="text--display-m texttype-input" value="Display M" placeholder="Display M">
                                 <input type="text" class="text--display-s texttype-input" value="Display S" placeholder="Display S">
                                 <input type="text" class="text--display-xs texttype-input" value="Display XS" placeholder="Display XS">
@@ -761,6 +761,37 @@ CHECKBOX
 
 
 
+
+                    <!-- 디스플레이/마스크 텍스트 -->
+                        <div v-if="renderId === '디스플레이/마스크 텍스트'">
+                            <div class="comp-view">
+                                <div style="font-size: 25px;font-weight:700;text-align : center">
+                                    <TextChangeMask     :text="controls.text"
+                                                        contain
+                                    />
+                                </div>
+                            </div>
+                            <div class="comp-control">
+                                <div>
+                                    <input type="text" v-model="controls.inputText">
+                                    <button class="default-button" @click="controls.text = controls.inputText">교체</button>
+                                    <button class="default-button" @click="controls.text = `random_${Math.round(Math.random()*100)}`">랜덤교체</button>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- 디스플레이/마스크 텍스트 -->
+
+
+
+
+
+
+
+
+
+
+
+
                      <!-- 프레임/레이어 컨텐츠 -->
                         <div v-if="renderId === '프레임/레이어 컨텐츠'">
                             <div class="comp-view">
@@ -1164,6 +1195,8 @@ import FloatSheet from '@/components/frame/FloatSheet.vue';
 import TESTListSelect from '@/components/testcomp/TESTListSelect.vue';
 import TESTColorSelect from '@/components/testcomp/TESTColorSelect.vue';
 
+import TextChangeMask from '@/components/display/TextChangeMask.vue';
+
 
 export default {
     name : 'PageComponents',
@@ -1191,6 +1224,8 @@ export default {
         TESTListSelect,
         TESTColorSelect,
 
+        TextChangeMask,
+
     },
     data() {
 
@@ -1205,8 +1240,6 @@ export default {
             });
             return p;
         },{});
-
-        console.log(categoryOrder);
 
         return {
 
