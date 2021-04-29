@@ -83,10 +83,6 @@ router.afterEach((to) => {
         store.commit('PAGE_freeLogin');
     }
 
-    VM.$nextTick(() => {
-        isPaging = false;
-        store.dispatch('uncoverPage');
-    })
 })
 
 
