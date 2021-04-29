@@ -257,6 +257,7 @@ export const dialogStore = {
                 payload = {
                     ...defaultDialogData[type],
                     ...options,
+                    type,
                 };
             }else {
                 return null;

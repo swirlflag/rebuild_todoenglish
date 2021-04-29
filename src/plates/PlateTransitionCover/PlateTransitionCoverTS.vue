@@ -1,48 +1,36 @@
 <template>
     <div    id="plate--transition"
+            v-if="$store.state.$paging.is_enable"
             class="plate"
-
-            v-if="$store.state.$paging.isEnable"
+            ref="ref_root"
     >
-        <div class="transition__curtain" ref="ref_curtain">
-            <span></span>
-            <span></span>
+        <div    class="transition__curtain"
+                ref="ref_curtain"
+        >
             <span></span>
         </div>
 
-        <div class="transition__cover" :class="`st-lean-${coverLeanDirection ? 'left' : 'right'}`" ref="ref_cover">
+        <div    class="transition__cover"
+                ref="ref_cover"
+        >
             <div class="transition__cover-inner">
-
-                <div class="transition__cover__logo">
-                    <img src="@/assets/logo/logo_todoenglish.svg" alt="">
-                </div>
-
-                <div class="transition__cover__characters">
-                    <img src="@/assets/icon/character_1.svg" alt="">
-                    <img src="@/assets/icon/character_2.svg" alt="">
-                    <img src="@/assets/icon/character_3.svg" alt="">
-                    <img src="@/assets/icon/character_4.svg" alt="">
-                </div>
-
-                <SpinnerColordotsWave v-if="0"/>
-
+                <p v-if="$store.state.$paging.is_cover"> from : {{ $route.path }}</p>
+                <p v-else>to : {{ $route.path }} </p>
             </div>
         </div>
 
-
     </div>
+
 </template>
 
 <script>
+
 import { iterElement } from '@/utils';
-import SpinnerColordotsWave from '@/components/spinner/SpinnerColordotsWave.vue'
+{iterElement}
 
 export default {
-
     name : 'PlateTransitionCover',
-    components : {
-        SpinnerColordotsWave
-    },
+
     data() {
         return {
             transitionActive : false,
@@ -55,28 +43,18 @@ export default {
             uncoverDelay : 200,
 
             coverLeanDirection : true,
-
-            time : {
-                // duration : 0.9,
-                duration : 5.9,
-                stagger : 0.04,
-            },
-
         }
     },
 
     watch : {
-        '$store.state.$paging.isCover'(now) {
-            if(now){
-                this.setRandom();
-                setTimeout(() => {
+        '$store.state.$paging.is_cover'(now) {
+            setTimeout(() => {
+                if(now){
                     this.coverd();
-                },this.coverDelay)
-            }else {
-                setTimeout(() => {
+                }else {
                     this.uncovered();
-                },this.uncoverDelay)
-            }
+                }
+            })
         }
     },
 
@@ -93,69 +71,58 @@ export default {
         },
 
         coverd() {
-            this.changeLean(this.reverse)
+            const curtain = this.$refs.ref_curtain;
 
-            // this.transitionActive = true;
+            const duration = 0.7;
 
-            let delay = 0;
-
-            // iterElement(this.curtains , (target,idx) => {
-            //     this.$gsap.fromTo(target , {
-            //         xPercent : 101 * (this.reverse?1:-1) ,
-            //     }, {
-            //         xPercent : 0,
-            //         duration : this.time.duration,
-            //         delay : delay,
-            //         ease : 'power4.out',
-            //         onComplete : () => {
-            //             if(idx === 0){
-            //                 this.reverseLean();
-
-            //                 this.$store.state.$paging.next();
-            //             }
-            //             // if(idx === this.curtains.length - 1){
-            //             //     this.uncovered();
-            //             // }
-            //         }
-            //     });
-
-            //     delay += this.time.stagger;
-            // });
+            this.$gsap.fromTo(curtain , {
+                xPercent : 100,
+                // opacity : 0.5,
+            } , {
+                // opacity : 1,
+                xPercent : 0,
+                ease : 'power4.out',
+                duration,
+                onComplete : () => {
+                    this.$store.dispatch('uncoveredPage');
+                },
+            });
 
             this.$gsap.fromTo(this.$refs.ref_cover , {
                 width : 0,
             }, {
-                width: 101 + (this.reverse?1:-1) + '%',
-                ease: 'power3.out',
-                duration : this.time.duration,
-                delay : delay
+                width: '100%',
+                ease: 'power4.out',
+                duration,
             });
 
-            this.$store.commit('PAGING_enable');
+            this.$refs.ref_root.style.opacity = 1;
+
         },
 
         uncovered() {
+            {iterElement}
+
+            const duration = 0.7;
+            const delay = 0.1;
+
             this.$gsap.to(this.$refs.ref_cover , {
                 width: 0,
-                ease: 'power2.inOut',
-                duration : this.time.duration,
+                ease : 'power2.inOut',
+                duration,
+                delay,
+            });
+
+            this.$gsap.to(this.$refs.ref_curtain ,  {
+                xPercent  : -100,
+                ease : 'power2.inOut',
+                duration,
+                delay,
+                onComplete : () => {
+                    this.$store.commit('PAGING_disable');
+                }
             })
 
-            const curtains = [...this.curtains].reverse();
-
-            iterElement(curtains , (target,idx) => {
-                this.$gsap.to(target, {
-                    xPercent : 101 * (this.reverse?-1:1),
-                    ease : 'power2.inOut',
-                    duration : this.time.duration,
-                    delay : this.time.stagger * (idx+1),
-                    onComplete : () => {
-                        if(idx === this.curtains.length - 1){
-                            this.$store.commit('PAGING_disable');
-                        }
-                    }
-                })
-            })
         },
 
     },
@@ -168,41 +135,43 @@ export default {
 export const transitionStore = {
     name : '$paging',
     state : {
-        isEnable : false,
-        isCover : false,
-        next : () => {console.dev('ERC_PT1')},
+        is_enable   : false,
+        is_cover    : false,
+        next        : () => {console.dev('ERC_PT1')},
     },
     mutations : {
         PAGING_enable(state) {
-            state.$paging.isEnable = true;
+            state.$paging.is_enable = true;
         },
         PAGING_disable(state) {
-            state.$paging.isEnable = false;
+            state.$paging.is_enable = false;
         },
         PAGING_registNext(state, next) {
             state.$paging.next = next;
         },
         PAGING_cover(state) {
-            state.$paging.isCover = true;
+            state.$paging.is_cover = true;
         },
         PAGING_uncover(state) {
-            state.$paging.isCover = false;
+            state.$paging.is_cover = false;
+        },
+        PAGING_goNext(state) {
+            state.$paging.next();
+            state.$paging.next = () => {};
         },
 
     },
 
     actions : {
-        coverPage({state, commit}, next) {
-            // if(){
-
-            // }
-            {state}
-            commit('PAGING_registNext', next);
-            commit('PAGING_cover');
+        coveredPage(context, next) {
+            context.commit('PAGING_registNext', next);
+            context.commit('PAGING_cover');
+            context.commit('PAGING_enable');
         },
-        uncoverPage(context) {
+        uncoveredPage(context) {
+            context.commit('PAGING_goNext');
             context.commit('PAGING_uncover');
-        }
+        },
     },
 }
 
@@ -216,9 +185,12 @@ export const transitionStore = {
     width: 100vw; height: 100%;
     box-sizing: border-box;
     background: transparent;
+    opacity: 0;
     // opacity: 0;
     // pointer-events: none;
     // display: none;
+    // background-color: rgba(255,0,0,0.5);
+
     &.st-active {
         opacity: 1;
         pointer-events: all;
@@ -233,30 +205,17 @@ export const transitionStore = {
     position: absolute;
 
     span {
+
         position: absolute;
         width: 100%; height: 100%;
         display: inline-block;
         box-sizing: border-box;
         z-index: 1000;
-
-        &:nth-child(1) {
-            background-color: $COLOR_pink_1;
-        }
-        &:nth-child(2) {
-            background-color: $COLOR_navy_2;
-        }
-        &:nth-child(3) {
-            background-color: $COLOR_violet_1 ;
-        }
-        &:nth-child(4) {
-            background-color: #fff;
-        }
-
+        background-color: rgba(50,50,50,1);
     }
 }
 
 .transition__cover {
-    background: #fff;
     box-sizing: border-box;
     width: 0; height: 100%;
     position: absolute;
@@ -264,6 +223,9 @@ export const transitionStore = {
     z-index: 1100;
     overflow: hidden;
     will-change: width;
+
+    color: #fff;
+    font-weight: 700;
 
     .transition__cover-inner {
         box-sizing: border-box;

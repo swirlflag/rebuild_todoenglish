@@ -118,7 +118,7 @@ export default {
 
             if(this.$store.state.$user.is_login){
 
-                this.$store.dispatch('openModalConfirm' , {
+                this.$store.dispatch('openDialog' , {
                     message : '확인을 누르면 로그아웃 합니다',
                     actionTrue : () => {
                         this.$store.dispatch('signOut');
@@ -127,7 +127,8 @@ export default {
             }else {
 
                 const random = `test_random${Math.round(Math.random()* 100)}`;
-                this.$store.dispatch('openModalConfirm' , {
+                this.$store.dispatch('openDialog' , {
+                    type : 'confirm',
                     title : '한방에 로그인하기',
                     message : `
                         확인을 누르면 이렇게 로그인합니다.
@@ -153,32 +154,30 @@ export default {
             }
         },
         TEST_openAlert(){
+            this.$store.dispatch('openDialog' , '비밀번호 변경을 위한 이메일을 발송하였습니다.<br/>메일함을 확인해주세요. (TEST)');
+        },
+        TEST_openAlert2(){
             const payload = {
-                title : 'TEST ALERT',
-                message : '테스트용 알림창',
-                buttonText : '커스텀 확인',
+                title : 'CUSTOM TITLE',
+                message : 'MESSAGE',
+                buttonConfirmText : 'CUSTOM BUTTON',
                 actionClose : () => {
                     console.log('test alert close');
                 }
             };
-            this.$store.dispatch('openModalAlert' , payload);
-        },
-        TEST_openAlert2(){
-            const payload = {
-                message : '비밀번호 변경을 위한 이메일을 발송하였습니다.<br/>메일함을 확인해주세요. (TEST)',
-            };
-            this.$store.dispatch('openModalAlert' , payload);
+            this.$store.dispatch('openDialog' , payload);
         },
         TEST_openConfirm1() {
             const payload = {
+                type : 'confirm',
                 message : '테스트 : 확인 버튼을 누르면 홈 화면으로 이동합니다.',
-                actionTrue : () => {
-                    if(this.$route.path !== '/'){
+                actionResult : (result) => {
+                    if(result && this.$route.path !== '/'){
                         this.$router.push('/');
                     }
                 },
             };
-            this.$store.dispatch('openModalConfirm' ,payload);
+            this.$store.dispatch('openDialog' ,payload);
         },
         TEST_addBanner() {
             this.$store.dispatch('addBannerAlert' , 'hello' + Math.floor(Math.random() * 1000));

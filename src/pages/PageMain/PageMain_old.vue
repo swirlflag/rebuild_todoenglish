@@ -1,0 +1,566 @@
+<template>
+    <div class="page-contents nav-correction">
+
+        <header class="main-header area__outer">
+            <div class="area__inner">
+                <h1 class="main-header__title">
+                    실패가 없는
+                    <br>모두의 영어유치원
+                </h1>
+                <span class="main-header__logo">
+                    <img src="@/assets/main/img_signboard.svg" alt="토도영어 로고 | TODO ENGLISH">
+                </span>
+                <p class="main-header__description">
+                    아이들의 즐거운 첫 영어 시작을 응원합니다.
+                    <!-- <br class="visible-overphone"> -->
+                    <br>
+                    <span class="fw-b">15일 무료 체험</span>을 시작하세요.
+                </p>
+                <div class="main-header__downloads">
+
+                    <ButtonDownload type="apple" theme="navy" class="visible-overphone"/>
+
+                    <ButtonDownload type="google" theme="navy" class="visible-overphone"/>
+
+                    <ButtonDownload type="mobile" theme="navy" class="visible-phone"/>
+
+                </div>
+
+                <span class="image-box main-header__source-children"></span>
+
+            </div>
+        </header>
+
+        <div class="main-introduce area__outer">
+            <div class="area__inner">
+                <div class="introduce__logo image-box" >
+                    <img src="@/assets/logo/logo_todoenglish_vertical_white.svg" alt="토도영어 로고 | TODO ENGLISH">
+                </div>
+
+                <p class="introduce__description">
+                    <span class="fw-b">토도영어</span> 는,
+                    <br>
+                    기초영어를 배우는 아이들을 위한 태블릿 학습 애플리케이션입니다.
+                    <br class="visible-overphone">
+                    영어 유치원에 가지 않는 아이도 알파벳부터 파닉스, 영어책 읽기 등의 학습을
+                    <br class="visible-overphone">
+                    충분히 할 수 있도록 설계되었습니다.
+                </p>
+            </div>
+        </div>
+
+        <div class="main-howtolearn showing-section area__outer">
+            <span class="area__bg"></span>
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--redflag"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        게임처럼
+                        <br class="visible-overphone">
+                        학습 미션을 해결
+                    </h3>
+                    <p class="showing__description">
+                        미션 형태의 학습구성으로 가르쳐주지 않아도
+                        <br class="visible-overphone">
+                        아이들이 스스로 룰을 이해하고 빠르게 몰입해요.
+                    </p>
+                </div>
+
+                <div class="showing__source">
+                    <div class="tablet-video">
+                        <div class="tablet-video__frame"></div>
+                        <div class="tablet-video__source">
+                            <video autoplay muted playsinline loop>
+                                <source src="@/assets/main/video_tablet_1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="main-experience showing-section type-right area__outer">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--talking"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        문지르고, 움직이고
+                        <br class="visible-overphone">
+                        연결하고, 말하는
+                        <br class="visible-overphone">
+                        풍부한 인터렉션
+                    </h3>
+                    <p class="showing__description">
+                        아이의 눈, 손과 입이 끊임없이 움직이며 오감으로 영어를 체험해요.
+                    </p>
+                </div>
+                <div class="showing__source">
+                    <div class="tablet-video">
+                        <div class="tablet-video__frame"></div>
+                        <div class="tablet-video__source">
+                            <video autoplay muted playsinline loop>
+                                <source src="@/assets/main/video_tablet_2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="main-subheader area__outer">
+            <div class="area__inner">
+                <h2 class="subheader__title">
+                    앱만으로 진짜 공부가 되는
+                    <br class="visible-overphone">디지털 콘텐츠
+                </h2>
+                <p class="subheader__description">
+                    게임과 같은 몰입감, 단순 암기와 반복도 즐거워요.
+                </p>
+            </div>
+        </div>
+
+        <div class="main-activity showing-section area__outer">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--alphabet"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        반복 학습임을 잊게하는 액티비티
+                    </h3>
+                    <p class="showing__description">
+                        똑같은 학습이라도 다양한 방식으로 접근하니 단순 암기와 반복도 즐거워요
+                    </p>
+                </div>
+
+                <div class="showing__source">
+                    <span class="image-box"></span>
+                </div>
+            </div>
+            <!-- <div class="area__source">
+                <span></span>
+            </div> -->
+        </div>
+
+        <div class="main-culture showing-section area__outer">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--movieslate"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        영미 문화와 일상을 체험
+                    </h3>
+                    <p class="showing__description">
+                        미국 또래 아이들의 학교생활, 말하는 스타일 등
+                        <br class="visible-overphone">
+                        짜인 연극이 아닌 리얼한 진짜 영상으로 경험할 수 있어요.
+                    </p>
+                </div>
+
+                <div class="showing__source">
+                    <span class="image-box"></span>
+                    <span class="image-box"></span>
+                    <span class="image-box"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="main-interview area__outer" style="background-color:#1f96db">
+            <div class="area__inner">
+                <div class="interview__portrait image-box">
+                    <img src="@/assets/main/img_interview_thumb_1.png" alt="토도영어 인터뷰 사진 - Raoul Kim">
+                </div>
+                <div class="interview__content">
+                    <p class="interview__opinion">
+                        “학습은 흥미를 잃지 않는 것이 가장 중요해요.
+                        <br class="visible-overphone">
+                        토도영어는 언제 공부하더라도 늘 새롭고
+                        <br class="visible-overphone">
+                        재미있을 수 있어요.”
+                    </p>
+                    <div class="interview__info">
+                        <div class="interview__name">Raoul Kim</div>
+                        <div class="interview__position">Head of Product, enuma Korea</div>
+                    </div>
+                    <div class="interview__showvideo">
+                        <i class="icon--playbutton c-yellow"></i>
+                        <span style="color: #ff0">인터뷰 영상 보기</span>
+                        <i class="icon--arrow c-yellow"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-weeklyreport showing-section type-right area__outer">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--uppergraph"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        한눈에 파악하는
+                        <br>
+                        주간 토도 리포트
+                    </h3>
+                    <p class="showing__description">
+                        얼마나 꾸준히 했는지, 어떤 활동을 좋아했고 어려워 했는지,
+                        <br class="visible-overphone">
+                        다른 아이들에 비해선 어떤지 등을 알 수 있는 토도 리포트를 매주 보내드려요
+                    </p>
+                </div>
+
+                <div class="showing__source">
+                    <div class="image-box">
+                        <img src="@/assets/main/img_report.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-dailynotice showing-section area__outer">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--talkwow"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        매일 받아보는
+                        <br>
+                        카톡 학습 알림
+                    </h3>
+                    <p class="showing__description">
+                        아이의 학습 과정 중의 사소한 정보라도
+                        <br class="visible-overphone">
+                        카톡 데일리 학습 알림장으로 알려드려요
+                    </p>
+                </div>
+
+                <div class="showing__source">
+                    <div class="image-box">
+                        <img src="@/assets/main/img_dailynotice.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-coaching showing-section type-right area__outer" >
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--waypoint"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        학습관리가 쉬워지는
+                        <br>코칭 가이드
+                    </h3>
+                    <p class="showing__description">
+                        아이의 학습 속도, 학습 시간, 형태 등을 분석하고 비교하여
+                        <br class="visible-overphone">
+                        학습관리를 어떻게 해야하는지 알려드려요.
+                    </p>
+                </div>
+
+                <div class="showing__source">
+                    <div class="image-box">
+                        <img src="@/assets/main/img_coaching.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-interview area__outer" style="background-color:#E03F82">
+            <div class="area__inner">
+                <div class="interview__portrait image-box">
+                    <img src="@/assets/main/img_interview_thumb_2.png" alt="토도영어 인터뷰 사진 - Jeff Park">
+                </div>
+                <div class="interview__content">
+                    <p class="interview__opinion">
+                        “디지털 서비스가 가질 수 있는 장점인 데이터를 적극.
+                        <br class="visible-overphone">
+                        활용해요. 아이의 학습 데이터를 그날그날 분석해서
+                        <br class="visible-overphone">
+                        부모님 카톡으로 알려드려요.”
+                    </p>
+                    <div class="interview__info">
+                        <div class="interview__name">Jeff Park</div>
+                        <div class="interview__position">Head of Business, enuma Korea</div>
+                    </div>
+                    <div class="interview__showvideo">
+                        <i class="icon--playbutton c-cyan"></i>
+                        <span style="color: #56D5E2">인터뷰 영상 보기</span>
+                        <i class="icon--arrow c-cyan"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-subheader area__outer">
+            <div class="area__inner">
+                <h2 class="subheader__title">
+                    미국 본사에서 개발한
+                    <br class="visible-overphone">
+                    디지털 ESL 커리큘럼
+                </h2>
+                <p class="subheader__description">
+                    디지털 학습에 최적화 된 ESL 커리큘럼을 자체 개발 했어요.
+                </p>
+            </div>
+        </div>
+
+        <div class="main-curriculum showing-section area__outer" style="background-color:#fff">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--todoenglish-school"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        미국 킨더 - 초등 2학년(G2)
+                        <br>통합 커리큘럼
+                    </h3>
+                    <p class="showing__description">
+                        <ul class="list--dot">
+                            <li>
+                                미국 공통교과 기준, 킨더(유치원) - G2(초2) 수준의 통합 커리큘럼을
+                                <br>
+                                약 2년의 학습 과정으로 제공합니다.
+                            </li>
+                            <li>
+                                아이들은 Phonics, Syntax와 같은 하드 스킬 외에도
+                                <br>
+                                영미권 문화와 매너를 익히는 소프트 스킬을 학습합니다.
+                            </li>
+                            <li>
+                                매달 배송되는 워크시트에 배운 내용을 복습하면서, 영어 ‘쓰기’를 시작합니다.
+                            </li>
+                            <li>
+                                다양한 스피킹 액티비티와 화상 튜터링으로 통해 영어 ‘말하기’를 시작합니다.
+                            </li>
+                        </ul>
+                    </p>
+                    <a href="#" class="showing__link">
+                        커리큘럼 자세히보기
+                        <i class="icon--arrow"></i>
+                    </a>
+                </div>
+
+                <div class="showing__source">
+                    <div class="image-box">
+                        <img src="@/assets/main/img_curriculum_map.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-testway showing-section type-right area__outer" style="background-color:#F2F0E9">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--use-tablet"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        시험이라고 느끼지 못하는
+                        <br class="visible-overphone">
+                        디지털 테스트
+                    </h3>
+                    <p class="showing__description">
+                        토도영어의 테스트는, 퀴즈와 챌린지 등으로 설계되어 있어요.
+                        <br class="visible-overphone">
+                        아이들은 매주 1회 이상 테스트 과정을 거치지만,
+                        <br class="visible-overphone">
+                        이를 게임의 일부로 여기며 스트레스 없이 진행합니다.
+                    </p>
+                    <p class="precaution">
+                        학습 진도와 성취도는 아마다 차이가 많습니다.
+                        <br>
+                        진도가 빠르다고 좋은 효과를 내는 것이 아니므로 아이의 속도에 맞추어 진행해 주세요.
+                    </p>
+                </div>
+
+                <!-- <div class="showing__source">
+                    <div class="image-box"></div>
+                </div> -->
+
+            </div>
+
+            <div class="area__source">
+                <div class="image-box"></div>
+            </div>
+        </div>
+
+        <div class="main-learning-content showing-section area__outer">
+            <div class="area__inner">
+                <div class="showing__content">
+                    <div class="showing__subtitle">
+                        <i class="icon--calendar"></i>
+                    </div>
+                    <h3 class="showing__title">
+                        2년여간의
+                        <br>풍부한 학습 콘텐츠
+                    </h3>
+                    <p class="showing__description">
+                        <ul class="list--dot">
+                            <li>
+                                2000개 이상의 학습 액티비티
+                            </li>
+                            <li>
+                                600일 이상의 데일리 코스
+                            </li>
+                            <li>
+                                300개 이상의 영상 콘텐츠 / 200권 이상의 도서 콘텐츠
+                            </li>
+                            <li>
+                                매주 1회 이상의 디지털 테스트
+                            </li>
+                            <li>
+                                매달 제공되는 레벨 별 워크시트
+                            </li>
+                        </ul>
+                    </p>
+                    <p class="precaution">
+                        콘텐츠는 계속 업데이트 됩니다.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="area__source">
+                <div class="image-box"></div>
+            </div>
+
+        </div>
+
+        <div class="main-interview area__outer" style="background-color:#F59E1D">
+            <div class="area__inner">
+                <div class="interview__portrait image-box">
+                    <img src="@/assets/main/img_interview_thumb_3.png" alt="토도영어 인터뷰 사진 - Laura Donahue">
+                </div>
+                <div class="interview__content">
+                    <p class="interview__opinion">
+                        “Every child can move through our system at their own
+                        <br class="visible-overphone">
+                        pace, in the path that’s best for them to learn.”
+                        <br class="visible-overphone">
+                        “토도영어에서는 모든 아이들이 각자에게 알맞는 속도로,
+                        <br class="visible-overphone">
+                        그리고 자신에게 가장 적합한 방법으로 학습할 수 있어요.”
+                    </p>
+                    <div class="interview__info">
+                        <div class="interview__name">Laura Donahue</div>
+                        <div class="interview__position">Head of Learning, enuma US</div>
+                    </div>
+                    <div class="interview__showvideo">
+                        <i class="icon--playbutton c-green"></i>
+                        <span style="color: #008F7E">인터뷰 영상 보기</span>
+                        <i class="icon--arrow c-green"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-footer area__outer">
+            <div class="area__inner">
+
+                <div class="main-footer__info">
+                    <div class="main-footer__logo image-box">
+                        <img src="@/assets/logo/logo_todoenglish_white.svg" alt="토도영어 로고 | TODO ENGLISH">
+                    </div>
+                    <p>15일 무료 체험</p>
+                </div>
+
+                <div class="main-footer__downloads">
+
+                    <ButtonDownload type="apple" theme="white" class="visible-overphone" />
+
+                    <ButtonDownload type="google" theme="white" class="visible-overphone" />
+
+                    <ButtonDownload type="mobile" theme="white" class="visible-phone" />
+
+                </div>
+
+                <p class="main-footer__precaution">
+                    <ul class="list--dot">
+                        <li>
+                            회원가입을 하시고 앱을 설치하시면 토도영어 앱의 모든 콘텐츠 이용이 가능합니다.
+                        </li>
+                        <li>
+                            카카오톡 연결을 해주셔야 우리아이 토도 스코어를 받으실 수 있습니다.
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</template>
+
+<script>
+import ButtonDownload from '@/components/button/ButtonDownload.vue';
+
+export default {
+    name : 'PageMain',
+
+    components : {
+        ButtonDownload,
+
+    },
+    data() {
+        return {
+            isNavClear : false,
+        }
+    },
+    methods: {
+        test(e) {
+            console.log(e);
+        },
+
+        clearStyleNav() {
+            this.$store.commit('GNB_useClear');
+            this.$store.commit('GNB_unuseWhite');
+        },
+        defaultStyleNav() {
+            this.$store.commit('GNB_unuseClear');
+            this.$store.commit('GNB_useWhite');
+        },
+
+        checkNavStyle() {
+            if(window.scrollY < 100){
+                if(this.isNavClear){
+                    return
+                }
+                this.clearStyleNav();
+                this.isNavClear = true;
+
+            }else {
+                if(!this.isNavClear){
+                    return
+                }
+                this.defaultStyleNav();
+                this.isNavClear = false;
+            }
+
+        }
+    },
+    mounted () {
+        // this.checkNavStyle();
+        // window.addEventListener('scroll' , this.checkNavStyle );
+    },
+    destroyed() {
+        // window.removeEventListener('scroll' , this.checkNavStyle );
+    },
+}
+</script>
+
+
+<style lang="scss" scoped >
+@import './PageMainStyle.scss';
+</style>

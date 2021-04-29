@@ -1,88 +1,43 @@
 <template>
     <div    ref="ref_root"
             class="nav-gnb"
-            :class="{'st-openmenu' : $store.state.$nav.is_openGnb , 'dt-login' : isLogin}"
+            :class="{'st-open' : isOpen , 'dt-login' : isLogin}"
     >
 
         <div class="gnb__dimmed" @click="closeMenu"></div>
 
+        <div class="gnb__content">
             <div class="gnb__concise" ref="ref_concise">
 
                 <div class="gnb__concise__wrap">
                     <router-link to="/" class="gnb__logo">
                         <i class="icon--logoschool c-white"></i>
-                        <span class="typo--todoenglish"></span>
+                        <span class="typo--todoschool">
+                            <strong>Todo School</strong>
+                            <span>토도 스쿨</span>
+                        </span>
                     </router-link>
 
-                    <div class="gnb__storage">
-                        <ul class="gnb__emphasis">
-                            <li class="gnb__emphasis__item">
-                                <a>
-                                    <div class="gnb__emphasis__badge" style="background-color : #F4B537">
-                                        <i class="fas fa-hashtag"></i>
-                                        멤버십 후기
-                                    </div>
-                                    <div class="gnb__emphasis__content">
-                                        <div class="gnb__emphasis__source">
-                                            <div class="image-box">
-                                                <img src="@/assets/event/wp_worksheet.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="gnb__emphasis__title">
-                                            토도영어 사용자들의 솔직 후기
-                                        </p>
-                                        <p class="gnb__emphasis__text">
-                                            토도영어를 사용해본 아이들의 부모님이 직접 남기는 솔직한 후기들을 살펴보세요.
-                                        </p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="gnb__emphasis__item">
-                                <a>
-                                    <div class="gnb__emphasis__badge" style="background-color : #1F96DB">
-                                        <i class="fas fa-external-link-alt"></i>
-                                        방침 변경
-                                    </div>
-                                    <div class="gnb__emphasis__content">
-                                        <div class="gnb__emphasis__source">
-                                            <div class="image-box">
-                                                <img src="@/assets/event/wp_worksheet.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="gnb__emphasis__title">
-                                            토도영어의 방침이 변경됩니다.
-                                        </p>
-                                        <p class="gnb__emphasis__text">
-                                            새롭게 변경되는 토도영어 방침을 자세하게 알려드려요.
-                                        </p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="gnb__emphasis__item">
-                                <a>
-                                    <div class="gnb__emphasis__badge" style="background-color : #F7419C">
-                                        <i class="fas fa-external-link-alt"></i>
-                                        토도라이브
-                                    </div>
-                                    <div class="gnb__emphasis__content">
-                                        <div class="gnb__emphasis__source">
-                                            <div class="image-box">
-                                                <img src="@/assets/event/wp_worksheet.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="gnb__emphasis__title">
-                                            토도라이브 런칭!
-                                        </p>
-                                        <p class="gnb__emphasis__text">
-                                            토도영어와 찰떡궁합! 집에서 하는 즐거운 영어수업 토도라이브를 만나보세요.
-                                        </p>
-                                    </div>
-                                </a>
-                            </li>
+                    <div class="gnb__minimal">
+                        <ul class="gnb__minimal__list">
+                            <template v-for="(item,idx) in gnbData.products">
+                                <li class="gnb__minimal__item" :key="idx">
+                                    <router-link :to="item.to">
+                                        {{ item.name }}
+                                    </router-link>
+                                </li>
+                            </template>
                         </ul>
+                    </div>
+
+                    <div class="gnb__storage">
                         <div class="gnb__user">
                             <span class="gnb__user__dot"></span>
-                            <i class="icon--account c-white"></i>
+                            <i  class="icon--account "
+                                :class="{'c-white' : isOpen}"
+                            >
+
+                            </i>
                         </div>
                         <button class="gnb__menu" @click="toggleMenu">
                             <div class="gnb__menu__icon">
@@ -94,164 +49,142 @@
                     </div>
                 </div>
 
-
             </div>
 
+            <div class="gnb__panel" ref="ref_panel">
 
-        <div class="gnb__panel" ref="ref_panel">
-            <!-- <div class="gnb__concise" ref="ref_concise">
-                <router-link to="/" class="gnb__logo">
-                    <i class="icon--logoschool c-white"></i>
-                    <span class="typo--todoenglish"></span>
-                </router-link>
+                <div class="gnb__panel__wrap" ref="ref_panelwrap">
 
-                <div class="gnb__storage">
-                    <ul class="gnb__emphasis">
-                        <li class="gnb__emphasis__item">
-                            <a>
-                                <div class="gnb__emphasis__badge" style="background-color : #F4B537">
-                                    <i class="fas fa-hashtag"></i>
-                                    멤버십 후기
-                                </div>
-                                <div class="gnb__emphasis__content">
-                                    big
-                                </div>
-                            </a>
-                        </li>
-                        <li class="gnb__emphasis__item">
-                            <a>
-                                <div class="gnb__emphasis__badge" style="background-color : #1F96DB">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    방침변경 안내
-                                </div>
-                                <div class="gnb__emphasis__content">
-                                    big
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="gnb__user">
-                        <span class="gnb__user__dot"></span>
-                        <i class="icon--account c-white"></i>
-                    </div>
-                    <button class="gnb__menu" @click="toggleMenu">
-                        <div class="gnb__menu__icon">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                    <div class="gnb__panel__block">
+                        <div class="gnb__product">
+                            제품 소개
+                            <ul class="gnb__product__list" ref="ref_public">
+
+                                <template v-for="(item,idx) in gnbData.products">
+                                    <li :key="idx" class="gnb__product__item">
+                                        <router-link :to="item.to">
+                                            <span class="gnb__product__prefix">
+                                                <span class="gnb__product__prefix-number">0{{ idx+1}}</span>
+                                                <span class="gnb__nowbadge">now</span>
+                                            </span>
+                                            <span class="gnb__product__name">
+                                                <span>{{ item.name }}</span>
+                                            </span>
+                                        </router-link>
+                                    </li>
+                                </template>
+                            </ul>
                         </div>
-                    </button>
-                </div>
-            </div> -->
-
-            <div class="gnb__panel__wrap" ref="ref_panelwrap">
-
-                <div class="gnb__panel__block">
-                    <div class="gnb__public">
-                        <span class="gnb__public__focus">focus</span>
-                        <ul class="gnb__public__list" ref="ref_public">
-
-                            <template v-for="(item,idx) in gnbData.public">
-                                <li :key="idx" class="gnb__public__item">
-                                    <router-link :to="item.to">
-                                        <span class="gnb__public__prefix">
-                                            <span class="gnb__public__prefix-number">0{{ idx+1}}</span>
-                                            <span class="gnb__nowbadge">now</span>
-                                        </span>
-                                        <span class="gnb__public__name">
-                                            <span>{{ item.name }}</span>
-                                        </span>
-                                    </router-link>
-                                </li>
-                            </template>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="gnb__panel__block">
-                    <div    class="gnb__private"
-                    >
-
-                        <div    class="gnb__private__title"
-                        >
-                            <i class="icon--lock"></i>
-                            {{
-                                isLogin ? `${$store.state.$user.username}님, 안녕하세요!` : '로그인이 필요합니다'
-                            }}
+                        <div class="gnb__banner">
+                            <a class="gnb__banner__link" href="#">
+                                <div class="gnb__banner__badge">
+                                    <span>New Event!</span>
+                                </div>
+                                <div class="gnb__banner__source">
+                                    <div class="image-box">
+                                        <img src="@/assets/illust/rocket_purple.svg" alt="">
+                                    </div>
+                                </div>
+                                <p class="gnb__banner__content">
+                                    <strong>월 32,500원</strong>으로 꺼내는
+                                    <br>우리 아이 영어 자신감!
+                                </p>
+                            </a>
                         </div>
+                    </div>
+                    <div class="gnb__panel__block">
+                        이용 안내
+                    </div>
 
-                        <ul class="gnb__private__list" ref="ref_private">
+                    <div class="gnb__panel__block">
+                        <div    class="gnb__private">
 
-                            <template v-for="(item,idx) in gnbData.private">
-                                <li :key="idx" class="gnb__private__item">
-                                    <router-link :to="item.to" class="gnb__private__item__target">
-                                        <span class="gnb__nowbadge">now</span>
-                                        <span class="gnb__private__name">{{ item.name }}</span>
-                                    </router-link>
-                                </li>
-                            </template>
+                        사용자
 
-                            <li class="gnb__private__item gnb__auth"
-                                @click="openAuthPanel"
+                            <div    class="gnb__private__title"
                             >
-                                <button class="gnb__private__item__target">
-                                    <i class="icon--key"></i>
-                                    <span class="gnb__private__name">
-                                        {{ isLogin ? '로그아웃' : '로그인' }}
-                                    </span>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="gnb__banner">
-                        <a class="gnb__banner__link" href="#">
-                            <div class="gnb__banner__badge">
-                                <span>New Event!</span>
+                                <i class="icon--lock"></i>
+                                {{
+                                    isLogin ? `${$store.state.$user.username}님, 안녕하세요!` : '로그인이 필요합니다'
+                                }}
                             </div>
-                            <div class="gnb__banner__source">
-                                <div class="image-box">
-                                    <img src="@/assets/illust/rocket_purple.svg" alt="">
+
+                            <ul class="gnb__private__list" ref="ref_private">
+
+                                <template v-for="(item,idx) in gnbData.private">
+                                    <li :key="idx" class="gnb__private__item">
+                                        <router-link :to="item.to" class="gnb__private__item__target">
+                                            <span class="gnb__nowbadge">now</span>
+                                            <span class="gnb__private__name">{{ item.name }}</span>
+                                        </router-link>
+                                    </li>
+                                </template>
+
+                                <li class="gnb__private__item gnb__auth"
+                                    @click="openAuthPanel"
+                                >
+                                    <button class="gnb__private__item__target">
+                                        <i class="icon--key"></i>
+                                        <span class="gnb__private__name">
+                                            {{ isLogin ? '로그아웃' : '로그인' }}
+                                        </span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="gnb__banner">
+                            <a class="gnb__banner__link" href="#">
+                                <div class="gnb__banner__badge">
+                                    <span>New Event!</span>
                                 </div>
-                            </div>
-                            <p class="gnb__banner__content">
-                                <strong>월 32,500원</strong>으로 꺼내는
-                                <br>우리 아이 영어 자신감!
+                                <div class="gnb__banner__source">
+                                    <div class="image-box">
+                                        <img src="@/assets/illust/rocket_purple.svg" alt="">
+                                    </div>
+                                </div>
+                                <p class="gnb__banner__content">
+                                    <strong>월 32,500원</strong>으로 꺼내는
+                                    <br>우리 아이 영어 자신감!
+                                </p>
+                            </a>
+                        </div>
+
+                        <div class="gnb__etc">
+
+                            <a href="#" class="gnb__etc__enuma">
+                                <span class="gnb__etc__enuma__copy">Empower ALL Children</span>
+                                <span class="gnb__etc__enuma__detail" >에누마 공식 홈페이지</span>
+                            </a>
+
+                            <ul class="gnb__etc__sns">
+                                <li class="gnb__etc__sns__item">
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                </li>
+                                <li class="gnb__etc__sns__item">
+                                    <a href="#"><i class="fab fa-facebook-square"></i></a>
+                                </li>
+                                <li class="gnb__etc__sns__item">
+                                    <a href="#"><i class="fab fa-twitter-square"></i></a>
+                                </li>
+                                <li class="gnb__etc__sns__item">
+                                    <a href="#"><i class="fab fa-youtube-square"></i></a>
+                                </li>
+                            </ul>
+
+                            <p class="gnb__etc__copyright">
+                                ⓒ 2018 Enuma, Inc. All Rights Reserved.
                             </p>
-                        </a>
-                    </div>
 
-                    <div class="gnb__etc">
-
-                        <a href="#" class="gnb__etc__enuma">
-                            <span class="gnb__etc__enuma__copy">Empower ALL Children</span>
-                            <span class="gnb__etc__enuma__detail" >에누마 공식 홈페이지</span>
-                        </a>
-
-                        <ul class="gnb__etc__sns">
-                            <li class="gnb__etc__sns__item">
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </li>
-                            <li class="gnb__etc__sns__item">
-                                <a href="#"><i class="fab fa-facebook-square"></i></a>
-                            </li>
-                            <li class="gnb__etc__sns__item">
-                                <a href="#"><i class="fab fa-twitter-square"></i></a>
-                            </li>
-                            <li class="gnb__etc__sns__item">
-                                <a href="#"><i class="fab fa-youtube-square"></i></a>
-                            </li>
-                        </ul>
-
-                        <p class="gnb__etc__copyright">
-                            ⓒ 2018 Enuma, Inc. All Rights Reserved.
-                        </p>
+                        </div>
 
                     </div>
-
                 </div>
             </div>
         </div>
+
+
+
 
     </div>
 </template>
@@ -263,33 +196,44 @@ export default {
         return {
 
             gnbData  : {
+                products : [
+                    {
+                        name : '토도영어',
+                        to : '/english',
+                    },
+                    {
+                        name : '토도한글',
+                        to : '/hangul',
+                    },
+                    {
+                        name : '토도수학',
+                        to : '/math',
+                    },
+                    {
+                        name : '토도라이브',
+                        to : '/live',
+                    },
+                ],
+
                 public : [
                     {
-                        name : '멤버십 후기',
-                        to : '/review',
+                        name : '구독하기',
+                        to : '/subscribe'
                     },
                     {
-                        name : '커리큘럼 안내',
-                        to : '/curriculum'
-                    },
-                    {
-                        name : '이용하기',
-                        to : '/product'
-                    },
-                    {
-                        name : '도움말',
+                        name : '서비스 센터',
                         to : '/help'
                     },
                 ],
 
                 private : [
                     {
-                        name : '계정 관리',
-                        to : '/mypage/account'
+                        name : '학습 정보',
+                        to : '/study'
                     },
                     {
-                        name : '학습정보 열람',
-                        to : '/mypage/study'
+                        name : '계정 관리',
+                        to : '/account'
                     },
                 ],
             },
@@ -304,12 +248,15 @@ export default {
         isLogin () {
             return this.$store.state.$user.is_login
         },
+        isOpen() {
+            return this.$store.state.$nav.is_openGnb;
+        },
     },
     watch: {
         '$route.path'() {
             this.$store.dispatch('closeGnb');
         },
-        '$store.state.$nav.is_openGnb'(now) {
+        'isOpen'(now) {
             this.navTL.clear();
             if(now){
                 this.openMenuMotion();
@@ -333,6 +280,7 @@ export default {
             });
 
         },
+
         closeMenuMotion() {
             const panel          = this.$refs.ref_panel;
             // const concise       = this.$refs.ref_concise;
@@ -377,7 +325,8 @@ export default {
     },
 }
 
-export const gnbStore2 = {
+export const gnbStoreTS = {
+
     state : {
         is_openGnb : false,
     },
@@ -406,30 +355,96 @@ export const gnbStore2 = {
 
 $navh : 68px;
 
-.nav-gnb{
-    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.15);
-    @include hardSelect {
-        color : #fff;
+@mixin backdropBlur() {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    backface-visibility: hidden;
+    will-change: transform;
+    translateZ: 0px
+}
+
+@mixin hoverUnderline($color:#fff){
+    position: relative;
+    box-sizing: border-box;
+
+    &::before {
+        content: '';
+        position: absolute;
+        display: inline-block;
+        width: 100%; height: 0.1em;
+        left: 0;bottom: 0;
+        background-color: rgba(255,255,255,1);
+        background-color: $color;
+        transition : transform 200ms $EASE_inOutCubic;
+        transform : scaleX(0);
+        transform-origin : center;
     }
+
+    @include hover {
+        &::before {
+            transform : scaleX(1);
+            transition : transform 300ms $EASE_outExpo;
+        }
+    }
+}
+
+@mixin hoverUnderlineLeft($color:#fff){
+    @include hoverUnderline($color);
+    &::before {transform-origin : left;}
+}
+
+@mixin hoverUnderlineRight($color:#fff){
+    @include hoverUnderline($color);
+    &::before {transform-origin : right;}
+}
+
+
+.nav-gnb{
+    // box-shadow: 0 3px 8px 0 rgba(0,0,0,0.15);
+    width: 100%;
+    height: 100%;
+    height: auto;
 }
 
 .gnb__dimmed {
     width: 100%; height: 100%;
     position: absolute;
     top: 0; left: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.4);
     z-index: 1;
     transition : opacity 600ms ease;
     opacity: 0;
     pointer-events: none;
-    .st-openmenu & {
+    .st-open & {
         opacity: 1;
         pointer-events: all;
     }
 }
 
+.gnb__content {
+    // border: 5px solid #d3d;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+
+    background-color: rgba(255,255,255,0.8);
+    transition: background-color 300ms ease 200ms;
+
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+
+    .st-open & {
+        transition: background-color 600ms ease 0ms;
+        background-color: rgba(20,20,20,0.9);
+        box-shadow: none;
+    }
+
+    @include backdropBlur;
+}
+
 .gnb__concise {
-    background-color: $COLOR_navy_2;
+    display: block;
     position: relative;
     z-index: 20;
 }
@@ -438,6 +453,8 @@ $navh : 68px;
     display: flex;
     position: relative;
     max-width : $SIZE_PC_contentWidth;
+    max-width: unset !important;
+
     padding: 0 $SIZE_PC_innerPadding ;
     margin: 0 auto;
     box-sizing: border-box;
@@ -450,7 +467,7 @@ $navh : 68px;
         padding: 0 $SIZE_MO_innerPadding;
     }
 
-    .st-openmenu & {
+    .st-open & {
         transform : translate3d(0,50%,0);
     }
 
@@ -460,11 +477,13 @@ $navh : 68px;
         justify-content: center;
         box-sizing: border-box;
         will-change: filter;
-        transition: filter 400ms ease;
+        transition: filter 300ms ease;
 
-        filter : grayscale(1) brightness(3);
-        .st-openmenu & {
-            transition-delay: 370ms;
+        // filter : grayscale(1) brightness(3);
+        filter : grayscale(1) brightness(0);
+        transition-delay: 170ms;
+        .st-open & {
+            transition-delay: 0;
             filter : grayscale(0) brightness(1);
         }
 
@@ -472,29 +491,117 @@ $navh : 68px;
             width: 34px ; height: 34px;
             transition : transform 300ms $EASE_outBack2;
             transform-origin : left;
-            .st-openmenu & {
+            .st-open & {
                 transform:scale(1.5);
                 transition-delay: 220ms;
             }
         }
-        .typo--todoenglish {
+        .typo--todoschool {
             opacity: 0;
+            color: #fff;
+            // border: 1px solid #000;
             position: absolute;
             top: 4px; left: 100%;
             margin-left: 40px;
             pointer-events: none;
-            width: 90px; height: 100%;
-            background-image: url('~@/assets/logo/logo_todoenglish_typo.svg');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
+            // width: 90px; height: 100%;
+            width: auto;
+            white-space: nowrap;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            // align-items: center;
+            justify-content: center;
+            // letter-spacing: 0.05em;
+            line-height: 1.2;
+            // background-image: url('~@/assets/logo/logo_todoenglish_typo.svg');
+            // background-size: contain;
+            // background-position: center;
+            // background-repeat: no-repeat;
             transform : translate3d(0, 20px, 0);
             transition: opacity 200ms ease, transform 300ms $EASE_inCubic 200ms;
-            .st-openmenu & {
+
+            .st-open & {
                 pointer-events: all;
                 transition: opacity 200ms ease 250ms, transform 500ms $EASE_outBack 200ms;
                 opacity: 1;
                 transform : translate3d(0, 0, 0);
+            }
+            strong {
+                font-size: 26px;
+                font-weight: 700;
+            }
+            span {
+                font-size: 16px;
+                font-weight: 400;
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .gnb__minimal {
+        justify-self: center;
+        align-self: center;
+        position: absolute;
+        height: 100%;
+        top: 0; left: 0;
+        left: 50%;
+
+        transform : translateX(-50%);
+        display:flex;
+        align-items: center;
+        font-weight: 700;
+
+        transition:  opacity 250ms $EASE_outExpo 100ms;
+        opacity: 1;
+
+        @include phone {
+            display: none;
+        }
+
+        .st-open & {
+            transition-delay: 0ms;
+            opacity: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .gnb__minimal__list {
+            display: flex;
+            align-items: center;
+        }
+
+        .gnb__minimal__item {
+            // border: 1px solid #3d3;
+            display: flex;
+            align-items: center;
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 1px; height: 9px;
+                flex : 0 0 1px;
+                border-radius: 9999px;
+                // background-color: rgba(255,255,255,0.5);
+                background: #000;
+                margin: 0 17px;
+            }
+
+            &:nth-child(1)::before {
+                display: none !important;
+            }
+            a {
+                display: inline-block;
+                width: 100%; height: 100%;
+                color: #000;
+                padding: 0 2px;
+                border-radius: 4px;
+
+                &.router-link-active {
+                    background: #333;
+                    color: #fff;
+                }
+
+                @include hoverUnderline(#000);
             }
         }
     }
@@ -610,15 +717,28 @@ $navh : 68px;
 
             .gnb__user__dot {
                 display: inline-block;
-                width: 5px; height: 5px;
+                width: 6px; height: 6px;
                 border-radius: 9999px;
-                background-color: rgba(255,255,255,0.4);
                 margin-right: 12px;
 
-                .dt-login & {
+                background-color: rgba(100,100,100,0.4);
+
+                .st-open & {
+                    background-color: rgba(255,255,255,0.4);
+                }
+
+                .dt-login &{
+                    background-color: rgb(61, 204, 32);
+                }
+
+                .st-open.dt-login & {
                     background-color: rgba(255,255,255,1);
                     box-shadow: 0 0 5px 2px rgba(5,255,0,0.8);
                 }
+            }
+
+            .icon--account {
+                transition: background-image 200ms ease;
             }
 
         }
@@ -632,10 +752,11 @@ $navh : 68px;
             border: 1px solid transparent;
 
             @include hover {
-                background-color : #fff;
-                .gnb__menu__icon > span::before,
-                .gnb__menu__icon > span::after{
-                    background: $COLOR_navy_1;
+                background-color : rgba(0,0,0,0.2);
+            }
+            .st-open & {
+                @include hover {
+                    background-color: rgba(255,255,255,0.2);
                 }
             }
 
@@ -648,7 +769,7 @@ $navh : 68px;
                 flex-direction: column;
                 justify-content: space-around;
 
-                .st-openmenu & {
+                .st-open & {
                     transform: scale(1.35);
                 }
                 > span {
@@ -663,9 +784,14 @@ $navh : 68px;
                         position: absolute;
                         top: 0;left: 0;
                         background-color: #fff;
+                        background-color: #000;
                         width: 100%; height: 100%;
                         transition: transform 500ms $EASE_outExpo, background-color 150ms ease 0ms;
                         border-radius: 9999px;
+
+                        .st-open & {
+                            background-color: #fff;
+                        }
                     }
 
                     &::before , &:nth-child(2)::after{
@@ -675,7 +801,7 @@ $navh : 68px;
                     &:nth-child(1)::before{ transition: transform 500ms $EASE_outExpo 250ms, background-color 150ms ease 0ms; }
                     &:nth-child(3)::before{ transition: transform 500ms $EASE_outExpo 350ms, background-color 150ms ease 0ms; }
 
-                    .st-openmenu & {
+                    .st-open & {
                         &:nth-child(1)::before{
                             transform : translate3d(103%,0,0);
                             transition: transform 500ms $EASE_outExpo 0ms, background-color 150ms ease 0ms;
@@ -714,9 +840,6 @@ $navh : 68px;
 
 
 
-
-
-
 .gnb__nowbadge {
     font-size: 16px;
     background-color: $COLOR_pink_1;
@@ -724,7 +847,7 @@ $navh : 68px;
     border-radius: 4px;
     display : none;
     line-height: 1em;
-    padding: 0 4px 4px 4px;
+    padding: 2px 4px 3px 4px;
     // color: $COLOR_pink_1;
     font-weight: 700;
 
@@ -734,8 +857,8 @@ $navh : 68px;
 }
 
 .gnb__panel {
+    // @include backdropBlur;
     overflow: hidden;
-    background-color: $COLOR_navy_2;
     // height : $navh;
     // height: 100%;
     // height: auto;
@@ -744,7 +867,10 @@ $navh : 68px;
     width: 100%;
     will-change: height;
     z-index: 10;
-    
+
+    @include hardSelect {
+        color : #fff;
+    }
 }
 
 .gnb__panel__wrap {
@@ -761,8 +887,9 @@ $navh : 68px;
 
     transform : translate3d(0,80px,0);
     transition: transform 0ms ease 500ms;
+    border: 1px solid #d3d;
 
-    .st-openmenu & {
+    .st-open & {
         transition: transform 800ms $EASE_outExpo 0ms;
         transform : translate3d(0,0,0);
         pointer-events: all !important;
@@ -785,35 +912,26 @@ $navh : 68px;
         font-weight: 700;
     }
 
-    .gnb__public {
+    .gnb__product {
         position: relative;
+        border: 1px solid #f11;
         width: 100%;
 
-        .gnb__public__focus {
-            width: 100%;
-            position: absolute;
-            top: 0; left: 0;
-            user-select: none !important;
-            pointer-events: none !important;
-            color: transparent;
-            @include publicFont;
-        }
-
-        .gnb__public__list {
+        .gnb__product__list {
 
             display: flex;
             flex-direction: column;
 
-            .gnb__public__item {
+            .gnb__product__item {
                 margin-top: 34px;
                 &:nth-child(1) {margin-top: 0}
 
-                .st-openmenu & {
+                .st-open & {
                     @for $i from 0 through 10 {
                         $delay : #{$i * 70ms};
                         &:nth-child(#{$i}) {
-                            .gnb__public__name ,
-                            .gnb__public__prefix{
+                            .gnb__product__name ,
+                            .gnb__product__prefix{
                                 opacity: 1;
                                 transform: translate3d(0,0,0);
                                 transition: transform 800ms $EASE_outExpo $delay, opacity 350ms ease $delay;
@@ -829,7 +947,7 @@ $navh : 68px;
                     position: relative;
                     // padding: 5px 10px 5px 0;
 
-                    .gnb__public__prefix {
+                    .gnb__product__prefix {
                         display: inline-block;
                         writing-mode: vertical-rl;
                         text-align: center;
@@ -843,15 +961,15 @@ $navh : 68px;
                         line-height : 1em;
 
                         .gnb__nowbadge {
-                            padding: 4px 0 4px 4px;
-                            transform: translateX(-15%);
+                            padding: 4px 2px 4px 3px;
+                            transform: translateX(-5%);
                         }
-                        .gnb__public__prefix-number{
+                        .gnb__product__prefix-number{
                             display: inline-block;
                         }
                     }
 
-                    .gnb__public__name {
+                    .gnb__product__name {
                         box-sizing: border-box;
                         @include publicFont;
                         transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
@@ -859,39 +977,22 @@ $navh : 68px;
                         opacity: 0;
                         position: relative;
 
-                        &::before {
-                            content: '';
-                            position: absolute;
-                            display: inline-block;
-                            width: 100%; height: 0.1em;
-                            left: 0;bottom: 0;
-                            background-color: rgba(255,255,255,1);
-                            transition : transform 200ms $EASE_inOutCubic;
-                            transform-origin : left;
-                            transform : scaleX(0);
-                        }
+                        @include hoverUnderlineLeft();
+
                     }
 
-                    @include hover {
-                        .gnb__public__name {
-                            &::before {
-                                transform : scaleX(1);
-                                transition : transform 300ms $EASE_outExpo;
-                            }
-                        }
-                    }
 
                     &.router-link-active {
 
                         pointer-events: none;
-                        .gnb__public__prefix{
+                        .gnb__product__prefix{
                             font-weight: 700;
                             color: rgba(255,255,255,1);
                         }
-                        .gnb__public__prefix-number{
+                        .gnb__product__prefix-number{
                             display: none;
                         }
-                        .gnb__public__name {
+                        .gnb__product__name {
                             > span {
                                 display: inline-block;
                                 opacity: 0.4 !important;
@@ -910,6 +1011,7 @@ $navh : 68px;
     .gnb__private {
         // margin-left: auto;
         text-align: right;
+        border: 1px solid #0fc;
 
         @keyframes swingLock {
             0% {transform : rotate(0);}
@@ -952,7 +1054,7 @@ $navh : 68px;
             opacity: 0;
             transform : translate3d(-20px,0,0);
 
-            .st-openmenu & {
+            .st-open & {
                 transition : transform 800ms $EASE_outExpo, opacity 350ms ease;
                 opacity: 1;
                 transform : translate3d(0,0,0);
@@ -983,20 +1085,20 @@ $navh : 68px;
                 opacity: 0;
                 transition : transform 600ms $EASE_outCubic 300ms , opacity 300ms ease;
                 transform-origin : right;
-                .st-openmenu & {
+                .st-open & {
                     opacity: 1;
                     transform : scaleX(1);
                 }
             }
             &::before {
                 top: 0;
-                .st-openmenu & {
+                .st-open & {
                     transition : transform 800ms $EASE_outExpo 0ms, opacity 700ms ease;
                 }
             }
             &::after {
                 bottom: 0;
-                .st-openmenu & {
+                .st-open & {
                     transition : transform 950ms $EASE_outExpo 140ms, opacity 700ms ease 140ms;
                 }
             }
@@ -1011,7 +1113,7 @@ $navh : 68px;
                     margin-top: 0;
                 }
 
-                .st-openmenu & {
+                .st-open & {
                     @for $i from 1 through 10 {
                         $delay : #{$i * 50ms + 50ms};
                         &:nth-child(#{$i}) {
@@ -1036,30 +1138,7 @@ $navh : 68px;
                     }
 
                     .gnb__private__name {
-                        box-sizing: border-box;
-                        // transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
-                        // transform: translate3d(30px,0,0);
-                        // opacity: 0;
-                        position: relative;
-
-                        &::before {
-                            content: '';
-                            position: absolute;
-                            display: inline-block;
-                            width: 100%; height: 0.1em;
-                            left: 0;bottom: 0;
-                            background-color: rgba(255,255,255,1);
-                            transition : transform 200ms $EASE_inOutCubic;
-                            transform-origin : right;
-                            transform : scaleX(0);
-                        }
-                    }
-
-                    @include hover {
-                        .gnb__private__name::before {
-                            transform : scaleX(1);
-                            transition : transform 300ms $EASE_outExpo;
-                        }
+                        @include hoverUnderlineRight;
                     }
 
                     &.router-link-active {
@@ -1090,6 +1169,8 @@ $navh : 68px;
     }
 
     .gnb__banner {
+        // display: none !important;
+
         margin-top: 52px;
 
         .gnb__banner__link {
@@ -1105,7 +1186,7 @@ $navh : 68px;
             transform : translate3d(0,50px,0);
             opacity: 0;
 
-            .st-openmenu & {
+            .st-open & {
                 opacity: 1;
                 transition: transform 800ms $EASE_outExpo 200ms, opacity 300ms ease 200ms;
                 transform : translate3d(0,0,0);
@@ -1131,7 +1212,7 @@ $navh : 68px;
                     transform : scale(0);
                     transition: transform 230ms $EASE_outBack 350ms;
 
-                    .st-openmenu & {
+                    .st-open & {
                         transform : scale(1);
                     }
                 }
@@ -1164,8 +1245,12 @@ $navh : 68px;
     }
 
 
-    $opacityEtc : 0.5;
+    $opacityEtc : 0.3;
+
     .gnb__etc {
+
+        // display: none !important;
+
         margin-top: 52px;
         display: flex;
         flex-direction: column;
@@ -1174,7 +1259,8 @@ $navh : 68px;
         transform : translate3d(0,30px,0);
         opacity: 0;
         transition: transform 800ms $EASE_outExpo 320ms, opacity 250ms ease 320ms;
-        .st-openmenu & {
+
+        .st-open & {
             opacity: 1;
             transform : translate3d(0,0,0);
         }

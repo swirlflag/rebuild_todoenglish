@@ -50,16 +50,16 @@
 </template>
 
 <script>
-import PlateTest                from '@/plates/PlateTest/PlateTest.vue';
-import PlateSetting             from '@/plates/PlateSetting/PlateSetting.vue';
-import PlateLoading             from '@/plates/PlateLoading/PlateLoading.vue';
-import PlateModal              from '@/plates/PlateModal/PlateModal.vue';
-import PlateAuth                from '@/plates/PlateAuth/PlateAuth.vue';
-import PlateTransitionCoverTS   from '@/plates/PlateTransitionCover/PlateTransitionCoverTS.vue';
-import PlateNavigation          from '@/plates/PlateNavigation/PlateNavigation.vue';
-import PlateBanner              from '@/plates/PlateBanner/PlateBanner.vue';
-import PlatePage                from '@/plates/PlatePage/PlatePage.vue';
-import PlateFooter              from '@/plates/PlateFooter/PlateFooter.vue';
+import PlateTest                    from '@/plates/PlateTest/PlateTest.vue';
+import PlateSetting                 from '@/plates/PlateSetting/PlateSetting.vue';
+import PlateLoading                 from '@/plates/PlateLoading/PlateLoading.vue';
+import PlateModal                   from '@/plates/PlateModal/PlateModal.vue';
+import PlateAuth                    from '@/plates/PlateAuth/PlateAuth.vue';
+import PlateTransitionCoverTS       from '@/plates/PlateTransitionCover/PlateTransitionCoverTS.vue';
+import PlateNavigation              from '@/plates/PlateNavigation/PlateNavigation.vue';
+import PlateBanner                  from '@/plates/PlateBanner/PlateBanner.vue';
+import PlatePage                    from '@/plates/PlatePage/PlatePage.vue';
+import PlateFooter                  from '@/plates/PlateFooter/PlateFooter.vue';
 
 // import '@/style/font/font.scss';
 // import '@/style/global/_reset.css';

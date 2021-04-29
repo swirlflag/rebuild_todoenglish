@@ -47,28 +47,19 @@ router.beforeEach((to,from, next) => {
         return;
     }
 
-    const isChangeCategoryPath = !isSameCategoryPath(to.path, from.path);
-
-    const useTransition = !firstRender && isChangeCategoryPath;
-    {useTransition}
-
     if(firstRender){
         firstRender = false;
+        next();
+        return;
     }
 
     if(isPaging){
         console.log('is paging so return');
-        return
+        return;
     }
 
-    if(useTransition){
-        isPaging = true;
+    store.dispatch('coveredPage' , next);
 
-        store.dispatch('coverPage' , next);
-    }else {
-        // 트랜지션 사용 조건이 아니면 그냥 넘김
-        next();
-    }
 });
 
 router.afterEach((to) => {

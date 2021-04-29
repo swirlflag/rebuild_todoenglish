@@ -146,6 +146,8 @@ $outGap : 4px;
 $max : 20px;
 $min : 8px;
 
+$tmepcolor : #333;
+
 #nav-scrollbar {
     z-index: 1200;
     position: absolute;
@@ -187,23 +189,24 @@ $min : 8px;
         transition:  transform 300ms $EASE_outBack2, width 250ms $EASE_outCubic, opacity 200ms ease, background-color 130ms ease;
         transform-origin: right;
         border-radius: 9999px;
+
         opacity: 0.4;
         box-sizing: border-box;
-        background-color: $COLOR_navy_2;
+        background-color: $tmepcolor;
         overflow: hidden;
         border: 1px solid rgba(255,255,255,0.3);
 
         .st-grab & , .st-hover &{
             width: $max;
             opacity: 0.5;
-            background-color: $COLOR_pink_1;
+            // background-color: $COLOR_pink_1;
         }
 
         .st-grab &{
             cursor: grabbing;
             transform : scale(0.96);
             animation : bgflow 1s linear infinite;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .st-hover &{

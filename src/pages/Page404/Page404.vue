@@ -19,7 +19,8 @@ export default {
     font-size: 20px;
     font-weight: 700;
     color: #fff;
-    background-color: dodgerblue;
+    // background-color: dodgerblue;
+    border: 3px solid dodgerblue;
     padding-top: 200px;
 }
 </style>

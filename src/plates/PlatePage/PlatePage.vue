@@ -29,13 +29,14 @@ export default {
     methods : {
         mountedPage() {
             setTimeout(() => {
-                console.log('page mount');
+                // console.log('page mount');
                 this.$store.commit('PAGE_mounted');
-            },1000)
+            },50)
+            // },1000)
         },
     },
     mounted() {
-
+        // this.$store.commit('PAGE_mounted');
     },
 }
 </script>
