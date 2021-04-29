@@ -1,6 +1,8 @@
 import store from '@/store/index.js';
 import Fragment from 'vue-fragment';
 import gsap from 'gsap';
+import axios from 'axios';
+import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import 'swiper/swiper.scss';
 
 import {
@@ -8,19 +10,13 @@ import {
     detectOS ,
     detectDevice ,
     detectTouchdevice ,
+    checkRegion ,
 } from '@/utils';
 
-import SwiperCore, { Navigation, Pagination } from 'swiper/core';
-SwiperCore.use([Navigation, Pagination]);
+
+checkRegion();
 
 // axios.defaults.baseURL = process.env.PROTOCOL + process.env.URLAPI;
-
-store.state.is_dev = process.env.NODE_ENV === 'development';
-
-store.state.type_browser     = detectBrowser();
-store.state.type_os          = detectOS();
-store.state.type_device      = detectDevice();
-store.state.is_touchDevice   = detectTouchdevice();
 
 if(localStorage.userData){
     const userData = JSON.parse(localStorage.userData);
@@ -33,7 +29,19 @@ if(localStorage.userData){
 
 // console.log(process.env.NODE_ENV === 'development');
 
-const watchScreenData = (Vue) => {
+const checkDetectData = (Vue) => {
+
+    Vue.prototype.$detect = Vue.observable({
+        is_dev          : process.env.NODE_ENV === 'development',
+        type_browser    : detectBrowser(),
+        type_os         : detectOS(),
+        type_device     : detectDevice(),
+        is_touchDevice  : detectTouchdevice(),
+    });
+
+};
+
+const bindScreenData = (Vue) => {
 
     const record = () => {
         Vue.prototype.$screen = Vue.observable({
@@ -48,19 +56,33 @@ const watchScreenData = (Vue) => {
     window.addEventListener('resize', record);
 }
 
+const installGloabalPlugin = (Vue) => {
+    SwiperCore.use([Navigation, Pagination]);
+
+    Vue.prototype.$gsap = gsap;
+    Vue.prototype.$swiper = SwiperCore;
+    Vue.prototype.$axios = axios;
+
+    Vue.use(Fragment.Plugin);
+}
+
+
+const setGlobalConfig = (Vue) => {
+    if(store.state.is_dev){
+        Vue.config.devtools = true;
+    }
+}
 
 export default {
     install(Vue) {
-        if(store.state.is_dev){
-            Vue.config.devtools = true;
-        }
 
-        Vue.use(Fragment.Plugin);
+        setGlobalConfig(Vue);
 
-        Vue.prototype.gsap = gsap;
-        Vue.prototype.swiper = SwiperCore;
+        checkDetectData(Vue);
 
-        watchScreenData(Vue);
+        bindScreenData(Vue);
+
+        installGloabalPlugin(Vue);
 
     }
 }

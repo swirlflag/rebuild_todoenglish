@@ -9,11 +9,6 @@
             <TESTListSelect @select="isShowFloatSheet = false" />
         </FloatSheet>
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
 
         <div id="temp">
 
@@ -45,6 +40,7 @@
         </div>
 
     </div>
+
 </template>
 
 <script>

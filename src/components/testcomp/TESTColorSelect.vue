@@ -81,7 +81,7 @@ export default {
         },
         makeSwiper() {
             const container = this.$refs.ref_container;
-            const swiper = new this.swiper(container, {
+            const swiper = new this.$swiper(container, {
                 slidesPerView : 'auto',
                 // freeMode : true,
                 // freeModeSticky : true,

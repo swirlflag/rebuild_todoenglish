@@ -51,7 +51,7 @@ export default {
     methods :{
         simpleAnimate(){
 
-            this.gsap.from(this.$refs.ref_icon , {
+            this.$gsap.from(this.$refs.ref_icon , {
                 scale : 0.3,
                 opacity : 0,
                 ease : 'back.out',
@@ -59,7 +59,7 @@ export default {
                 delay : 0.4,
             })
 
-            this.gsap.from(this.$refs.ref_title, {
+            this.$gsap.from(this.$refs.ref_title, {
                 letterSpacing : '0.5em',
                 opacity : 0,
                 ease : 'power4.out',

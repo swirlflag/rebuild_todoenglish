@@ -81,7 +81,7 @@ export default {
 
             // const itemHeight = items[0].offsetHeight;
 
-            this.gsap.to(items , {
+            this.$gsap.to(items , {
                 y : (idx,item) => {
                     return item.offsetHeight * idx;
                 },
@@ -91,7 +91,7 @@ export default {
 
         },
         removeBanner(index) {
-            {this.gsap}
+            {this.$gsap}
             this.$store.commit('BANNER_removeAlert',index);
             // const list = this.$refs.ref_list;
 
@@ -99,7 +99,7 @@ export default {
 
             // // console.log(item);
 
-            // const tl = new this.gsap.timeline();
+            // const tl = new this.$gsap.timeline();
 
             // // console.log(tl);
 

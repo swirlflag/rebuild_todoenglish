@@ -85,22 +85,25 @@ export default {
             return ` page--${(this.$route.name || 'error').toLowerCase()}`;
         },
         appClassNameBrowser() {
-            return this.$store.state.type_browser ?  ` browser--${this.$store.state.type_browser}`: '';
+            return this.$detect.type_browser ?  ` browser--${this.$detect.type_browser}`: '';
         },
         appClassNameOS() {
-            return this.$store.state.type_os ? ` os--${this.$store.state.type_os}`: '';
+            return this.$detect.type_os ? ` os--${this.$detect.type_os}`: '';
         },
         appClassNameDevice() {
-            return this.$store.state.type_device ? ` device--${this.$store.state.type_device}`: '';
+            return this.$detect.type_device ? ` device--${this.$detect.type_device}`: '';
         },
         appClassNameLanguage() {
-            return this.$store.state.languageType ? ` language--${this.$store.state.languageType}` : '';
+            return this.$detect.languageType ? ` language--${this.$detect.languageType}` : '';
         },
         appClassNameTouchdevice() {
-            return this.$store.state.is_touchDevice ? ' use_touch' : ' unuse_touch';
+            return this.$detect.is_touchDevice ? ' use_touch' : ' unuse_touch';
         },
         appClassNameStateFreeze() {
             return this.$store.state.$app.is_freeze ? ' st-freeze' : '';
+        },
+        appClassNameRegion() {
+            return 1    
         },
 
     },

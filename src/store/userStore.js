@@ -1,4 +1,8 @@
+import { checkRegion } from '@/utils';
+
 const TEMP_SESSIONID = "TEMP-SESSIONID";
+
+const region = checkRegion();
 
 const userStore = {
     name : '$user',
@@ -9,6 +13,7 @@ const userStore = {
         accountId   : null,
         username    : null,
         expireDay   : 7,
+        region      : region,
     },
     getters : {
 

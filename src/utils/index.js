@@ -245,3 +245,16 @@ export const detectLastPath = (prefixPath) => VM.$route.path.split(prefixPath)[1
 
 
 export const deepCopy = (origin) => JSON.parse(JSON.stringify(origin));
+
+
+
+export const checkRegion = () => {
+
+    // 한국어   ko
+    // 영어     en
+    // 일본어   ja
+    // 중국어   zh
+    const lang = navigator.language || navigator.userLanguage;
+    return lang.split('-')[0];
+
+};

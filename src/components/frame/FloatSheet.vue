@@ -76,7 +76,7 @@ export default {
                 overY : false,
             },
 
-            tl : new this.gsap.timeline(),
+            tl : new this.$gsap.timeline(),
         }
     },
     computed : {

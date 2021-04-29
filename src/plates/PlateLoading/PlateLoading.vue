@@ -31,7 +31,7 @@ export default {
             if(now){
                 const wrap = this.$refs.ref_wrap;
 
-                this.gsap.to(wrap , {
+                this.$gsap.to(wrap , {
                     yPercent : -100,
                     ease : 'power2.out',
                     duration : 0.6,

@@ -109,7 +109,7 @@ export default {
             el_options : [],
 
             isOpen : false,
-            tl : new this.gsap.timeline(),
+            tl : new this.$gsap.timeline(),
             transformStyle : {
                 closeHeight : 'auto',
                 openHeight : 'auto',

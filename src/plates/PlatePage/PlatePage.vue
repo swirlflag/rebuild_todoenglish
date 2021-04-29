@@ -29,9 +29,9 @@ export default {
     methods : {
         mountedPage() {
             setTimeout(() => {
+                console.log('page mount');
                 this.$store.commit('PAGE_mounted');
             },1000)
-            // console.log('page mount');
         },
     },
     mounted() {

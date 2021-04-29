@@ -98,7 +98,7 @@ export default {
             let delay = 0;
 
             iterElement(this.curtains , (target,idx) => {
-                this.gsap.fromTo(target , {
+                this.$gsap.fromTo(target , {
                     xPercent : 101 * (this.reverse?1:-1) ,
                 }, {
                     xPercent : 0,
@@ -120,7 +120,7 @@ export default {
                 delay += this.time.stagger;
             });
 
-            this.gsap.fromTo(this.$refs.ref_cover , {
+            this.$gsap.fromTo(this.$refs.ref_cover , {
                 width : 0,
             }, {
                 width: 101 + (this.reverse?1:-1) + '%',
@@ -133,7 +133,7 @@ export default {
         },
 
         uncovered() {
-            this.gsap.to(this.$refs.ref_cover , {
+            this.$gsap.to(this.$refs.ref_cover , {
                 width: 0,
                 ease: 'power2.inOut',
                 duration : this.time.duration,
@@ -142,7 +142,7 @@ export default {
             const curtains = [...this.curtains].reverse();
 
             iterElement(curtains , (target,idx) => {
-                this.gsap.to(target, {
+                this.$gsap.to(target, {
                     xPercent : 101 * (this.reverse?-1:1),
                     ease : 'power2.inOut',
                     duration : this.time.duration,

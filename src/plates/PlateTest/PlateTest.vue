@@ -44,8 +44,6 @@
                 인증창 호출
             </button>
 
-            <br>
-
             <button @click="TEST_switchAuth">
                 한방에 로그인/로그아웃
             </button>
@@ -53,19 +51,35 @@
                 로그인 유무 :
                 {{$store.state.$user.is_login}}
             </div>
-
-            <router-link to="/mypage/account">
-                강제 이동: 계정 관리
+            <br>
+            <router-link to="/reveiw">
+                (구) 멤버십 후기
             </router-link>
+            <br>
+            <router-link to="/product">
+                (구) 이용하기
+            </router-link>
+            <br>
+            <router-link to="/curriculum">
+                (구) 커리큘럼 안내
+            </router-link>
+            <br>
+             <router-link to="/help">
+                (구) 도움말
+            </router-link>
+            <br>
+            <router-link to="/mypage/account">
+                (구)계정 관리
+            </router-link>
+            <br>
             <router-link to="/mypage/study">
-                강제 이동: 학습정보 열람
+                (구)학습정보 열람
             </router-link>
 
             <div id="testlog1"></div>
             <div id="testlog2"></div>
 
         </div>
-
 
         <div id="test__open"
             @mousedown="grab"
