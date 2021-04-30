@@ -455,6 +455,7 @@ $MO_navh : 60px;
     &.st-open {
         height: 100%;
     }
+    
 }
 
 .gnb__dimmed {
