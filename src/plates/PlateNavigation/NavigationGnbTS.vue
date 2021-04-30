@@ -6,7 +6,7 @@
 
         <div class="gnb__dimmed" @click="closeMenu"></div>
 
-        <div class="gnb__content">
+        <div class="gnb__content" ref="ref_content">
             <div class="gnb__concise" ref="ref_concise">
 
                 <div class="gnb__concise__wrap">
@@ -36,7 +36,6 @@
                             <i  class="icon--account "
                                 :class="{'c-white' : isOpen}"
                             >
-
                             </i>
                         </div>
                         <button class="gnb__menu" @click="toggleMenu">
@@ -57,7 +56,9 @@
 
                     <div class="gnb__panel__block">
                         <div class="gnb__product">
-                            제품 소개
+                            <!-- <div class="gnb__panel__title">
+                                토도스쿨의 제품을 만나보세요.
+                            </div> -->
                             <ul class="gnb__product__list" ref="ref_public">
 
                                 <template v-for="(item,idx) in gnbData.products">
@@ -75,7 +76,33 @@
                                 </template>
                             </ul>
                         </div>
-                        <div class="gnb__banner">
+                    </div>
+
+                    <div class="gnb__panel__block">
+
+
+                        <div class="gnb__product">
+                            <!-- <div class="gnb__panel__title">
+                                도움이 필요하신가요?
+                            </div> -->
+                            <ul class="gnb__product__list" ref="ref_public">
+
+                                <template v-for="(item,idx) in gnbData.public">
+                                    <li :key="idx" class="gnb__product__item">
+                                        <router-link :to="item.to">
+                                            <span class="gnb__product__prefix">
+                                                <span class="gnb__product__prefix-number">0{{ gnbData.products.length + idx+1}}</span>
+                                                <span class="gnb__nowbadge">now</span>
+                                            </span>
+                                            <span class="gnb__product__name">
+                                                <span>{{ item.name }}</span>
+                                            </span>
+                                        </router-link>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                        <!-- <div class="gnb__banner">
                             <a class="gnb__banner__link" href="#">
                                 <div class="gnb__banner__badge">
                                     <span>New Event!</span>
@@ -90,18 +117,13 @@
                                     <br>우리 아이 영어 자신감!
                                 </p>
                             </a>
-                        </div>
-                    </div>
-                    <div class="gnb__panel__block">
-                        이용 안내
+                        </div> -->
                     </div>
 
                     <div class="gnb__panel__block">
                         <div    class="gnb__private">
 
-                        사용자
-
-                            <div    class="gnb__private__title"
+                            <div    class="gnb__panel__title"
                             >
                                 <i class="icon--lock"></i>
                                 {{
@@ -133,7 +155,7 @@
                             </ul>
                         </div>
 
-                        <div class="gnb__banner">
+                        <!-- <div class="gnb__banner">
                             <a class="gnb__banner__link" href="#">
                                 <div class="gnb__banner__badge">
                                     <span>New Event!</span>
@@ -148,7 +170,8 @@
                                     <br>우리 아이 영어 자신감!
                                 </p>
                             </a>
-                        </div>
+                        </div> -->
+
 
                         <div class="gnb__etc">
 
@@ -184,8 +207,6 @@
         </div>
 
 
-
-
     </div>
 </template>
 
@@ -213,6 +234,7 @@ export default {
                         name : '토도라이브',
                         to : '/live',
                     },
+
                 ],
 
                 public : [
@@ -221,7 +243,7 @@ export default {
                         to : '/subscribe'
                     },
                     {
-                        name : '서비스 센터',
+                        name : '고객 센터',
                         to : '/help'
                     },
                 ],
@@ -257,7 +279,6 @@ export default {
             this.$store.dispatch('closeGnb');
         },
         'isOpen'(now) {
-            this.navTL.clear();
             if(now){
                 this.openMenuMotion();
             }else {
@@ -267,29 +288,29 @@ export default {
     },
     methods : {
         openMenuMotion() {
-            // const concise   = this.$refs.ref_concise;
-            const panel    = this.$refs.ref_panel;
+            this.navTL.clear();
             const panelWrap    = this.$refs.ref_panelwrap;
+            let openHeight = panelWrap.offsetHeight > window.innerHeight ? window.innerHeight : panelWrap.offsetHeight;
+            if(this.$screen.isMobileSize){
+                openHeight = this.$screen.height;
+            }
 
-            const openHeight = panelWrap.offsetHeight;
-
-            this.navTL.to(panel, {
+            this.navTL.to(this.$refs.ref_panel, {
                 height: openHeight,
                 ease: 'power3.out',
                 duration: 0.7,
             });
-
         },
 
         closeMenuMotion() {
-            const panel          = this.$refs.ref_panel;
-            // const concise       = this.$refs.ref_concise;
-            // const closeHeight   = concise.offsetHeight;
-
-            this.navTL.to(panel, {
-                height: 0,
+            this.navTL.clear();
+            this.navTL.to(this.$refs.ref_panel, {
+                height: this.$refs.ref_concise.offsetHeight,
                 ease: 'power4.out',
                 duration: 0.6,
+                onComplete : () => {
+                    this.$refs.ref_panel.scrollTo(0,0);
+                },
             });
         },
 
@@ -317,11 +338,29 @@ export default {
             this.publicList    = this.$refs.ref_public.querySelectorAll('li');
             this.privateList   = this.$refs.ref_private.querySelectorAll('li');
         },
+
+        windowResize() {
+            if(this.isOpen){
+                console.log(this.isOpen);
+                this.openMenuMotion();
+            }
+        },
+
+        bindWindowResize() {
+            window.addEventListener('resize' , this.windowResize);
+        },
+        unbindWindowResize() {
+            window.removeEventListener('resize' , this.windowResize);
+        },
     },
 
     mounted(){
         this.selectElement();
-        this.closeMenu()
+        this.closeMenu();
+        this.bindWindowResize();
+    },
+    beforeDestroy() {
+        this.unbindWindowResize();
     },
 }
 
@@ -339,11 +378,15 @@ export const gnbStoreTS = {
         },
     },
     actions : {
-        openGnb({commit}) {
-            commit('GNB_open');
+        openGnb(context) {
+            // if(!context.state.$nav.is_openGnb){
+                context.commit('GNB_open');
+            // }
         },
-        closeGnb({commit}) {
-            commit('GNB_close');
+        closeGnb(context) {
+            if(context.state.$nav.is_openGnb){
+                context.commit('GNB_close');
+            }
         }
     },
 
@@ -353,7 +396,13 @@ export const gnbStoreTS = {
 
 <style lang="scss" scoped>
 
-$navh : 68px;
+$PC_navh : 60px;
+$MO_navh : 60px;
+
+@include phone {
+    $PC_navh : 40px;
+}
+
 
 @mixin backdropBlur() {
     backdrop-filter: blur(10px);
@@ -400,10 +449,12 @@ $navh : 68px;
 
 
 .nav-gnb{
-    // box-shadow: 0 3px 8px 0 rgba(0,0,0,0.15);
     width: 100%;
-    height: 100%;
     height: auto;
+    box-sizing: border-box;
+    &.st-open {
+        height: 100%;
+    }
 }
 
 .gnb__dimmed {
@@ -422,31 +473,45 @@ $navh : 68px;
 }
 
 .gnb__content {
-    // border: 5px solid #d3d;
+
     box-sizing: border-box;
+    min-height: $PC_navh;
     width: 100%;
     height: auto;
+    height: 100%;
     position: relative;
     z-index: 2;
+    // max-height: 100vh;
+    max-height: 100%;
+    box-sizing: border-box;
+    // overflow: scroll;
+    overflow: hidden;
+    pointer-events: none;
 
-    background-color: rgba(255,255,255,0.8);
-    transition: background-color 300ms ease 200ms;
+    // box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 
-    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    @include phone {
+        min-height : $MO_navh
+    }
+
 
     .st-open & {
         transition: background-color 600ms ease 0ms;
-        background-color: rgba(20,20,20,0.9);
+        // background-color: rgba(35,35,35,0.85);
         box-shadow: none;
     }
 
-    @include backdropBlur;
+    // @include backdropBlur;
 }
 
 .gnb__concise {
     display: block;
-    position: relative;
+    position: absolute;
+    width: 100%;
     z-index: 20;
+    pointer-events: all;
+    // margin-bottom: -$PC_navh;
 }
 
 .gnb__concise__wrap {
@@ -458,17 +523,20 @@ $navh : 68px;
     padding: 0 $SIZE_PC_innerPadding ;
     margin: 0 auto;
     box-sizing: border-box;
-    height: $navh ;
+    height: $PC_navh ;
     transition: transform 500ms $EASE_outQuart;
+
+    @include overPhone {
+        .st-open & {
+            transform : translate3d(0,50%,0);
+        }
+    }
 
     @include phone {
         max-width : $SIZE_MO_contentWidth;
         width: 100%;
-        padding: 0 $SIZE_MO_innerPadding;
-    }
-
-    .st-open & {
-        transform : translate3d(0,50%,0);
+        padding: 0 $SIZE_MO_innerPadding*1.25;
+        height: $MO_navh;
     }
 
     .gnb__logo {
@@ -492,8 +560,10 @@ $navh : 68px;
             transition : transform 300ms $EASE_outBack2;
             transform-origin : left;
             .st-open & {
-                transform:scale(1.5);
-                transition-delay: 220ms;
+                @include overPhone {
+                    transform:scale(1.5);
+                    transition-delay: 220ms;
+                }
             }
         }
         .typo--todoschool {
@@ -536,6 +606,10 @@ $navh : 68px;
                 font-weight: 400;
                 opacity: 0.8;
             }
+
+            @include phone {
+                display: none;
+            }
         }
     }
 
@@ -552,12 +626,8 @@ $navh : 68px;
         align-items: center;
         font-weight: 700;
 
-        transition:  opacity 250ms $EASE_outExpo 100ms;
+        transition:  opacity 250ms $EASE_outExpo 200ms;
         opacity: 1;
-
-        @include phone {
-            display: none;
-        }
 
         .st-open & {
             transition-delay: 0ms;
@@ -566,13 +636,16 @@ $navh : 68px;
             user-select: none;
         }
 
+        @include phone {
+            display: none;
+        }
+
         .gnb__minimal__list {
             display: flex;
             align-items: center;
         }
 
         .gnb__minimal__item {
-            // border: 1px solid #3d3;
             display: flex;
             align-items: center;
             &::before {
@@ -613,6 +686,9 @@ $navh : 68px;
 
         > * {
             margin-left: 24px;
+            @include phone {
+                margin-left: 12px;
+            }
             &:nth-child(1) {
                 margin-left: 0;
             }
@@ -748,6 +824,7 @@ $navh : 68px;
             position: relative;
             border-radius: 8px;
             padding: 6px;
+            margin-right: -6px;
             transition : background-color 300ms ease , border 300ms ease;
             border: 1px solid transparent;
 
@@ -770,7 +847,7 @@ $navh : 68px;
                 justify-content: space-around;
 
                 .st-open & {
-                    transform: scale(1.35);
+                    transform: scale(1.26);
                 }
                 > span {
                     display: inline-block;
@@ -858,15 +935,36 @@ $navh : 68px;
 
 .gnb__panel {
     // @include backdropBlur;
-    overflow: hidden;
-    // height : $navh;
+    // overflow: hidden;
+    // height : $PC_navh;
     // height: 100%;
     // height: auto;
-    height: 0;
     position: relative;
+    // position: absolute; top: 0; left: 0;
+    // height: 0;
+
+    @include hideScrollbar ;
+    overflow: scroll;
+    max-height: 100%;
+    height: 0;
     width: 100%;
     will-change: height;
     z-index: 10;
+    pointer-events: none;
+    box-sizing: border-box;
+
+    background-color: rgba(255,255,255,0.8);
+    transition: background-color 300ms ease 200ms;
+
+    .st-open & {
+        transition: background-color 600ms ease 0ms;
+        background-color: rgba(35,35,35,0.85);
+        pointer-events: all;
+    }
+
+    @include phone {
+        // height: 100% !important;
+    }
 
     @include hardSelect {
         color : #fff;
@@ -875,47 +973,112 @@ $navh : 68px;
 
 .gnb__panel__wrap {
     max-width : $SIZE_PC_contentWidth;
-    padding: #{$SIZE_PC_innerPadding*3} $SIZE_PC_innerPadding ;
+    // padding: #{$SIZE_PC_innerPadding*3} $SIZE_PC_innerPadding ;
+    padding: 0 $SIZE_PC_innerPadding ;
+
     margin: 0 auto;
     width: 100%;
     position: relative;
     display :flex;
     flex-direction: row;
     justify-content: space-between;
+    justify-content: flex-end;
     box-sizing: border-box;
     pointer-events: none;
+    // visibility: hidden;
 
     transform : translate3d(0,80px,0);
     transition: transform 0ms ease 500ms;
-    border: 1px solid #d3d;
 
     .st-open & {
         transition: transform 800ms $EASE_outExpo 0ms;
         transform : translate3d(0,0,0);
         pointer-events: all !important;
+        // visibility: visible;
+    }
+
+    @include phone {
+        flex-direction: column;
+        max-width : $SIZE_MO_contentWidth;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        padding: 0 $SIZE_MO_innerPadding ;
     }
 
     > .gnb__panel__block{
+        // border: 1px solid #fff;
+        border-left: 1px solid rgba(255,255,255,0.1);
         box-sizing: border-box;
         display : flex;
         flex-direction: column;
         width: 50%;
+        width: 100%;
         max-width: 380px;
+        max-width: 300px;
         margin-left: $SIZE_PC_innerPadding;
+        margin-left: 10px;
+        padding: #{$SIZE_PC_innerPadding*3 + $PC_navh} 0 #{$SIZE_PC_innerPadding*3};
+
         &:nth-child(1) {
             margin-left: 0;
+        }
+        &:last-child {
+            border-left: transparent;
+        }
+        @include phone {
+            border: none;
+            max-width: 100%;
+            padding: 0;
+            margin-left: 0;
+        }
+
+        .gnb__panel__title {
+            font-size: $SIZE_PC_fontsize_large;
+            font-size: $SIZE_PC_fontsize_strong ;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            // justify-content: flex-end;
+            transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
+            opacity: 0;
+            transform : translate3d(-20px,0,0);
+            margin-bottom: 26px;
+
+            .st-open & {
+                transition : transform 800ms $EASE_outExpo, opacity 350ms ease;
+                opacity: 1;
+                transform : translate3d(0,0,0);
+            }
+
+            > .icon--lock {
+                .dt-login & {
+                    display: none;
+                }
+            }
+
         }
     }
 
     @mixin publicFont {
-        font-size: $SIZE_PC_fontsize_title;
+        $sizeGnbPublic : 40px;
+        // font-size: $SIZE_PC_fontsize_title;
+        font-size: $sizeGnbPublic;
         font-weight: 700;
+
+        @include phone {
+            font-size: $SIZE_MO_fontsize_title ;
+        }
     }
 
     .gnb__product {
         position: relative;
-        border: 1px solid #f11;
         width: 100%;
+
+        > p {
+            font-size: 20px;
+            // margin-bottom: 10px;
+            margin-bottom: 34px;
+        }
 
         .gnb__product__list {
 
@@ -923,18 +1086,24 @@ $navh : 68px;
             flex-direction: column;
 
             .gnb__product__item {
-                margin-top: 34px;
+                // margin-top: 34px;
+                // margin-top: 20px;
+                margin-bottom: 20px;
                 &:nth-child(1) {margin-top: 0}
 
                 .st-open & {
-                    @for $i from 0 through 10 {
+                    @for $i from 0 through 100 {
                         $delay : #{$i * 70ms};
                         &:nth-child(#{$i}) {
                             .gnb__product__name ,
                             .gnb__product__prefix{
                                 opacity: 1;
                                 transform: translate3d(0,0,0);
-                                transition: transform 800ms $EASE_outExpo $delay, opacity 350ms ease $delay;
+                                transition: transform 800ms $EASE_outExpo, opacity 350ms ease ;
+
+                                @include overPhone {
+                                    transition-delay : $delay;
+                                }
                             }
                         }
                     }
@@ -951,14 +1120,30 @@ $navh : 68px;
                         display: inline-block;
                         writing-mode: vertical-rl;
                         text-align: center;
-                        margin-right: 14px;
+                        margin-right: 12px;
                         font-weight: 300;
                         letter-spacing: 0;
                         color: rgba(255,255,255,0.6);
                         transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
-                        transform: translate3d(0,20px,0);
                         opacity: 0;
                         line-height : 1em;
+
+                        display: flex;
+
+                        justify-content: center;
+                        align-items: center;
+                        width: 22px;
+                        flex : 0 0 22px;
+                        transform: translate3d(0,20px,0);
+                        @include overPhone {
+                            // width: 22px;
+                            // flex : 0 0 22px;
+                            // transform: translate3d(0,20px,0);
+                        }
+
+                        @include phone {
+
+                        }
 
                         .gnb__nowbadge {
                             padding: 4px 2px 4px 3px;
@@ -973,7 +1158,10 @@ $navh : 68px;
                         box-sizing: border-box;
                         @include publicFont;
                         transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
-                        transform: translate3d(30px,0,0);
+
+                        @include overPhone {
+                            transform: translate3d(30px,0,0);
+                        }
                         opacity: 0;
                         position: relative;
 
@@ -1008,69 +1196,50 @@ $navh : 68px;
 
     }
 
+    @keyframes swingLock {
+        0% {transform : rotate(0);}
+        20% {transform : rotate(8deg);}
+        40% {transform : rotate(-8deg);}
+        60% {transform : rotate(8deg);}
+        80%,
+        100% {transform : rotate(0);}
+    }
+
+    @keyframes floatKey{
+        0% {
+            animation-timing-function: $EASE_inCubic;
+            transform : translate3d(0,0,0);
+        }
+        40% {transform : translate3d(8px,0,0);}
+        80%,
+        100% {transform : translate3d(0,0,0);}
+    }
+
     .gnb__private {
-        // margin-left: auto;
+
         text-align: right;
-        border: 1px solid #0fc;
 
-        @keyframes swingLock {
-            0% {transform : rotate(0);}
-            20% {transform : rotate(8deg);}
-            40% {transform : rotate(-8deg);}
-            60% {transform : rotate(8deg);}
-            80%,
-            100% {transform : rotate(0);}
-        }
-
-        @keyframes floatKey{
-            0% {
-                animation-timing-function: $EASE_inCubic;
-                transform : translate3d(0,0,0);
-            }
-            40% {transform : translate3d(8px,0,0);}
-            80%,
-            100% {transform : translate3d(0,0,0);}
-        }
         @include hover {
-            .icon--lock {
-                animation : swingLock 1000ms $EASE_outCubic infinite;
-            }
-            .icon--key {
-                animation: floatKey 1000ms $EASE_outCubic infinite;
-            }
+            .icon--lock {animation : swingLock 1000ms $EASE_outCubic infinite;}
+            .icon--key {animation: floatKey 1000ms $EASE_outCubic infinite;}
         }
 
+        @include phone {
+            text-align: left;
+            margin-top: 30px;
+        }
         i {
             margin-right: 14px;
         }
-
-        .gnb__private__title {
-            font-size: $SIZE_PC_fontsize_large;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
+        .gnb__panel__title {
             justify-content: flex-end;
-            transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
-            opacity: 0;
-            transform : translate3d(-20px,0,0);
-
-            .st-open & {
-                transition : transform 800ms $EASE_outExpo, opacity 350ms ease;
-                opacity: 1;
-                transform : translate3d(0,0,0);
+            @include phone {
+                justify-content: flex-start;
             }
-
-            > .icon--lock {
-                .dt-login & {
-                    display: none;
-                }
-            }
-
         }
 
         .gnb__private__list {
-            padding: 26px 0 ;
-            margin-top: 26px;
+            padding: 22px 0 ;
 
             position: relative;
 
@@ -1109,6 +1278,7 @@ $navh : 68px;
                 transition: transform 450ms $EASE_inCubic 0ms, opacity 350ms ease 0ms;
                 opacity: 0;
                 margin-top: 26px;
+                margin-top: 22px;
                 &:nth-child(1) {
                     margin-top: 0;
                 }
@@ -1132,6 +1302,16 @@ $navh : 68px;
                     align-items: center;
                     font-weight: 700;
                     font-size: $SIZE_PC_fontsize_subtitle;
+                    &.router-link-active {
+                        pointer-events: none !important;
+                        .dt-login & .gnb__private__name {
+                            opacity: 0.4;
+                        }
+                    }
+
+                    @include phone {
+                        font-size: $SIZE_MO_fontsize_large;
+                    }
 
                     .gnb__nowbadge {
                         margin-right: 10px;
@@ -1141,12 +1321,6 @@ $navh : 68px;
                         @include hoverUnderlineRight;
                     }
 
-                    &.router-link-active {
-                        pointer-events: none !important;
-                        .dt-login & .gnb__private__name {
-                            opacity: 0.4;
-                        }
-                    }
 
                 }
 
@@ -1176,6 +1350,7 @@ $navh : 68px;
         .gnb__banner__link {
             width: 100%; height: 100%;
             padding: 26px 30px;
+            padding: 20px 16px;
             border-radius: 16px;
             position: relative;
             background-color: #F5FAFF;
@@ -1203,6 +1378,7 @@ $navh : 68px;
 
 
                 span {
+                    font-size: $SIZE_PC_fontsize_small;
                     padding: 3px 15px 5px;
                     border-radius: 9999px;
                     box-sizing: border-box;
@@ -1220,7 +1396,7 @@ $navh : 68px;
             }
             .gnb__banner__source {
                 position: absolute;
-                right: -23%; bottom: -7px;
+                right: -35%; bottom: -6%;
                 height: 100%;
                 z-index: 1;
                 .image-box {
@@ -1234,6 +1410,8 @@ $navh : 68px;
                 color: #000000;
                 width: 100%;
                 font-size: $SIZE_PC_fontsize_large;
+                font-size: $SIZE_PC_fontsize_strong;
+
                 font-weight: 700;
                 text-shadow: 0 3px 5px rgba(255,255,255,0.2);
                 strong   {
@@ -1260,6 +1438,8 @@ $navh : 68px;
         opacity: 0;
         transition: transform 800ms $EASE_outExpo 320ms, opacity 250ms ease 320ms;
 
+
+
         .st-open & {
             opacity: 1;
             transform : translate3d(0,0,0);
@@ -1267,6 +1447,9 @@ $navh : 68px;
 
         @include hardSelect {
             font-size: $SIZE_PC_fontsize_small;
+            @include phone {
+                font-size: $SIZE_MO_fontsize_small;
+            }
         }
 
         > * {
@@ -1292,6 +1475,9 @@ $navh : 68px;
                 text-decoration: underline;
                 font-family: 'Caveat', cursive;
                 font-size: $SIZE_PC_fontsize_subtitle;
+                @include phone {
+                    font-size: $SIZE_MO_fontsize_subtitle;
+                }
             }
         }
 
@@ -1310,6 +1496,9 @@ $navh : 68px;
                     display: inline-block;
                     i {
                         font-size: 28px;
+                        @include phone {
+                            font-size: 20px;
+                        }
                     }
                 }
             }
