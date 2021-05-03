@@ -22,6 +22,7 @@
 
         <Dialog />
 
+        <RoofAlert />
 
         <div    id="modal__dimmed"
                 :class="{'st-show' : $modal.is_dimmedActive}"
@@ -37,7 +38,8 @@
 import ModalAlert       , { modalAlertStore }       from './ModalAlert.vue';
 import ModalConfirm     , { modalConfirmStore }     from './ModalConfirm.vue';
 
-import Dialog , { dialogStore } from './Dialog.vue';
+import Dialog           , { dialogStore }           from './Dialog.vue';
+import RoofAlert        , { roofAlertStore }        from './RoofAlert.vue';
 
 export default {
     name : "PlateModal",
@@ -45,8 +47,8 @@ export default {
         ModalAlert,
         ModalConfirm,
 
-
         Dialog,
+        RoofAlert,
     },
     computed : {
         $modal() {
@@ -76,7 +78,9 @@ export const modalStore = {
     name : '$modal',
     modalAlertStore,
     modalConfirmStore,
+
     dialogStore,
+    roofAlertStore,
 
     state : {
 
@@ -167,6 +171,9 @@ export const modalStore = {
     display: inline-block;
     box-sizing: border-box;
     pointer-events: none;
+    > * {
+        // pointer-events: all;
+    }
 }
 
 #modal__dimmed {

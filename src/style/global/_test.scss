@@ -1,12 +1,12 @@
-.test_longtext{
-    color: #ccc;
-    font-size: 30px;
-    &::before {
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam luctus, lectus quis viverra cursus, ex lacus lobortis mi, non pulvinar tortor turpis eget quam. Pellentesque pellentesque felis sed pellentesque porta. Duis mollis nunc nec sapien lacinia maximus. Fusce dictum eleifend est, nec convallis sem pulvinar at. Proin laoreet sem quis fringilla porta. Vestibulum sit amet pretium justo. Praesent auctor bibendum porta. Vivamus dapibus rutrum lacus, tincidunt tristique felis efficitur consequat. Fusce at orci condimentum, semper mi nec, hendrerit quam. Integer sodales vestibulum libero vitae volutpat. In eget imperdiet libero. Sed imperdiet arcu purus, vitae cursus metus pretium vitae. Phasellus et vestibulum tortor, ultricies pretium est. Nullam tempor lorem sed nulla tempor, id iaculis tortor lacinia. Morbi id est sed sapien mattis molestie ut sed mauris. Aliquam id aliquam dolor. Quisque id rutrum lectus, non molestie mauris. Nam velit arcu, vestibulum tincidunt mi id, lobortis sollicitudin sem. Maecenas ut quam varius, condimentum erat quis, eleifend purus. Donec magna ex, dapibus et maximus et, tristique a sapien. Morbi ac enim at ligula posuere aliquet a sit amet risus. Donec egestas id ligula et feugiat. Sed aliquam mollis mauris. Cras sit amet sodales est. Aliquam sed dictum massa. Maecenas ac vehicula ligula, quis molestie tortor.';
+
+.pagemission {
+    border: 1px dashed #d3d;
+    h1 {
+        font-size: 50px;
+        font-weight: 700;
     }
-    &.nospace {
-        &::before {
-            content : 'aaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbccccaaaabbbbcccc'
-        }
+
+    p {
+        // font-size: 10px;
     }
 }

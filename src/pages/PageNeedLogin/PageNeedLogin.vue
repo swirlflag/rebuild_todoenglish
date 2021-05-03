@@ -9,7 +9,7 @@
                 <br>
                 <br>
                 <br>
-                <div class="layout__escape">
+                <div class="layout-escape">
                     로그인이 필요한 페이지 입니다.
                 </div>
 
@@ -45,6 +45,10 @@ export default {
 
 <style scoped lang="scss">
 #need-login {
-    border: 1px solid #d3d;
+    background: rgb(255, 170, 140);
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    box-sizing: border-box;
 }
 </style>

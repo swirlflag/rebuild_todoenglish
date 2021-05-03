@@ -1,79 +1,149 @@
 const routes =  [
-// 메인 (토도영어 소개)
+// 메인 (토도스쿨 소개)
     {
         path : '/',
         name : 'main',
         component : () => import('@/pages/PageMain/PageMain.vue'),
     },
 
-// 멤버십 후기
+// 토도영어
     {
-        path : '/review',
-        name : 'review',
-        component : () => import('@/pages/PageReview/PageReview.vue'),
+        path : '/english',
+        name : 'english',
+        component : () => import('@/pages/PageTodoEnglish/PageTodoEnglish.vue'),
     },
 
-// 제품 소개(멤버십 가입)
+// 토도한글
     {
-        path : '/product',
-        name : 'product',
-        component : () => import('@/pages/PageProduct/PageProduct.vue'),
+        path : '/hangul',
+        name : 'hangul',
+        component : () => import('@/pages/PageTodoHangul/PageTodoHangul.vue'),
     },
 
-// 커리큘럼
-    {
-        path : '/curriculum',
-        redirect : '/curriculum/map'
-    },
-    {
-        path : '/curriculum/map',
-        alias: [
-            '/curriculum',
-            '/curriculum/objectives'
-        ],
-        name : 'curriculum',
-        component : () => import('@/pages/PageCurriculum/PageCurriculum.vue'),
-    },
-
+// 고객 센터
     {
         path : '/help',
+        name : 'help',
         component : () => import('@/pages/PageHelp/PageHelp.vue'),
     },
 
-// 마이페이지
+// 구독하기
     {
-        path : '/mypage',
-        redirect : '/mypage/study'
-    },
-    {
-        path : '/mypage/study',
-        alias: [
-            '/mypage',
-            '/mypage/account'
-        ],
-        name : 'mypage',
-        needLogin : true,
-        component : () => import('@/pages/PageMypage/PageMypage.vue'),
+        path : '/subscribe',
+        name : 'subscribe',
+        component : () => import('@/pages/PageSubscribe/PageSubscribe.vue'),
     },
 
-// 컴포넌트 정리
+// 학습 정보
     {
-        path : '/components',
-        name : 'components',
-        component : () => import('@/pages/PageComponents/PageComponents.vue'),
+        path : '/studyinfo',
+        name : 'studyinfo',
+        component : () => import('@/pages/PageStudyinfo/PageStudyinfo.vue'),
     },
 
-// 404 not found
+// 계정 관리
     {
-        path : '/404',
-        // redirect : '/404',
-        alias : '/*',
+        path : '/account',
+        name : 'account',
+        component : () => import('@/pages/PageAccount/PageAccount.vue'),
+    },
+
+
+
+
+
+// 404
+
+// path /404로 변경
+    {
+        path : '*',
+        redirect : '/404',
+    },
+    {
+        path: '/404',
         name : '404',
         component : () => import('@/pages/Page404/Page404.vue'),
     },
-
-
+// path 미변경으로 화면만 출력
+    // {
+    //     path : '/404',
+    //     alias : '*',
+    //     name : '404',
+    //     component : () => import('@/pages/Page404/Page404.vue'),
+    // },
 ];
+
+
+
+
+// 컴포넌트 정리 페이지
+routes.push({
+    path : '/components',
+    name : 'components',
+    component : () => import('@/pages/PageComponents/PageComponents.vue'),
+})
+
+
+// 토도영어 구 버전 
+const oldVersion = () => {
+    const old = [
+        // 구 메인
+        {
+            path : '/old_main',
+            name : 'old_main',
+            component : () => import('@/pages/PageMain/PageMain_old.vue'),
+        },
+
+        // 제품 소개(멤버십 가입)
+        {
+            path : '/old_product',
+            name : 'old_product',
+            component : () => import('@/pages/PageProduct/PageProduct.vue'),
+        },
+
+        // 커리큘럼
+        {
+            path : '/old_curriculum',
+            redirect : '/old_curriculum/map'
+        },
+        {
+            path : '/old_curriculum/map',
+            alias: [
+                '/old_curriculum',
+                '/old_curriculum/objectives'
+            ],
+            name : 'old_curriculum',
+            component : () => import('@/pages/PageCurriculum/PageCurriculum.vue'),
+        },
+
+
+
+        // 마이페이지
+        {
+            path : '/old_mypage',
+            redirect : '/old_mypage/study'
+        },
+        {
+            path : '/old_mypage/study',
+            alias: [
+                '/old_mypage',
+                '/old_mypage/account'
+            ],
+            name : 'old_mypage',
+            needLogin : true,
+            component : () => import('@/pages/PageMypage/PageMypage.vue'),
+        },
+
+    ]
+
+    for(let i = 0; i < old.length; ++i){
+        routes.push(old[i]);
+    }
+};
+oldVersion();
+
+
+
 
 const routerInfo = {
     mode : 'history',

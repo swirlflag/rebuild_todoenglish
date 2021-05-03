@@ -1,7 +1,7 @@
 <!--
 RADIO
     <label class="radio-label">
-        <input type="radio" name="버튼/일반 링크/색테마" value="" v-model="controls.theme"><span>default or auto</span>
+        <input type="radio" name="버튼/Text Link/색테마" value="" v-model="controls.theme"><span>default or auto</span>
     </label>
 
 TEXT INPUT
@@ -14,7 +14,7 @@ CHECKBOX
     </label>
 -->
 <template>
-    <div>
+    <div  class="nav-correction">
         <div id="comp">
 
             <div id="mylog" v-if="0">
@@ -71,8 +71,8 @@ CHECKBOX
 
 
 
-                    <!-- 버튼/기본 -->
-                        <div v-if="renderId === '버튼/기본'" class="comp-component" >
+                    <!-- 버튼/Default -->
+                        <div v-if="renderId === '버튼/Default'" class="comp-component" >
                             <div class="comp-view">
                                 <ButtonDefault
                                     :theme="controls.theme"
@@ -87,21 +87,21 @@ CHECKBOX
                                 <div>
                                     버튼 색상 테마 :
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/기본/색테마" value="" v-model="controls.theme"><span>default</span>
+                                        <input type="radio" name="버튼/Default/색테마" value="" v-model="controls.theme"><span>default</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/기본/색테마" value="navy" v-model="controls.theme"><span>navy</span>
+                                        <input type="radio" name="버튼/Default/색테마" value="navy" v-model="controls.theme"><span>navy</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/기본/색테마" value="pink" v-model="controls.theme"><span>pink</span>
+                                        <input type="radio" name="버튼/Default/색테마" value="pink" v-model="controls.theme"><span>pink</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/기본/색테마" value="green" v-model="controls.theme"><span>green</span>
+                                        <input type="radio" name="버튼/Default/색테마" value="green" v-model="controls.theme"><span>green</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                    <!-- 버튼/기본 -->
+                    <!-- 버튼/Default -->
 
 
 
@@ -115,8 +115,8 @@ CHECKBOX
 
 
 
-                    <!-- 버튼/다운로드 -->
-                        <div v-if="renderId === '버튼/다운로드'" class="comp-component" >
+                    <!-- 버튼/Download -->
+                        <div v-if="renderId === '버튼/Download'" class="comp-component" >
                             <div class="comp-view">
                                 <ButtonDownload :type="controls.type" :theme="controls.theme"/>
                             </div>
@@ -124,27 +124,27 @@ CHECKBOX
                                 <div>
                                     다운로드 버튼 타입 :
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/타입" value="apple" v-model="controls.type"><span>apple</span>
+                                        <input type="radio" name="버튼/Download/타입" value="apple" v-model="controls.type"><span>apple</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/타입" value="google" v-model="controls.type"><span>google</span>
+                                        <input type="radio" name="버튼/Download/타입" value="google" v-model="controls.type"><span>google</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/타입" value="mobile" v-model="controls.type"><span>mobile</span>
+                                        <input type="radio" name="버튼/Download/타입" value="mobile" v-model="controls.type"><span>mobile</span>
                                     </label>
                                 </div>
                                 <div>
                                     버튼 색상 테마 :
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/색테마" value="" v-model="controls.theme"><span>default</span>
+                                        <input type="radio" name="버튼/Download/색테마" value="" v-model="controls.theme"><span>default</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/다운로드/색테마" value="navy" v-model="controls.theme"><span>navy</span>
+                                        <input type="radio" name="버튼/Download/색테마" value="navy" v-model="controls.theme"><span>navy</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                    <!-- 버튼/다운로드 -->
+                    <!-- 버튼/Download -->
 
 
 
@@ -154,8 +154,8 @@ CHECKBOX
 
 
 
-                    <!-- 버튼/일반 링크 -->
-                        <div v-if="renderId === '버튼/일반 링크'" class="comp-component" >
+                    <!-- 버튼/Text Link -->
+                        <div v-if="renderId === '버튼/Text Link'" class="comp-component" >
                             <div class="comp-view">
                                 <div>
                                     Lorem ipsum dolor sit amet,
@@ -177,16 +177,16 @@ CHECKBOX
                                 </div>
                                 <div>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/일반 링크/색테마" value="" v-model="controls.theme"><span>default or auto</span>
+                                        <input type="radio" name="버튼/Text Link/색테마" value="" v-model="controls.theme"><span>default or auto</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/일반 링크/색테마" value="navy" v-model="controls.theme"><span>navy</span>
+                                        <input type="radio" name="버튼/Text Link/색테마" value="navy" v-model="controls.theme"><span>navy</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/일반 링크/색테마" value="pink" v-model="controls.theme"><span>pink</span>
+                                        <input type="radio" name="버튼/Text Link/색테마" value="pink" v-model="controls.theme"><span>pink</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="버튼/일반 링크/색테마" value="mint" v-model="controls.theme"><span>mint</span>
+                                        <input type="radio" name="버튼/Text Link/색테마" value="mint" v-model="controls.theme"><span>mint</span>
                                     </label>
                                 </div>
                                 <div>
@@ -202,7 +202,7 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!-- 버튼/일반 링크 -->
+                    <!-- 버튼/Text Link -->
 
 
 
@@ -282,8 +282,8 @@ CHECKBOX
 
 
 
-                    <!-- 입력/선택 드롭다운 -->
-                        <div v-if="renderId === '입력/선택 드롭다운'">
+                    <!-- 입력/Dropdown -->
+                        <div v-if="renderId === '입력/Dropdown'">
                             <div class="comp-view row">
 
                                 <InputDropdown  placeholder="선택해주세요"
@@ -322,7 +322,7 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                <!-- //입력/선택 드롭다운 -->
+                <!-- //입력/Dropdown -->
 
 
 
@@ -333,8 +333,8 @@ CHECKBOX
 
 
 
-                <!-- 입력/토글 스위치 -->
-                    <div v-if="renderId === '입력/토글 스위치'">
+                <!-- 입력/Toggle Switch -->
+                    <div v-if="renderId === '입력/Toggle Switch'">
                         <div class="comp-view">
                             <InputToggleSwitch  v-model="controls.value"
                                                 @change="controls.onChange"
@@ -352,7 +352,7 @@ CHECKBOX
                             </div>
                         </div>
                     </div>
-                <!-- 입력/토글 스위치 -->
+                <!-- 입력/Toggle Switch -->
 
 
 
@@ -362,8 +362,8 @@ CHECKBOX
 
 
 
-                <!-- 입력/선택 라디오 -->
-                    <div v-if="renderId === '입력/선택 라디오'">
+                <!-- 입력/Radio Selector -->
+                    <div v-if="renderId === '입력/Radio Selector'">
 
                         <div class="comp-view row">
 
@@ -392,18 +392,18 @@ CHECKBOX
                             <div>
                                 연결 값 설정해보기 :
                                 <label class="radio-label">
-                                    <input type="radio" name="입력/선택 라디오/값" value="yes" v-model="controls.value" ><span>yes</span>
+                                    <input type="radio" name="입력/Radio Selector/값" value="yes" v-model="controls.value" ><span>yes</span>
                                 </label>
                                 <label class="radio-label">
-                                    <input type="radio" name="입력/선택 라디오/값" value="no" v-model="controls.value" ><span>no</span>
+                                    <input type="radio" name="입력/Radio Selector/값" value="no" v-model="controls.value" ><span>no</span>
                                 </label>
                                 <label class="radio-label">
-                                    <input type="radio" name="입력/선택 라디오/값" value="unmatch" v-model="controls.value" ><span>unmatch</span>
+                                    <input type="radio" name="입력/Radio Selector/값" value="unmatch" v-model="controls.value" ><span>unmatch</span>
                                 </label>
                             </div>
                         </div>
                     </div>
-                <!-- //입력/선택 라디오 -->
+                <!-- //입력/Radio Selector -->
 
 
 
@@ -414,8 +414,8 @@ CHECKBOX
 
 
 
-                    <!-- 입력/선택 라디오 컬렉션 -->
-                        <div v-if="renderId === '입력/선택 라디오 컬렉션'">
+                    <!-- 입력/Radio Selector Collection -->
+                        <div v-if="renderId === '입력/Radio Selector Collection'">
                             <div class="comp-view">
 
                                 <!-- <InputRadioCollection -->
@@ -445,7 +445,7 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!-- 입력/선택 라디오 컬렉션 -->
+                    <!-- 입력/Radio Selector Collection -->
 
 
 
@@ -455,8 +455,8 @@ CHECKBOX
 
 
 
-                    <!--  입력/선택 체크박스 -->
-                        <div v-if="renderId === '입력/선택 체크박스'">
+                    <!--  입력/Checkbox -->
+                        <div v-if="renderId === '입력/Checkbox'">
                             <div class="comp-view row">
                                 <InputCheckbox
                                     v-model="controls.checks[0]"
@@ -502,15 +502,15 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!--  입력/선택 체크박스 -->
+                    <!--  입력/Checkbox -->
 
 
 
 
 
 
-                    <!--  입력/선택 체크박스 컬렉션 -->
-                        <div v-if="renderId === '입력/선택 체크박스 컬렉션'">
+                    <!--  입력/Checkbox Collection -->
+                        <div v-if="renderId === '입력/Checkbox Collection'">
                             <div class="comp-view">
                                 <InputCheckboxCollection    v-model="controls.list"
                                                             @change="controls.onChange"
@@ -541,15 +541,15 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!--  입력/선택 체크박스 컬렉션 --> 
+                    <!--  입력/Checkbox Collection --> 
 
 
 
 
 
 
-                    <!--  입력/입력 텍스트 -->
-                        <div v-if="renderId === '입력/입력 텍스트'">
+                    <!--  입력/Input Text -->
+                        <div v-if="renderId === '입력/Input Text'">
                             <div class="comp-view">
                                 <InputText      style="max-width: 500px"
                                                 placeholder="텍스트 - v-model 방식"
@@ -592,7 +592,7 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!--  입력/입력 텍스트 -->
+                    <!--  입력/Input Text -->
 
 
 
@@ -600,8 +600,8 @@ CHECKBOX
 
 
 
-                    <!--  입력/입력 이메일 -->
-                        <div v-if="renderId === '입력/입력 이메일'">
+                    <!--  입력/Input Email -->
+                        <div v-if="renderId === '입력/Input Email'">
                             <div class="comp-view">
                                 <InputTextEmail style="max-width: 500px"
                                                 placeholder="이메일 - v-model 방식"
@@ -645,7 +645,7 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!--  입력/입력 이메일 -->
+                    <!--  입력/Input Email -->
 
 
 
@@ -653,8 +653,8 @@ CHECKBOX
 
 
 
-                    <!--  입력/입력 비밀번호 -->
-                        <div v-if="renderId === '입력/입력 비밀번호'">
+                    <!--  입력/Input Password -->
+                        <div v-if="renderId === '입력/Input Password'">
                             <div class="comp-view">
                                 <InputTextPassword  placeholder="비밀번호 - v-model 방식"
                                                     style="max-width:500px"
@@ -712,7 +712,7 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!--  입력/입력 비밀번호 -->
+                    <!--  입력/Input Password -->
 
 
 
@@ -762,8 +762,8 @@ CHECKBOX
 
 
 
-                    <!-- 디스플레이/마스크 텍스트 -->
-                        <div v-if="renderId === '디스플레이/마스크 텍스트'">
+                    <!-- 디스플레이/Mask Text -->
+                        <div v-if="renderId === '디스플레이/Mask Text'">
                             <div class="comp-view">
                                 <div style="font-size: 25px;font-weight:700;text-align : center">
                                     <TextChangeMask     :text="controls.text"
@@ -779,7 +779,7 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!-- 디스플레이/마스크 텍스트 -->
+                    <!-- 디스플레이/Mask Text -->
 
 
 
@@ -792,8 +792,8 @@ CHECKBOX
 
 
 
-                     <!-- 프레임/레이어 컨텐츠 -->
-                        <div v-if="renderId === '프레임/레이어 컨텐츠'">
+                     <!-- 프레임/Layer Content -->
+                        <div v-if="renderId === '프레임/Layer Content'">
                             <div class="comp-view">
 
                                 <div class="show-tempblue">
@@ -844,7 +844,7 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!-- 프레임/레이어 컨텐츠 -->
+                    <!-- 프레임/Layer Content -->
 
 
 
@@ -857,8 +857,8 @@ CHECKBOX
 
 
 
-                    <!-- 프레임/플로트 시트 -->
-                        <div v-if="renderId === '프레임/플로트 시트'">
+                    <!-- 프레임/Float Sheet -->
+                        <div v-if="renderId === '프레임/Float Sheet'">
                             <div class="comp-view">
                                 <template v-if="controls.showScroll">
                                     <div style="height:100vh"></div>
@@ -906,10 +906,10 @@ CHECKBOX
                                 <div>
                                     샘플 내부 레이아웃 :
                                     <label class="radio-label">
-                                        <input type="radio" name="프레임/플로트 시트/샘플타입" value="list" v-model="controls.sampleType"><span>list</span>
+                                        <input type="radio" name="프레임/Float Sheet/샘플타입" value="list" v-model="controls.sampleType"><span>list</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="프레임/플로트 시트/샘플타입" value="color" v-model="controls.sampleType"><span>color</span>
+                                        <input type="radio" name="프레임/Float Sheet/샘플타입" value="color" v-model="controls.sampleType"><span>color</span>
                                     </label>
                                 </div>
                                 <div>
@@ -927,7 +927,7 @@ CHECKBOX
 
                             </div>
                         </div>
-                    <!-- 프레임/플로트 시트 -->
+                    <!-- 프레임/Float Sheet -->
 
 
 
@@ -1005,8 +1005,8 @@ CHECKBOX
 
 
 
-                    <!-- 모달/다이얼로그 -->
-                        <div v-if="renderId === '모달/다이얼로그'">
+                    <!-- 모달/Dialog -->
+                        <div v-if="renderId === '모달/Dialog'">
                             <div class="comp-control">
                                 <div>
                                     <button class="default-button" @click="controls.call(controls.payload)">
@@ -1016,16 +1016,16 @@ CHECKBOX
                                 <div>
                                     타입 :
                                     <label class="radio-label">
-                                        <input type="radio" name="모달/다이얼로그/type" value="alert" v-model="controls.payload.type"><span>alert</span>
+                                        <input type="radio" name="모달/Dialog/type" value="alert" v-model="controls.payload.type"><span>alert</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="모달/다이얼로그/type" value="confirm" v-model="controls.payload.type"><span>confirm</span>
+                                        <input type="radio" name="모달/Dialog/type" value="confirm" v-model="controls.payload.type"><span>confirm</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="모달/다이얼로그/type" value="prompt" v-model="controls.payload.type"><span>prompt</span>
+                                        <input type="radio" name="모달/Dialog/type" value="prompt" v-model="controls.payload.type"><span>prompt</span>
                                     </label>
                                     <label class="radio-label">
-                                        <input type="radio" name="모달/다이얼로그/type" value="wait" v-model="controls.payload.type"><span>wait</span>
+                                        <input type="radio" name="모달/Dialog/type" value="wait" v-model="controls.payload.type"><span>wait</span>
                                     </label>
                                 </div>
                                 <div>
@@ -1048,7 +1048,7 @@ CHECKBOX
                                 </div>
                             </div>
                         </div>
-                    <!-- 모달/다이얼로그 -->
+                    <!-- 모달/Dialog -->
 
 
 
@@ -1064,8 +1064,8 @@ CHECKBOX
 
 
 
-                    <!-- 모달/인증 -->
-                         <div v-if="renderId === '모달/인증'">
+                    <!-- 모달/Auth -->
+                         <div v-if="renderId === '모달/Auth'">
 
                             <div class="comp-control">
                                 <div>
@@ -1076,7 +1076,50 @@ CHECKBOX
                                 <div></div>
                             </div>
                         </div>
-                    <!-- 모달/인증 -->
+                    <!-- 모달/Auth -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- 모달/Roof Alert -->
+                         <div v-if="renderId === '모달/Roof Alert'">
+                            <div class="comp-control">
+                                <div>
+                                    타입 :
+                                    <label class="radio-label">
+                                        <input type="radio" name="모달/RoofAlert/type" value="default" v-model="controls.payload.type"><span>default</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="모달/RoofAlert/type" value="success" v-model="controls.payload.type"><span>success</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="모달/RoofAlert/type" value="warning" v-model="controls.payload.type"><span>warning</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="모달/RoofAlert/type" value="error" v-model="controls.payload.type"><span>error</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="text" v-model="controls.payload.message">
+                                </div>
+                                <div>
+                                    <button class="default-button" @click="controls.call(controls.payload)">
+                                        open/close
+                                    </button>
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                    <!-- 모달/Roof Alert -->
 
 
 

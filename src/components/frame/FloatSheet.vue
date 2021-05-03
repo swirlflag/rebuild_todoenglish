@@ -224,9 +224,6 @@ export default {
         this.registPoint();
         this.beforeObserve = false;
 
-        
-
-
     },
 
     beforeDestroyed() {

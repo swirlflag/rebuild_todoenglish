@@ -1,6 +1,6 @@
 import store from '@/store/index.js';
 import Fragment from 'vue-fragment';
-import gsap from 'gsap';
+import gsap  from 'gsap';
 import axios from 'axios';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import 'swiper/swiper.scss';

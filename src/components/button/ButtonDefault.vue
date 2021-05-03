@@ -65,7 +65,6 @@
 
 <script>
 
-import { gsap , TimelineMax } from 'gsap';
 import { iterElement, randomOne , randomRange} from '@/utils';
 
 const randomNegative = (v) => v*randomOne(-1,1);
@@ -120,7 +119,7 @@ export default {
             const maxX  = rect.width/1.9;
             const maxY  = rect.height/1.9;
 
-            const tl = new TimelineMax();
+            const tl = new this.$gsap.timeline();
             tl.pause();
 
             const finishLength = this.ref_particles.length;
@@ -151,7 +150,7 @@ export default {
                     duration : 0.8,
                     onComplete : () => {
                         if(finishLength === ++particleCompleteCount){
-                            gsap.set(this.ref_particles ,{
+                            this.$gsap.set(this.ref_particles ,{
                                 css : {
                                     rotate : 0,
                                     x : 0,

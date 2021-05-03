@@ -28,8 +28,6 @@
         <div    id="modal-dialog"
                 v-if="isOpen"
                 :class="`type--${dialogData.type}`"
-
-
         >
             <div class="dialog__box" >
 
@@ -245,7 +243,20 @@ export const dialogStore = {
         MODAL_closeDialog(state) {
             state.$modal.is_openDialog = false;
         },
-        MODAL_recordDialogData(state,options) {
+        MODAL_recordDialogData(state,payload) {
+            state.$modal.dialogData = payload;
+        },
+        MODAL_resetActions(state) {
+            state.$modal.dialogData.actionResult = null;
+        },
+    },
+
+    actions : {
+         openDialog(context,options) {
+            if(context.state.$modal.is_openDialog){
+                return;
+            }
+
             let payload = {};
 
             if(typeof options === 'string'){
@@ -263,22 +274,8 @@ export const dialogStore = {
                 return null;
             }
 
-            state.$modal.dialogData = payload;
-        },
-        MODAL_resetActions(state) {
-            state.$modal.dialogData.actionResult = null;
-        },
-    },
-
-    actions : {
-         openDialog(context,options) {
-            if(context.state.$modal.is_openDialog){
-                return;
-            }
-
             context.dispatch('enableModal' , 'dialog');
-
-            context.commit('MODAL_recordDialogData', options);
+            context.commit('MODAL_recordDialogData', payload);
             context.commit('MODAL_openDialog');
         },
 
@@ -312,7 +309,6 @@ $tempPadding: 30px;
 $boxRadius : 16px;
 
 #modal-dialog {
-
     pointer-events: all;
     position: absolute;
     z-index: 1020;

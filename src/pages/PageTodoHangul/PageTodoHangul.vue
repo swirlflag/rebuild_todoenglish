@@ -1,11 +1,11 @@
 <template>
 
     <div class="pagemission page--main layout">
-        <h1>PAGE : 메인</h1>
+        <h1>PAGE : 토도한글</h1>
         <p>path : {{ $route.path }}</p>
-        <p>@/src/pages/PageMain/PageMain.vue</p>
+        <p>@/src/pages/PageTodoHangul/PageTodoHangul.vue</p>
         <br>
-        <p>토도스쿨에 대한 소개 혹은 토도스쿨에 포함된 서비스를 나열합니다.</p>
+        <p>토도한글 서비스에 대한 페이지를 작성합니다.</p>
     </div>
 
 </template>

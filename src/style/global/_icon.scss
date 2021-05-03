@@ -208,9 +208,23 @@ i.icon {
     &--cancel {
         width: 32px; height: 32px;
         background-image: url('~@/assets/icon/icon_cancel.svg');
-        .c-white {
+        &.c-white {
             background-image: url('~@/assets/icon/icon_cancel_white.svg');
         }
+    }
+
+
+    &--alert-info {
+        width: 22px; height: 22px;
+        background-image: url('~@/assets/icon/icon_alert_info.svg');
+    }
+    &--alert-checked {
+        width: 22px; height: 22px;
+        background-image: url('~@/assets/icon/icon_alert_check.svg');
+    }
+    &--alert-cancel {
+        width: 22px; height: 22px;
+        background-image: url('~@/assets/icon/icon_alert_cancel.svg');
     }
 
 

@@ -73,7 +73,7 @@ export default {
         coverd() {
             const curtain = this.$refs.ref_curtain;
 
-            const duration = 0.7;
+            const duration = 0.43;
 
             this.$gsap.fromTo(curtain , {
                 xPercent : 100,
@@ -81,10 +81,11 @@ export default {
             } , {
                 // opacity : 1,
                 xPercent : 0,
-                ease : 'power4.out',
+                ease : 'power2.out',
                 duration,
                 onComplete : () => {
                     this.$store.dispatch('uncoveredPage');
+                    console.log(1);
                 },
             });
 
@@ -92,7 +93,7 @@ export default {
                 width : 0,
             }, {
                 width: '100%',
-                ease: 'power4.out',
+                ease: 'power2.out',
                 duration,
             });
 
@@ -103,19 +104,19 @@ export default {
         uncovered() {
             {iterElement}
 
-            const duration = 0.7;
-            const delay = 0.1;
+            const duration = 0.62;
+            const delay = 0.22;
 
             this.$gsap.to(this.$refs.ref_cover , {
                 width: 0,
-                ease : 'power2.inOut',
+                ease : 'power3.inOut',
                 duration,
                 delay,
             });
 
             this.$gsap.to(this.$refs.ref_curtain ,  {
                 xPercent  : -100,
-                ease : 'power2.inOut',
+                ease : 'power3.inOut',
                 duration,
                 delay,
                 onComplete : () => {
@@ -211,7 +212,7 @@ export const transitionStore = {
         display: inline-block;
         box-sizing: border-box;
         z-index: 1000;
-        background-color: rgba(50,50,50,1);
+        background-color: rgba(100,100,100,1);
     }
 }
 

@@ -101,7 +101,7 @@ $lineThick : calc(1px + 0.047em);
     z-index: 1;
     align-items: center;
     line-height: inherit;
-    font-size: 16px;
+    // font-size: 16px;
     transition: color 150ms ease 150ms;
     will-change: color ;
     color: inherit;

@@ -7,6 +7,7 @@
 
         <router-view    v-else
                         id="page-router"
+                        class="page-contents"
                         @hook:mounted="mountedPage"
         >
 
@@ -53,15 +54,16 @@ export default {
 #page-router {
     height: 100%;
 }
+
 .page-contents {
 
-    margin-top: $SIZE_PC_gnbHeight !important;
+    padding-top: $SIZE_PC_gnbHeight !important;
     @include phone {
-        margin-top: $SIZE_MO_gnbHeight !important;
+        padding-top: $SIZE_MO_gnbHeight !important;
     }
 
     &.nav-correction {
-        margin-top: 0 !important;
+        padding-top: 0 !important;
     }
 
     &.use-bottom-margin {

@@ -278,6 +278,7 @@ button.default-button {
         transition: transform 400ms $EASE_outExpo;
         transform : translateX(-101%);
         background-color: tempblue_a(0.6);
+        max-width: 240px;
 
         .st-opentab & {
             transform : translateX(0);
@@ -426,7 +427,7 @@ $categorypadding : 10px;
     background-color : tempblue_a(0.05);
     background-size : 2%;
     @include phone {
-        padding: 10px;
+        padding: $SIZE_MO_innerPadding;
     }
 
     &.row  {
@@ -444,7 +445,7 @@ $categorypadding : 10px;
 
 .comp-control {
     width: 100%;
-    padding: 10px;
+    padding: $SIZE_MO_innerPadding;
     box-sizing: border-box;
     background-color: tempblue_a(0.2);
     position: relative;
@@ -491,12 +492,12 @@ $categorypadding : 10px;
     display: flex;
     flex-direction: column;
     height: auto;
-    padding: 20px;
+    padding: $SIZE_MO_innerPadding;
     line-height: $SIZE_lineheight_high2;
     // position: relative;
 
     @include phone {
-        padding: 8px;
+        padding: $SIZE_MO_innerPadding;
     }
 
     .comp-title {

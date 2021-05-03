@@ -251,7 +251,7 @@ export default {
                 private : [
                     {
                         name : '학습 정보',
-                        to : '/study'
+                        to : '/studyinfo'
                     },
                     {
                         name : '계정 관리',
@@ -341,7 +341,6 @@ export default {
 
         windowResize() {
             if(this.isOpen){
-                console.log(this.isOpen);
                 this.openMenuMotion();
             }
         },
@@ -399,10 +398,6 @@ export const gnbStoreTS = {
 $PC_navh : 60px;
 $MO_navh : 60px;
 
-@include phone {
-    $PC_navh : 40px;
-}
-
 
 @mixin backdropBlur() {
     backdrop-filter: blur(10px);
@@ -455,7 +450,6 @@ $MO_navh : 60px;
     &.st-open {
         height: 100%;
     }
-    
 }
 
 .gnb__dimmed {
@@ -947,7 +941,7 @@ $MO_navh : 60px;
     @include hideScrollbar ;
     overflow: scroll;
     max-height: 100%;
-    height: 0;
+    height: $PC_navh;
     width: 100%;
     will-change: height;
     z-index: 10;

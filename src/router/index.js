@@ -11,6 +11,10 @@ Vue.use(VueRouter);
 
 const needLoginPages = [
     'mypage',
+    'old_mypage',
+
+    // 'account',
+    // 'studyinfo',
 ];
 
 const router = new VueRouter(routerInfo);
@@ -54,7 +58,7 @@ router.beforeEach((to,from, next) => {
     }
 
     if(isPaging){
-        console.log('is paging so return');
+        console.dev('ERC_PT2 : 이미 페이지 전환중입니다.');
         return;
     }
 

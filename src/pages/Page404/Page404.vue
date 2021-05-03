@@ -1,8 +1,7 @@
 <template>
 
-    <div class="temp404">
-         
-        page404 화면 제작하기
+    <div class="temp404 layout">
+        MEMO : 잘못된 경로에 대한 화면 작성 404
     </div>
 
 </template>
@@ -19,6 +18,7 @@ export default {
     font-size: 20px;
     font-weight: 700;
     color: #fff;
+    color: dodgerblue;
     // background-color: dodgerblue;
     border: 3px solid dodgerblue;
     padding-top: 200px;

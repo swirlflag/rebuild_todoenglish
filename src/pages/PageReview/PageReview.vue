@@ -13,7 +13,7 @@
         <div id="temp">
 
             <div class="layout">
-                <h2 class="layout__escape">text 1</h2>
+                <h2 class="layout-escape">text 1</h2>
                 <h2>text 222</h2>
 
                 <ul class="list--dot">

@@ -47,32 +47,32 @@
             <button @click="TEST_switchAuth">
                 한방에 로그인/로그아웃
             </button>
+<br>
+            <button @click="$store.dispatch('openRoofAlert', {message: '안녕하세요? 안전한 로그인을 위해 비밀번호를 변경해주세요.' , type: 'error'})">
+                roof alert!
+            </button>
             <div>
                 로그인 유무 :
                 {{$store.state.$user.is_login}}
             </div>
             <br>
-            <router-link to="/reveiw">
-                (구) 멤버십 후기
+            <router-link to="/old_main">
+                (구) 토도영어 메인
             </router-link>
             <br>
-            <router-link to="/product">
+            <router-link to="/old_product">
                 (구) 이용하기
             </router-link>
             <br>
-            <router-link to="/curriculum">
+            <router-link to="/old_curriculum">
                 (구) 커리큘럼 안내
             </router-link>
             <br>
-             <router-link to="/help">
-                (구) 도움말
-            </router-link>
-            <br>
-            <router-link to="/mypage/account">
+            <router-link to="/old_mypage/account">
                 (구)계정 관리
             </router-link>
             <br>
-            <router-link to="/mypage/study">
+            <router-link to="/old_mypage/study">
                 (구)학습정보 열람
             </router-link>
 
