@@ -788,6 +788,112 @@ CHECKBOX
 
 
 
+                     <!-- 디스플레이/Popover -->
+                        <div v-if="renderId === '디스플레이/Popover'">
+                            <div class="comp-view">
+                                <div style="position: relative;width :300px;height: 300px;" class="show-tempblue">
+                                    <p>
+                                        target area.
+                                    </p>
+
+                                    {{controls.isShow}}
+
+                                    <Popover v-model="controls.isShow"
+                                            :position="controls.position"
+                                            :type="controls.type"
+                                            style="transition: all 500ms ease"
+
+                                    >
+                                        코어(core) 세션은 토도영어의 해당 학습 레벨에서
+                                        <br>다룬 내용을 전반적으로 연습해요.
+                                    </Popover>
+
+
+                                </div>
+                            </div>
+
+                            <div class="comp-control">
+                                <div>
+                                    <button class="default-button" @click="controls.isShow = !controls.isShow">
+                                        {{controls.isShow ?'닫기' : '호출하기'}}
+                                    </button>
+                                </div>
+                                <div>
+                                    position outer :
+                                    <label class="radio-label">
+                                        <input type="radio" name="디스플레이/Popover/outer" value="bottom" v-model="controls.position[0]">
+                                        <span>bottom</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="디스플레이/Popover/outer" value="top" v-model="controls.position[0]" >
+                                        <span>top</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="디스플레이/Popover/outer" value="left" v-model="controls.position[0]" >
+                                        <span>left</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="디스플레이/Popover/outer" value="right" v-model="controls.position[0]" >
+                                        <span>right</span>
+                                    </label>
+                                </div>
+
+                                <div>
+                                    posiiton catch :
+
+                                    <template v-if="controls.position[0] === 'right' || controls.position[0] === 'left'">
+                                        <label class="radio-label">
+                                            <input type="radio" name="디스플레이/Popover/catch" value="top" v-model="controls.position[1]">
+                                            <span>top</span>
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="디스플레이/Popover/catch" value="center" v-model="controls.position[1]">
+                                            <span>center</span>
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="디스플레이/Popover/catch" value="bottom" v-model="controls.position[1]">
+                                            <span>bottom</span>
+                                        </label>
+                                    </template>
+
+                                    <template v-else>
+                                        <label class="radio-label">
+                                            <input type="radio" name="디스플레이/Popover/catch" value="left" v-model="controls.position[1]">
+                                            <span>left</span>
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="디스플레이/Popover/catch" value="center" v-model="controls.position[1]">
+                                            <span>center</span>
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="디스플레이/Popover/catch" value="right" v-model="controls.position[1]">
+                                            <span>right</span>
+                                        </label>
+                                    </template>
+                                </div>
+                                <div>
+                                    type :
+                                    <label class="radio-label">
+                                        <input type="radio" name="디스플레이/Popover/type" value="default" v-model="controls.type">
+                                        <span>default</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="디스플레이/Popover/type" value="tooltip" v-model="controls.type">
+                                        <span>tooltip</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- 디스플레이/Popover -->
+
+
+
+
+
+
+
+
+
 
 
 
@@ -928,6 +1034,21 @@ CHECKBOX
                             </div>
                         </div>
                     <!-- 프레임/Float Sheet -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
 
 
 
@@ -1239,6 +1360,7 @@ import TESTListSelect from '@/components/testcomp/TESTListSelect.vue';
 import TESTColorSelect from '@/components/testcomp/TESTColorSelect.vue';
 
 import TextChangeMask from '@/components/display/TextChangeMask.vue';
+import Popover from '@/components/display/Popover.vue';
 
 
 export default {
@@ -1268,6 +1390,7 @@ export default {
         TESTColorSelect,
 
         TextChangeMask,
+        Popover,
 
     },
     data() {

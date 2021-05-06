@@ -31,9 +31,7 @@ export default {
     data() {
         return {
             tl : new this.$gsap.timeline(),
-
             isRender : false,
-
         }
     },
     computed : {
@@ -129,9 +127,7 @@ export default {
     beforeDestroy() {
 
     },
-}
-
-// type : default , success , warning, error,
+};
 
 export const roofAlertStore = {
     state : {
@@ -139,6 +135,7 @@ export const roofAlertStore = {
         roofAlertData : {
             type : 'default',
             message : '',
+            timeout : null,
         },
     },
     mutations : {
@@ -150,6 +147,12 @@ export const roofAlertStore = {
         },
         MODAL_recordRoofAlertData(state, payload) {
             state.$modal.roofAlertData = payload;
+        },
+        MODAL_timeoutRoofAlert(state) {
+            {state}
+            // state.$modal.roofAlertData.timeout = setTimeout(() => {
+            //     t
+            // },2000);
         },
 
     },
@@ -164,10 +167,10 @@ export const roofAlertStore = {
                 payload = {
                     type : 'default',
                     message : options,
-                }
+                };
             }else if(typeof options === 'object'){
                 const type = options.type || 'default';
-                payload = {type,...options}
+                payload = {type,...options};
             }else {
                 return;
             }
@@ -175,10 +178,17 @@ export const roofAlertStore = {
             context.commit('MODAL_recordRoofAlertData' ,payload);
             context.commit('MODAL_openRoofAlert');
 
+            if(options.time){
+                setTimeout(() => {
+                    context.dispatch('closeRoofAlert');
+                },options.time * 1000);
+            }
+
 
         },
         closeRoofAlert(context) {
             context.commit('MODAL_closeRoofAlert');
+            // 삭제
         },
     },
 };

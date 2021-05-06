@@ -297,8 +297,8 @@ const data = [
 
     {
         name : '디스플레이/sticky stack',
-        title : 'title ',
-        text : 'text ',
+        title : 'sticky stack title ',
+        text : 'sticky stack text ',
         control : {
 
         }
@@ -306,13 +306,25 @@ const data = [
 
     {
         name : '디스플레이/Mask Text',
-        title : 'title',
-        text : 'text ',
+        title : 'Mask Text title',
+        text : 'Mask Text text ',
         control : {
             text : 'default text',
             inputText : 'default text',
         }
     },
+
+    {
+        name : '디스플레이/Popover',
+        title : 'Popover title',
+        text : 'Popover text ',
+        control : {
+            isShow : false,
+            position : ['bottom' , 'left'],
+            type: 'default',
+        }
+    },
+
 
 
     {
@@ -445,6 +457,7 @@ const data = [
             payload : {
                 type : 'default',
                 message : 'hey',
+                time : 2,
             },
             call(payload) { {payload}
                 if(!VM.$store.state.$modal.is_openRoofAlert){

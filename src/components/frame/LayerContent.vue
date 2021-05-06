@@ -3,7 +3,7 @@
                     :duration="700"
     >
         <div    class="layer-content"
-                v-if="this.modelData.isShow"
+                v-if="modelData.isShow"
         >
             <div class="layer-content__dimmed" @click="close"></div>
 
@@ -37,17 +37,16 @@
 <script>
 export default {
     name : 'LayerContent',
-    model : {
-        prop : 'modelValue',
-        event : 'modelEvent',
-    },
-
     props: {
         modelValue : Boolean,
         isShow : Boolean,
 
         title : String,
         hash : String,
+    },
+    model : {
+        prop : 'modelValue',
+        event : 'modelEvent',
     },
     data() {
         return {
@@ -71,6 +70,12 @@ export default {
         },
     },
     methods : {
+        open(){
+            this.modelData.isShow = true;
+        },
+        close() {
+            this.modelData.isShow = false;
+        },
         watchHash() {
             if(this.$route.hash ===  `#${this.hash}` && !this.modelData.isShow){
                 this.open();
@@ -99,14 +104,6 @@ export default {
 
             this.$emit('modelEvent', this.modelData.isShow);
         },
-
-        open(){
-            this.modelData.isShow = true;
-        },
-        close() {
-            this.modelData.isShow = false;
-        }
-
     },
 
     mounted() {

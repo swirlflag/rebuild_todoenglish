@@ -48,7 +48,7 @@
                 한방에 로그인/로그아웃
             </button>
 <br>
-            <button @click="$store.dispatch('openRoofAlert', {message: '안녕하세요? 안전한 로그인을 위해 비밀번호를 변경해주세요.' , type: 'error'})">
+            <button @click="$store.dispatch('openRoofAlert', {message: '안녕하세요? 토도영어 150년치 쿠폰을 드립니다!' , type: 'warning' ,time : 5})">
                 roof alert!
             </button>
             <div>
