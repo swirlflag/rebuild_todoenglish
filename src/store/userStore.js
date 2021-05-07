@@ -1,8 +1,8 @@
-import { checkRegion } from '@/utils';
+import { checkDefaultRegion } from '@/utils';
 
 const TEMP_SESSIONID = "TEMP-SESSIONID";
 
-const region = checkRegion();
+const region = checkDefaultRegion();
 
 const userStore = {
     name : '$user',
@@ -19,48 +19,50 @@ const userStore = {
 
     },
     mutations : {
-        USER_LOGIN({$user}){
+        USER_login({$user}){
             $user.is_login = true;
         },
-        USER_LOGOUT({$user}){
+        USER_logout({$user}){
             $user.is_login = false;
         },
-        USER_SET_SESSIONID({$user} , sessionId) {
+        USER_setSessionId({$user} , sessionId) {
             $user.sessionId = sessionId;
         },
-        USER_REMOVE_SESSIONID({$user}) {
+        USER_removeSessionId({$user}) {
             $user.sessionId = null;
         },
-        USER_SET_EMAILID({$user}, emailId) {
+        USER_setEmailId({$user}, emailId) {
             $user.emailId = emailId;
         },
-        USER_REMOVE_EMAILID({$user}) {
+        USER_removeEmailId({$user}) {
             $user.emailId = null;
         },
-        USER_SET_ACCOUNTID({$user},accountId) {
+        USER_setAccountId({$user},accountId) {
             $user.accountId = accountId;
         },
-        USER_REMOVE_ACCOUNTID({$user}) {
+        USER_removeAccountId({$user}) {
             $user.accountId = null;
         },
-        USER_SET_USERNAME({$user},username) {
+        USER_setUsername({$user},username) {
             $user.username = username;
         },
-        USER_REMOVE_USERNAME({$user}){
+        USER_removeUsername({$user}){
             $user.username = null;
         },
-
+        USER_setRegion({$user}, region) {
+            $user.region = region;
+        },
     },
 
     actions : {
         signIn({commit},payload) {
             const { emailId , accountId, username } = payload;
 
-            commit('USER_LOGIN');
-            commit('USER_SET_EMAILID' , emailId);
-            commit('USER_SET_USERNAME' , username);
-            commit('USER_SET_ACCOUNTID' , accountId);
-            commit('USER_SET_SESSIONID' , TEMP_SESSIONID);
+            commit('USER_login');
+            commit('USER_setEmailId' , emailId);
+            commit('USER_setUsername' , username);
+            commit('USER_setAccountId' , accountId);
+            commit('USER_setSessionId' , TEMP_SESSIONID);
 
             const userData = {
                 accountId   : accountId,
@@ -76,14 +78,19 @@ const userStore = {
         },
 
         signOut({commit}) {
-            commit('USER_LOGOUT');
-            commit('USER_REMOVE_EMAILID');
-            commit('USER_REMOVE_USERNAME');
-            commit('USER_REMOVE_ACCOUNTID');
-            commit('USER_REMOVE_SESSIONID');
+            commit('USER_logout');
+            commit('USER_removeEmailId');
+            commit('USER_removeUsername');
+            commit('USER_removeAccountId');
+            commit('USER_removeSessionId');
 
             localStorage.removeItem('userData');
         },
+
+        changeRegion(context,region) {
+            context.commit('USER_setRegion',region);
+        },
+
     },
 
 };

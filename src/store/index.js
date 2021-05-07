@@ -10,7 +10,6 @@ import { transitionStore    } from '@/plates/PlateTransitionCover/PlateTransitio
 import { navStore           } from '@/plates/PlateNavigation/PlateNavigation.vue';
 import { modalStore         } from '@/plates/PlateModal/PlateModal.vue';
 import { authStore          } from '@/plates/PlateAuth/PlateAuth.vue';
-import { bannerStore        } from '@/plates/PlateBanner/PlateBanner.vue';
 import { stickyStackStore   } from '@/components/display/StickyStack.vue';
 
 Vue.use(Vuex);
@@ -24,7 +23,6 @@ const storeInfo = combineStore(
     modalStore,
     authStore,
     userStore,
-    bannerStore,
     stickyStackStore,
 );
 

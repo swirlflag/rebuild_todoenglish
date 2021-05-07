@@ -10,11 +10,8 @@ import {
     detectOS ,
     detectDevice ,
     detectTouchdevice ,
-    checkRegion ,
+    checkDefaultRegion ,
 } from '@/utils';
-
-
-checkRegion();
 
 // axios.defaults.baseURL = process.env.PROTOCOL + process.env.URLAPI;
 
@@ -37,17 +34,20 @@ const checkDetectData = (Vue) => {
         type_os         : detectOS(),
         type_device     : detectDevice(),
         is_touchDevice  : detectTouchdevice(),
+        region          : checkDefaultRegion(),
     });
 
 };
 
 const bindScreenData = (Vue) => {
 
+    const standardMobileSize = 768;
+
     const record = () => {
         Vue.prototype.$screen = Vue.observable({
             width: window.innerWidth,
             height: window.innerHeight,
-            isMobileSize : window.innerWidth <= store.state.standard_mobileSize,
+            isMobileSize : window.innerWidth <= standardMobileSize,
         });
     };
 

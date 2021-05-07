@@ -1,18 +1,11 @@
 const state = {
-    type_browser : '',
-    type_os : '',
-    type_device : '',
-    is_touchDevice : null,
-    is_dev : null,
-
     is_pageScrollLock : false,
     is_pageNeedLogin : false,
     is_appLoading : true,
 
     is_mountedPage : false,
 
-    standard_mobileSize : 768,
-
+    // region : 
 }
 
 const getters = {

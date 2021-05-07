@@ -319,6 +319,7 @@ const data = [
         title : 'Popover title',
         text : 'Popover text ',
         control : {
+            bigsize : false,
             isShow : false,
             position : ['bottom' , 'left'],
             type: 'default',

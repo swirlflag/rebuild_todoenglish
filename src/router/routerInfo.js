@@ -84,7 +84,15 @@ routes.push({
 })
 
 
-// 토도영어 구 버전 
+// 다국어 테스트 
+routes.push({
+    path : '/math',
+    name : 'math',
+    component : () => import('@/pages/PageTodoMath/PageTodoMath.vue'),
+})
+
+
+// 토도영어 구 버전
 const oldVersion = () => {
     const old = [
         // 구 메인

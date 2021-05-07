@@ -85,7 +85,6 @@ export default {
                 duration,
                 onComplete : () => {
                     this.$store.dispatch('uncoveredPage');
-                    console.log(1);
                 },
             });
 

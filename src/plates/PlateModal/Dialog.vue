@@ -230,11 +230,6 @@ export const dialogStore = {
         is_openDialog : false,
         dialogData : {...defaultDialogData.alert},
     },
-    getters : {
-        is_showDialog(state) {
-            return !!state.$modal.dialogList.length
-        }
-    },
     mutations : {
 
         MODAL_openDialog(state) {

@@ -243,18 +243,24 @@ export const validatePassword = (password) => {
 
 export const detectLastPath = (prefixPath) => VM.$route.path.split(prefixPath)[1] || null;
 
-
 export const deepCopy = (origin) => JSON.parse(JSON.stringify(origin));
 
+export const checkDefaultRegion = () => {
 
-
-export const checkRegion = () => {
-
+    // 지역값획득 : 계정설정 > 로컬스토리지 > 브라우저획득 로 계획
     // 한국어   ko
     // 영어     en
     // 일본어   ja
     // 중국어   zh
-    const lang = navigator.language || navigator.userLanguage;
-    return lang.split('-')[0];
+
+    const localRegion = localStorage.getItem('local-region');
+
+    if(localRegion){
+        return localRegion;
+    }
+
+    const navigatorRegion = navigator.language || navigator.userLanguage;
+
+    return navigatorRegion.split('-')[0];
 
 };

@@ -791,13 +791,13 @@ CHECKBOX
                      <!-- 디스플레이/Popover -->
                         <div v-if="renderId === '디스플레이/Popover'">
                             <div class="comp-view">
-                                <div style="position: relative;width :300px;height: 300px;" class="show-tempblue">
+                                <div    style="position: relative;"
+                                        :style="`${controls.bigsize ? 'width:300px; height: 300px': ''}`"
+                                        class="show-tempblue"
+                                >
                                     <p>
                                         target area.
                                     </p>
-
-                                    {{controls.isShow}}
-
                                     <Popover v-model="controls.isShow"
                                             :position="controls.position"
                                             :type="controls.type"
@@ -807,15 +807,17 @@ CHECKBOX
                                         코어(core) 세션은 토도영어의 해당 학습 레벨에서
                                         <br>다룬 내용을 전반적으로 연습해요.
                                     </Popover>
-
-
                                 </div>
                             </div>
 
                             <div class="comp-control">
                                 <div>
+                                    <button class="default-button" @click="controls.bigsize = !controls.bigsize">타겟 사이즈 전환</button>
+                                </div>
+                                <div>
+                                    호출 상태 : {{controls.isShow}}
                                     <button class="default-button" @click="controls.isShow = !controls.isShow">
-                                        {{controls.isShow ?'닫기' : '호출하기'}}
+                                        {{controls.isShow ?'닫기' : '호출'}}
                                     </button>
                                 </div>
                                 <div>

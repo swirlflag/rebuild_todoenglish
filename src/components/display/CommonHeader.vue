@@ -99,7 +99,7 @@ export default {
             }
         },
         calcHeight () {
-            if(!this.$refs.ref_links || window.innerWidth > this.$store.state.standard_mobileSize){
+            if(!this.$refs.ref_links || !this.$screen.isMobileSize ){
                 return
             }
 
@@ -126,7 +126,7 @@ export default {
 
     },
     mounted() {
-        if(window.innerWidth <= this.$store.state.standard_mobileSize){
+        if(this.$screen.isMobileSize){
             this.calcHeight();
         }else {
             window.addEventListener('resize' , this.calcHeight);

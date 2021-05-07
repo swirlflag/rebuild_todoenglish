@@ -4,7 +4,6 @@
             :class="`${appClassNamePage}${appClassNameBrowser}${appClassNameOS}${appClassNameDevice}${appClassNameTouchdevice}${appClassNameStateFreeze}`"
     >
 
-
         <PlateSetting/>
 
         <PlateTest
@@ -24,19 +23,11 @@
             v-if="1"
         />
 
-        <!-- <transition name="plate--auth">
-
-        </transition> -->
-
         <PlateAuth
             v-if="1"
         />
 
         <PlateNavigation
-            v-if="1"
-        />
-
-        <PlateBanner
             v-if="1"
         />
 
@@ -57,7 +48,6 @@ import PlateModal                   from '@/plates/PlateModal/PlateModal.vue';
 import PlateAuth                    from '@/plates/PlateAuth/PlateAuth.vue';
 import PlateTransitionCoverTS       from '@/plates/PlateTransitionCover/PlateTransitionCoverTS.vue';
 import PlateNavigation              from '@/plates/PlateNavigation/PlateNavigation.vue';
-import PlateBanner                  from '@/plates/PlateBanner/PlateBanner.vue';
 import PlatePage                    from '@/plates/PlatePage/PlatePage.vue';
 import PlateFooter                  from '@/plates/PlateFooter/PlateFooter.vue';
 
@@ -68,7 +58,15 @@ import PlateFooter                  from '@/plates/PlateFooter/PlateFooter.vue';
 export default {
     name: 'App',
     components: {
-        PlateSetting, PlateLoading, PlateTransitionCoverTS , PlateNavigation , PlatePage ,PlateTest , PlateFooter , PlateModal ,PlateAuth ,PlateBanner
+        PlateSetting,
+        PlateLoading,
+        PlateTransitionCoverTS ,
+        PlateNavigation ,
+        PlatePage ,
+        PlateTest ,
+        PlateFooter ,
+        PlateModal ,
+        PlateAuth
     },
     data() {
         return {
@@ -76,11 +74,13 @@ export default {
             // useAuthField : false,
 
             appLoadEnd : false,
-
             isFreeze : false,
         }
     },
     computed : {
+        appClassNames(){
+            return `${this.appClassNamePage}${this.appClassNameBrowser}${this.appClassNameOS}${this.appClassNameDevice}${this.appClassNameTouchdevice}${this.appClassNameStateFreeze}`
+        },
         appClassNamePage() {
             return ` page--${(this.$route.name || 'error').toLowerCase()}`;
         },
@@ -103,7 +103,8 @@ export default {
             return this.$store.state.$app.is_freeze ? ' st-freeze' : '';
         },
         appClassNameRegion() {
-            return 1    
+            return 1
+            // return this.$store.state.$app 
         },
 
     },
