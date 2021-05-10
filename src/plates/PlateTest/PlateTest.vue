@@ -94,6 +94,7 @@
 </template>
 
 <script>
+import { randomOne } from '@/utils';
 export default {
     data() {
         let useTest = false;
@@ -120,13 +121,16 @@ export default {
 
                 this.$store.dispatch('openDialog' , {
                     message : '확인을 누르면 로그아웃 합니다',
-                    actionTrue : () => {
-                        this.$store.dispatch('signOut');
+                    actionResult : (result) => {
+                        if(result){
+                            this.$store.dispatch('signOut');
+                        }
                     }
                 })
             }else {
 
                 const random = `test_random${Math.round(Math.random()* 100)}`;
+                const region = randomOne('ko' , 'en', 'jp' , 'zh');
                 this.$store.dispatch('openDialog' , {
                     type : 'confirm',
                     title : '한방에 로그인하기',
@@ -134,13 +138,17 @@ export default {
                         확인을 누르면 이렇게 로그인합니다.
                         <br> emailId : ${random}@gmail.com
                         <br> username : ${random}
+                        <br> region : ${region}
                     `,
-                    actionTrue : () => {
-                        this.$store.dispatch('signIn' , {
-                            emailId : `${random}@gmail.com`,
-                            username : `${random}`,
-                            accountId : "ACCOUNT_TEST",
-                        });
+                    actionResult : (result) => {
+                        if(result){
+                            this.$store.dispatch('signInSuccess' , {
+                                emailId : `${random}@gmail.com`,
+                                username : `${random}`,
+                                region : region,
+                                accountId : "ACCOUNT_TEST",
+                            });
+                        }
                     },
                 });
             }
@@ -161,7 +169,7 @@ export default {
                 title : 'CUSTOM TITLE',
                 message : 'MESSAGE',
                 buttonConfirmText : 'CUSTOM BUTTON',
-                actionClose : () => {
+                actionResult : () => {
                     console.log('test alert close');
                 }
             };

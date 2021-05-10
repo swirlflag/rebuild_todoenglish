@@ -98,6 +98,7 @@ const API_tryLogin = (signData = {emailId: '' , password : ''}) => {
         }
     })
 }
+{API_tryLogin}
 
 import { randomOne} from '@/utils';
 import InputText             from '@/components/input/InputText.vue';
@@ -217,19 +218,24 @@ export default {
         },
 
         async sendLogin() {
-            const { result , errorCode , data } = await API_tryLogin(this.value);
+            // const { result , errorCode , data } = await API_tryLogin(this.value);
+            const { result , errorCode , data } = await this.$store.dispatch('signInTry', this.value);
+
             if(this.isDestory){
                 return null;
             }
+
             if(result){
                 this.loginSuccess(data);
             }else {
                 this.loginFail(errorCode);
             }
+
         },
         loginSuccess(data) {
+            {data}
             this.$emit('change-phase' , 'signinSuccess');
-            this.$store.dispatch('signIn' , data);
+            // this.$store.dispatch('signInSuccess' , data);
         },
         loginFail(errorCode) {
             if(errorCode === "ID"){

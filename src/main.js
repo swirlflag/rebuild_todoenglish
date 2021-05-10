@@ -3,9 +3,7 @@ import router from './router';
 import store from './store';
 import App  from './App.vue';
 import PageNotSurpport from '@/pages/PageNotSurpport/PageNotSurpport.vue';
-
 import initLogic from '@/init/init.js';
-
 import '@/utils/expansion.js';
 
 Vue.use(initLogic);

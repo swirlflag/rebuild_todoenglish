@@ -25,6 +25,7 @@
 <script>
 import ButtonSignin from '@/components/button/ButtonSignin.vue';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
+import {randomOne} from '@/utils';
 
 export default {
     name : 'AuthSelection',
@@ -35,18 +36,21 @@ export default {
         TEST_onetouchLogin() {
             this.$store.dispatch('closeAuthPanel');
             const random = `random${Math.round(Math.random()* 100)}`;
-            this.$store.dispatch('openModalAlert' , {
+            const region = randomOne('ko','en','jp' , 'zh');
+            this.$store.dispatch('openDialog' , {
                 title : '',
                 message : `
                     이렇게 로그인합니다.
                     <br>
                     <br>emailId : ${random}@gmail.com
                     <br>username : ${random}
+                    <br>region : ${region}
                 `,
-                actionClose : () => {
-                    this.$store.dispatch('signIn' , {
+                actionResult : () => {
+                    this.$store.dispatch('signInSuccess' , {
                         emailId : `${random}@gmail.com`,
-                        username : `${random}`,
+                        username : random,
+                        region : region,
                         accountId : "ACCOUNT_ONETOUCH"
                     });
                 }

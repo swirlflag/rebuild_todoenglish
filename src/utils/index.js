@@ -245,22 +245,24 @@ export const detectLastPath = (prefixPath) => VM.$route.path.split(prefixPath)[1
 
 export const deepCopy = (origin) => JSON.parse(JSON.stringify(origin));
 
-export const checkDefaultRegion = () => {
+export const detectDefaultRegion = () => {
 
-    // 지역값획득 : 계정설정 > 로컬스토리지 > 브라우저획득 로 계획
+    // 지역값획득 : 실시간유저의선택 > 로컬스토리지값 >= 계정할당값 > 브라우저획득 로 계획중..
     // 한국어   ko
     // 영어     en
     // 일본어   ja
     // 중국어   zh
 
-    const localRegion = localStorage.getItem('local-region');
+    const storage   = localStorage.getItem('LOCAL_REGION');
+    const navigator = (window.navigator.language || window.navigator.userLanguage).split('-')[0];
 
-    if(localRegion){
-        return localRegion;
+    return {
+        storage ,
+        navigator,
     }
 
-    const navigatorRegion = navigator.language || navigator.userLanguage;
-
-    return navigatorRegion.split('-')[0];
-
 };
+
+// export const currentRegionData = (data) => {
+//     // const region = 
+// }

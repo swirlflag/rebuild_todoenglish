@@ -5,7 +5,7 @@ const state = {
 
     is_mountedPage : false,
 
-    // region : 
+    region : 'ko',
 }
 
 const getters = {
@@ -45,10 +45,16 @@ const mutations = {
     PAGE_unmounted() {
         state.is_mountedPage = false;
     },
+    REGION_change(state, region) {
+        window.localStorage.setItem('LOCAL_REGION' , region);
+        state.region = region;
+    },
 }
 
 const actions = {
-
+    changeRegion(context , region) {
+        context.commit('REGION_change' , region);
+    }
 }
 
 export default { state , getters, mutations, actions };

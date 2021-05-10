@@ -1,19 +1,18 @@
-import { checkDefaultRegion } from '@/utils';
+import { randomOne } from '@/utils';
 
 const TEMP_SESSIONID = "TEMP-SESSIONID";
-
-const region = checkDefaultRegion();
 
 const userStore = {
     name : '$user',
 
     state: {
         is_login    : false,
+        is_trylogin : false,
         emailId     : null,
         accountId   : null,
         username    : null,
         expireDay   : 7,
-        region      : region,
+        region      : null,
     },
     getters : {
 
@@ -52,43 +51,115 @@ const userStore = {
         USER_setRegion({$user}, region) {
             $user.region = region;
         },
+        USER_removeRegion({$user}) {
+            $user.region = null;
+        },
+        USER_saveLocalData({$user}) {
+            const flatData = JSON.stringify({
+                emailId : $user.emailId,
+                accountId : $user.accountId,
+                sessionId : $user.sessionId,
+                username : $user.username,
+                region : $user.region,
+            });
+
+            window.localStorage.setItem('userData', flatData);
+        },
+        USER_removeLocalData() {
+            window.localStorage.removeItem('userData');
+        }
     },
 
     actions : {
-        signIn({commit},payload) {
-            const { emailId , accountId, username } = payload;
 
-            commit('USER_login');
-            commit('USER_setEmailId' , emailId);
-            commit('USER_setUsername' , username);
-            commit('USER_setAccountId' , accountId);
-            commit('USER_setSessionId' , TEMP_SESSIONID);
+        async signInTry(context, signData) {
 
-            const userData = {
-                accountId   : accountId,
-                sessionId   : TEMP_SESSIONID,
-                emailId     : emailId,
-                username    : username,
-            };
+            const { emailId, password , TEST_random } = signData;
 
-            const flatUserData = JSON.stringify(userData);
+            if(!emailId || !password){
+                return;
+            }
 
-            localStorage.setItem('userData', flatUserData);
+            const username = emailId.split('@')[0];
+
+            const tempAccountId = `TEMP-AUTHACCOUNT-${username.toUpperCase()}`;
+
+        // do: 서버와 통신하는 코드
+
+            let response = {
+                result : true ,
+                data : {
+                    emailId ,
+                    accountId : tempAccountId,
+                    username ,
+                    region : randomOne('ko','en','jp','zh'),
+                }
+            }
+
+            if(TEST_random){
+                response = randomOne(
+                    response ,
+                    {result: false, errorCode : 'ID' },
+                    {result: false, errorCode : 'PW' },
+                )
+            }
+
+            return new Promise((resolve, reject) => {
+                try {
+                    setTimeout(() => {
+                        context.dispatch('signInSuccess', response.data);
+                        resolve(response);
+                    },1000)
+                }catch(error) {
+                    context.dispatch('signInFail');
+                    reject(error);
+                }
+            })
+        },
+
+        signInSuccess(context,response) {
+
+            const { emailId , accountId, username , region , clientSignin } = response;
+
+            context.commit('USER_login');
+            context.commit('USER_setEmailId' , emailId);
+            context.commit('USER_setUsername' , username);
+            context.commit('USER_setAccountId' , accountId);
+            context.commit('USER_setSessionId' , TEMP_SESSIONID);
+            context.commit('USER_setRegion' , region);
+
+            context.commit('USER_saveLocalData');
+
+            if(!clientSignin){
+                context.dispatch('changeRegion' , region);
+            }
+        },
+
+        signInFail() {
 
         },
 
-        signOut({commit}) {
-            commit('USER_logout');
-            commit('USER_removeEmailId');
-            commit('USER_removeUsername');
-            commit('USER_removeAccountId');
-            commit('USER_removeSessionId');
+        signOut(context) {
+            context.commit('USER_logout');
+            context.commit('USER_removeEmailId');
+            context.commit('USER_removeUsername');
+            context.commit('USER_removeAccountId');
+            context.commit('USER_removeSessionId');
+            context.commit('USER_removeRegion');
 
-            localStorage.removeItem('userData');
+            context.commit('USER_removeLocalData');
+
         },
 
-        changeRegion(context,region) {
-            context.commit('USER_setRegion',region);
+        saveAccountRegion(context,region) {
+        // do :서버에 계정 정보를 저장함....
+            // logic..
+        // then
+            context.commit('USER_setRegion' , region);
+            context.commit('USER_saveLocalData');
+
+            context.dispatch('changeRegion', region);
+
         },
 
     },

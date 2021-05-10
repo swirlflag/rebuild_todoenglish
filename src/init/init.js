@@ -10,21 +10,35 @@ import {
     detectOS ,
     detectDevice ,
     detectTouchdevice ,
-    checkDefaultRegion ,
+    detectDefaultRegion ,
 } from '@/utils';
 
 // axios.defaults.baseURL = process.env.PROTOCOL + process.env.URLAPI;
 
-if(localStorage.userData){
-    const userData = JSON.parse(localStorage.userData);
-    store.dispatch('signIn' , userData);
-}
-
-// store.state.$user.is_login = true;
-
 // $state.use_coverdPlate = $state.type_browser === 'ie' ;
 
 // console.log(process.env.NODE_ENV === 'development');
+
+const checkClientSignin = () => {
+    const userData = window.localStorage.getItem('userData');
+
+    if(userData){
+        const parseUserData = JSON.parse(userData);
+        store.dispatch('signInSuccess' , {...parseUserData , clientSignin : true });
+    }
+
+}
+
+const checkRegion = () => {
+    const user = store.state.$user.region;
+    const { storage , navigator } = detectDefaultRegion();
+
+    const finalRegion = storage || user || navigator;
+
+    store.dispatch('changeRegion' , finalRegion);
+}
+
+
 
 const checkDetectData = (Vue) => {
 
@@ -34,10 +48,14 @@ const checkDetectData = (Vue) => {
         type_os         : detectOS(),
         type_device     : detectDevice(),
         is_touchDevice  : detectTouchdevice(),
-        region          : checkDefaultRegion(),
+        region          : detectDefaultRegion(),
     });
 
+    // store.commit('REGION_change' , dete);
+
 };
+
+
 
 const bindScreenData = (Vue) => {
 
@@ -75,6 +93,10 @@ const setGlobalConfig = (Vue) => {
 
 export default {
     install(Vue) {
+
+        checkClientSignin();
+
+        checkRegion();
 
         setGlobalConfig(Vue);
 

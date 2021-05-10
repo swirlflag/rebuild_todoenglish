@@ -417,8 +417,6 @@ CHECKBOX
                     <!-- 입력/Radio Selector Collection -->
                         <div v-if="renderId === '입력/Radio Selector Collection'">
                             <div class="comp-view">
-
-                                <!-- <InputRadioCollection -->
                                 <InputRadioCollection   v-model="VMODEL_SELECTVALUE"
                                                         name="input-radio-collection"
                                                         @change="controls.onChange"
@@ -993,7 +991,7 @@ CHECKBOX
                                                 :title="controls.sampleType === 'list' ? '타이틀을 선택해 주세요' : controls.sampleType === 'color' ? '원하는 색을 골라주세요' : null"
                                 >
                                     <TESTListSelect     v-if="controls.sampleType === 'list'"
-                                                        :index="controls.selectIndex"
+                                                        :index="controls.Index"
                                                         @select="(data) => {controls.selectItem = data.value; controls.selectIndex= data.index;controls.isShow = false}"
                                     />
 
