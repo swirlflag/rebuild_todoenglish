@@ -92,7 +92,7 @@ export default {
     }
 
     @include phone {
-        overflow: hidden;
+        // overflow: hidden;
         line-height: $SIZE_lineheight_high2;
     }
 

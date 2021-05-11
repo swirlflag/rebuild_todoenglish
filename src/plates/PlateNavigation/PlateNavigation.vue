@@ -41,11 +41,12 @@ export const navStore = {
 #plate--navigation{
     position: fixed;
     z-index: 1000;
-    width: 100vw; height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     pointer-events: none;
     background-color: transparent;
     pointer-events: none;
-    box-sizing: border-box;
+    // box-sizing: border-box;
     > * {
         pointer-events: auto;
     }

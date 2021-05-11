@@ -31,9 +31,11 @@ export default {
             grabStartRatio : 0,
 
             scrollElement : document.scrollingElement,
+            // scrollElement : document.body,
+
             isScrollBindFinish : false,
 
-            SY : 0,
+            ST : 0,
             WH : 0,
             FH : 0,
         }
@@ -54,7 +56,8 @@ export default {
         calcSizing() {
             this.WH = window.innerHeight;
             this.FH = this.scrollElement.scrollHeight;
-            this.SY = window.scrollY;
+            // this.ST = window.scrollY;
+            this.ST = this.scrollElement.scrollTop;
         },
 
         onMouseenterRoot() {
@@ -73,9 +76,9 @@ export default {
         calcScrollState() {
             this.calcSizing();
 
-            const scrollBarHeight = this.$refs.ref_root.offsetHeight;
+            const scrollBarHeight   = this.$refs.ref_root.offsetHeight;
 
-            const thumbY            = scrollBarHeight * ((1/this.FH) * this.SY);
+            const thumbY            = scrollBarHeight * ((1/this.FH) * this.ST);
             const thumbHeight       = this.WH * (this.WH/this.FH) ;
 
             this.isNoneScroll       = thumbHeight >= this.WH;
@@ -102,7 +105,7 @@ export default {
             const nowRatio = 1/this.WH * CY;
             const targetY = this.FH * nowRatio - (this.WH*this.grabStartRatio);
 
-            window.scrollTo(0,targetY);
+            this.scrollElement.scrollTo(0,targetY);
         },
 
         bindScrollBarEvent() {
@@ -112,11 +115,14 @@ export default {
             this.isScrollBindFinish = true;
             this.scrollingElement   = document.scrollingElement;
 
+            // document.body.addEventListener('scroll' , this.calcScrollState);
+
             window.addEventListener('scroll' , this.calcScrollState);
             window.addEventListener('mousemove' , this.onMouseMoveWindow);
             window.addEventListener('mouseup' , this.onMouseUpWindow);
         },
         unbindScrollBarEvnet() {
+            // document.body.removeEventListener('scroll' , this.calcScrollState);
             window.removeEventListener('scroll' , this.calcScrollState);
             window.removeEventListener('mousemove' , this.onMouseMoveWindow);
             window.removeEventListener('mouseup' , this.onMouseUpWindow);

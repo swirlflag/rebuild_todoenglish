@@ -34,10 +34,6 @@
                 open confirm
             </button>
 
-            <button @click="TEST_addBanner">
-                add banner
-            </button>
-
             <br>
 
             <button @click="TEST_toggleAuthPlate">
@@ -186,9 +182,6 @@ export default {
                 },
             };
             this.$store.dispatch('openDialog' ,payload);
-        },
-        TEST_addBanner() {
-            this.$store.dispatch('addBannerAlert' , 'hello' + Math.floor(Math.random() * 1000));
         },
         TEST_toggleAuthPlate() {
             if(this.$store.state.$auth.is_open){

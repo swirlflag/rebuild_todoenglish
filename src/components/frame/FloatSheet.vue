@@ -207,12 +207,14 @@ export default {
 
         bindPcEvents() {
             setTimeout(() => {
+                // document.body.addEventListener('scroll' , this.calcPosition)
                 window.addEventListener('scroll' , this.calcPosition);
                 window.addEventListener('resize' , this.close);
                 window.addEventListener('mousedown' , this.detectPath);
             },0)
         },
         unbindPcEvents() {
+            // document.body.removeEventListener('scroll' , this.calcPosition)
             window.removeEventListener('scroll' , this.calcPosition);
             window.removeEventListener('resize' , this.close);
             window.removeEventListener('mousedown' , this.detectPath)

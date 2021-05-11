@@ -146,8 +146,6 @@ export default {
             this.closeMenu();
             this.$store.dispatch('openAuthPanel')
         },
-
-
         onScrollWindow() {
             const Y = window.scrollY;
             this.isHide = this.beforeScrollY < Y ;

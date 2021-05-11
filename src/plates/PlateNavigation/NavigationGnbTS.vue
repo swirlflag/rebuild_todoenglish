@@ -50,7 +50,7 @@
 
             </div>
 
-            <div class="gnb__panel" ref="ref_panel">
+            <div class="gnb__panel" ref="ref_panel" @scroll="onScrollPanel">
 
                 <div class="gnb__panel__wrap" ref="ref_panelwrap">
 
@@ -288,21 +288,27 @@ export default {
     },
     methods : {
         openMenuMotion() {
+
+            this.$store.commit('SCROLL_lock');
+            // this.navTl.pause();
             this.navTL.clear();
             const panelWrap    = this.$refs.ref_panelwrap;
-            let openHeight = panelWrap.offsetHeight > window.innerHeight ? window.innerHeight : panelWrap.offsetHeight;
-            if(this.$screen.isMobileSize){
-                openHeight = this.$screen.height;
-            }
+
+            let openHeight  = (panelWrap.offsetHeight > this.$screen.height) || this.$screen.isMobileSize
+                            ? this.$screen.height
+                            : panelWrap.offsetHeight
+            ;
 
             this.navTL.to(this.$refs.ref_panel, {
                 height: openHeight,
                 ease: 'power3.out',
                 duration: 0.7,
             });
+            // this.navTl.play(0);
         },
 
         closeMenuMotion() {
+            this.$store.commit('SCROLL_unlock');
             this.navTL.clear();
             this.navTL.to(this.$refs.ref_panel, {
                 height: this.$refs.ref_concise.offsetHeight,
@@ -350,6 +356,18 @@ export default {
         },
         unbindWindowResize() {
             window.removeEventListener('resize' , this.windowResize);
+        },
+        onScrollPanel() {
+            const panel = this.$refs.ref_panel;
+            const ST = panel.scrollTop;
+
+            if(ST === 0){
+                console.log(1);
+                panel.scrollTo(0,1);
+            }else if(ST + panel.offsetHeight === panel.scrollHeight){
+                panel.scrollTo(0,panel.scrollHeight - panel.offsetHeight - 0.1)
+            }
+
         },
     },
 
@@ -448,7 +466,7 @@ $MO_navh : 60px;
     height: auto;
     box-sizing: border-box;
     &.st-open {
-        height: 100%;
+        // height: 100%;
     }
 }
 
@@ -785,6 +803,10 @@ $MO_navh : 60px;
         .gnb__user {
             display : flex;
             align-items: center;
+
+            @include phone {
+                display: none;
+            }
 
             .gnb__user__dot {
                 display: inline-block;

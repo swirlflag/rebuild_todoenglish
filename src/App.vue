@@ -130,13 +130,11 @@ export default {
             //   const appStoreUrl = browserName == 'Chrome' ? process.env.APPSTORE_URL_CHROME_PC : process.env.APPSTORE_URL_PC
         // console.log(process.env);
 
-        window.addEventListener('scroll' , this.detectScrollDirectionNav)
     },
     mounted() {
         // console.log(this.$store.state.is_dev);
     },
     destroyed() {
-        window.removeEventListener('scroll' , this.detectScrollDirectionNav)
     }
 }
 
@@ -171,8 +169,10 @@ export const appStore = {
 
 <style scoped lang="scss" >
 #app {
-    min-height: 100vh;
+    min-height: 100%;
     height: 100%;
+    // overflow-y: scroll;
+    // overflow-x : hidden;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

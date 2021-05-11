@@ -109,6 +109,13 @@ const oldVersion = () => {
             component : () => import('@/pages/PageProduct/PageProduct.vue'),
         },
 
+        // 리뷰
+        {
+            path : '/old_review',
+            name : 'old_review',
+            component : () => import('@/pages/PageReview/PageReview.vue'),
+        },
+
         // 커리큘럼
         {
             path : '/old_curriculum',

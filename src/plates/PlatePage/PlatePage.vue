@@ -50,9 +50,15 @@ export default {
 #plate--page {
     box-sizing: border-box;
     height: 100%;
+    height: auto;
+
+    @include phone {
+
+    }
 }
 #page-router {
     height: 100%;
+    box-sizing: border-box;
 }
 
 .page-contents {

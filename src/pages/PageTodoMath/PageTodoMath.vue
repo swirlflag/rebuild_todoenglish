@@ -87,9 +87,34 @@
                 {{ $l.sayhello }}
             </h1>
             <h2>
-                <!-- {{ $l.eventtitle }} -->
+                {{ $l.eventtitle }}
             </h2>
+            <br>
+            <p>br</p><br>
+            <p>br</p><br>
+            <p>br</p><br>
+            <p>br</p><br>
+            <p>br</p><br>
+            <p>br</p><br>
+            <p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br>
+            fin
+
         </div>
+
+        <div id="sticky">
+            test : css sticky
+        </div>
+
+        <div id="scrolltt"></div>
+        <div id="scrollt">
+            <template v-for="item in 122">
+                <div :key="item">
+                </div>
+            </template>
+
+        </div>
+
+        <p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br><p>br</p><br>
 
     </div>
 
@@ -134,6 +159,24 @@ export default {
             // console.log(this.radioUserRegion , '계정 지역 변경/저장');
             this.$store.dispatch('saveAccountRegion' , this.radioUserRegion);
         }
+    },
+    mounted() {
+        const target = document.querySelectorAll('#scrollt > div');
+
+        [...target].forEach((child) => {
+            this.$gsap.to(child , {
+                x : window.innerWidth - child.offsetWidth,
+                y : -20,
+                scrollTrigger : {
+                    trigger : child,
+                    // scrub : true,
+                    scrub : 0.5,
+                    to : window.innerHeight,
+                    ease : 'power4.inOut'
+                }
+            })
+        });
+
     }
 }
 </script>
@@ -141,6 +184,35 @@ export default {
 
 
 <style lang="scss" scoped>
+#scrollt {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    overflow: hidden;
+}
+#scrollt div {
+    margin-right: auto;
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    margin-top: 1px;
+    height: 5px;
+    color: #fff;
+    font-weight: bold;
+    background-color: red;
+}
+#sticky {
+    position: sticky;
+    // top: 0; left: 0;
+    display: inline-block;
+    background: rgb(245, 85, 138);
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 20px;
+    width: calc(100% - 40px);
+    bottom: 20px;
+    color: #fff;
+}
 .temp-notice {
     background: dodgerblue;
     // font-weight: 700;
@@ -156,7 +228,7 @@ export default {
     padding: 5px;
 }
 .page--todomath {
-    border: 1px solid #d3d;
+    // border: 1px solid #d3d;
 }
 .temp-display{
     @include hardSelect {
