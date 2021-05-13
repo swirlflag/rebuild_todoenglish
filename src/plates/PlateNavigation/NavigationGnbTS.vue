@@ -1,6 +1,6 @@
 <template>
     <div    ref="ref_root"
-            class="nav-gnb"
+            id="nav-gnb"
             :class="{'st-open' : isOpen , 'dt-login' : isLogin}"
     >
 
@@ -121,7 +121,8 @@
                     </div>
 
                     <div class="gnb__panel__block">
-                        <div    class="gnb__private">
+
+                        <div class="gnb__private">
 
                             <div    class="gnb__panel__title"
                             >
@@ -153,6 +154,13 @@
                                     </button>
                                 </li>
                             </ul>
+                        </div>
+
+                        <div class="gnb__region">
+                            <button class="gnb__region__button">
+                                <i class="icon--globe"></i>
+                                <span>Language • 언어변경</span>
+                            </button>
                         </div>
 
                         <!-- <div class="gnb__banner">
@@ -205,7 +213,6 @@
                 </div>
             </div>
         </div>
-
 
     </div>
 </template>
@@ -345,11 +352,24 @@ export default {
             this.privateList   = this.$refs.ref_private.querySelectorAll('li');
         },
 
+        onScrollPanel() {
+            const panel = this.$refs.ref_panel;
+            const ST = panel.scrollTop;
+
+            if(ST === 0){
+                panel.scrollTo(0,1);
+            }else if(ST + panel.offsetHeight === panel.scrollHeight){
+                panel.scrollTo(0,panel.scrollHeight - panel.offsetHeight - 0.1)
+            }
+
+        },
+
         windowResize() {
             if(this.isOpen){
                 this.openMenuMotion();
             }
         },
+
 
         bindWindowResize() {
             window.addEventListener('resize' , this.windowResize);
@@ -357,18 +377,7 @@ export default {
         unbindWindowResize() {
             window.removeEventListener('resize' , this.windowResize);
         },
-        onScrollPanel() {
-            const panel = this.$refs.ref_panel;
-            const ST = panel.scrollTop;
 
-            if(ST === 0){
-                console.log(1);
-                panel.scrollTo(0,1);
-            }else if(ST + panel.offsetHeight === panel.scrollHeight){
-                panel.scrollTo(0,panel.scrollHeight - panel.offsetHeight - 0.1)
-            }
-
-        },
     },
 
     mounted(){
@@ -461,7 +470,7 @@ $MO_navh : 60px;
 }
 
 
-.nav-gnb{
+#nav-gnb{
     width: 100%;
     height: auto;
     box-sizing: border-box;
@@ -517,6 +526,7 @@ $MO_navh : 60px;
 
     // @include backdropBlur;
 }
+
 
 .gnb__concise {
     display: block;
@@ -922,14 +932,6 @@ $MO_navh : 60px;
         }
     }
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -1357,6 +1359,25 @@ $MO_navh : 60px;
                 }
             }
         }
+    }
+
+    .gnb__region {
+        // border: 1px solid #d3d;
+        margin-top: 50px;
+        display: flex;
+        justify-content: flex-end;
+
+        .gnb__region__button {
+            // border: 1px solid #3d3;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 700;
+
+            .icon--globe {
+                margin-right: 10px;
+            }
+        }
+
     }
 
     .gnb__banner {

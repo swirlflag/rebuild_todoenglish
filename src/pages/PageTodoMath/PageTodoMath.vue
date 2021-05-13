@@ -1,7 +1,11 @@
 <template>
 
     <div class="pagemission page--todomath layout">
+
         <div class="temp-notice">
+            <br>
+            토도수학은 토도스쿨 오픈시 포함되지 않을 예정이며 페이지 테스트용 공간으로 사용중입니다
+            <br><br>
             다국어 시스템 테스트중..
             <br>(지역,언어 값 이하 <strong>"지역"</strong> 으로 표기)
             <br>
@@ -81,14 +85,16 @@
 
 
         <div class="temp-display">
+
             <p>~ 이하 표시 테스트 ~</p>
             <br>
             <h1>
-                {{ $l.sayhello }}
+                {{ $l.MAIN_HEADER_TITLE }}
             </h1>
             <h2>
-                {{ $l.eventtitle }}
+                {{ $l.MAIN_HEADER_TEXT }}
             </h2>
+
             <br>
             <p>br</p><br>
             <p>br</p><br>
@@ -184,6 +190,7 @@ export default {
 
 
 <style lang="scss" scoped>
+
 #scrollt {
     display: flex;
     flex-direction: column;

@@ -1,7 +1,7 @@
 <template>
     <div    id="app"
             ref="ref_root"
-            :class="`${appClassNamePage}${appClassNameBrowser}${appClassNameOS}${appClassNameDevice}${appClassNameTouchdevice}${appClassNameStateFreeze}`"
+            :class="`${appClassNamePage}${appClassNameBrowser}${appClassNameOS}${appClassNameDevice}${appClassNameTouchdevice}${appClassNameStateFreeze}${appClassNameRegion}`"
     >
 
         <PlateSetting/>
@@ -103,8 +103,7 @@ export default {
             return this.$store.state.$app.is_freeze ? ' st-freeze' : '';
         },
         appClassNameRegion() {
-            return 1
-            // return this.$store.state.$app 
+            return  ` region--${this.$store.state.region}`;
         },
 
     },

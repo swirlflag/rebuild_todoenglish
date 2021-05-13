@@ -62,7 +62,12 @@ router.beforeEach((to,from, next) => {
         return;
     }
 
-    store.dispatch('coveredPage' , next);
+// next
+    if(to.path !== from.path){
+        store.dispatch('coveredPage' , next);
+    }else {
+        next();
+    }
 
 });
 

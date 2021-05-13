@@ -11,6 +11,10 @@
             v-if="1"
         />
 
+        <RegionChange
+            
+        />
+
     </nav>
 
 </template>
@@ -18,13 +22,15 @@
 <script>
 
 import Scrollbar                        from './Scrollbar.vue';
-import NavigationGnbTS  , { gnbStoreTS }     from '@/plates/PlateNavigation/NavigationGnbTS.vue';
+import NavigationGnbTS  , { gnbStoreTS }     from './NavigationGnbTS.vue';
+import RegionChange , {regionChangeStore}  from './RegionChange.vue';
 // import NavigationMenu   from '@/components/navigation/NavigationMenu.vue';
 
 export default {
     name : 'NavagationGnb',
     components : {
         NavigationGnbTS,
+        RegionChange,
         Scrollbar,
     }
 }
@@ -32,6 +38,7 @@ export default {
 export const navStore = {
     name : '$nav',
     gnbStoreTS,
+    regionChangeStore,
 }
 
 </script>

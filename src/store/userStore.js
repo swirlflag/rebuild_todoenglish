@@ -86,6 +86,7 @@ const userStore = {
 
         // do: 서버와 통신하는 코드
 
+            // 서버에서 가져온걸로 가정하는 값
             let response = {
                 result : true ,
                 data : {

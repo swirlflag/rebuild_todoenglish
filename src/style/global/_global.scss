@@ -73,6 +73,9 @@ body {
 .image-box {
     display: inline-block;
     vertical-align: top;
+    @include phone {
+        max-width : 100px;
+    }
     img {
         width: 100%; height: 100%;
         display: inline-block;

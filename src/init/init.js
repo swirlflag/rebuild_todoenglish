@@ -3,7 +3,7 @@ import Fragment from 'vue-fragment';
 import gsap  from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import axios from 'axios';
-import SwiperCore, { Navigation, Pagination } from 'swiper/core';
+import SwiperCore, { Parallax, Navigation, Pagination } from 'swiper/core';
 import 'swiper/swiper.scss';
 
 import {
@@ -76,7 +76,7 @@ const bindScreenData = (Vue) => {
 }
 
 const installGloabalPlugin = (Vue) => {
-    SwiperCore.use([Navigation, Pagination]);
+    SwiperCore.use([Parallax,Navigation, Pagination]);
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -85,6 +85,7 @@ const installGloabalPlugin = (Vue) => {
     Vue.prototype.$axios = axios;
 
     Vue.use(Fragment.Plugin);
+
 }
 
 
