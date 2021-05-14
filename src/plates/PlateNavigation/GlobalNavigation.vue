@@ -353,7 +353,7 @@ export default {
         },
 
         openRegion() {
-            // this.closeMenu();
+            this.closeMenu();
             this.$store.dispatch('openRegionPanel');
         },
 
