@@ -3,7 +3,7 @@
     <nav id="plate--navigation" class="plate">
 
 
-        <NavigationGnbTS
+        <GlobalNavigation
             v-if="1"
         />
 
@@ -12,7 +12,7 @@
         />
 
         <RegionChange
-            
+
         />
 
     </nav>
@@ -21,15 +21,14 @@
 
 <script>
 
-import Scrollbar                        from './Scrollbar.vue';
-import NavigationGnbTS  , { gnbStoreTS }     from './NavigationGnbTS.vue';
-import RegionChange , {regionChangeStore}  from './RegionChange.vue';
-// import NavigationMenu   from '@/components/navigation/NavigationMenu.vue';
+import Scrollbar  from './Scrollbar.vue';
+import GlobalNavigation , { gnbStore } from './GlobalNavigation.vue';
+import RegionChange , {regionChangeStore} from './RegionChange.vue';
 
 export default {
     name : 'NavagationGnb',
     components : {
-        NavigationGnbTS,
+        GlobalNavigation,
         RegionChange,
         Scrollbar,
     }
@@ -37,7 +36,7 @@ export default {
 
 export const navStore = {
     name : '$nav',
-    gnbStoreTS,
+    gnbStore,
     regionChangeStore,
 }
 

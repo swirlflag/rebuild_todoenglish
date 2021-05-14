@@ -6,7 +6,7 @@ import defaultStore     from './defaultStore.js';
 import userStore        from './userStore.js';
 
 import { appStore           } from '@/App.vue';
-import { transitionStore    } from '@/plates/PlateTransitionCover/PlateTransitionCoverTS.vue';
+import { transitionStore    } from '@/plates/PlateTransitionCover/PlateTransitionCover.vue';
 import { navStore           } from '@/plates/PlateNavigation/PlateNavigation.vue';
 import { modalStore         } from '@/plates/PlateModal/PlateModal.vue';
 import { authStore          } from '@/plates/PlateAuth/PlateAuth.vue';

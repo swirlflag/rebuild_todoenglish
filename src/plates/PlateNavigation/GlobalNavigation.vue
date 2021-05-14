@@ -157,7 +157,7 @@
                         </div>
 
                         <div class="gnb__region">
-                            <button class="gnb__region__button">
+                            <button class="gnb__region__button" @click="onClickRegionButton">
                                 <i class="icon--globe"></i>
                                 <span>Language • 언어변경</span>
                             </button>
@@ -179,7 +179,6 @@
                                 </p>
                             </a>
                         </div> -->
-
 
                         <div class="gnb__etc">
 
@@ -294,6 +293,20 @@ export default {
         },
     },
     methods : {
+        onScrollPanel() {
+            const panel = this.$refs.ref_panel;
+            const ST = panel.scrollTop;
+
+            if(ST === 0){
+                panel.scrollTo(0,1);
+            }else if(ST + panel.offsetHeight === panel.scrollHeight){
+                panel.scrollTo(0,panel.scrollHeight - panel.offsetHeight - 0.1)
+            }
+
+        },
+        onClickRegionButton() {
+            this.openRegion();
+        },
         openMenuMotion() {
 
             this.$store.commit('SCROLL_lock');
@@ -339,6 +352,11 @@ export default {
             this.$store.dispatch('closeGnb');
         },
 
+        openRegion() {
+            // this.closeMenu();
+            this.$store.dispatch('openRegionPanel');
+        },
+
         toggleMenu() {
             if(this.$store.state.$nav.is_openGnb){
                 this.$store.dispatch('closeGnb');
@@ -352,17 +370,7 @@ export default {
             this.privateList   = this.$refs.ref_private.querySelectorAll('li');
         },
 
-        onScrollPanel() {
-            const panel = this.$refs.ref_panel;
-            const ST = panel.scrollTop;
 
-            if(ST === 0){
-                panel.scrollTo(0,1);
-            }else if(ST + panel.offsetHeight === panel.scrollHeight){
-                panel.scrollTo(0,panel.scrollHeight - panel.offsetHeight - 0.1)
-            }
-
-        },
 
         windowResize() {
             if(this.isOpen){
@@ -390,7 +398,7 @@ export default {
     },
 }
 
-export const gnbStoreTS = {
+export const gnbStore = {
 
     state : {
         is_openGnb : false,

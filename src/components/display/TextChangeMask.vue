@@ -77,8 +77,8 @@ export default {
             this.animate();
         },
         animate() {
-            const fly       = this.$refs.ref_fly;
             const target    = this.$refs.ref_target;
+            const fly       = this.$refs.ref_fly;
             const contain   = this.$refs.ref_contain;
             const before    = this.$refs.ref_before;
             const after     = this.$refs.ref_after;
@@ -89,6 +89,9 @@ export default {
             const delay     = this.delay ? this.delay * 0.001 : 0;
 
             setTimeout(() => {
+                if(!target){
+                    return
+                }
 
                 const startWidth    = target.offsetWidth;
                 // const startHeight   = target.offsetHeight;
@@ -132,7 +135,11 @@ export default {
                     },
                     onComplete : () => {
                         this.isAnimate = false;
-                        this.$gsap.set(this.$refs.ref_target , {css : {
+                        const targetComplate = this.$refs.ref_target;
+                        if(!targetComplate){
+                            return;
+                        }
+                        this.$gsap.set(targetComplate , {css : {
                             width : null
                         }});
                         this.remainderAnimate();

@@ -15,7 +15,7 @@
             @loadMotionEnd="loadMotionEnd"
         />
 
-        <PlateTransitionCoverTS
+        <PlateTransitionCover
              v-if="1"
         />
 
@@ -46,7 +46,7 @@ import PlateSetting                 from '@/plates/PlateSetting/PlateSetting.vue
 import PlateLoading                 from '@/plates/PlateLoading/PlateLoading.vue';
 import PlateModal                   from '@/plates/PlateModal/PlateModal.vue';
 import PlateAuth                    from '@/plates/PlateAuth/PlateAuth.vue';
-import PlateTransitionCoverTS       from '@/plates/PlateTransitionCover/PlateTransitionCoverTS.vue';
+import PlateTransitionCover         from '@/plates/PlateTransitionCover/PlateTransitionCover.vue';
 import PlateNavigation              from '@/plates/PlateNavigation/PlateNavigation.vue';
 import PlatePage                    from '@/plates/PlatePage/PlatePage.vue';
 import PlateFooter                  from '@/plates/PlateFooter/PlateFooter.vue';
@@ -60,7 +60,7 @@ export default {
     components: {
         PlateSetting,
         PlateLoading,
-        PlateTransitionCoverTS ,
+        PlateTransitionCover ,
         PlateNavigation ,
         PlatePage ,
         PlateTest ,

@@ -88,7 +88,6 @@ const installGloabalPlugin = (Vue) => {
 
 }
 
-
 const setGlobalConfig = (Vue) => {
     if(store.state.is_dev){
         Vue.config.devtools = true;
