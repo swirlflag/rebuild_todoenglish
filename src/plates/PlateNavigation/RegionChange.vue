@@ -1,68 +1,81 @@
 <template>
-    <div id="nav-region"
-
-        v-if="isOpen"
+    <transition
+        name="nav-region"
+        :duration="700"
     >
-
-        <div class="region__dimmed" @click="onClickDimmed"></div>
-
-        <div    class="region__panel"
-                :class="{'st-gogo' : gogo}"
+        <div    id="nav-region"
+                v-if="isOpen"
+                ref="ref_root"
         >
 
-            <div class="region__cover"></div>
+            <div class="region__dimmed" @click="onClickDimmed"></div>
 
-            <div class="region__swiper swiper-container" ref="ref_swiper">
-                <div class="swiper-wrapper">
+            <div    class="region__panel"
+                    :class="{'st-gogo' : gogo}"
+                    ref="ref_panel"
+            >
 
-                    <template v-for="(item) in regionList">
-                        <div    class="swiper-slide"
-                                :key="item.code"
-                        >
-                            <div    class="region__flag"
-                                    :class="`region--${item.code}`"
-                                    data-swiper-parallax-scale="0.58"
-                                    data-swiper-parallax-opacity="0.4"
-                                    :data-region-code="item.code"
+                <div class="region__cover"></div>
+
+                <div class="region__swiper swiper-container" ref="ref_swiper">
+                    <div class="swiper-wrapper">
+
+                        <template v-for="(item) in regionList">
+                            <div    class="swiper-slide"
+                                    :key="item.code"
                             >
+                                <div    class="region__flag"
+                                        :class="`region--${item.code}`"
+                                        data-swiper-parallax-scale="0.58"
+                                        data-swiper-parallax-opacity="0.4"
+                                        :data-region-code="item.code"
+                                >
+                                </div>
                             </div>
-                        </div>
-                    </template>
+                        </template>
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="region__name">
-                <TextChangeMask     :text="selectRegionText"
-                                    :contain="false"
-                                    :speed="500"
+                <div class="region__spinner">
+                    <SpinnerColordotsWave/>
+                </div>
 
-                />
-            </div>
+                <div class="region__name">
+                    <TextChangeMask     :text="selectRegionText"
+                                        :contain="false"
+                                        :speed="500"
 
-            <div class="region__control">
-                -{{currentIndex}}-
-                <button class="region__select" @click="onClickSelect">
-                    <TextChangeMask :text="selectRegion.confirm"
-                                    :contain="false"
-                                    :speed="500"
-                                    :delay="200"
                     />
-                </button>
+                </div>
+
+                <div    class="region__control"
+                        ref="ref_control"
+                >
+                    <button class="region__select" @click="onClickSelect">
+                        <TextChangeMask :text="selectRegion.confirm"
+                                        :contain="false"
+                                        :speed="500"
+                                        :delay="200"
+                        />
+                    </button>
+                </div>
+
             </div>
 
         </div>
-
-    </div>
+    </transition>
 </template>
 
 <script>
 import TextChangeMask from '@/components/display/TextChangeMask.vue';
+import SpinnerColordotsWave from  '@/components/spinner/SpinnerColordotsWave.vue';
 
 export default {
     name : 'RegionChange',
     components : {
         TextChangeMask ,
+        SpinnerColordotsWave,
     },
     data() {
         return {
@@ -100,6 +113,10 @@ export default {
             gogo : false,
 
             swiper : null,
+
+            modelData : {
+                isShow : false,
+            }
         }
     },
     computed : {
@@ -127,27 +144,50 @@ export default {
     },
     watch : {
         "isOpen"() {
-            if(this.isOpen){
-                this.selectIndex = this.currentIndex;
-                setTimeout(this.renderSwiper);
-            }
-        }
+            this.watchIsOpen();
+        },
+        "modelData.isShow"() {
+            // this.watchModelData();
+        },
     },
 
     methods : {
         onClickSelect() {
             this.gogo = !this.gogo;
-            this.$store.dispatch('changeRegion' , this.selectRegion.code);
+
+            setTimeout(() => {
+                this.$store.dispatch('changeRegion' , this.selectRegion.code);
+                this.gogo = false;
+            },1500)
         },
         onClickDimmed() {
             this.$store.dispatch('closeRegionPanel');
         },
+        watchIsOpen(){
 
+            if(this.isOpen){
+                this.selectIndex = this.currentIndex;
+                setTimeout(() => {
+                    this.openMotion();
+                    this.renderSwiper();
+                })
+            }else {
+                this.closeMotion();
+            }
+        },
+
+        openMotion() {
+
+        },
+        closeMotion() {
+
+        },
 
         renderSwiper() {
+
             const slideChange = ({realIndex}) => {
                 this.selectIndex = realIndex;
-            }
+            };
 
             const options = {
                 // freeMode : true,
@@ -204,6 +244,10 @@ export const regionChangeStore = {
 </script>
 
 <style lang="scss" scoped>
+
+.nav-region-leave-active {
+    pointer-events: none !important;
+}
 #nav-region {
     position : absolute;
     top: 0 ; left: 0;
@@ -214,19 +258,28 @@ export const regionChangeStore = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    opacity: 1;
+    transition:  opacity 300ms ease;
+
+    &.nav-region-enter ,
+    &.nav-region-leave-to  {
+        opacity: 0;
+    }
+
 }
 
 .region__dimmed {
     position: absolute;
     width: 100%; height: 100%;
-    // background-color: rgba(255,255,0,0.4);
-    // background-color: rgba(200,255,255,0.4);
     background-color: rgba(255,255,255,0.4);
-    // background-color: rgba(0,0,0,0.4);
+
     top: 0; left: 0;
     z-index: 1;
     width: 100%; height: 100%;
+
 }
+
 .region__cover {
     width: 100vw; height: 100vh;
 
@@ -262,7 +315,7 @@ export const regionChangeStore = {
     align-items: center;
     flex-direction: column;
     width: 500px; height: 500px;
-    // transition:  border-radius 500ms ease;
+
     @include phone {
         width: 90vw; height: 90vw;
     }
@@ -423,6 +476,20 @@ export const regionChangeStore = {
     }
 }
 
+.region__spinner {
+    position: absolute;
+    bottom: 35%;
+    width: 100%;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    transform: translateY(-50%);
+
+    .st-gogo & {
+        opacity: 1;
+    }
+}
+
 .region__name {
     position: absolute;
     bottom: 25%;
@@ -465,8 +532,8 @@ export const regionChangeStore = {
     left: 0;
     display: flex;
     justify-content: center;
-    // z-index: 9;
-    z-index: 20;
+    z-index: 9;
+    // z-index: 20;
     pointer-events: none;
 
     .region__select {

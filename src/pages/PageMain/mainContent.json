@@ -1,0 +1,16 @@
+{
+    "MAIN_TITLE" : {
+        "ko" : "안녕하세요!",
+        "en" : "Hello!",
+        "jp" : "こんにちは!",
+        "zh" : "你好！"
+    },
+    "MAIN_CONTENT" : {
+        "ko" : "언어별 표시 테스트",
+        "en" : "Main screen language-specific display test",
+        "jp" : "言語別表示テスト",
+        "zh" : "特定语言的显示测试"
+    }
+}
+
+

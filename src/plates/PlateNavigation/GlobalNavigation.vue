@@ -286,9 +286,9 @@ export default {
         },
         'isOpen'(now) {
             if(now){
-                this.openMenuMotion();
+                this.openMotion();
             }else {
-                this.closeMenuMotion();
+                this.closeMotion();
             }
         },
     },
@@ -307,7 +307,7 @@ export default {
         onClickRegionButton() {
             this.openRegion();
         },
-        openMenuMotion() {
+        openMotion() {
 
             this.$store.commit('SCROLL_lock');
             // this.navTl.pause();
@@ -327,7 +327,7 @@ export default {
             // this.navTl.play(0);
         },
 
-        closeMenuMotion() {
+        closeMotion() {
             this.$store.commit('SCROLL_unlock');
             this.navTL.clear();
             this.navTL.to(this.$refs.ref_panel, {
@@ -374,7 +374,7 @@ export default {
 
         windowResize() {
             if(this.isOpen){
-                this.openMenuMotion();
+                this.openMotion();
             }
         },
 
