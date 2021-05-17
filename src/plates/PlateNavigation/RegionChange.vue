@@ -5,17 +5,19 @@
     >
         <div    id="nav-region"
                 v-if="isOpen"
+                :class="{'st-change' : modelData.isChange}"
                 ref="ref_root"
         >
 
             <div class="region__dimmed" @click="onClickDimmed"></div>
 
             <div    class="region__panel"
-                    :class="{'st-gogo' : gogo}"
                     ref="ref_panel"
             >
 
-                <div class="region__cover"></div>
+                <div class="region__cover" ref="ref_cover"></div>
+
+                <div class="region__globe" ref="ref_globe"></div>
 
                 <div class="region__swiper swiper-container" ref="ref_swiper">
                     <div class="swiper-wrapper">
@@ -41,7 +43,7 @@
                     <SpinnerColordotsWave/>
                 </div>
 
-                <div class="region__name">
+                <div class="region__name" ref="ref_name">
                     <TextChangeMask     :text="selectRegionText"
                                         :contain="false"
                                         :speed="500"
@@ -116,7 +118,10 @@ export default {
 
             modelData : {
                 isShow : false,
-            }
+                isChange : false,
+            },
+
+            tl : new this.$gsap.timeline(),
         }
     },
     computed : {
@@ -139,7 +144,7 @@ export default {
             return this.regionList[this.selectIndex];
         },
         selectRegionText() {
-            return this.selectRegion[this.gogo ? 'success' : 'name'];
+            return this.selectRegion[this.modelData.isChange ? 'success' : 'name'];
         },
     },
     watch : {
@@ -153,35 +158,81 @@ export default {
 
     methods : {
         onClickSelect() {
-            this.gogo = !this.gogo;
-
-            setTimeout(() => {
-                this.$store.dispatch('changeRegion' , this.selectRegion.code);
-                this.gogo = false;
-            },1500)
+            this.startChangeRegion();
         },
+
         onClickDimmed() {
             this.$store.dispatch('closeRegionPanel');
         },
+
+        startChangeRegion() {
+            this.modelData.isChange = true;
+            this.changeStartMotion();
+
+            setTimeout(() => {
+                this.$store.dispatch('changeRegion' , this.selectRegion.code);
+                this.modelData.isChange = false;
+                this.changeEndMotion();
+            },1000)
+        },
+
         watchIsOpen(){
 
             if(this.isOpen){
                 this.selectIndex = this.currentIndex;
                 setTimeout(() => {
-                    this.openMotion();
                     this.renderSwiper();
+                    this.openMotion();
                 })
             }else {
                 this.closeMotion();
             }
         },
+        useTimeline(motion) {
+            this.tl.pause();
+            this.tl.clear();
+            motion();
+            this.tl.play();
+        },
 
         openMotion() {
-
+            this.useTimeline(() => {
+                this.tl.from(this.$refs.ref_globe ,{ scale : 0.7, y : 40, ease: 'power3.out', duration : 0.6, clearProps: 'auto',},0);
+                this.tl.from(this.swiper.visibleSlides ,{y : 30,opacity : 0,ease: 'power3.out',stagger : 0.07,duration : 0.6, clearProps: 'auto',},0);
+                this.tl.from(this.$refs.ref_name ,{y : 10,opacity : 0,ease: 'power3.out',duration : 0.6,delay : 0.3, clearProps: 'auto',},0);
+                this.tl.from(this.$refs.ref_control , {y : 10, opacity : 0,ease : 'power2.out',duration : 0.6,delay : 0.35, clearProps: 'auto',},0);
+            })
         },
         closeMotion() {
-
+            this.useTimeline(() => {
+                this.tl.to(this.$refs.ref_globe ,{ scale : 0.7, y : 40, ease: 'power3.in', duration : 0.3,},0);
+                this.tl.to(this.swiper.visibleSlides ,{y : -20,opacity : 0,ease: 'power2.in',stagger : 0.05,duration : 0.2,},0);
+                this.tl.to(this.$refs.ref_name ,{y : -10,opacity : 0,ease: 'power1.in',duration : 0.3,},0);
+                this.tl.to(this.$refs.ref_control , {y : -10 ,opacity : 0,ease : 'power1.in',duration : 0.3,},0);
+            });
         },
+
+        changeStartMotion() {
+            const slides = this.swiper.slides;
+            const active = this.swiper.slides[this.swiper.activeIndex];
+
+            this.useTimeline(() => {
+                this.tl.to(slides , {opacity : i => i === this.swiper.activeIndex ? 1 : 0, duration : 0.3},0);
+                this.tl.to(active , { yPercent : -50 , scale : 1.35, ease : 'back.out', duration : 0.35,clearProps: 'auto',},0);
+                this.tl.to(this.$refs.ref_name , { yPercent : 50 , scale : 1.12, ease : 'power2.out', duration : 0.4, clearProps: 'auto',},0);
+            });
+        },
+        changeEndMotion() {
+            const slides = this.swiper.slides;
+            const active = this.swiper.slides[this.swiper.activeIndex];
+
+            this.useTimeline(() => {
+                this.tl.to(slides , { opacity : 1 , duration : 0.6 , ease : 'power1.in', clearProps: 'auto',} ,0);
+                this.tl.to(active , { yPercent : 0 , scale : 1, ease : 'back.inOut', duration : 0.4, clearProps: 'auto',},0);
+                this.tl.to(this.$refs.ref_name , { yPercent : 0 , scale : 1, ease : 'power2.inOut', duration : 0.4, clearProps: 'auto',},0);
+            });
+        },
+
 
         renderSwiper() {
 
@@ -202,11 +253,13 @@ export default {
                 parallax        : true,
 
                 spaceBetween : 30,
+                watchSlidesVisibility: true,
 
                 on : {
                     slideChange
                 }
             };
+
 
             this.swiper = new this.$swiper(this.$refs.ref_swiper, options);
 
@@ -215,6 +268,7 @@ export default {
     },
 
     mounted() {
+
     },
 
 }
@@ -245,9 +299,7 @@ export const regionChangeStore = {
 
 <style lang="scss" scoped>
 
-.nav-region-leave-active {
-    pointer-events: none !important;
-}
+
 #nav-region {
     position : absolute;
     top: 0 ; left: 0;
@@ -266,6 +318,10 @@ export const regionChangeStore = {
     &.nav-region-leave-to  {
         opacity: 0;
     }
+    &.nav-region-leave-active ,
+    &.st-change {
+        pointer-events: none;
+    }
 
 }
 
@@ -273,6 +329,7 @@ export const regionChangeStore = {
     position: absolute;
     width: 100%; height: 100%;
     background-color: rgba(255,255,255,0.4);
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 60%, rgba(180,180,180,0.5) 100%);
 
     top: 0; left: 0;
     z-index: 1;
@@ -293,78 +350,69 @@ export const regionChangeStore = {
     z-index: 10;
     // display: none;
     border-radius: 9999px;
-    transform: scale(0);
+    transform: scale(0,0);
     pointer-events: none;
-    opacity: 0;
-    transition: transform 600ms $EASE_outCubic , opacity 500ms ease;
+    opacity: 1;
+    transition: transform 340ms $EASE_inSine , opacity 500ms ease;
 
-    .st-gogo & {
+    @include phone {
+        transform: scale(1,0);
+        border-radius: 0;
+        width: 100vw; height: 100vh;
+    }
+
+    .st-change & {
         opacity: 1;
-        transform: scale(1.45);
-        pointer-events: all;
+        transform: scale(1.45,1.45);
+        transition: transform 500ms $EASE_outCubic , opacity 500ms ease;
+
+        @include phone {
+            transform: scale(1,1);
+        }
     }
 }
 
 .region__panel {
-    border-radius: 100%;
-    position: relative;
-    z-index: 2;
 
+    position: relative;
+    z-index: 11;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 500px; height: 500px;
 
+    margin-top: -20px;
+
     @include phone {
         width: 90vw; height: 90vw;
-    }
-
-    &.st-gogo {
-        // pointer-events: none;
+        margin-top: -50px;
     }
 
     // background: linear-gradient(127deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0.2) 85%, rgba(0,0,0,0.05) 100%);
     // background: rgba(255,255,255,0.3);
-    background-color: rgba(255,255,255,0.98);
-
-    border: 3px solid #fff;
-    box-shadow: inset 8px 8px 5px rgba(255,255,255,0.8) , 0 25px 40px rgba($color : dodgerblue , $alpha : 0.2);
-
-    &::before {
-        @keyframes regionGlobe {
-            0% {background-position: -100% 0 ;}
-            100% {background-position: 100% 0 ;}
-        }
-        content: '';
-        display: inline-block;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        position: absolute;
-        border-radius: inherit;
-        background-image: url('~@/assets/illust/worldmap.png');
-        // background-position: 200% 100%;
-        background-repeat: repeat;
-        background-size: 200% 100%;
-        animation: regionGlobe 30s linear infinite;
-        opacity: 0.035;
-    }
 
 }
 
-.region__swiper {
-    width: 100%; height: 100%;
-    z-index: 20;
-
-    box-sizing: border-box;
-    overflow: hidden;
-    cursor: grab;
-    position: relative;
-    border-radius: 100%;
-
-    .st-gogo & {
-        pointer-events: none;
+.region__globe {
+    @keyframes regionGlobe {
+        0% {background-position: -100% 0 ;}
+        100% {background-position: 100% 0 ;}
     }
+    content: '';
+    display: inline-block;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    position: absolute;
+    background-image: url('~@/assets/illust/worldmap.png');
+    background-repeat: repeat;
+    background-size: 200% 100%;
+    animation: regionGlobe 30s linear infinite;
+    box-shadow: inset 8px 8px 5px rgba(255,255,255,0.8) , 0 25px 40px rgba($color : dodgerblue , $alpha : 0.2);
+    // border: 3px solid #d3d;
+    border: 3px solid #fff;
+    border-radius: 100%;
+    background-color: rgba(255,255,255,0.98);
 
     &::before , &::after{
         content: '';
@@ -378,7 +426,7 @@ export const regionChangeStore = {
 
         transition: opacity 300ms ease;
 
-        .st-gogo & {
+        .st-change & {
             opacity: 0;
         }
     }
@@ -413,6 +461,22 @@ export const regionChangeStore = {
         animation: rotateline2 100s linear infinite reverse;
     }
 
+}
+
+.region__swiper {
+    width: 100%; height: 100%;
+    z-index: 20;
+
+    box-sizing: border-box;
+    overflow: hidden;
+    cursor: grab;
+    position: relative;
+    border-radius: 100%;
+
+    .st-change & {
+        pointer-events: none;
+    }
+
     .swiper-wrapper {
         width: 100%; height: 100%;
         box-sizing: border-box;
@@ -424,15 +488,15 @@ export const regionChangeStore = {
         width: 25%; height: 25%;
         box-sizing: border-box;
 
-        transition: opacity 300ms ease , transform 350ms $EASE_outBack2;
+        // transition: opacity 300ms ease , transform 350ms $EASE_outBack2;
 
-        .st-gogo & {
-            opacity: 0;
+        .st-change & {
+            // opacity: 0;
 
-            &.swiper-slide-active {
-                opacity: 1;
-                transform: scale(1.3) translate3d(0,-50%,0);
-            }
+            // &.swiper-slide-active {
+            //     opacity: 1;
+            //     transform: scale(1.3) translate3d(0,-50%,0);
+            // }
         }
 
         .region__flag {
@@ -478,23 +542,21 @@ export const regionChangeStore = {
 
 .region__spinner {
     position: absolute;
-    bottom: 35%;
+    bottom: 30%;
     width: 100%;
     z-index: 10;
     opacity: 0;
     transition: opacity 300ms ease;
     transform: translateY(-50%);
 
-    .st-gogo & {
+    .st-change & {
         opacity: 1;
     }
 }
 
 .region__name {
     position: absolute;
-    bottom: 25%;
-    transform: translateY(50%);
-    font-size: 26px;
+    bottom: 20%;
     z-index: 20;
     font-weight: 700;
     color: #333;
@@ -503,17 +565,20 @@ export const regionChangeStore = {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 400ms ease;
+    // transition: transform 400ms ease;
     width: 100%;
     pointer-events: none;
 
+    font-size: $SIZE_PC_fontsize_large;
     @include phone {
+        font-size: $SIZE_MO_fontsize_large;
+        bottom: 18%;
         padding: 0 $SIZE_MO_innerPadding;
     }
 
-    .st-gogo & {
+    .st-change & {
         // color: dodgerblue;
-        transform : scale(1.12) translateY(50%);
+        // transform : scale(1.12) translateY(50%);
     }
 
     > .mask-text {
@@ -527,17 +592,12 @@ export const regionChangeStore = {
     position: absolute;
     top: 100%; left: 0;
     margin-top: 40px;
-    z-index: 10;
     width: 100%;
     left: 0;
     display: flex;
     justify-content: center;
-    z-index: 9;
-    // z-index: 20;
-    pointer-events: none;
 
     .region__select {
-        pointer-events: all;
         background-color: dodgerblue;
         border-radius: 14px;
         width: 220px; height: 50px;

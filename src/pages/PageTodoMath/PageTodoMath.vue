@@ -156,6 +156,13 @@ export default {
             return result;
         },
     },
+    watch : {
+        "region"(now,old) {
+            if(now !== old){
+                this.radioSiteRegion = now;
+            }
+        }
+    },
     methods : {
         changeSiteRegion() {
             // console.log(this.radioSiteRegion , '사이트 언어 변경');
