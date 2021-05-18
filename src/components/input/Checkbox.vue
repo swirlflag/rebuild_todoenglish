@@ -1,6 +1,6 @@
 <!--
     USE PREVIEW :
-        <InputCheckbox      text="myText"
+        <Checkbox      text="myText"
                             v-model="modelValue"
         />
 
@@ -32,7 +32,7 @@
 
 <script>
 export default {
-    name : 'InputCheckbox',
+    name : 'Checkbox',
     props : {
         modelValue : Boolean,
         checked : Boolean,

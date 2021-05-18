@@ -1,25 +1,25 @@
 <!--
 
     USE PREVIEW :
-        <InputRadio value="myValue"
+        <Radio value="myValue"
                     name="myName"
                     @change="myChange"
                     v-model="myModelValue"  ||  checked
         >
             myText
-        </InputRadio>
+        </Radio>
 
     METHODS :
         ref.check()
 
     MEMO :
         이 컴포넌트를 단일로 구성해 묶음을 직접 구성한후 $emit('change')호출시 현재 input의 value 정보만 받을수 있습니다.
-        나열한 라디오들의 index, before와 같은 요소가 필요하다면 InputRadioCollection을 사용해 주세요.
+        나열한 라디오들의 index, before와 같은 요소가 필요하다면 RadioCollection을 사용해 주세요.
 
 -->
 <template>
     <label  class="input--radio"
-            :class="{'st-checked' : isChecked}"
+            :class="`${isChecked ? 'st-checked' : ''}${styleType}`"
     >
         <input  type="radio"
                 ref="ref_radio"
@@ -29,7 +29,7 @@
                 @change="onChange"
                 @click="onClick"
         >
-        <span class="radio--icon"></span>
+        <span class="radio--mark"></span>
 
         <div class="radio--label">
             <slot></slot>
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-    name : 'InputRadio',
+    name : 'Radio',
     model: {
         prop: 'modelValue',
         event: 'modelEvent'
@@ -62,6 +62,8 @@ export default {
         checked : Boolean,
 
         index : Number,
+        type : String,
+
     },
 
     data() {
@@ -88,7 +90,9 @@ export default {
 
     },
     computed : {
-
+        styleType() {
+            return this.type ? ` type--${this.type}` : 'type--default';
+        }
     },
     methods : {
 
@@ -192,52 +196,159 @@ export default {
     align-items: center;
     cursor: pointer;
     transition: color 200ms ease;
+    position: relative;
+    box-sizing: border-box;
 
     input {
         display: none;
     }
 
-    @include hover {
+    .radio--mark {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+    }
 
-        color: $COLOR_pink_1;
-        .radio--icon {
-            border-color : $COLOR_pink_1;
+    &.type--default {
+        .radio--mark {
+            width: 22px; height: 22px;
+            border-radius: 9999px;
+            margin-right: 8px;
+            border: 2px solid $COLOR_linegray;
+            position: relative;
+            background-color: #F5F5F7;
+            transition: border 200ms ease, background-color 200ms ease;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: #fff;
+                transform : scale(1);
+                transform-origin: center center;
+                border-radius: inherit;
+                opacity: 0;
+                transition: transform 450ms $EASE_outBack2;
+            }
+        }
+        @include hover {
+            color: $COLOR_pink_1;
+            .radio--mark {
+                border-color : $COLOR_pink_1;
+            }
+        }
+        &.st-checked {
+            .radio--mark {
+                background-color: $COLOR_pink_1;
+                border-color : $COLOR_pink_1;
+                &::before {
+                    transform : scale(0.4) ;
+                    opacity: 1;
+                }
+            }
         }
     }
+
+
+    &.type--flat {
+
+        $flat-thick : 8px;
+        $flat-radius : 10px;
+        $color-default : rgb(182, 190, 182);
+
+        position: relative;
+        margin-bottom: #{$flat-thick} !important;
+        color: rgb(70, 95, 79);
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            bottom: #{-$flat-thick}; left: 0;
+            border-radius: $flat-radius;
+            background-color: $color-default;
+            transition: background-color 100ms ease;
+            border-bottom: 1px solid rgba(255,255,255,0.7);
+            box-shadow: 0 5px 5px 0 rgba(0,0,0,0.15);
+        }
+
+        .radio--mark {
+            display: none;
+        }
+
+        .radio--label {
+            padding: 14px 40px;
+            width: auto; height: auto;
+            top: 0; left: 0;
+            position: relative;
+            font-weight: 700;
+            transition: transform 280ms $EASE_outBack3 40ms, background-color 150ms ease;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: $flat-radius;
+            background-color: rgba(239,239,239,1);
+            background-color: rgba(255,255,255,1);
+            border: 1px solid $color-default;
+        }
+
+        @include hover {
+
+        }
+
+        &.st-checked {
+            &::before {
+                background-color: rgb(30, 155, 78);
+            }
+            .radio--label {
+                color: #fff;
+                border-top: 1px solid rgba(255,255,255,0.8);
+                border-left: 1px solid rgba(200,200,200,0.1);
+                border-right: 1px solid rgba(200,200,200,0.1);
+                border-bottom: 1px solid transparent;
+                background: rgba(51,205,112,1);
+                transition: transform 160ms $EASE_outBack3 ,background-color 150ms ease;
+                transform: translateY($flat-thick - 3px);
+            }
+        }
+    }
+
 }
 
-.radio--icon {
-    display: inline-block;
-    width: 22px; height: 22px;
-    border-radius: 9999px;
-    position: relative;
-    box-sizing: border-box;
-    margin-right: 8px;
-    border: 2px solid $COLOR_linegray;
-    background-color: #F5F5F7;
-    transition: border 200ms ease, background-color 200ms ease;
 
-    .st-checked & {
-        background-color: $COLOR_pink_1;
-        border-color : $COLOR_pink_1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.radio--mark {
+
+    .type--flat &{
+        width: 100%; height: 100%;
+        position: absolute;
+        border: 1px solid rgb(51,205,112);
     }
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: #fff;
-        transform : scale(1);
-        transform-origin: center center;
-        border-radius: inherit;
-        opacity: 0;
-        transition: transform 450ms $EASE_outBack2;
+}
 
-        .st-checked & {
-            transform : scale(0.4) ;
-            opacity: 1;
-        }
+
+.type--default {
+    
+
+    .radio--mark {
+
     }
 }
 

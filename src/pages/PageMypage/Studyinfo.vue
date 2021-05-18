@@ -79,11 +79,11 @@
 
                     <div class="study__report__control">
 
-                        <InputDropdown placeholder="날짜를 선택하세요">
+                        <Dropdown placeholder="날짜를 선택하세요">
                             <option value="200330">2020.03.30</option>
                             <option value="200430">2020.04.30</option>
                             <option value="200530">2020.05.30</option>
-                        </InputDropdown>
+                        </Dropdown>
 
                         <ButtonDefault theme="pink">
                             보기
@@ -192,14 +192,14 @@
 <script>
 import ButtonDefault    from '@/components/button/ButtonDefault.vue';
 import TextChangeMask   from '@/components/display/TextChangeMask.vue';
-import InputDropdown   from '@/components/input/InputDropdown.vue';
+import Dropdown   from '@/components/input/Dropdown.vue';
 
 export default {
     name : 'mypageStudyInfo',
     components : {
         ButtonDefault ,
         TextChangeMask ,
-        InputDropdown,
+        Dropdown,
     },
     data() {
         return {

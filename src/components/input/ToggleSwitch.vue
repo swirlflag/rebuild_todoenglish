@@ -1,6 +1,6 @@
 <!--
     USE PREVIEW
-        <InputToggleSwitch  v-model="controls.value"
+        <ToggleSwitch  v-model="controls.value"
                             @change="controls.onChange"
         />
 
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name : 'InputToggleSwitch',
+    name : 'ToggleSwitch',
     model : {
         prop : 'modelValue',
         event : 'modelEvent',

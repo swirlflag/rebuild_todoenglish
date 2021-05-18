@@ -1,6 +1,6 @@
 <!--
     USE PREVIEW :
-        <InputCheckboxCollection    v-model || :list="[
+        <CheckboxCollection    v-model || :list="[
                                         {
                                             text : 'itemText',
                                             value : itemValue,
@@ -28,7 +28,7 @@
     >
         <template v-for="(item,idx) in allList">
 
-            <InputCheckbox  :key="`${idx}-${item.text}`"
+            <Checkbox  :key="`${idx}-${item.text}`"
                             :text="item.text"
                             :index="idx"
                             :name="data_name"
@@ -43,11 +43,11 @@
 
 <script>
 import { deepCopy } from '@/utils';
-import InputCheckbox from '@/components/input/InputCheckbox.vue';
+import Checkbox from '@/components/input/Checkbox.vue';
 export default {
-    name : 'InputCheckboxCollection',
+    name : 'CheckboxCollection',
     components : {
-        InputCheckbox
+        Checkbox
     },
     model : {
         prop : 'modelValue',

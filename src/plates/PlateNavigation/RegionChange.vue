@@ -3,6 +3,7 @@
         name="nav-region"
         :duration="700"
     >
+    
         <div    id="nav-region"
                 v-if="isOpen"
                 :class="{'st-change' : modelData.isChange}"
@@ -10,6 +11,8 @@
         >
 
             <div class="region__dimmed" @click="onClickDimmed"></div>
+
+
 
             <div    class="region__panel"
                     ref="ref_panel"

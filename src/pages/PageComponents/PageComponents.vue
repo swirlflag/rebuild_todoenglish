@@ -286,7 +286,7 @@ CHECKBOX
                         <div v-if="renderId === '입력/Dropdown'">
                             <div class="comp-view row">
 
-                                <InputDropdown  placeholder="선택해주세요"
+                                <Dropdown  placeholder="선택해주세요"
                                                 @change="controls.onChange"
                                                 v-model="VMODEL_SELECTVALUE"
                                 >
@@ -296,9 +296,9 @@ CHECKBOX
                                     >
                                         value {{item}}
                                     </option>
-                                </InputDropdown>
+                                </Dropdown>
 
-                                <InputDropdown  placeholder="test placeholder"
+                                <Dropdown  placeholder="test placeholder"
                                                 @change="controls.onChange"
                                                 v-model="VMODEL_SELECTVALUE"
                                 >
@@ -308,7 +308,7 @@ CHECKBOX
                                     >
                                         value {{item}}
                                     </option>
-                                </InputDropdown>
+                                </Dropdown>
 
                             </div>
 
@@ -336,7 +336,7 @@ CHECKBOX
                 <!-- 입력/Toggle Switch -->
                     <div v-if="renderId === '입력/Toggle Switch'">
                         <div class="comp-view">
-                            <InputToggleSwitch  v-model="controls.value"
+                            <ToggleSwitch  v-model="controls.value"
                                                 @change="controls.onChange"
                             />
                         </div>
@@ -367,21 +367,21 @@ CHECKBOX
 
                         <div class="comp-view row">
 
-                            <InputRadio value="yes"
+                            <Radio value="yes"
                                         name="input-radio"
                                         @change="controls.onChange"
                                         v-model="controls.value"
                             >
                                 yes
-                            </InputRadio>
+                            </Radio>
 
-                            <InputRadio value="no"
+                            <Radio value="no"
                                         name="input-radio"
                                         @change="controls.onChange"
                                         v-model="controls.value"
                             >
                                 no
-                            </InputRadio>
+                            </Radio>
 
                         </div>
 
@@ -417,7 +417,7 @@ CHECKBOX
                     <!-- 입력/Radio Selector Collection -->
                         <div v-if="renderId === '입력/Radio Selector Collection'">
                             <div class="comp-view">
-                                <InputRadioCollection   v-model="VMODEL_SELECTVALUE"
+                                <RadioCollection   v-model="VMODEL_SELECTVALUE"
                                                         name="input-radio-collection"
                                                         @change="controls.onChange"
                                                         :direction="controls.direction"
@@ -456,23 +456,23 @@ CHECKBOX
                     <!--  입력/Checkbox -->
                         <div v-if="renderId === '입력/Checkbox'">
                             <div class="comp-view row">
-                                <InputCheckbox
+                                <Checkbox
                                     v-model="controls.checks[0]"
                                     @change="controls.onChange"
                                     checked
                                     text="체크박스 A"
                                 />
-                                <InputCheckbox
+                                <Checkbox
                                     v-model="controls.checks[0]"
                                     @change="controls.onChange"
                                     text="체크박스 A"
                                 />
-                                <InputCheckbox
+                                <Checkbox
                                     v-model="controls.checks[1]"
                                     @change="controls.onChange"
                                     text="체크박스 B"
                                 />
-                                <InputCheckbox
+                                <Checkbox
                                     v-model="controls.checks[2]"
                                     @change="controls.onChange"
                                     text="체크박스 C"
@@ -510,7 +510,7 @@ CHECKBOX
                     <!--  입력/Checkbox Collection -->
                         <div v-if="renderId === '입력/Checkbox Collection'">
                             <div class="comp-view">
-                                <InputCheckboxCollection    v-model="controls.list"
+                                <CheckboxCollection    v-model="controls.list"
                                                             @change="controls.onChange"
                                                             :direction="controls.direction"
                                                             name="input-checkbox-collection"
@@ -1341,12 +1341,12 @@ import categoryData from './categoryData.js';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
 import ButtonDownload from '@/components/button/ButtonDownload.vue';
 import ButtonUndermask from '@/components/button/ButtonUndermask.vue';
-import InputDropdown from '@/components/input/InputDropdown.vue';
-import InputToggleSwitch from '@/components/input/InputToggleSwitch.vue';
-import InputRadio from '@/components/input/InputRadio.vue';
-import InputRadioCollection from '@/components/input/InputRadioCollection.vue';
-import InputCheckbox from '@/components/input/InputCheckbox.vue';
-import InputCheckboxCollection from '@/components/input/InputCheckboxCollection.vue';
+import Dropdown from '@/components/input/Dropdown.vue';
+import ToggleSwitch from '@/components/input/ToggleSwitch.vue';
+import Radio from '@/components/input/Radio.vue';
+import RadioCollection from '@/components/input/RadioCollection.vue';
+import Checkbox from '@/components/input/Checkbox.vue';
+import CheckboxCollection from '@/components/input/CheckboxCollection.vue';
 import InputText from '@/components/input/InputText.vue';
 import InputTextEmail from '@/components/input/InputTextEmail.vue';
 import InputTextPassword from '@/components/input/InputTextPassword.vue';
@@ -1371,12 +1371,12 @@ export default {
         ButtonDownload,
         ButtonUndermask,
 
-        InputDropdown,
-        InputRadio,
-        InputRadioCollection,
-        InputToggleSwitch,
-        InputCheckbox,
-        InputCheckboxCollection,
+        Dropdown,
+        Radio,
+        RadioCollection,
+        ToggleSwitch,
+        Checkbox,
+        CheckboxCollection,
         InputText,
         InputTextEmail,
         InputTextPassword,

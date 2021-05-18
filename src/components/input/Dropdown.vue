@@ -1,6 +1,6 @@
 <!--
     USE PREVIEW
-        <InputDropdown      placeholder="옵션을 골라주세요"
+        <Dropdown      placeholder="옵션을 골라주세요"
                             @change="changeFunction"
                             v-model="modelValue"
         >
@@ -11,7 +11,7 @@
             >
                 {{ item }}
             </option>
-        </InputDropdown>
+        </Dropdown>
 
     METHODS :
         ref.open()
@@ -85,7 +85,7 @@ import TextChangeMask from '@/components/display/TextChangeMask.vue';
 import { targetPathDetect } from '@/utils';
 
 export default {
-    name : "InputDropdown",
+    name : "Dropdown",
     components : {
         TextChangeMask,
     },

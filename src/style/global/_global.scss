@@ -625,5 +625,5 @@ body {
 .text--subtitle-l { @include TEXT_SUBTITLE_L(); }
 .text--subtitle-m { @include TEXT_SUBTITLE_M(); }
 .text--subtitle-s { @include TEXT_SUBTITLE_S(); }
-.text--button-m { @include TEXT_BUTTON_M(); }
+.text--button-m { @include TEXT_BUTTON_L(); }
 .text--button-s { @include TEXT_BUTTON_S(); }

@@ -20,7 +20,7 @@
             <div class="temp-control">
                 <strong>웹 앱 내에서 변경 도구 (ex : 사이트의 "언어변경")</strong>
                 <br>
-                <InputRadioCollection   v-model="radioSiteRegion"
+                <RadioCollection   v-model="radioSiteRegion"
                                         name="test-1"
                                         :list="[
                                         {
@@ -48,7 +48,7 @@
             <div class="temp-control">
                 <strong>유저계정의 지역 설정후 저장 (ex : 계정설정 - 지역변경)</strong>
                 <br>
-                <InputRadioCollection   v-model="radioUserRegion"
+                <RadioCollection   v-model="radioUserRegion"
                                         name="test-2"
                                         :list="[
                                         {
@@ -127,14 +127,14 @@
 </template>
 
 <script>
-import InputRadioCollection from '@/components/input/InputRadioCollection.vue';
+import RadioCollection from '@/components/input/RadioCollection.vue';
 import ButtonDefault from '@/components/button/ButtonDefault.vue';
 
 import todoMathContent from './todoMathContent.json';
 
 export default {
     components : {
-        InputRadioCollection,
+        RadioCollection,
         ButtonDefault,
     },
     data() {

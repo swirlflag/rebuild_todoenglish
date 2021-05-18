@@ -11,7 +11,7 @@
 
         <div class="auth__signup-marketing-agree">
 
-            <InputRadioCollection   v-model="pickValue"
+            <RadioCollection   v-model="pickValue"
                                     name="auth-marketing-agree"
                                     :list="[
                                         {
@@ -38,12 +38,12 @@
 
 <script>
 
-import InputRadioCollection from '@/components/input/InputRadioCollection.vue';
+import RadioCollection from '@/components/input/RadioCollection.vue';
 import ButtonDefault    from '@/components/button/ButtonDefault.vue';
 
 export default {
     components : {
-        InputRadioCollection,
+        RadioCollection,
         ButtonDefault,
     },
     name : 'AuthSignupMarketingAgree',

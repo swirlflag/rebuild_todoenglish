@@ -1,7 +1,7 @@
 <!--
 
     USE PREVIEW :
-        <InputRadioCollection   v-model="myModelValue"
+        <RadioCollection        v-model="myModelValue"
                                 name="myName"
                                 @change="myChange"
                                 direction="row"
@@ -11,6 +11,8 @@
                                         value : itemValue,
                                     }
                                 ]"
+
+                                :list="['a','b',1,1573]"
         />
 
     METHODS :
@@ -26,16 +28,17 @@
             :class="`direction--${computedDirection}`"
     >
 
-        <template v-for="(item,idx) in list" >
+        <template v-for="(item,idx) in renderList" >
 
-            <InputRadio     :key="idx"
+            <Radio          :key="idx"
                             :value="item.value"
                             :name="data_name"
                             v-model="localVmodel"
                             :index="idx"
+                            :type="type"
             >
                 {{ item.text }}
-            </InputRadio>
+            </Radio>
 
         </template>
 
@@ -43,12 +46,12 @@
 </template>
 
 <script>
-import InputRadio from '@/components/input/InputRadio.vue';
+import Radio from '@/components/input/Radio.vue';
 
 export default {
-    name : 'InputRadioCollection',
+    name : 'RadioCollection',
     components : {
-        InputRadio,
+        Radio,
     },
     props : {
         modelValue : null,
@@ -59,6 +62,8 @@ export default {
         },
         name : String,
         direction : String, // row, col, vertical, horizontal
+        type : String,
+
     },
     model: {
         prop: 'modelValue',
@@ -79,8 +84,6 @@ export default {
 
             localVmodel : this.modelValue || this.list || '',
 
-            listValueMap : this.list.map(c => c.value),
-
             ignoreModel : false,
 
         }
@@ -99,6 +102,12 @@ export default {
                 }
             }
         },
+        renderList(){
+            return this.list.map(c => typeof c === 'object' ? c : {text :c , value: c})
+        },
+        listValueMap(){
+            return this.renderList.map(c => c.value);
+        },
     },
     watch: {
         'modelValue'() {
@@ -107,6 +116,12 @@ export default {
         'localVmodel'() {
             this.watchVmodel();
         },
+        // 'list' : {
+        //     deep : true,
+        //     handler(){
+        //         console.log('watch list');
+        //     }
+        // }
     },
     methods : {
         watchModelValue() {
@@ -144,16 +159,18 @@ export default {
 
             let value = null;
 
-            if(index > -1 && index < this.list.length){
-                value = this.list[index].value;
+            if(index > -1 && index < this.renderList.length){
+                value = this.renderList[index].value;
             }
 
             this.modelData = {
                 before,
                 value,
                 index,
-                allList : this.list,
+                allList : this.renderList,
             }
+
+            console.log(this.modelData);
 
         },
 
@@ -167,6 +184,8 @@ export default {
 <style lang="scss" scoped>
 $colGap : 5px;
 $rowGap : 10px;
+
+
 .input--radio-collection {
     display :flex;
     flex-direction: column;
@@ -175,13 +194,19 @@ $rowGap : 10px;
         flex-direction: row;
         flex-wrap: wrap;
         > .input--radio {
-            margin: $colGap $rowGap ;
+
+            &.type--default {
+                margin: $colGap $rowGap ;
+            }
+
         }
     }
     &.direction--col {
         flex-direction: column;
         > .input--radio {
-            margin: $colGap ;
+            &.type--default {
+                margin: $colGap ;
+            }
         }
     }
 
