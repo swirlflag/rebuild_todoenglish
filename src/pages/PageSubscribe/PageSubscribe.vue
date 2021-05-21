@@ -3,101 +3,142 @@
     <div class="pagemission page--subscribe">
 
         <section class="subscribe__notice">
-            <p>
+            <!-- <p>
                 선택하기 전에 알려드립니다!
-            </p>
+            </p> -->
         </section>
 
         <section class="subscribe__header">
-            <h1>선택한 학습 과목의 구독권을 발급받아 볼까요?</h1>
+            <h1>
+                {{$l.category_main_title}}
+            </h1>
+            <p>
+
+            </p>
         </section>
 
-        <br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br>br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br<br> br
+        {{categorys}}
+        <section class="subscribe__category">
+            <p class="subscribe__category__title">
+                {{$l.category_select_title}}
+            </p>
 
-        <section class="subscribe__configure">
+            <div class="subscribe__category__radiobox">
 
-            <div class="subscribe__configure__wrap">
+                <!-- <div class="subscribe__category__radio" @click="selectCategory('이벤트')">
+                    <span class="subscribe__category__radio__source item--event">
+                        토도영어 12개월
+                        <br>+
+                        <br>토도한글 12개월
+                    </span>
+                    <p class="subscribe__category__radio__name">이벤트 패키지!</p>
+                </div> -->
 
-
-                <div class="subscribe__option">
-                    <div class="subscribe__configure__block">
-                        <p class="subscribe__block__title">
-                            먼저, 구독하려는 과목을 선택해주세요.
+                <template v-for="([key,values],idx) in Object.entries(categorys)">
+                    <div    class="subscribe__category__radio"
+                            :class="{'st-checked' : pickPaymentOptions.category === key}"
+                            @click="selectCategory(key)"
+                            :key="`${key}-${idx}`"
+                    >
+                        <span   class="subscribe__category__radio__source"
+                                :class="`item--${key}`"
+                        >
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <p class="subscribe__category__radio__name">
+                            {{ values.name }}
                         </p>
-                        <div class="subscribe__block__radios">
-                            <RadioCollection
-                                                :list="['토도영어','토도한글']"
-                                                @change="log"
-                                                type="flat"
-
-                            />
-                        </div>
 
                     </div>
 
-                    <br><br>
+                </template>
 
-                    <div class="subscribe__configure__block">
-                        <p class="subscribe__block__title">
-                            구독하려는 자녀의 프로필 갯수를 알려주세요.
-                        </p>
-                        <div class="subscribe__block__radios">
-                            <RadioCollection
-                                                :list="['한 자녀','두 자녀']"
-                                                @change="log"
-                                                type="flat"
+                {{refinePaymentData}}
+            </div>
 
-                            />
-                        </div>
+        </section>
 
-                    </div>
-
-                    <br> <br>
-                    <div class="subscribe__configure__block">
-                        <p class="subscribe__block__title">
-                            상품의 구독 기간은요?
-                        </p>
-                        <div class="subscribe__block__radios">
-                            <RadioCollection
-                                                :list="['6개월' , '12개월']"
-                                                @change="log"
-                                                type="flat"
-
-                            />
-                        </div>
-                    </div>
-                    <br><br>
-
-                    워크시트 추가 구입하기
+        <!-- <section class="subscribe__configure"> -->
+            {{pickPaymentOptions}}
             <br>
-                    태블릿
+            <br>
 
-                    <br>
-                    토도라이브 티켓
+        <section    class="subscribe__configure"
+                    v-if="refinePaymentData.isShow"
+                    :class="`type--${pickPaymentOptions.category}`"
+        >
 
-
-                    <div class="subscribe__configure__block">
-                        <p class="subscribe__block__title">
-                            
-                        </p>
-                        <div class="subscribe__block__radios">
-                            <RadioCollection
-                                                :list="['6개월' , '12개월']"
-                                                @change="log"
-                                                type="flat"
-
-                            />
-                        </div>
-                    </div>
-                </div>
+            <div class="subscribe__configure__wrap" >
 
                 <div class="subscribe__status">
 
-                    <div class="subscribe__ticket">
-                        <div class="subscribe__ticket__title">
-                            <p>토도영어</p>
+                    <div    class="subscribe__ticket"
+                            v-if="pickPaymentOptions.type === 'product'"
+                    >
+
+                        <div class="subscribe__ticket__side1">
+
+                            <div class="subscribe__ticket__etc">
+                                <span class="subscribe__ticket__logo"></span>
+                                <span class="subscribe__ticket__lettering">TODO SCHOOL</span>
+                            </div>
+
+                            <div    class="subscribe__profilelength"
+                                    :class="{'st-show' : !!pickPaymentOptions.profileLength}"
+                            >
+                                <TextChangeMask
+                                    :text="pickPaymentOptions.profileLength ||'0'"
+                                />
+                                <span>
+                                    개 프로필에 등록합니다.
+                                </span>
+                            </div>
+
+                            <div class="subscribe__ticket__board">
+
+                                <p class="subscribe__ticket__title">
+                                    <TextChangeMask
+                                        :text="refinePaymentData.name"
+                                    />
+                                </p>
+
+                                <div class="subscribe__select-">
+
+                                </div>
+                                <span class="subscribe__ticket__barcord"></span>
+                            </div>
+
                         </div>
+
+                        <span class="subscribe__ticket__cutline"></span>
+
+                        <div class="subscribe__ticket__side2">
+                            side2
+                        </div>
+
                     </div>
+
+                </div>
+
+                <div class="subscribe__option">
+                    
+
+                    <template v-for="(item,idx) in refinePaymentData.structure">
+
+                        <div class="subscribe__configure__block" :key="`${pickPaymentOptions.category}-${idx}`">
+                            <p class="subscribe__configure__title">
+                                {{ item.title }}
+                            </p>
+
+                            <div class="subscribe__configure__radio">
+                                <RadioCollection    v-model="pickPaymentOptions[item.key]"
+                                                    :list="item.options.map(c => ({text : c.label , value : c.value}))"
+                                                    type="flat"
+                                />
+                            </div>
+                        </div>
+                    </template>
 
                 </div>
             </div>
@@ -109,107 +150,105 @@
 
 <script>
 
+import TextChangeMask from '@/components/display/TextChangeMask.vue';
 import RadioCollection from '@/components/input/RadioCollection.vue';
+import { flatenRegionData } from '@/utils';
+
+import paymentData from './paymentData.json';
+import PageSubscribeData from './PageSubscribeData.json';
+
+
+
+
 export default {
     components : {
         RadioCollection,
+        TextChangeMask,
     },
     data() {
         return {
+
+            pickPaymentOptions : {
+                category : null,
+                type : null,
+            },
+
         }
     },
+    computed : {
+        // product
+
+        region () {
+            return this.$store.state.region;
+        },
+
+        $l() {
+            return flatenRegionData(PageSubscribeData,this.region);
+        },
+
+        categorys() {
+            const result = {};
+            Object.entries(paymentData).map(([k,v]) => {
+                const name = v.name[this.region];
+                if(name){
+                    result[k] = {
+                        key : k,
+                        name,
+                        type : v.type,
+                    }
+                }
+            });
+            return result;
+        },
+
+        refinePaymentData(){
+            const pickCategory = this.pickPaymentOptions.category;
+            if(pickCategory){
+                const result = flatenRegionData(paymentData[pickCategory],this.region);
+
+                // result.isShow = this.categorys.map(c => c.category).indexOf(this.pickPaymentOptions.category) > -1;
+
+                result.isShow = !!this.categorys[pickCategory];
+
+                return result;
+            }else {
+                return {}
+            }
+        },
+    },
+
     methods : {
         log(v){
             console.log(v)
-        }
-    }
+        },
+        selectCategory(category) {
+            if(this.pickPaymentOptions.category === category){
+
+                {123}
+                // this.pickPaymentOptions = {
+                //     category : null,
+                //     type : null,
+                // }
+            }else {
+                this.pickPaymentOptions = {
+                    category,
+                    type : this.categorys[category].type,
+                }
+            }
+        },
+        makeCategorySwiper() {
+            const options = {
+
+            };
+
+            const swiper = new this.$swiper(this.$refs.ref_swiper, options)
+            {swiper}
+        },
+    },
+    mounted() {
+        // this.makeCategorySwiper();
+    },
 }
 </script>
 
 <style scoped lang="scss" src="./PageSubscribe.scss"></style>
-<style lang="scss" scoped>
-
-.page--subscribe {
-    // border: 1px solid #000;
-}
-
-section {
-    // border: 1px solid #d3d;
-    @include layout;
-    // background-color: #aa1;
-}
-
-.page--subscribe {
-
-}
-
-.subscribe__header {
-    h1 {
-        // font-size: ;
-        // font-size: 20px;
-        // color: #d3d;
-    }
-}
-
-
-
-.subscribe__configure {
-    border: 1px solid #d3d;
-}
-.subscribe__configure__wrap {
-    border: 1px solid #3d3;
-    display: flex;
-    height: 100%;
-    min-height: 100%;
-}
-
-.subscribe__status{
-    width: 50%; height: auto;
-    height: auto;
-    display: inline-block;
-    box-sizing: border-box;
-    border: 2px dashed #d3d;
-    border-radius: 16px;
-    flex : 0 0 auto;
-    // position: sticky;
-    display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // top: 0;
-    // top: 0;
-
-}
-
-.subscribe__ticket {
-    width: 400px; height: 800px;
-    border: 1px solid #ddd;
-    color: #fff;
-    background: dodgerblue;
-    background-color: #E03F82;
-
-    position: sticky;
-    top: calc(50% - 400px);
-
-    .subscribe__ticket__title {
-        border: 1px solid #fff;
-        font-size: 30px;
-        font-weight: 300;
-    }
-}
-
-// font-family: 'Bebas Neue', cursive;
-
-.subscribe__option {
-    width: 50%;
-    // margin-left: 50px;
-    margin-right: 50px;
-}
-.subscribe__configure__block {
-    width: 100%;
-    border: 1px solid #000;
-    p {
-        @include TEXT_SUBTITLE_M;
-    }
-}
-
-</style>

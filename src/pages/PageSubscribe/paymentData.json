@@ -1,0 +1,192 @@
+{
+    "todoenglish" : {
+        "type" : "product",
+
+        "name" : {
+            "ko" : "토도영어",
+            "en" : "Todo English",
+            "jp" : "英語の授業",
+            "zh" : "英语课"
+        },
+
+        "prices"  : {
+            "english_1profile_6month" : 100000,
+            "english_1profile_12month" : 200000,
+            "english_2profile_6month" : 200000,
+            "english_2profile_12month" : 400000
+        },
+
+        "structure" : [
+
+            {
+                "key" : "profileLength",
+                "title" : {
+                    "ko" : "구독하려는 자녀의 프로필 갯수를 입력해주세요.",
+                    "en" : "Please enter the number of child profiles you wish to subscribe to",
+                    "jp" : "サブスクライブする子供のプロフィール本数を入力してください。",
+                    "zh" : "请输入您想要订阅的孩子的个人资料数量。"
+                },
+                "options" : [
+                    {
+                        "value" : 1,
+                        "label" : {
+                            "ko" : "한 자녀",
+                            "en" : "One Child",
+                            "jp" : "した子供",
+                            "zh" : "一个小孩"
+                        }
+                    },
+                    {
+                        "value" : 2,
+                        "label" : {
+                            "ko" : "두 자녀",
+                            "en" : "Two Child",
+                            "jp" : "二人の子供",
+                            "zh" : "两个孩子"
+                        }
+                    }
+                ]
+            },
+
+            {
+                "key" : "monthPeriod",
+                "title" : {
+                    "ko" : "상품의 구독 기간은요?",
+                    "en" : "How long is the product subscription period?",
+                    "jp" : "商品の購読期間は？",
+                    "zh" : "产品订购期为多长时间？"
+                },
+                "options" : [
+                    {
+                        "value" : 6,
+                        "label" : {
+                            "ko" : "6개월",
+                            "en" : "6 Month",
+                            "jp" : "6ヶ月",
+                            "zh" : "6个月"
+                        }
+                    },
+                    {
+                        "value" : 12,
+                        "label" : {
+                            "ko" : "12개월",
+                            "en" : "12 Month",
+                            "jp" : "12ヶ月",
+                            "zh" : "12个月"
+                        }
+                    }
+                ]
+            }
+
+        ]
+    },
+
+
+
+
+
+
+
+    "todohangul" : {
+        "type" : "product",
+
+        "name" : {
+            "ko" : "토도한글",
+            "en" : "Todo Hangul",
+            "jp" : "ハングルの授業",
+            "zh" : "韩国语课"
+        },
+
+        "prices"  : {
+            "hangul_1profile_6month" : 100000,
+            "hangul_1profile_12month" : 200000,
+            "hangul_2profile_6month" : 200000,
+            "hangul_2profile_12month" : 400000
+        },
+
+        "structure" : [
+
+            {
+                "key" : "profileLength",
+                "title" : {
+                    "ko" : "구독하려는 자녀의 프로필 갯수를 입력해주세요.",
+                    "en" : "Please enter the number of child profiles you wish to subscribe to",
+                    "jp" : "サブスクライブする子供のプロフィール本数を入力してください。",
+                    "zh" : "请输入您想要订阅的孩子的个人资料数量。"
+                },
+                "options" : [
+                    {
+                        "value" : 1,
+                        "label" : {
+                            "ko" : "한 자녀",
+                            "en" : "One Child",
+                            "jp" : "した子供",
+                            "zh" : "一个小孩"
+                        }
+                    },
+                    {
+                        "value" : 2,
+                        "label" : {
+                            "ko" : "두 자녀",
+                            "en" : "Two Child",
+                            "jp" : "二人の子供",
+                            "zh" : "两个孩子"
+                        }
+                    }
+                ]
+            },
+
+            {
+                "key" : "monthPeriod",
+                "title" : {
+                    "ko" : "상품의 구독 기간은요?",
+                    "en" : "How long is the product subscription period?",
+                    "jp" : "商品の購読期間は？",
+                    "zh" : "产品订购期为多长时间？"
+                },
+                "options" : [
+                    {
+                        "value" : 6,
+                        "label" : {
+                            "ko" : "6개월",
+                            "en" : "6 Month",
+                            "jp" : "6ヶ月",
+                            "zh" : "6个月"
+                        }
+                    },
+                    {
+                        "value" : 12,
+                        "label" : {
+                            "ko" : "12개월",
+                            "en" : "12 Month",
+                            "jp" : "12ヶ月",
+                            "zh" : "12个月"
+                        }
+                    }
+                ]
+            }
+
+        ]
+
+    },
+
+
+
+
+
+
+
+
+    "device" : {
+        "type" : "etc",
+
+        "name" : {
+            "ko" : "디바이스",
+            "en" : "Device"
+        }
+    }
+
+
+
+}
+

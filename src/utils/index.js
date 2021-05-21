@@ -263,6 +263,34 @@ export const detectDefaultRegion = () => {
 
 };
 
-// export const currentRegionData = (data) => {
-//     // const region = 
-// }
+
+
+export const flatenRegionData = (origin,region) => {
+    let reduce;
+
+    if(Array.isArray(origin)){
+        reduce = [];
+        origin.forEach((item) => {
+            reduce.push(flatenRegionData(item,region))
+        });
+    }else if(typeof origin === 'object'){
+        const keys = Object.keys(origin);
+        const isRegionObject = keys.indexOf(region) > -1;
+
+        if(isRegionObject){
+            reduce = origin[region];
+        }else {
+            reduce = {};
+            keys.forEach((key) => {
+                reduce[key] = flatenRegionData(origin[key],region);
+            });
+        }
+    }else {
+        reduce = origin;
+    }
+
+    return reduce;
+
+};
+
+

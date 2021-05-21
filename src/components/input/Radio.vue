@@ -91,7 +91,7 @@ export default {
     },
     computed : {
         styleType() {
-            return this.type ? ` type--${this.type}` : 'type--default';
+            return this.type ? ` type--${this.type}` : ' type--default';
         }
     },
     methods : {

@@ -170,8 +170,6 @@ export default {
                 allList : this.renderList,
             }
 
-            console.log(this.modelData);
-
         },
 
     },
@@ -182,9 +180,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$colGap : 5px;
-$rowGap : 10px;
+$default-col : 5px;
+$default-row : 10px;
 
+$flat-col : 15px;
+$flat-row : 15px;
 
 .input--radio-collection {
     display :flex;
@@ -196,16 +196,22 @@ $rowGap : 10px;
         > .input--radio {
 
             &.type--default {
-                margin: $colGap $rowGap ;
+                margin: $default-col $default-row ;
+            }
+
+            &.type--flat {
+                margin-right: $flat-col ;
+                margin-top: $flat-row;
             }
 
         }
     }
+
     &.direction--col {
         flex-direction: column;
         > .input--radio {
             &.type--default {
-                margin: $colGap ;
+                margin: $default-col ;
             }
         }
     }
