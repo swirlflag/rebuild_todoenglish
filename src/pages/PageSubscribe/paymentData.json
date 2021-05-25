@@ -2,7 +2,7 @@
     "todoenglish" : {
         "type" : "product",
 
-        "reveal" : ["ko","en","jp", "zh"],
+        "reveal" : true,
 
         "name" : {
             "ko" : "토도영어",
@@ -114,7 +114,7 @@
     "todohangul" : {
         "type" : "product",
 
-        "reveal" : ["ko","en","jp"],
+        "reveal" : true,
 
         "name" : {
             "ko" : "토도한글",
@@ -203,7 +203,7 @@
     "todolive" : {
         "type" : "product",
 
-        "reveal" : ["ko","en","jp", "zh"],
+        "reveal" : true,
 
         "name" : {
             "ko" : "토도라이브",

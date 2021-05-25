@@ -223,28 +223,15 @@ export default {
         },
 
         refinePaymentData(){
-            // const pickCategory = this.paymentOptions.category;
-
-            // if(pickCategory){
-
-            //     const result = flatenRegionData(paymentData[pickCategory],this.region);
-
-            //     // result.isShow = this.categorys.map(c => c.category).indexOf(this.paymentOptions.category) > -1;
-
-            //     result.isShow = !!this.categorys[pickCategory];
-
-            //     return result;
-            // }else {
-            //     return {}
-            // }
-
             let data = {};
 
             Object.entries(paymentData).map(([key,values]) => {
-
                 const { reveal } = values;
 
-                if(typeof reveal === 'boolean'){
+                if(reveal === undefined){
+                    data[key] = values;
+                }
+                else if(typeof reveal === 'boolean'){
                     if(reveal){
                         data[key] = values;
                     }
@@ -254,34 +241,25 @@ export default {
                         data[key] = values;
                     }
                 }
-
             });
 
             return flatenRegionData(data,this.region)
         },
 
         refineCategoryData() {
-            const { category } = this.paymentOptions;
-
-            const categoryData = this.refinePaymentData[category];
-            // const isShow = !!categoryData;
-
-            return {
-                ...categoryData,
-                // isShow,
-            }
+            return this.refinePaymentData[this.paymentOptions.category]
         },
 
 
     },
     watch :{
         "region"() {
-            this.calcPaymentResult();
+            this.watchRegion();
         },
         "paymentOptions.pick" :{
             deep : true,
             handler() {
-                this.calcPaymentResult();
+                this.watchPaymentPick();
             },
         },
         "paymentOptions.category"() {
@@ -292,12 +270,7 @@ export default {
     methods : {
         watchSelectCategory() {
             const { category } = this.paymentOptions;
-
-            
-
             const type = category && this.refinePaymentData[category].type;
-
-            console.log(type);
 
             this.paymentOptions.type = type;
             this.paymentOptions.pick = {};
@@ -306,25 +279,31 @@ export default {
                 price : null,
             };
         },
-
+        watchRegion() {
+            if(!this.paymentOptions.category){
+                return;
+            }
+            this.calcPaymentResult();
+        },
+        watchPaymentPick() {
+            if(!this.refinePaymentData[this.paymentOptions.category]){
+                this.paymentOptions.category = null;
+                return;
+            }
+            this.calcPaymentResult();
+        },
         selectCategory(category) {
             this.paymentOptions.category = category;
         },
         calcPaymentResult() {
-            const { category } = this.paymentOptions;
-            if(!category){
-                return;
-            }
-            if(!this.refinePaymentData[category]){
-                this.paymentOptions.category = null;
-                return;
-            }
             const string = this.assembleProductString();
             const price = this.refineCategoryData.prices[string] || null;
 
             this.paymentOptions.result = {
                 string, price
             };
+
+            console.log(this.paymentOptions.result);
         },
         assembleProductString() {
             let result = '';
@@ -360,9 +339,6 @@ export default {
 
         },
 
-
-
-        
     },
     mounted() {
     },
