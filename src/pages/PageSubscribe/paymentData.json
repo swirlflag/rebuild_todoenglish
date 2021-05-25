@@ -2,6 +2,8 @@
     "todoenglish" : {
         "type" : "product",
 
+        "reveal" : ["ko","en","jp", "zh"],
+
         "name" : {
             "ko" : "토도영어",
             "en" : "Todo English",
@@ -10,16 +12,37 @@
         },
 
         "prices"  : {
-            "english_1profile_6month" : 100000,
-            "english_1profile_12month" : 200000,
-            "english_2profile_6month" : 200000,
-            "english_2profile_12month" : 400000
+            "todoenglish_1profile_6month" : {
+                "ko" : 100000,
+                "en" : 100,
+                "jp" : 10000,
+                "zh" : 1000
+            },
+            "todoenglish_1profile_12month" : {
+                "ko" : 200000,
+                "en" : 200,
+                "jp" : 20000,
+                "zh" : 2000
+            },
+            "todoenglish_2profile_6month" : {
+                "ko" : 200000,
+                "en" : 200,
+                "jp" : 20000,
+                "zh" : 2000
+            },
+            "todoenglish_2profile_12month" : {
+                "ko" : 400000,
+                "en" : 400,
+                "jp" : 40000,
+                "zh" : 4000
+            }
         },
 
         "structure" : [
 
             {
                 "key" : "profileLength",
+                "required" : true,
                 "title" : {
                     "ko" : "구독하려는 자녀의 프로필 갯수를 입력해주세요.",
                     "en" : "Please enter the number of child profiles you wish to subscribe to",
@@ -50,6 +73,7 @@
 
             {
                 "key" : "monthPeriod",
+                "required" : true,
                 "title" : {
                     "ko" : "상품의 구독 기간은요?",
                     "en" : "How long is the product subscription period?",
@@ -90,6 +114,8 @@
     "todohangul" : {
         "type" : "product",
 
+        "reveal" : ["ko","en","jp"],
+
         "name" : {
             "ko" : "토도한글",
             "en" : "Todo Hangul",
@@ -98,16 +124,17 @@
         },
 
         "prices"  : {
-            "hangul_1profile_6month" : 100000,
-            "hangul_1profile_12month" : 200000,
-            "hangul_2profile_6month" : 200000,
-            "hangul_2profile_12month" : 400000
+            "todohangul_1profile_6month" : 100000,
+            "todohangul_1profile_12month" : 200000,
+            "todohangul_2profile_6month" : 200000,
+            "todohangul_2profile_12month" : 400000
         },
 
         "structure" : [
 
             {
                 "key" : "profileLength",
+                "required" : true,
                 "title" : {
                     "ko" : "구독하려는 자녀의 프로필 갯수를 입력해주세요.",
                     "en" : "Please enter the number of child profiles you wish to subscribe to",
@@ -138,6 +165,7 @@
 
             {
                 "key" : "monthPeriod",
+                "required" : true,
                 "title" : {
                     "ko" : "상품의 구독 기간은요?",
                     "en" : "How long is the product subscription period?",
@@ -172,18 +200,141 @@
 
 
 
+    "todolive" : {
+        "type" : "product",
 
+        "reveal" : ["ko","en","jp", "zh"],
 
+        "name" : {
+            "ko" : "토도라이브",
+            "en" : "Todo Live",
+            "jp" : "ハングルの授業",
+            "zh" : "韩国语课"
+        },
+
+        "prices"  : {
+            "todolive_1ticket" : 9000,
+            "todolive_10ticket" : 89000
+        },
+
+        "structure" : [
+
+            {
+                "key" : "ticketLength",
+                "required" : false,
+                "title" : {
+                    "ko" : "구매할 티켓 갯수를 알려주세요.",
+                    "en" : "Please enter the number of child profiles you wish to subscribe to",
+                    "jp" : "サブスクライブする子供のプロフィール本数を入力してください。",
+                    "zh" : "请输入您想要订阅的孩子的个人资料数量。"
+                },
+
+                "statusText" : {
+                    "ko" : "개의 토도라이브 참여 티켓",
+                    "en" : "en ~~",
+                    "jp" : "jp ~~",
+                    "zh" : "zh ~~"
+                },
+
+                "options" : [
+                    {
+                        "value" : 1,
+                        "label" : {
+                            "ko" : "1회권",
+                            "en" : "10 Ticket",
+                            "jp" : "した子供",
+                            "zh" : "一个小孩"
+                        }
+                    },
+                    {
+                        "value" : 10,
+                        "label" : {
+                            "ko" : "10회권",
+                            "en" : "Two Child",
+                            "jp" : "二人の子供",
+                            "zh" : "两个孩子"
+                        }
+                    }
+                ]
+            }
+
+        ]
+
+    },
 
 
 
     "device" : {
         "type" : "etc",
 
+        "reveal" : ["ko","en","jp"],
+
         "name" : {
-            "ko" : "디바이스",
-            "en" : "Device"
-        }
+            "ko" : "사용 기기",
+            "en" : "Device",
+            "jp" : "Device jp"
+        },
+
+        "prices"  : {
+            "device_galaxytab" : 178000,
+            "device_ak47" : 60000,
+            "device_m4a1" : 2870000,
+            "device_k2" : 880000
+        },
+
+        "structure" : [
+
+            {
+                "key" : "deviceName",
+                "required" : true,
+                "title" : {
+                    "ko" : "구매하려는 기기를 선택해주세요.",
+                    "en" : "Please enter the number of child profiles you wish to subscribe to",
+                    "jp" : "サブスクライブする子供のプロフィール本数を入力してください。",
+                    "zh" : "请输入您想要订阅的孩子的个人资料数量。"
+                },
+                "options" : [
+                    {
+                        "value" : "galaxytab",
+                        "label" : {
+                            "ko" : "갤럭시 탭 A7",
+                            "en" : "galaxy_tab_7",
+                            "jp" : "galaxy_tab_7 jp",
+                            "zh" : "galaxy_tab_7 zh"
+                        }
+                    },
+                    {
+                        "value" : "ak47",
+                        "label" : {
+                            "ko" : "AK-47",
+                            "en" : "AK-47",
+                            "jp" : "AK-47",
+                            "zh" : "AK-47"
+                        }
+                    },
+                    {
+                        "value" : "m4a1",
+                        "label" : {
+                            "ko" : "M4A1",
+                            "en" : "M4A1",
+                            "jp" : "M4A1",
+                            "zh" : "M4A1"
+                        }
+                    },
+                    {
+                        "value" : "k2",
+                        "label" : {
+                            "ko" : "K2",
+                            "en" : "K2",
+                            "jp" : "K2",
+                            "zh" : "K2"
+                        }
+                    }
+                ]
+            }
+
+        ]
+
     }
 
 

@@ -10,5 +10,11 @@
         "en" : "First, please select the product group you want to purchase.",
         "jp" : "まず、購入ハシリョヌン商品群を選択してください。",
         "zh" : "首先，选择要购买的产品组"
+    },
+    "priceUnit" : {
+        "ko" : "₩",
+        "en" : "$",
+        "jp" : "¥",
+        "zh" : "¥"
     }
 }

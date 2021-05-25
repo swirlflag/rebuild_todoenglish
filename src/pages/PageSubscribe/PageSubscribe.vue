@@ -17,7 +17,7 @@
             </p>
         </section>
 
-        {{categorys}}
+        <br><br>
         <section class="subscribe__category">
             <p class="subscribe__category__title">
                 {{$l.category_select_title}}
@@ -25,21 +25,13 @@
 
             <div class="subscribe__category__radiobox">
 
-                <!-- <div class="subscribe__category__radio" @click="selectCategory('이벤트')">
-                    <span class="subscribe__category__radio__source item--event">
-                        토도영어 12개월
-                        <br>+
-                        <br>토도한글 12개월
-                    </span>
-                    <p class="subscribe__category__radio__name">이벤트 패키지!</p>
-                </div> -->
-
-                <template v-for="([key,values],idx) in Object.entries(categorys)">
+                <template v-for="([key,values],idx) in Object.entries(refinePaymentData)">
                     <div    class="subscribe__category__radio"
-                            :class="{'st-checked' : pickPaymentOptions.category === key}"
+                            :class="{'st-checked' : paymentOptions.category === key}"
                             @click="selectCategory(key)"
                             :key="`${key}-${idx}`"
                     >
+
                         <span   class="subscribe__category__radio__source"
                                 :class="`item--${key}`"
                         >
@@ -54,27 +46,32 @@
 
                 </template>
 
-                {{refinePaymentData}}
             </div>
 
         </section>
-
-        <!-- <section class="subscribe__configure"> -->
-            {{pickPaymentOptions}}
+            <!-- refinePaymentData : {{refinePaymentData}} -->
+            <br>
+            <br>
+            refineCategoryData : {{refineCategoryData}}
+            <br>
+            <br>
+            this.paymentOptions : {{paymentOptions}}
             <br>
             <br>
 
         <section    class="subscribe__configure"
-                    v-if="refinePaymentData.isShow"
-                    :class="`type--${pickPaymentOptions.category}`"
+                    v-if="refineCategoryData"
+                    :class="`category--${paymentOptions.category}`"
         >
 
             <div class="subscribe__configure__wrap" >
 
-                <div class="subscribe__status">
+                <div    class="subscribe__status"
+                        :class="`type--${paymentOptions.type}`"
+                >
 
                     <div    class="subscribe__ticket"
-                            v-if="pickPaymentOptions.type === 'product'"
+                            v-if="paymentOptions.type === 'product'"
                     >
 
                         <div class="subscribe__ticket__side1">
@@ -85,10 +82,10 @@
                             </div>
 
                             <div    class="subscribe__profilelength"
-                                    :class="{'st-show' : !!pickPaymentOptions.profileLength}"
+                                    :class="{'st-show' : !!paymentOptions.pick.profileLength}"
                             >
                                 <TextChangeMask
-                                    :text="pickPaymentOptions.profileLength ||'0'"
+                                    :text="paymentOptions.pick.profileLength ||'0'"
                                 />
                                 <span>
                                     개 프로필에 등록합니다.
@@ -99,12 +96,36 @@
 
                                 <p class="subscribe__ticket__title">
                                     <TextChangeMask
-                                        :text="refinePaymentData.name"
+                                        :text="refineCategoryData.name"
                                     />
                                 </p>
 
-                                <div class="subscribe__select-">
+                                <ul class="subscribe__ticket__list">
+                                    <template v-for="(item,idx) in refineCategoryData.structure">
+                                        <li     class="subscribe__ticket__text prefix--dot"
+                                                v-if="paymentOptions.pick[item.key]"
+                                                :key="idx"
+                                        >
+                                            <!-- {{paymentOptions.pick[item.key]}} -->
+                                            <!-- {{item.statusText}} -->
 
+                                            {{ item }}
+                                        </li>
+                                    </template>
+                                </ul>
+
+                                <div    class="subscribe__ticket__price"
+                                        :class="{'st-show' : paymentOptions.result.price}"
+                                >
+                                    <TextChangeMask
+                                        :text="paymentOptions.result.price && paymentOptions.result.price.toLocaleString()"
+                                        speed="400"
+                                        delay="150"
+                                    />
+
+                                    <span>
+                                        {{$l.priceUnit}}
+                                    </span>
                                 </div>
                                 <span class="subscribe__ticket__barcord"></span>
                             </div>
@@ -114,26 +135,33 @@
                         <span class="subscribe__ticket__cutline"></span>
 
                         <div class="subscribe__ticket__side2">
-                            side2
+                            side2 :
                         </div>
 
+                    </div>
+
+                    <div    class="subscribe__etc-display"
+                            v-if="paymentOptions.type === 'etc'"
+                    >
+                        subscribe__etc-display
                     </div>
 
                 </div>
 
                 <div class="subscribe__option">
-                    
 
-                    <template v-for="(item,idx) in refinePaymentData.structure">
+                    <template v-for="(option,idx) in refineCategoryData.structure">
 
-                        <div class="subscribe__configure__block" :key="`${pickPaymentOptions.category}-${idx}`">
+                        <div class="subscribe__configure__block" :key="`${paymentOptions.category}-${idx}`">
                             <p class="subscribe__configure__title">
-                                {{ item.title }}
+                                {{ option.title }}
                             </p>
 
+                            <span v-if="option.required">* required check</span>
+
                             <div class="subscribe__configure__radio">
-                                <RadioCollection    v-model="pickPaymentOptions[item.key]"
-                                                    :list="item.options.map(c => ({text : c.label , value : c.value}))"
+                                <RadioCollection    v-model="paymentOptions.pick[option.key]"
+                                                    :list="option.options.map(c => ({text : c.label , value : c.value}))"
                                                     type="flat"
                                 />
                             </div>
@@ -168,15 +196,23 @@ export default {
     data() {
         return {
 
-            pickPaymentOptions : {
+            paymentOptions : {
                 category : null,
                 type : null,
+
+                pick : {
+                    // ...from paymentData.json
+                },
+
+                result : {
+                    string : "",
+                    price : null,
+                },
             },
 
         }
     },
     computed : {
-        // product
 
         region () {
             return this.$store.state.region;
@@ -186,69 +222,171 @@ export default {
             return flatenRegionData(PageSubscribeData,this.region);
         },
 
-        categorys() {
-            const result = {};
-            Object.entries(paymentData).map(([k,v]) => {
-                const name = v.name[this.region];
-                if(name){
-                    result[k] = {
-                        key : k,
-                        name,
-                        type : v.type,
+        refinePaymentData(){
+            // const pickCategory = this.paymentOptions.category;
+
+            // if(pickCategory){
+
+            //     const result = flatenRegionData(paymentData[pickCategory],this.region);
+
+            //     // result.isShow = this.categorys.map(c => c.category).indexOf(this.paymentOptions.category) > -1;
+
+            //     result.isShow = !!this.categorys[pickCategory];
+
+            //     return result;
+            // }else {
+            //     return {}
+            // }
+
+            let data = {};
+
+            Object.entries(paymentData).map(([key,values]) => {
+
+                const { reveal } = values;
+
+                if(typeof reveal === 'boolean'){
+                    if(reveal){
+                        data[key] = values;
                     }
                 }
+                else if(Array.isArray(reveal)){
+                    if(reveal.indexOf(this.region) > -1){
+                        data[key] = values;
+                    }
+                }
+
             });
-            return result;
+
+            return flatenRegionData(data,this.region)
         },
 
-        refinePaymentData(){
-            const pickCategory = this.pickPaymentOptions.category;
-            if(pickCategory){
-                const result = flatenRegionData(paymentData[pickCategory],this.region);
+        refineCategoryData() {
+            const { category } = this.paymentOptions;
 
-                // result.isShow = this.categorys.map(c => c.category).indexOf(this.pickPaymentOptions.category) > -1;
+            const categoryData = this.refinePaymentData[category];
+            // const isShow = !!categoryData;
 
-                result.isShow = !!this.categorys[pickCategory];
-
-                return result;
-            }else {
-                return {}
+            return {
+                ...categoryData,
+                // isShow,
             }
+        },
+
+
+    },
+    watch :{
+        "region"() {
+            this.calcPaymentResult();
+        },
+        "paymentOptions.pick" :{
+            deep : true,
+            handler() {
+                this.calcPaymentResult();
+            },
+        },
+        "paymentOptions.category"() {
+            this.watchSelectCategory();
         },
     },
 
     methods : {
-        log(v){
-            console.log(v)
-        },
-        selectCategory(category) {
-            if(this.pickPaymentOptions.category === category){
+        watchSelectCategory() {
+            const { category } = this.paymentOptions;
 
-                {123}
-                // this.pickPaymentOptions = {
-                //     category : null,
-                //     type : null,
-                // }
-            }else {
-                this.pickPaymentOptions = {
-                    category,
-                    type : this.categorys[category].type,
+            
+
+            const type = category && this.refinePaymentData[category].type;
+
+            console.log(type);
+
+            this.paymentOptions.type = type;
+            this.paymentOptions.pick = {};
+            this.paymentOptions.result = {
+                string : "",
+                price : null,
+            };
+        },
+
+        selectCategory(category) {
+            this.paymentOptions.category = category;
+        },
+        calcPaymentResult() {
+            const { category } = this.paymentOptions;
+            if(!category){
+                return;
+            }
+            if(!this.refinePaymentData[category]){
+                this.paymentOptions.category = null;
+                return;
+            }
+            const string = this.assembleProductString();
+            const price = this.refineCategoryData.prices[string] || null;
+
+            this.paymentOptions.result = {
+                string, price
+            };
+        },
+        assembleProductString() {
+            let result = '';
+            const { category } = this.paymentOptions;
+
+            switch(category) {
+                case ('todoenglish'):{
+                    const { profileLength, monthPeriod } = this.paymentOptions.pick;
+                    result = `todoenglish_${profileLength}profile_${monthPeriod}month`;
+                    break;
+                }
+                case ('todohangul') : {
+                    const { profileLength , monthPeriod } = this.paymentOptions.pick;
+                    result = `todohangul_${profileLength}profile_${monthPeriod}month`;
+                    break;
+                }
+                case ('todolive') : {
+                    const { ticketLength } = this.paymentOptions.pick;
+                    result = `todolive_${ticketLength}ticket`;
+                    break;
+                }
+                case ('device') : {
+                    const { deviceName } = this.paymentOptions.pick;
+                    result = `device_${deviceName}`;
+                    break;
+                }
+                default : {
+                    break;
                 }
             }
-        },
-        makeCategorySwiper() {
-            const options = {
 
-            };
+            return result;
 
-            const swiper = new this.$swiper(this.$refs.ref_swiper, options)
-            {swiper}
         },
+
+
+
+        
     },
     mounted() {
-        // this.makeCategorySwiper();
     },
 }
 </script>
 
 <style scoped lang="scss" src="./PageSubscribe.scss"></style>
+
+
+<!--
+토도영어
+    구독권
+    워크시트
+
+토도한글
+    구독권
+
+토도수학
+    구독권
+
+토도라이브
+    참여 티켓
+
+디바이스
+    갤럭시탭
+
+-->

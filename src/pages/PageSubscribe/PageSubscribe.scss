@@ -4,6 +4,9 @@ $english-color : #fff;
 $hangul-backcolor : rgb(255, 204, 62);
 $hangul-color : #000;
 
+$live-backcolor : #f7419c;
+$live-color : #fff;
+
 
 .page--subscribe {
     // border: 1px solid #000;
@@ -104,6 +107,13 @@ section {
                     background-color: $hangul-backcolor;
                 }
 
+                &.item--todolive {
+                    font-size: 30px;
+                    font-weight: 700;
+                    color: #fff;
+                    background-color: $live-backcolor;
+                }
+
                 &.item--device {
                     font-size: 60px;
                     color: #fff;
@@ -200,21 +210,32 @@ section {
         }
     }
 
-    &::before ,&::after{
-        content: '' ;
-        width: 100px;height: 100px;
-        position: absolute;
-        border-radius: 100%;
-        background-color: #fff;
+
+    @mixin ticketHole {
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            border-radius: 100%;
+            width: 100px; height: 100px;
+            background-color: #fff;
+        }
     }
 
-    &::before {
-        top: 0; left: 50%;
-        transform: translate(-50%,-70%);
+    @mixin ticketHoleTop {
+        @include ticketHole;
+        &::before {
+            top : 0; left : 50%;
+            transform: translate(-50%,-70%);
+        }
     }
-    &::after {
-        bottom: 0; left: 50%;
-        transform: translate(-50%,70%);
+
+    @mixin ticketHoleBottom {
+        @include ticketHole;
+        &::before {
+            bottom : 0; left : 50%;
+            transform: translate(-50%,70%);
+        }
     }
 
 
@@ -230,6 +251,7 @@ section {
         box-shadow: $ticket-shadow;
         transition : background-color 300ms ease;
 
+        @include ticketHoleTop;
 
         .subscribe__ticket__etc {
             // border: 1px solid #000;
@@ -248,9 +270,6 @@ section {
                 position: absolute;
                 top: 0; left: 0;
             }
-
-
-
             .subscribe__ticket__lettering {
                 position: absolute;
                 right: 0;
@@ -273,8 +292,8 @@ section {
             flex-direction: column;
             align-items: center;
             min-height: 400px;
-            // padding: 20px;
-            // padding-top: 0;
+            padding: 10px;
+            padding-top: 0;
             position: relative;
 
             .subscribe__ticket__title {
@@ -283,6 +302,7 @@ section {
                 display: inline-block;
                 transform: translateY(-40%);
                 font-family: 'Black Han Sans', sans-serif;
+                // font-weight: 700;
                 font-size: 40px;
                 display: flex;
                 justify-content: center;
@@ -298,6 +318,34 @@ section {
                 }
             }
 
+            .subscribe__ticket__list {
+                width: 100%;
+
+                .subscribe__ticket__text {
+                    border: 1px solid #3d3;
+                }
+            }
+
+            .subscribe__ticket__price {
+                margin-top: auto;
+                width: 100%;
+                opacity: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                font-weight: 700;
+                font-size: 40px;
+                transition: opacity 300ms ease;
+
+                > .mask-text {
+                    text-align: right;
+                }
+
+                &.st-show {
+                    opacity: 1;
+                }
+            }
+
             .subscribe__ticket__barcord {
                 // border: 1px solid #d3d;
                 width: 36px; height: 150px;
@@ -310,6 +358,10 @@ section {
             }
         }
 
+    }
+
+    .subscribe__ticket__side2 {
+        @include ticketHoleBottom;
     }
 
     .subscribe__ticket__cutline {
@@ -338,7 +390,7 @@ section {
         .subscribe__ticket__barcord {background-image : url(~@/assets/temp/barcordwhite.png)};
     }
 
-    .type--todoenglish & {
+    .category--todoenglish & {
         color : $english-color;
         @include ticketwhite;
         .subscribe__ticket__side1,
@@ -347,7 +399,7 @@ section {
         .subscribe__ticket__cutline {border-top: 4px dashed $english-backcolor;}
     }
 
-    .type--todohangul & {
+    .category--todohangul & {
         color : $hangul-color;
         @include ticketblack;
         .subscribe__ticket__side1,
@@ -356,6 +408,23 @@ section {
         .subscribe__ticket__cutline {border-top: 4px dashed $hangul-backcolor;}
     }
 
+    .category--todolive & {
+        color : $live-color;
+        @include ticketwhite;
+        .subscribe__ticket__side1,
+        .subscribe__ticket__side2,
+        .subscribe__ticket__title  {background-color: $live-backcolor;}
+        .subscribe__ticket__cutline {border-top: 4px dashed $live-backcolor;}
+    }
+
+}
+
+.subscribe__etc-display {
+    position: sticky;
+    border: 2px solid #d3d;
+    width: 500px; height: 500px;
+
+    top : calc(50% - 250px);
 }
 
 
