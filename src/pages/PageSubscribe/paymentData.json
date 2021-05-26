@@ -11,6 +11,13 @@
             "zh" : "英语课"
         },
 
+        "text" : {
+            "ko" : "토도영어는 iOS/Android 모바일 기기 환경에서 실행할 수 있는 교육용 애플리케이션입니다. 플레이 하는 운영체제 환경에 따라 App Store/Play Store에서 다운로드 받으실 수 있으며 하단에서 커리큘럼 이용에 필요한 정기 구독권을 결제합니다.",
+            "en" : "Todo English is an educational application that can be run on iOS/Android mobile devices. You can download it from the App Store/Play Store depending on the operating system environment you are playing, and you pay for a regular subscription to use the curriculum.",
+            "jp" : "藤堂の英語は、iOS/ Androidモバイル機器の環境で実行できる教育アプリケーションです。プレイするオペレーティング・システム環境に応じて、App Store/ Play Storeからダウンロードすることができカリキュラム利用に必要な定期購読を支払います。",
+            "zh" : "Todo English是一种教育性应用程序，可以在iOS / Android移动设备环境中运行。 您可以根据所玩的操作系统环境从App Store / Play商店下载它，并支付使用该课程表的常规订阅费用。"
+        },
+
         "prices"  : {
             "todoenglish_1profile_6month" : {
                 "ko" : 100000,
@@ -123,6 +130,13 @@
             "zh" : "韩国语课"
         },
 
+        "text" : {
+            "ko" : "토도한글은 iOS/Android 모바일 기기 환경에서 실행할 수 있는 교육용 애플리케이션입니다. 플레이 하는 운영체제 환경에 따라 App Store/Play Store에서 다운로드 받으실 수 있으며 하단에서 커리큘럼 이용에 필요한 정기 구독권을 결제합니다.",
+            "en" : "Todo English is an educational application that can be run on iOS/Android mobile devices. You can download it from the App Store/Play Store depending on the operating system environment you are playing, and you pay for a regular subscription to use the curriculum.",
+            "jp" : "藤堂の英語は、iOS/ Androidモバイル機器の環境で実行できる教育アプリケーションです。プレイするオペレーティング・システム環境に応じて、App Store/ Play Storeからダウンロードすることができカリキュラム利用に必要な定期購読を支払います。",
+            "zh" : "Todo English是一种教育性应用程序，可以在iOS / Android移动设备环境中运行。 您可以根据所玩的操作系统环境从App Store / Play商店下载它，并支付使用该课程表的常规订阅费用。"
+        },
+
         "prices"  : {
             "todohangul_1profile_6month" : 100000,
             "todohangul_1profile_12month" : 200000,
@@ -212,6 +226,13 @@
             "zh" : "韩国语课"
         },
 
+        "text" : {
+            "ko" : "토도라이브는 온라인 미팅 프로그램 Zoom을 이용해 웹 브라우저 혹은 Zoom어플리케이션에서 참여할수 있는 실시간 교육 세션입니다. 토도라이브 티켓으로 세션을 예약해 참여할 수 있으며 하단에서는 티켓의 결제를 진행합니다.",
+            "en" : "Todo English is an educational application that can be run on iOS/Android mobile devices. You can download it from the App Store/Play Store depending on the operating system environment you are playing, and you pay for a regular subscription to use the curriculum.",
+            "jp" : "藤堂の英語は、iOS/ Androidモバイル機器の環境で実行できる教育アプリケーションです。プレイするオペレーティング・システム環境に応じて、App Store/ Play Storeからダウンロードすることができカリキュラム利用に必要な定期購読を支払います。",
+            "zh" : "Todo English是一种教育性应用程序，可以在iOS / Android移动设备环境中运行。 您可以根据所玩的操作系统环境从App Store / Play商店下载它，并支付使用该课程表的常规订阅费用。"
+        },
+
         "prices"  : {
             "todolive_1ticket" : 9000,
             "todolive_10ticket" : 89000
@@ -264,6 +285,8 @@
 
 
 
+
+
     "device" : {
         "type" : "etc",
 
@@ -273,6 +296,13 @@
             "ko" : "사용 기기",
             "en" : "Device",
             "jp" : "Device jp"
+        },
+
+        "text" : {
+            "ko" : "토도스쿨 제품 이용에 용이한 디바이스를 선별해 멤버십 구독을 진행중인 분들께 합리적인 가격에 제공해 드립니다. 하단에서 디바이스를 선택해 결제를 진행합니다.",
+            "en" : "We select devices that are easy to use for Todo School products and provide them at a reasonable price to those who are in the process of membership subscription. Select a device at the bottom to proceed with payment.",
+            "jp" : "藤堂スクール製品利用に容易なデバイスを選別してメンバーシップのサブスクリプションを進行中の方にリーズナブルな価格でご提供いたします。下部にデバイスを選択して決済を行います。",
+            "zh" : "我们选择易于用于Todo School产品的设备，并以合理的价格向正在加入会员的人提供这些设备。 选择底部的设备以继续付款。"
         },
 
         "prices"  : {
@@ -335,6 +365,26 @@
 
         ]
 
+    },
+
+    "worksheet" : {
+        "type" : "etc",
+
+        "reveal" : true,
+
+        "name" : {
+            "ko" : "워크시트",
+            "en" : "Work Sheet",
+            "jp" : "Work Sheet jp",
+            "zh" : "Work Sheet zh"
+        },
+
+        "text" : {
+            "ko" : "워크시트는 토도스쿨 학습과 함께 커리큘럼을 더욱 효과적으로 만들어주는 맞춤 학습지 입니다, 하단에서 과목과 학습 진행 상황에 알맞게 추가적인 워크시트를 구매하실수 있습니다.",
+            "en" : "Worksheets are tailored workbooks that make the curriculum more effective along with Todo School learning. You can purchase additional worksheets at the bottom to suit your subject and learning progress.",
+            "jp" : "ワークシートは、藤堂スクール学習と一緒にカリキュラムをより効果的にしてくれるカスタム学習指導ですが、下部には科目の学習の進捗状況に合わせ、追加のワークシートを購入出来ます。",
+            "zh" : "工作表是量身定制的工作簿，可以使课程随着Todo School学习而更加有效，您可以在底部购买其他工作表以适合您的学科和学习进度。"
+        }
     }
 
 

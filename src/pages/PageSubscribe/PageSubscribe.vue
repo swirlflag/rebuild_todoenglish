@@ -3,9 +3,11 @@
     <div class="pagemission page--subscribe">
 
         <section class="subscribe__notice">
-            <!-- <p>
+            <p>
                 선택하기 전에 알려드립니다!
-            </p> -->
+                <br>
+                우리 무슨 이벤트 이런거 하고있어요 
+            </p>
         </section>
 
         <section class="subscribe__header">
@@ -13,7 +15,6 @@
                 {{$l.category_main_title}}
             </h1>
             <p>
-
             </p>
         </section>
 
@@ -47,6 +48,15 @@
                 </template>
 
             </div>
+
+            <p class="subscribe__category__text" v-if="refineCategoryData.text">
+                * {{refineCategoryData.text}}
+                <br>
+                <br>
+                <span class="precaution">
+                    -테스트: 선택한 결제 상품에 대해, 상품 타입(?) 및 결제 종류에 대한 간단한 설명줄-
+                </span>
+            </p>
 
         </section>
             <!-- refinePaymentData : {{refinePaymentData}} -->
@@ -143,7 +153,8 @@
                     <div    class="subscribe__etc-display"
                             v-if="paymentOptions.type === 'etc'"
                     >
-                        subscribe__etc-display
+
+                        {{refineCategoryData}}
                     </div>
 
                 </div>
@@ -228,26 +239,22 @@ export default {
             Object.entries(paymentData).map(([key,values]) => {
                 const { reveal } = values;
 
-                if(reveal === undefined){
+                const isAll = (reveal === undefined) || (typeof reveal === 'boolean' && reveal);
+
+                if(isAll){
                     data[key] = values;
-                }
-                else if(typeof reveal === 'boolean'){
-                    if(reveal){
-                        data[key] = values;
-                    }
-                }
-                else if(Array.isArray(reveal)){
+                }else if(Array.isArray(reveal)){
                     if(reveal.indexOf(this.region) > -1){
                         data[key] = values;
                     }
                 }
             });
 
-            return flatenRegionData(data,this.region)
+            return flatenRegionData(data,this.region);
         },
 
         refineCategoryData() {
-            return this.refinePaymentData[this.paymentOptions.category]
+            return this.refinePaymentData[this.paymentOptions.category] || {};
         },
 
 
@@ -297,13 +304,12 @@ export default {
         },
         calcPaymentResult() {
             const string = this.assembleProductString();
-            const price = this.refineCategoryData.prices[string] || null;
+            const price = this.refineCategoryData?.prices?.[string] || null;
 
             this.paymentOptions.result = {
                 string, price
             };
 
-            console.log(this.paymentOptions.result);
         },
         assembleProductString() {
             let result = '';
@@ -312,22 +318,36 @@ export default {
             switch(category) {
                 case ('todoenglish'):{
                     const { profileLength, monthPeriod } = this.paymentOptions.pick;
-                    result = `todoenglish_${profileLength}profile_${monthPeriod}month`;
+
+                    const stringProfileLength   =   profileLength   ?   `_${profileLength}profile`  : "";
+                    const stringMonthPeriod     =   monthPeriod     ?   `_${monthPeriod}month`      : "";
+
+                    result = `todoenglish${stringProfileLength}${stringMonthPeriod}`;
                     break;
                 }
                 case ('todohangul') : {
                     const { profileLength , monthPeriod } = this.paymentOptions.pick;
-                    result = `todohangul_${profileLength}profile_${monthPeriod}month`;
+
+                    const stringProfileLength   =   profileLength   ?   `_${profileLength}profile`  : "";
+                    const stringMonthPeriod     =   monthPeriod     ?   `_${monthPeriod}month`      : "";
+
+                    result = `todohangul${stringProfileLength}${stringMonthPeriod}`;
                     break;
                 }
                 case ('todolive') : {
                     const { ticketLength } = this.paymentOptions.pick;
-                    result = `todolive_${ticketLength}ticket`;
+
+                    const stringTicketLength =  ticketLength  ?  `_${ticketLength}ticket` : "";
+
+                    result = `todolive${stringTicketLength}`;
                     break;
                 }
                 case ('device') : {
                     const { deviceName } = this.paymentOptions.pick;
-                    result = `device_${deviceName}`;
+
+                    const stringDeviceName = deviceName ? `_${deviceName}` : "";
+
+                    result = `device${stringDeviceName}`;
                     break;
                 }
                 default : {
@@ -351,7 +371,7 @@ export default {
 <!--
 토도영어
     구독권
-    워크시트
+    워크시트?
 
 토도한글
     구독권

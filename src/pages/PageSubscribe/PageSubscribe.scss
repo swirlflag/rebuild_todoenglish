@@ -142,6 +142,15 @@ section {
 
         }
     }
+
+    .subscribe__category__text {
+        border: 1px solid #000;
+        font-weight: 700;
+        margin-top: 50px;
+        .precaution {
+            font-weight: 300;
+        }
+    }
 }
 
 
@@ -421,7 +430,7 @@ section {
 
 .subscribe__etc-display {
     position: sticky;
-    border: 2px solid #d3d;
+    border: 5px solid #d3d;
     width: 500px; height: 500px;
 
     top : calc(50% - 250px);
