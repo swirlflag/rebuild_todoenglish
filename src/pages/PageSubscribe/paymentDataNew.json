@@ -1,0 +1,126 @@
+[
+
+
+
+
+
+
+
+
+
+    {
+        "category" : "todoenglish",
+
+        "children" : [
+            {
+                "name" : "subscribe",
+
+                "options" : [
+                    {
+                        "key" : "profileLength",
+                        "props" : [
+                            {
+                                "value" : 1,
+                                "label" : "한 자녀"
+                            },
+                            {
+                                "value" : 2,
+                                "label" : "두 자녀"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+
+    },
+
+
+
+
+
+
+
+
+
+    {
+        "category" : "etc",
+
+        "children" : [
+            {
+                "name" : "device",
+                "options" : [
+                    {
+                        "key" : "deviceKind",
+                        "props" : [
+                            {
+                                "value" : "galaxytab",
+                                "label" : "갤럭시 탭"
+                            },
+                            {
+                                "value" : "ipad",
+                                "label" : "아이패드"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name" : "worksheet",
+
+                "children" : [
+                    {
+                        "name" : "todoenglish",
+
+                        "options" : [
+                            {
+                                "key" : "english range",
+                                "props" : [
+                                    {
+                                        "value" : "a-b",
+                                        "label" : "A-B"
+                                    },
+                                    {
+                                        "value" : "c-d",
+                                        "label" : "C-D"
+                                    },
+                                    {
+                                        "value" : "e-f",
+                                        "label" : "E-F"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+
+                    {
+                        "name" : "todohangul",
+
+                        "options" : [
+                            {
+                                "key" : "hangul range",
+                                "props" : [
+                                    {
+                                        "value" : "a-b",
+                                        "label" : "A-B"
+                                    },
+                                    {
+                                        "value" : "c-d",
+                                        "label" : "C-D"
+                                    },
+                                    {
+                                        "value" : "e-f",
+                                        "label" : "E-F"
+                                    }
+                                ]
+                            }
+                        ]
+
+                    }
+                ]
+            }
+        ]
+
+    }
+
+]

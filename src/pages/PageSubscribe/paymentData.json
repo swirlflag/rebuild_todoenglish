@@ -367,6 +367,9 @@
 
     },
 
+
+
+
     "worksheet" : {
         "type" : "etc",
 
@@ -384,10 +387,78 @@
             "en" : "Worksheets are tailored workbooks that make the curriculum more effective along with Todo School learning. You can purchase additional worksheets at the bottom to suit your subject and learning progress.",
             "jp" : "ワークシートは、藤堂スクール学習と一緒にカリキュラムをより効果的にしてくれるカスタム学習指導ですが、下部には科目の学習の進捗状況に合わせ、追加のワークシートを購入出来ます。",
             "zh" : "工作表是量身定制的工作簿，可以使课程随着Todo School学习而更加有效，您可以在底部购买其他工作表以适合您的学科和学习进度。"
-        }
+        },
+
+        "prices"  : {
+            "worksheet_todoenglish_atob"    : 20000,
+            "worksheet_todoenglish_ctod"    : 20000,
+            "worksheet_todoenglish_etof"    : 40000,
+            "worksheet_todohangul_atob"     : 40000,
+            "worksheet_todohangul_ctod"     : 40000,
+            "worksheet_todohangul_etof"     : 40000
+        },
+
+        "structure" : [
+
+            {
+                "key" : "category",
+                "required" : true,
+                "title" : {
+                    "ko" : "구매하려는 워크시트의 과목을 골라주세요.",
+                    "en" : "Please select the subject on the worksheet you wish to purchase.",
+                    "jp" : "購入するワークシートの科目を選んでください。",
+                    "zh" : "请在您要购买的工作表上选择主题。"
+                },
+                "options" : [
+                    {
+                        "value" : "todoenglish",
+                        "label" : {
+                            "ko" : "토도영어",
+                            "en" : "Todo English",
+                            "jp" : "英語の授業",
+                            "zh" : "英语课"
+                        }
+                    },
+                    {
+                        "value" : "todohangul",
+                        "label" : {
+                            "ko" : "토도한글",
+                            "en" : "Todo Hangul",
+                            "jp" : "ハングルの授業",
+                            "zh" : "韩国语课"
+                        }
+                    }
+                ]
+            },
+
+            {
+                "key" : "range",
+                "required" : true,
+                "title" : {
+                    "ko" : "구매하려는 워크시트의 구간을 선택해주세요.",
+                    "en" : "Please select the subject on the worksheet you wish to purchase.",
+                    "jp" : "購入するワークシートの科目を選んでください。",
+                    "zh" : "请在您要购买的工作表上选择主题。"
+                },
+                "options" : [
+                    {
+                        "value" : "atob",
+                        "label" : "A-B"
+                    },
+                    {
+                        "value" : "ctod",
+                        "label" : "C-D"
+                    },
+                    {
+                        "value" : "e-f",
+                        "label" : "E-F"
+                    }
+                ]
+            }
+
+        ]
+
     }
-
-
 
 }
 

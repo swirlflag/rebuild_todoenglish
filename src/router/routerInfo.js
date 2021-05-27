@@ -33,6 +33,11 @@ const routes =  [
         name : 'subscribe',
         component : () => import('@/pages/PageSubscribe/PageSubscribe.vue'),
     },
+    {
+        path : '/sub',
+        name : 'sub',
+        component : () => import('@/pages/PageSubscribe/PageSubscribe2.vue'),
+    },
 
 // 학습 정보
     {
