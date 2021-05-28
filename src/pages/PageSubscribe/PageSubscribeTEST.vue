@@ -1,7 +1,20 @@
 <template>
     <div>
-adsdd으아아대가리가꺠지겟어요
+        <div>
+            로직 정리중/ 다국어X
+            <br>
+            middleChildrens : {{middleChildrens}}
+            <br>
+            SELECT.pick.options : {{ SELECT.pick.options }}
+            <br>
+        </div>
+
+
         <div id="step1">
+
+            <span class="title">
+                대분류
+            </span>
 
             <RadioCollection
                 v-model="SELECT.pick.category"
@@ -11,13 +24,15 @@ adsdd으아아대가리가꺠지겟어요
             />
 
         </div>
-        middleChildrens : {{middleChildrens}}
-        <div id="step2">
 
+        <div id="step2">
+            <span class="title">
+                중분류
+            </span>
 
             <template v-for="(item,idx) in middleChildrens">
                 <div :key="idx" v-if="item">
-                    <br>
+                    <!-- <p> - {{item}}</p> -->
                     <RadioCollection
                         @change="(v) => {changeMiddleRadio(idx,v)}"
                         :list="item.map(c => c.name)"
@@ -25,25 +40,27 @@ adsdd으아아대가리가꺠지겟어요
                 </div>
             </template>
 
-            <br>
-            <br>
-
-
         </div>
 
         <div id="step3">
+            <span class="title">
+                옵션 선택
+            </span>
 
-            {{ SELECT.pick.options }}
+
             <template v-for="(item,idx) in SELECT.pick.options">
                 <div :key="idx" v-if="item">
                     <p> - {{item.key}}</p>
-                    <br>
                     <RadioCollection
                         :list="item.props.map(c => ({text: c.label , value : c.value}))"
                     />
                 </div>
             </template>
 
+        </div>
+
+        <div class="logicimg">
+            <img src="@/assets/temp/sublogic.png" alt="">
         </div>
 
         <RadioCollection v-if="0" :list="[]"/>
@@ -60,7 +77,7 @@ adsdd으아아대가리가꺠지겟어요
 <script>
 
 
-import DATA from './paymentDataNew.json';
+import DATA from './paymentDataTEST.json';
 
 import RadioCollection from '@/components/input/RadioCollection.vue';
 
@@ -176,7 +193,7 @@ export default {
                 this.middleChildrens.splice(idx+1,1,focus.children);
                 this.SELECT.pick.options = [];
             }else {
-                console.log('nope!!!!!!!!!!!!');
+                console.log('go option + ');
                 this.middlePoints = this.middlePoints.slice(0, idx+1);
                 this.middleChildrens = this.middleChildrens.slice(0,idx+1);
 
@@ -193,6 +210,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+span.title {
+    // border: 2px solid #000;
+    background: #fff;
+    font-weight: 700;
+    font-weight: 20px;
+    display: inline-block;
+    // border-radius: 5px;
+    padding: 5px;
+    color: #d3d;
+} 
+
 #step1 {
     background-color: rgb(165, 231, 42);
 }
@@ -200,11 +229,23 @@ export default {
     background-color: rgb(231, 165, 42);
 }
 #step3 {
-    background-color: rgb(42, 140, 231);
+    background-color: rgb(100, 180, 255);
 
     p {
         font-weight: 700;
         color: #fff;
+    }
+}
+.logicimg {
+    margin-top: 100px;
+    border: 1px solid #aaa;
+
+    max-width : 800px;
+    margin: 0 auto;
+    margin-top: 100px;
+    img  {
+        width: 100%; height: 100%;
+        display: inline-block;
     }
 }
 </style>

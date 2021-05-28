@@ -34,9 +34,9 @@ const routes =  [
         component : () => import('@/pages/PageSubscribe/PageSubscribe.vue'),
     },
     {
-        path : '/sub',
-        name : 'sub',
-        component : () => import('@/pages/PageSubscribe/PageSubscribe2.vue'),
+        path : '/logictest',
+        name : 'logictest',
+        component : () => import('@/pages/PageSubscribe/PageSubscribeTEST.vue'),
     },
 
 // 학습 정보
