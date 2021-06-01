@@ -1,0 +1,56 @@
+[
+    {
+        "key" : "todoenglish",
+
+        "children" : [
+            {
+                "key" : "subscribe",
+                "options" : [
+                    {
+                        "key" : "profileLength",
+                        "props" : [
+                            {
+                                "value" : 1,
+                                "lebel" : "1 자녀"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+
+
+    {
+        "key" : "etc",
+        "children" : [
+            {
+                "key" : "device",
+                "children" : [
+                    {
+
+                    }
+                ]
+            },
+            {
+                "key" : "worksheet" ,
+                "children" : [
+                    {
+                        "key" : "todohangul",
+                        "options" : [
+                            {
+                                "key" : "range",
+                                "props" : [
+                                    {
+                                        "value" : "atob",
+                                        "label" : "A-B"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

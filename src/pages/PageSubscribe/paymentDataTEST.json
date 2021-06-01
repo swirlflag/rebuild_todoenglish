@@ -10,6 +10,7 @@
 
     {
         "category" : "todoenglish",
+        "name" : "todoenglish",
 
         "children" : [
             {
@@ -53,9 +54,9 @@
 
 
 
-
     {
         "category" : "todohangul",
+        "name" : "todohangul",
 
         "children" : [
             {
@@ -106,6 +107,7 @@
 
     {
         "category" : "todolive",
+        "name" : "todolive",
 
         "children" : [
             {
@@ -143,6 +145,7 @@
 
     {
         "category" : "etc",
+        "name" : "etc",
 
         "children" : [
             {

@@ -163,12 +163,55 @@ const oldVersion = () => {
 oldVersion();
 
 
+// routes.push({
+//     path : '/ttt',
+//     component: function() {
+//         var reg = new RegExp("www|sitename|test|localhost:8000");
+//         var parts = window.location.host.split(".");
+//         return reg.test(parts[0]) ? require('./views/home') : require('./views/subdomain');
+//     }()
+// })
+
+
+// subdomain test
+const host = window.location.host;
+const parts = host.split('.');
+const domainLength = 4; // route1.example.com => domain length = 3
+
+let test = null;
+
+const english = [{
+    path : '*',
+    name : 'english',
+    component : () => import('@/pages/PageHelp/PageHelp.vue'),
+}]
+
+const hangul = [{
+    path : '*',
+    name : 'hangul',
+    component : () => import('@/pages/PageProduct/PageProduct.vue'),
+}]
+
+if (parts.length === (domainLength - 1) || parts[0] === 'www') {
+    test = routes;
+} else if (parts[0] === 'english') {
+    test = english;
+} else if (parts[0] === 'hangul') {
+    test = hangul;
+} else {
+    test = routes;
+}
+
+
+
+
 
 
 const routerInfo = {
     mode : 'history',
     base : process.env.BASE_URL,
-    routes ,
+    // routes ,
+    routes : test,
 };
 
 export {

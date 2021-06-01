@@ -1,0 +1,46 @@
+{
+    "todoenglish_1profile_6month" : {
+        "ko" : 100000,
+        "en" : 100,
+        "jp" : 10000,
+        "zh" : 1000
+    },
+    "todoenglish_1profile_12month" : {
+        "ko" : 200000,
+        "en" : 200,
+        "jp" : 20000,
+        "zh" : 2000
+    },
+    "todoenglish_2profile_6month" : {
+        "ko" : 200000,
+        "en" : 200,
+        "jp" : 20000,
+        "zh" : 2000
+    },
+    "todoenglish_2profile_12month" : {
+        "ko" : 400000,
+        "en" : 400,
+        "jp" : 40000,
+        "zh" : 4000
+    },
+
+
+
+    "todohangul_1profile_6month" : 100000,
+    "todohangul_1profile_12month" : 200000,
+    "todohangul_2profile_6month" : 200000,
+    "todohangul_2profile_12month" : 400000,
+
+
+
+    "todolive_1ticket" : 9000,
+    "todolive_10ticket" : 89000,
+
+
+    "worksheet_todoenglish_atob"    : 20000,
+    "worksheet_todoenglish_ctod"    : 20000,
+    "worksheet_todoenglish_etof"    : 40000,
+    "worksheet_todohangul_atob"     : 40000,
+    "worksheet_todohangul_ctod"     : 40000,
+    "worksheet_todohangul_etof"     : 40000
+}

@@ -3,9 +3,12 @@
         <div>
             로직 정리중/ 다국어X
             <br>
-            middleChildrens : {{middleChildrens}}
+            <!-- {{SELECT}} -->
             <br>
-            SELECT.pick.options : {{ SELECT.pick.options }}
+            <br>
+            renders.middle : {{ renders.middle }}
+            <br>
+            renders.option : {{ renders.option }}
             <br>
         </div>
 
@@ -17,9 +20,9 @@
             </span>
 
             <RadioCollection
-                v-model="SELECT.pick.category"
-                :list="DATA.map((c) => {
-                    return c.category
+                v-model="picks.category"
+                :list="allData.map((c) => {
+                    return c.name
                 })"
             />
 
@@ -30,7 +33,7 @@
                 중분류
             </span>
 
-            <template v-for="(item,idx) in middleChildrens">
+            <template v-for="(item,idx) in renders.middle">
                 <div :key="idx" v-if="item">
                     <!-- <p> - {{item}}</p> -->
                     <RadioCollection
@@ -48,7 +51,7 @@
             </span>
 
 
-            <template v-for="(item,idx) in SELECT.pick.options">
+            <template v-for="(item,idx) in renders.option">
                 <div :key="idx" v-if="item">
                     <p> - {{item.key}}</p>
                     <RadioCollection
@@ -58,6 +61,7 @@
             </template>
 
         </div>
+        {{picks.option}}
 
         <div class="logicimg">
             <img src="@/assets/temp/sublogic.png" alt="">
@@ -65,11 +69,11 @@
 
         <RadioCollection v-if="0" :list="[]"/>
 
-        <!-- {{SELECT.pick}} -->
+        <!-- {{renders}} -->
 
-        <!-- {{SELECT.pick.middle}} -->
+        <!-- {{renders.middle}} -->
         <br>
-        <!-- {{SELECT.pick.options}} -->
+        <!-- {{renders.option}} -->
 
     </div>
 </template>
@@ -78,8 +82,11 @@
 
 
 import DATA from './paymentDataTEST.json';
+import PRICEDATA from './pricesData.json';
 
 import RadioCollection from '@/components/input/RadioCollection.vue';
+
+import { flatenRegionData } from '@/utils';
 
 const getmiddles = (children,depth = 0) => {
     // console.log(children);
@@ -103,105 +110,92 @@ export default {
         RadioCollection,
     },
     data() {
+
         return {
             DATA,
+            PRICEDATA,
 
-            SELECT : {
-                pick : {
-                    category : "",
-                    middle :  [],
-                    options : [],
-                }
+            renders : {
+                category : [],
+                middlePoint : [],
+                middle : [],
+                option : [],
             },
 
-            middleChildrens : [],
-            middleNav : [],
-            middlePoints : [],
+            picks : {
+                category : "",
+                option : {
 
+                }
+            },
 
         }
     },
     computed : {
-        nowCategory () {
-            const index = DATA.map(c => c.category).indexOf(this.SELECT.pick.category);
-            return DATA[index] || {};
+        region() {
+            return this.$store.state.region;
         },
-
+        allData() {
+            return flatenRegionData(DATA, this.region);
+        },
+        allPrices() {
+            return flatenRegionData(PRICEDATA, this.region );
+        },
+        nowCategory () {
+            const index = this.allData.map(c => c.category).indexOf(this.picks.category);
+            return this.allData[index] || {};
+        },
     },
 
     watch : {
-        'SELECT.pick.category'(){
-
-            if(this.nowCategory.children.length > 1){
-                this.SELECT.pick.middle = this.nowCategory.children;
-                this.middleChildrens = [this.nowCategory.children];
-                this.SELECT.pick.options = [];
-            }else {
-                this.middleChildrens = [];
-                this.SELECT.pick.middle = [];
-                this.SELECT.pick.options = this.nowCategory.children[0].options;
-            }
-
-        },
-
+        "picks.category"() {
+            this.watchCategoryChange();
+        }
     },
 
     methods : {
+        watchCategoryChange() {
 
-        focusChildren(max) {
-
-            let result = null;
-
-            let i = -1;
-
-            const endMax = max ? Math.min(this.middlePoints.length, max) : this.middlePoints.length;
-
-            const loop = (child) => {
-                ++i;
-                // console.log(child[this.middlePoints[i]]);
-                if(i < endMax){
-                    return loop(child.children[this.middlePoints[i]]);
-                } else {
-                    return child;
-                }
+            if(this.nowCategory.children.length > 1){
+                this.renders.middle   = [this.nowCategory.children];
+                this.renders.option  = [];
+            }else {
+                this.renders.middle   = [];
+                this.renders.option  = this.nowCategory.children[0].options;
             }
-
-            {loop}
-
-            result = loop(this.nowCategory);
-
-            // console.log(this.nowCategory.children);
-            // console.log(result);
-
-            return result;
         },
 
-        changeMiddleRadio(idx,v) { {idx,v}
+        focusChildren(max) {
+            const endMax = max ? Math.min(this.renders.middlePoint.length, max) : this.renders.middlePoint.length;
 
-            this.middlePoints.slice(0, idx);
-            this.middlePoints.splice(idx, 1, v.index);
+            const loop = (obj,i) => ++i < endMax ? loop(obj.children[this.renders.middlePoint[i]],i) : obj;
 
-            // console.log('middlePoints: ',  this.middlePoints);
+            return loop(this.nowCategory,-1);
+        },
 
-            // this.middleChildrens.slice(0,idx);
-            // this.middleChildrens.splice(idx,1,this.focusChildren());
+        changeMiddleRadio(idx,v) {
+            this.renders.middlePoint.splice(idx, 1, v.index);
 
-            const focus = this.focusChildren(idx+1);
+            const focusIndex = idx + 1;
 
-            if(focus.children){
-                this.middleChildrens.slice(0,idx+1);
-                this.middleChildrens.splice(idx+1,1,focus.children);
-                this.SELECT.pick.options = [];
+            const target = this.focusChildren(focusIndex);
+
+            console.log(target);
+
+            const name = target.name;
+
+            this.picks.option[name] = name;
+
+            if(target.children){
+                this.renders.middle.splice(focusIndex,1,target.children);
+                this.renders.option = [];
+
+                // this.picks.option[]
             }else {
-                console.log('go option + ');
-                this.middlePoints = this.middlePoints.slice(0, idx+1);
-                this.middleChildrens = this.middleChildrens.slice(0,idx+1);
-
-                this.SELECT.pick.options = focus.options;
+                this.renders.middlePoint = this.renders.middlePoint.slice(0, focusIndex);
+                this.renders.middle = this.renders.middle.slice(0,focusIndex);
+                this.renders.option = target.options;
             }
-
-            // console.log(focuschildren);
-
 
         }
     }
@@ -211,6 +205,7 @@ export default {
 
 <style lang="scss" scoped>
 
+//
 span.title {
     // border: 2px solid #000;
     background: #fff;
@@ -220,7 +215,7 @@ span.title {
     // border-radius: 5px;
     padding: 5px;
     color: #d3d;
-} 
+}
 
 #step1 {
     background-color: rgb(165, 231, 42);
@@ -240,7 +235,7 @@ span.title {
     margin-top: 100px;
     border: 1px solid #aaa;
 
-    max-width : 800px;
+    max-width : 900px;
     margin: 0 auto;
     margin-top: 100px;
     img  {
