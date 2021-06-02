@@ -1,24 +1,46 @@
 [
+
+
+
     {
         "key" : "todoenglish",
 
-        "children" : [
+        "options" : [
             {
-                "key" : "subscribe",
-                "options" : [
+                "key" : "profileLength",
+                "props" : [
                     {
-                        "key" : "profileLength",
-                        "props" : [
-                            {
-                                "value" : 1,
-                                "lebel" : "1 자녀"
-                            }
-                        ]
+                        "value" : 1,
+                        "lebel" : "한 자녀"
+                    },
+                    {
+                        "value" : 2,
+                        "lebel" : "두 자녀"
+                    }
+                ]
+            },
+            {
+                "key" : "monthPeriod",
+                "props" : [
+                    {
+                        "value" : 6,
+                        "lebel" : "6 개월"
+                    },
+                    {
+                        "value" : 12,
+                        "lebel" : "12 개월"
                     }
                 ]
             }
+
         ]
+
     },
+
+
+
+
+
 
 
     {
@@ -26,15 +48,43 @@
         "children" : [
             {
                 "key" : "device",
-                "children" : [
+                "options" : [
                     {
-
+                        "key" : "deviceKind",
+                        "props" : [
+                            {
+                                "value" : "ipad",
+                                "label" : "아이패드"
+                            },
+                            {
+                                "value" : "galaxy",
+                                "label" : "갤럭시 탭"
+                            }
+                        ]
                     }
                 ]
             },
             {
                 "key" : "worksheet" ,
                 "children" : [
+                    {
+                        "key" : "todoenglish",
+                        "options" : [
+                            {
+                                "key" : "range",
+                                "props" : [
+                                    {
+                                        "value" : "atob",
+                                        "label" : "A-B"
+                                    },
+                                    {
+                                        "value" : "ctod",
+                                        "label" : "C-D"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
                     {
                         "key" : "todohangul",
                         "options" : [
@@ -44,6 +94,14 @@
                                     {
                                         "value" : "atob",
                                         "label" : "A-B"
+                                    },
+                                    {
+                                        "value" : "ctod",
+                                        "label" : "C-D"
+                                    },
+                                    {
+                                        "value" : "etof",
+                                        "label" : "E-F"
                                     }
                                 ]
                             }
@@ -53,4 +111,10 @@
             }
         ]
     }
+
+
+
+
+
+
 ]

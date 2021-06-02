@@ -1,17 +1,5 @@
 <template>
     <div>
-        <div>
-            로직 정리중/ 다국어X
-            <br>
-            <!-- {{SELECT}} -->
-            <br>
-            <br>
-            renders.middle : {{ renders.middle }}
-            <br>
-            renders.option : {{ renders.option }}
-            <br>
-        </div>
-
 
         <div id="step1">
 
@@ -19,29 +7,24 @@
                 대분류
             </span>
 
-            <RadioCollection
-                v-model="picks.category"
-                :list="allData.map((c) => {
-                    return c.name
-                })"
-            />
-
         </div>
+
+
 
         <div id="step2">
             <span class="title">
                 중분류
             </span>
 
-            <template v-for="(item,idx) in renders.middle">
-                <div :key="idx" v-if="item">
-                    <!-- <p> - {{item}}</p> -->
+            <template v-for="(item, depth) in middleChildren">
+                <div :key="depth">
                     <RadioCollection
-                        @change="(v) => {changeMiddleRadio(idx,v)}"
-                        :list="item.map(c => c.name)"
+                        @change="(v) => {changeMiddleRadio(depth,v.index)}"
+                        :list="item.map(c => c.key)"
                     />
                 </div>
             </template>
+
 
         </div>
 
@@ -50,30 +33,21 @@
                 옵션 선택
             </span>
 
-
-            <template v-for="(item,idx) in renders.option">
-                <div :key="idx" v-if="item">
-                    <p> - {{item.key}}</p>
-                    <RadioCollection
-                        :list="item.props.map(c => ({text: c.label , value : c.value}))"
-                    />
-                </div>
-            </template>
-
         </div>
-        {{picks.option}}
 
         <div class="logicimg">
-            <img src="@/assets/temp/sublogic.png" alt="">
+            <!-- <img src="@/assets/temp/sublogic.png" alt=""> -->
         </div>
 
         <RadioCollection v-if="0" :list="[]"/>
 
-        <!-- {{renders}} -->
+        <!-- {{ allData }} -->
 
-        <!-- {{renders.middle}} -->
         <br>
-        <!-- {{renders.option}} -->
+        <br>
+        middlePoint : {{middlePoint}}
+        <br>
+        middleChildren : {{middleChildren.map(c => c.map(c2 => c2.key))}}
 
     </div>
 </template>
@@ -81,29 +55,14 @@
 <script>
 
 
-import DATA from './paymentDataTEST.json';
-import PRICEDATA from './pricesData.json';
+// import DATA from './paymentDataTEST.json';
+// import PRICEDATA from './pricesData.json';
+
+import NEWDATA from './new.json';
 
 import RadioCollection from '@/components/input/RadioCollection.vue';
 
 import { flatenRegionData } from '@/utils';
-
-const getmiddles = (children,depth = 0) => {
-    // console.log(children);
-
-    if(Array.isArray(children)){
-        return children.map((c) => {
-            if(c.options){
-                return c.options
-            }else {
-                return getmiddles(c.children , ++depth);
-            }
-        });
-    }else if(typeof children === 'object'){
-        return 'no middle'
-    }
-}
-{getmiddles}
 
 export default {
     components : {
@@ -112,11 +71,11 @@ export default {
     data() {
 
         return {
-            DATA,
-            PRICEDATA,
+            // DATA,
+            // PRICEDATA,
+            NEWDATA,
 
             renders : {
-                category : [],
                 middlePoint : [],
                 middle : [],
                 option : [],
@@ -129,6 +88,9 @@ export default {
                 }
             },
 
+            middlePoint : [],
+            middleChildren : [],
+
         }
     },
     computed : {
@@ -136,68 +98,94 @@ export default {
             return this.$store.state.region;
         },
         allData() {
-            return flatenRegionData(DATA, this.region);
+            return flatenRegionData(NEWDATA, this.region);
         },
-        allPrices() {
-            return flatenRegionData(PRICEDATA, this.region );
-        },
-        nowCategory () {
-            const index = this.allData.map(c => c.category).indexOf(this.picks.category);
-            return this.allData[index] || {};
-        },
+
     },
 
     watch : {
-        "picks.category"() {
-            this.watchCategoryChange();
-        }
+
     },
 
     methods : {
-        watchCategoryChange() {
+        focusDepth(depthIndex) { {depthIndex}
 
-            if(this.nowCategory.children.length > 1){
-                this.renders.middle   = [this.nowCategory.children];
-                this.renders.option  = [];
-            }else {
-                this.renders.middle   = [];
-                this.renders.option  = this.nowCategory.children[0].options;
+            let result = null;
+            let i = -1;
+            const endMax = Math.min(this.middlePoint.length, depthIndex);
+
+            console.log(endMax);
+
+            const loop = (child) => {
+                // typeof child === "Array" !!!!!!!!!!!!111
+                ++i; {i}
+
+                const targetchild = child[this.middlePoint[i]];
+
+                if(i < endMax && targetchild.children){
+                    return loop(targetchild.children)
+                }else {
+                    return targetchild
+                }
+
             }
+
+            {loop}
+
+            result = loop(this.allData);
+
+            return result;
+
         },
 
-        focusChildren(max) {
-            const endMax = max ? Math.min(this.renders.middlePoint.length, max) : this.renders.middlePoint.length;
+        changeMiddleRadio(depthIndex,itemIndex) { {depthIndex,itemIndex}
 
-            const loop = (obj,i) => ++i < endMax ? loop(obj.children[this.renders.middlePoint[i]],i) : obj;
+            this.middlePoint = this.middlePoint.slice(0, depthIndex);
+            this.middlePoint.splice(depthIndex, 1, itemIndex);
 
-            return loop(this.nowCategory,-1);
-        },
+            const target = this.focusDepth(depthIndex); {target}
 
-        changeMiddleRadio(idx,v) {
-            this.renders.middlePoint.splice(idx, 1, v.index);
+            console.log('target : ', target);
 
-            const focusIndex = idx + 1;
-
-            const target = this.focusChildren(focusIndex);
-
-            console.log(target);
-
-            const name = target.name;
-
-            this.picks.option[name] = name;
+            console.error(`
+                아래 target.children 으로 분기하는것 isMiddle로 변경하고 렌더링 조건 제대로 만들기
+                depthIndex 값 바르게 조작하기
+                array 조작하는거 하나로 통일하기
+                1번째만 대분류로 만들기
+                옵션 렌더링하기
+            `);
 
             if(target.children){
-                this.renders.middle.splice(focusIndex,1,target.children);
-                this.renders.option = [];
+                console.log('more middle ~~~~~');
+                // this.middleChildren.splice(depthIndex+1, 1, target);
+                // this.middleChildren.slice(0,depthIndex+1);
 
-                // this.picks.option[]
+                // if(target.children){
+                    this.middleChildren = this.middleChildren.slice(0, depthIndex+1);
+                    this.middleChildren.splice(depthIndex+1,1,target.children);
+                // }
             }else {
-                this.renders.middlePoint = this.renders.middlePoint.slice(0, focusIndex);
-                this.renders.middle = this.renders.middle.slice(0,focusIndex);
-                this.renders.option = target.options;
+                console.log('end and show option + ');
+
+                this.middlePoint = this.middlePoint.slice(0, depthIndex+1);
+                this.middleChildren = this.middleChildren.slice(0,depthIndex+1);
+                // this.SELECT.pick.options = focus.options;
             }
 
-        }
+        },
+    },
+    mounted() {
+        // this.changeMiddleRadio(0,0)
+
+
+        this.middleChildren = [this.allData];
+
+
+        // this.middleChildren = this.allData.map(c => c.key);
+
+        // console.log(object);
+
+        // this.middleChildren.splice(0, 1, this.allData);
     }
 
 }
